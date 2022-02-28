@@ -1,0 +1,30 @@
+<tr id="list-{{JOB id}}">
+    <td><input type="checkbox" onclick="SelectedApplications({{JOB id}})" value="{{JOB id}}" /></td>
+    <td>{{JOB id}}</td>
+    <td><figure class="avatar avatar-sm"><img src="{{JOB id_photo}}"  class="rounded-circle" style="width:100px; object-fit: contain;" /></figure></td>
+     <td>{{JOB name}}</td>
+     <td>{{JOB status}}</td>
+     <td>{{JOB type}}</td>
+     <td>{{JOB signed_by}}</td>
+     <td>{{JOB nationality}}</td>
+    <td>{{JOB university}}</td>
+    <td>{{JOB program}}</td>
+    <td>
+        <a   href="<?php echo LoadAdminLinkSettings('edit-application?id='.$data['JOB_DATA']->id); ?>" target="_blank"> <i data-feather="edit"></i></a>
+        <a  href="<?php echo LoadAdminLinkSettings('view-application?id='.$data['JOB_DATA']->id); ?>" target="_blank"><i data-feather="eye"></i></a>
+    </td>
+    
+    <!-- <td class="text-right">
+        <div class="dropdown">
+            <a href="#" data-toggle="dropdown"
+               class="btn btn-floating"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="ti-more-alt"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                 View</a>
+Edit</a>
+            </div>
+        </div>
+    </td> -->
+</tr>

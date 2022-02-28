@@ -1,0 +1,131 @@
+<?php
+  
+$universities = '';
+$universities = $db->get(T_UNIVERSITY);
+
+$option_list = '';
+
+
+
+
+
+?>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Add Department</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('dashboard'); ?>">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('manage-universities'); ?>">Manage Universities</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Add Departments</li>
+            </ol>
+        </nav>
+    </div>     
+</div>
+<div class="row">
+    
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8 card">
+        <div>
+		<form class="job_box mb-3" method="post" id="create-job">
+			<div id="create-job-alert"></div>
+			<div class="row">
+                <h4 class="col-12 subtitle">Departments</h4>
+                        
+               
+
+                <div class="form-group row col-12">
+                    <label class="col-3">University Name</label>
+                   
+                    <div class="col-9">
+                         <select class="form-select" name="university_id" aria-label="Default select example">
+                            <option selected>Univerisity Name</option>
+                            
+                            <?php 
+                               foreach( $universities as  $list_ ){ ?>
+
+                               <option value="<?php echo $list_->id; ?>"> <?php echo $list_->university; ?> </option>
+                            
+                            
+                             <?php }
+                            
+                            ?>
+                        
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Department Name</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="department" id="department" />
+                        </div>
+                    </div>
+                </div>
+
+               
+
+              
+            </div>
+            <div class="form-group text-center">
+                    <input type="hidden" name="hash" value="<?php echo CreateSession()?>">
+                    <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
+                    <button type="submit" class="btn btn-primary sett_btn"> Save Department</button>
+            </div>
+             
+		</form>
+	</div>
+ 
+</div>
+   <div class="col-lg-2"></div>
+</div>
+ </div>   
+</div>
+    <script src="<?php echo LoadAdminLink('/vendors/ckeditor5/ckeditor.js'); ?>"></script>
+    <script>
+         
+
+                $(function() {
+                    "use strict";
+                    
+                    var form_university = $('form.job_box');
+                    form_university.ajaxForm({
+                        url: '{{LINK aj/application/university_department}}',
+                        beforeSend: function() {
+                            $('.sett_btn').text('PLEASE WAIT..');
+                        },
+                        success: function(data) {
+                         
+
+                                $('.sett_btn').text('SAVE CHANGES');
+                                $('#department').val('');
+                              
+                                toastr.options = {
+                                        timeOut: 2000,
+                                        progressBar: true,
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        showDuration: 200,
+                                        hideDuration: 200
+                                      };
+                                  toastr.success('Department Saved!');
+                              
+                                 $('.create-job-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                                $('.alert-success').fadeIn('fast', function() {
+                                    $(this).delay(2000).slideUp(500, function() {
+                                        $(this).remove();
+                                        
+                                    });
+                                 });
+                            
+                        }
+                    });
+                });
+    </script>
+   
+

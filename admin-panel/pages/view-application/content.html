@@ -1,0 +1,1413 @@
+<?php 
+  $ap_n = $_GET['id'];
+  $apn = $db->where('id', $ap_n)->getOne(T_APPLICATIONS);
+  $related_programs = array();
+       
+    $related_programs = $db->get(T_PROGRAM);
+
+  
+
+?>
+<?php
+ $get_all_users = $db->where('access_level', 4,'!=')->get(T_USERS);
+
+?>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .applicationView {
+        width: 100%;
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .app-view-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding-bottom: 15px;
+    }
+
+    .app-view-header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .app-view-header-left img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .app-top-view-text {
+        display: flex;
+        /* align-items: center; */
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 10px;
+    }
+
+    .app-top-view-text p {
+        margin: 0;
+        color: #5d5d5d;
+        font-size: 13px;
+    }
+
+    .name_display {
+        margin: 0;
+        font-weight: 700;
+        color: black !important;
+        font-size: 15px !important;
+    }
+
+
+
+    .appVTop {
+        display: flex;
+        padding: 20px 0;
+
+    }
+
+    .appProfileRow {
+        display: flex;
+        margin-top: 10px;
+    }
+
+    .applicantName {
+        color: #333;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .appProfileFirst {
+        font-size: 13px;
+        min-width: 140px;
+        color: #727272 !important;
+    }
+
+
+    .dpPhoto {
+        height: 100px;
+        width: 100px;
+        background-position: center !important;
+        background-size: cover !important;
+        border-radius: 5px;
+    }
+
+    .appProfilePic {
+        text-align: center;
+    }
+
+    .appStatusDiv {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+    }
+
+    .appStatusDiv select {
+        width: 100%;
+        border: rgb(102, 101, 101) solid 1px;
+        padding: 5px;
+        margin-top: 6px;
+        border-radius: 5px;
+    }
+
+    .appStatus {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .appVBottom {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bottomHeader {
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .appBottom {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cardHeader {
+        font-weight: 600;
+        font-size: 18px;
+        color: rgb(34, 33, 33);
+    }
+
+    .aThumbnail {
+        height: 120px;
+        width: 140px;
+        background: url("https://apksshare.com/wp-content/uploads/2021/06/Image-to-PDF-Converter-Free-JPG-to-PDF-APK-MOD-Download-2.3.4.png");
+        background-position: center;
+        background-size: cover;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .table-btnz {
+        padding: 3px 5px !important;
+        font-size: 10px !important;
+    }
+
+    .appProfile {
+        margin-right: 50px;
+    }
+
+    .purple-btn {
+        background-color: #5066e1;
+        padding: 6px 10px;
+        margin-top: 5px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .admin-table {
+        /* max-width: 60vw; */
+        width: 100%;
+        margin: auto;
+        border-collapse: collapse;
+        font-size: 13px;
+        text-transform: capitalize;
+    }
+
+    .admin-table th {
+        border: 1px solid #5066e1;
+        padding: 7px 0;
+        background-color: #5066e1;
+        color: white;
+        text-align: center;
+    }
+
+    .admin-table td {
+        border: 1px solid #003eff17;
+        padding: 7px 0;
+        text-align: center;
+    }
+
+
+
+
+
+
+
+    .status-note-para {
+        max-width: 300px;
+    }
+
+    .send-note-form {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid #f1f1f1;
+        background-color: #E8E8E8;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .reply-pad {
+        display: flex;
+        flex-direction: column;
+        background-color: #E8E8E8;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .reply-pad-top {
+        background-color: white;
+        margin: 5px;
+        border-radius: 6px;
+    }
+
+    .reply-pad-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        padding-top: 0;
+    }
+
+    .reply-pad-bottom>p {
+        padding: 3px 10px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        background-color: #5066e1;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .reply-pad label {
+        font-size: 13px;
+        padding: 8px 13px;
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    .reply-pad label:hover {
+        background-color: #5066e1;
+        color: white;
+        cursor: pointer;
+    }
+
+    .reply-pad input {
+        flex: 1;
+        outline: none;
+        border: none;
+        height: 100%;
+        padding: 9px;
+        font-size: 13px;
+        width: 100%;
+        border-radius: 6px;
+    }
+
+    .reply-pad button {
+        font-size: 13px;
+        padding: 4px 10px;
+        margin: 2px 1px;
+        border: none;
+        border-left: 1px solid #044ea130;
+        background-color: white;
+        height: 100%;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+
+    .message-form-admin {
+        font-weight: 700;
+        font-size: 23px;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .Admin-text-time {
+        font-size: 10px;
+        color: gray;
+    }
+
+    #message-admin>div {
+        border-bottom: 1px solid #f1f1f1;
+        padding: 3px 0;
+        margin-bottom: 15px;
+    }
+
+    .message-from-chatter {
+        text-transform: capitalize;
+        font-weight: 600;
+        color: #5066e1;
+        font-size: 13px;
+    }
+
+    .Admin-text-note {
+        margin: 5px 0;
+        font-size: 13px;
+    }
+
+    .action-pad89 {
+        background: white;
+        margin: 100px auto;
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        max-width: 500px;
+        position: absolute;
+        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        display: none;
+    }
+
+    .message-pad89 {
+        white-space: bac;
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+
+    #file-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #file-container>div {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 4px 8px;
+        font-size: 13px;
+        border-radius: 10px;
+        color: #5066e1;
+    }
+
+    #file-container>div>p {
+        margin-right: 7px;
+    }
+
+    #file-container>div>i {
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    #message-admin {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .message-pot {
+        display: flex;
+        align-items: center;
+    }
+
+    .message-pot>p {
+        margin-right: 3px;
+        color: #5066e1;
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    .message-pot>div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+        border-radius: 50%;
+        color: white;
+        background-color: #5066e1;
+        margin-left: 5px;
+    }
+
+    .messages-modal {
+        position: absolute;
+        background: #21252999;
+        background: linear-gradient(to right, #212529b2, #212529c9, #212529b2);
+        top: 0;
+        width: 100%;
+        left: 0;
+        height: 100%;
+        z-index: 10;
+        display: none;
+    }
+
+    .messages-top-area {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .messages-top-area>p {
+        margin-bottom: 0;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .myMessages {
+        max-height: 400px;
+        min-height: 400px;
+        overflow-y: auto;
+        padding: 10px 0;
+    }
+
+    .message-rows {
+        display: flex;
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .message-rows img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 0 10px;
+    }
+
+    .left-message {
+        justify-content: flex-start;
+    }
+
+    .right-message {
+        justify-content: flex-end;
+    }
+
+    .message-bubble {
+        font-size: 13px;
+        padding: 7px 10px;
+        border-radius: 10px;
+        max-width: 50%;
+    }
+
+    .left-message .message-bubble {
+        background-color: #E8E8E8;
+        color: #2E2E2E;
+        border-radius: 0 15px 15px 15px;
+    }
+
+    .right-message .message-bubble {
+        background-color: #5066e1;
+        color: white;
+        border-radius: 15px 0 15px 15px;
+    }
+
+    .message-arrival {
+        font-size: 10px;
+        line-height: 1.6;
+        color: #6c757dde;
+        margin: 0 5px;
+    }
+
+    .message-area {
+        flex: 1;
+    }
+
+    .right-message .message-area {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .left-message .message-area {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .table-action-btn {
+        padding: 3px 10px;
+        border-radius: 4px;
+        border: none;
+        background: #ffc107;
+        color: white;
+        margin: auto;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.128);
+    }
+    .admin-table td p {
+        margin-bottom: 0;
+    }
+    .action-body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .action-body>div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        align-items: center;
+        border-bottom: 1px solid #f7f7f7;
+        border-radius: 10px;
+    }
+
+    .action-body>div>button {
+        padding: 3px 10px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        background-color: #5066e1;
+    }
+
+    .action-body>div>p {
+        margin-bottom: 0;
+    }
+    .commision-form > div{
+        display: flex;
+        align-items: center;
+    }
+    .commision-form p{
+        margin-bottom: 0;
+        min-width: 105px;
+    }
+    .commision-inputs {
+        border: 1px solid #003eff17;
+        padding: 5px;
+        margin: 3px 0;
+        border-radius: 4px;
+        background: #F4F5FD;
+    }
+    input.commision-inputs {
+        max-width: 85px;
+    }
+    #show-commission > div {
+        display: flex;
+        align-items: center;
+    }
+    #show-commission p{
+        margin-bottom: 0;
+    }
+    #edit-commission-form{
+        display: none;
+    }
+    .action-btn {
+        padding: 0.4vw 0.5vw;
+        background: #00BC86;
+        border: 1px solid white;
+        box-shadow: 1px 1px 1px rgb(0 0 0 / 18%);
+        border-radius: 7px;
+        cursor: pointer;
+        color: white !important;
+    }
+    .upload-letter {
+        background: #20c997;
+        color: white !important;
+        padding: 4px 8px;
+        margin: 0;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px rgb(0 0 0 / 11%);
+    }
+</style>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>View Application</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href=index.html>Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Manage Applications</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">View Application</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 card">
+        <div class="applicationView">
+            <div class="app-view-header-top">
+                <div class="app-view-header-left">
+                    <img src="https://history.ubc.ca/wp-content/uploads/sites/23/2020/01/Kevin-website.jpg"
+                        alt="Applicant Picture">
+                    <div class="app-top-view-text">
+                        <p class="name_display" id="applicant_names"></p>
+                        <p id="applicant_email1"></p>
+                        <p>Reference ID : <span id="reference_id"></span></p>
+                        <div class="message-pot" onclick="messagesModal('block')">
+                            <p>Messages</p>
+                            <div>3</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-print"></i>
+                </div>
+            </div>
+            <div class="appVTop">
+                <div class="appProfile">
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">First Name</div>
+                        <div class="appProfileSecond" id="first_name"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Middle Name</div>
+                        <div class="appProfileSecond" id="middle_name"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Last Name</div>
+                        <div class="appProfileSecond" id="last_name"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Date Of Birth</div>
+                        <div class="appProfileSecond" id="d_o_b"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Father's Name</div>
+                        <div class="appProfileSecond" id="father_name"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Mother's Name</div>
+                        <div class="appProfileSecond" id="mother_name"></div>
+                    </div>
+
+
+                </div>
+                <div class="appProfile">
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Application ID</div>
+                        <div class="appProfileSecond" id="app_id"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Email</div>
+                        <div class="appProfileSecond" id="email2"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Phone Number 1</div>
+                        <div class="appProfileSecond" id="phone1"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Phone Number 2</div>
+                        <div class="appProfileSecond" id="phone2"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Nationality</div>
+                        <div class="appProfileSecond" id="nation"></div>
+                    </div>
+                    <div class="appProfileRow">
+                        <div class="appProfileFirst">Country of residence</div>
+                        <div class="appProfileSecond" id="country"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="bottomHeader">All Applications</p>
+
+            <table class="admin-table">
+                <thead>
+                    <th>Priority</th>
+                    <th>University</th>
+                    <th>Program</th>
+                    <th>Status</th>
+                    <th>Acceptance Letter</th>
+                    <th>Date Applied</th>
+                    <th>Edit Request</th>
+                </thead>
+                <tbody id="all_applications">
+                    <!-- application rendered from JS -->
+                </tbody>
+            </table>
+            <br>
+            <div class="messages-modal">
+                <div class="action-pad89" id="action-pad">
+                    <div class="messages-top-area">
+                        <p>Send Action</p>
+                        <p onclick="openSendAction('none')">close</p>
+                    </div>
+                    <div class="action-body">
+                        <div>
+                            <p>Document Missing</p>
+                            <button onclick="send_action('document_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Passport Missing</p>
+                            <button onclick="send_action('passport_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Transcript Missing</p>
+                            <button onclick="send_action('transcript_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Passport Missing</p>
+                            <button onclick="send_action('passport_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Stamp Missing On Transcript</p>
+                            <button onclick="send_action('stamp_missing_on_transcript')">Send</button>
+                        </div>
+                        <div>
+                            <p>Stamp Missing On Diploma</p>
+                            <button onclick="send_action('stamp_missing_on_diploma')">Send</button>
+                        </div>
+                        <div>
+                            <p>Translation Of Transcript Missing</p>
+                            <button onclick="send_action('translation_of_transcript_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Translation of HighSchool Diploma Missing</p>
+                            <button onclick="send_action('translation_of_highschool_diploma_missing')">Send</button>
+                        </div>
+                        <div>
+                            <p>Happy End</p>
+                            <button onclick="send_action('happy_end')">Send</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-pad89">
+                    <div class="messages-top-area">
+                        <p>Messages</p>
+                        <p onclick="messagesModal('none')">close</p>
+                    </div>
+                    <div class="myMessages" id="rendered-message">
+                        <!-- Messages render here -->
+                    </div>
+                    <form method="post" class="send-note-form" id="send-message">
+                        <input type="file" name="file" id="input-file" hidden>
+                        <input type="hidden" name="name" id="input-names" />
+                        <input type="hidden" name="email" id="input-email" />
+
+                        <div class="reply-pad">
+                            <div class="reply-pad-top">
+                                <input placeholder="Send message to Applicant.." name="message" id="input-message" />
+                                <div id="file-container">
+                                    <!-- Upload file name Comes Here -->
+                                </div>
+                            </div>
+                            <div class="reply-pad-bottom">
+                                <p class="send-action-btn" onclick="openSendAction('block')">
+                                    Send Action
+                                </p>
+                                <div class="div">
+                                    <label for="input-file">
+                                        Upload file
+                                    </label>
+                                    <button type="submit" id="send-message-btn">
+                                        Send Message
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="bottomHeader">Attached Documents</p>
+            <table class="admin-table" id="attachemnets">
+               
+            </table>
+            <br>
+            <p class="bottomHeader">Commision</p>
+            <div class="div" id="commision-container" >
+                <form method="post" class="commision-form" id="edit-commission-form" style="display: <?php echo ($apn->signed_by &&  $apn->commision)? '' : 'block';  ?>">
+                    <div class="">
+                        <p>Başvuru Yapan </p>:&nbsp;
+                        <select id="signed_by" name="signed_by" class="commision-inputs" value="<?php echo GetUserName($apn->signed_by); ?>">
+                            <?php foreach($get_all_users as $usr){?>
+                            <option value="<?php echo $usr->id; ?>">
+                                <?php echo $usr->first_name.' '.$usr->last_name; ?>
+                            </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Commision </p>:&nbsp;
+                        <input type="number" name="commision" id="" class="commision-inputs" value="<?php echo $apn->commision; ?>">
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $ap_n; ?>" />
+                    <button type="submit" class="purple-btn">Save</button>
+                </form>
+                <div id="show-commission" style="display: <?php echo ($apn->signed_by &&  $apn->commision)? '' : 'none';  ?>">
+                    <div>
+                        <p><?php echo GetUserName($apn->signed_by); ?> :</p>
+                        <p>&nbsp; <?php echo $apn->commision; ?></p>
+                    </div>
+                    <button class="purple-btn" onclick="showEditCommision('SHOW')">Edit</button>
+                </div>
+            </div>
+            <hr />
+            <button class="btn btn-warning send_notfication_email" onclick="send_notification()">Send Notification Email</button>
+        </div>
+    </div>
+    <div id="modal_data" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <p type="button" class="btn-close" onclick="hideModal()" data-bs-dismiss="modal" aria-label="Close">
+                        X</p>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to change the status of this applicant ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="hideModal()"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="moday()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="change_acceptance" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <p type="button" class="btn-close" onclick="hideModalC()" data-bs-dismiss="modal" aria-label="Close">
+                        X</p>
+                </div>
+                <div class="modal-body" id="modal_acceptance">
+                    
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-lg-2"></div> -->
+
+
+</div>
+<form class="accteansd" method="post">
+    <input type="hidden" id="target_to" name="id" value="" />
+</form>
+
+
+
+<script>
+    //FETCH THIS APPLICATION DATA
+    let applicationo_view_id = '<?php echo $ap_n; ?>';
+    let delete_permission = '<?php echo  $kd->user->access_level; ?>';
+    $.get('{{LINK aj/front_end_api/view_application}}?' + "hash=<?php echo CreateMainSession() ?>", { id: applicationo_view_id }, function (data) {
+        if (data.status == 200) {
+            renderApplicantData(data)
+            renderTableData(data)
+            renderMessages(data.chats)
+        }
+    });
+
+
+    function send_action(text_slug) {
+        let new_data = new FormData();
+        let applicant_name = '<?php echo $apn->first_name." ".$apn->middle_name." ".$apn->last_name; ?>';
+        new_data.append('action_slug', text_slug);
+        new_data.append('file', '');
+        new_data.append('message', '');
+        new_data.append('email', '<?php echo $apn->email; ?>');
+        new_data.append('name', applicant_name);
+        //  $(function () {
+            // console.log("Send")
+            $.ajax({
+                url: '{{LINK aj/front_end_api/send_admin_message}}?hash=<?php echo CreateMainSession(); ?>',
+                method: "POST",
+                data: new_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+                    
+                },
+                success: function (data) {
+                    if (data.status == 200) {
+                    document.getElementById("action-pad").style.display = "none"
+                    document.getElementById("input-message").innerHTML = ""
+                    document.getElementById("input-message").value = ""
+                    renderMessages(data.chats)
+                }
+            }
+        })
+    }
+    let last_set_id;
+    function hideModal() {
+        $('#modal_data').modal('hide');
+    }
+    function hideModalC() {
+        $('#change_acceptance').modal('hide');
+    }
+    
+    function ChangeStatus(id) {
+        last_set_id = id;
+        $('#modal_data').modal('show');
+
+    }
+    $('.mark_universityupload').click(function () {
+        let ids_d = $(this).attr("data-id");
+
+        $('#upload_leter-' + ids_d).click();
+
+
+    });
+
+    $(function () {
+        $('.commision-form').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '{{LINK aj/application/change_status_note}}?hash=<?php echo CreateMainSession(); ?>',
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    if (data.status == 200) {
+                        console.log("COMMISION", data)
+                        document.getElementById("input-message").innerHTML = ""
+                        document.getElementById("input-message").value = ""
+                        location.reload();
+                        // renderMessages(data.chats)
+                    }
+                }
+            });
+        });
+
+        $('#send-message').on('submit', function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '{{LINK aj/front_end_api/send_admin_message}}?hash=<?php echo CreateMainSession(); ?>',
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    if (data.status == 200) {
+                        document.getElementById("input-message").innerHTML = ""
+                        document.getElementById("input-message").value = ""
+                        renderMessages(data.chats)
+
+
+                    }
+                }
+            });
+
+        });
+
+
+
+        let form1 = $('form.accteansd');
+        $('.upload_acceptance').change(function () {
+            let target_id = $(this).attr("data-id");
+            //  let file_data = ('#upload_leter-'+target_id).prop('files')  
+            $('#target_to').val(target_id);
+            var $this = $(this), $clone3 = $this.clone();
+            $this.after($clone3).appendTo(form1);
+
+            form1.submit();
+
+        });
+
+        form1.ajaxForm({
+            url: '{{LINK aj/application/upload_acceptance}}?hash=<?php echo CreateMainSession(); ?>',
+            dataTyep: 'json',
+
+            success: function (data) {
+                if (data.status == 200) {
+
+                    toastr.options = {
+                        timeOut: 2000,
+                        progressBar: true,
+                        showMethod: "slideDown",
+                        hideMethod: "slideUp",
+                        showDuration: 200,
+                        hideDuration: 200
+                    };
+                    toastr.success('Acceptance letter uploaded');
+                    window.location = data.url
+                }
+                else {
+                    toastr.options = {
+                        timeOut: 2000,
+                        progressBar: true,
+                        showMethod: "slideDown",
+                        hideMethod: "slideUp",
+                        showDuration: 200,
+                        hideDuration: 200
+                    };
+                    toastr.warning('Acceptance uploaded failed');
+
+                    window.location = data.url
+
+                }
+            }
+        });
+    });
+
+
+
+    function send_request(id) {
+       
+       $.get('{{LINK aj/front_end_api/admin_approve_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
+           if (data.status == 200) {
+            //   console.log("request changes done", data);
+              renderTableData(data)
+            //   window.location.reload()
+           }
+       });
+   }
+
+
+    function submit_note() {
+        let id = '<?php echo $ap_n; ?>';
+        let note = $('#p_note').val();
+        let signed_by = $('#signed_by').val();
+        let commision = $('#commision').val();
+
+        $.get('{{LINK aj/application/change_status_note}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, note: note, signed_by: signed_by, commision: commision }, function (data) {
+            if (data.status == 200) {
+
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 200,
+                    hideDuration: 200
+                };
+                toastr.success('Applicant Note Updated!');
+                location.reload();
+                
+            }
+        });
+    }
+
+    function send_notification() {
+        let id = '<?php echo $ap_n; ?>';
+        let note = $('#p_note').val();
+        let signed_by = $('#signed_by').val();
+        let application_no = '<?php echo $apn->application_no; ?>';
+        let applicant_email = '<?php echo $apn->email; ?>';
+        let first_name = ' <?php echo $apn->first_name; ?>';
+        let last_name = ' <?php echo $apn->last_name; ?>';
+        let middle_name = ' <?php echo $apn->middle_name; ?>';
+        let university_name = '<?php echo GetuniversityByID($apn->university_id); ?>';
+        let program_name = '<?php echo GetProgramByID($apn->program_id); ?>';
+
+        $.get('{{LINK aj/application/send_single_notification}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, application_no: application_no, note: note, signed_by: signed_by, last_name: last_name, middle_name: middle_name, first_name: first_name, applicant_email: applicant_email, university_name: university_name, program_name: program_name }, function (data) {
+            if (data.status == 200) {
+
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 200,
+                    hideDuration: 200
+                };
+                toastr.success(data.message);
+                location.reload();
+            }
+        });
+    }
+    $('.mark_university').click(function () {
+        if ($(this).is(':checked')) {
+
+            let ids = $(this).attr("data-id");
+            let valuef = $(this).val();
+
+
+            $.get('{{LINK aj/application/checked}}?' + "hash=<?php echo CreateMainSession() ?>", { id: ids, value: valuef }, function (data) {
+                if (data.status == 200) {
+
+                    toastr.options = {
+                        timeOut: 2000,
+                        progressBar: true,
+                        showMethod: "slideDown",
+                        hideMethod: "slideUp",
+                        showDuration: 200,
+                        hideDuration: 200
+                    };
+                    toastr.success('Unchecked');
+                    location.reload();
+                }
+            });
+
+        } else {
+            let ids = $(this).attr("data-id");
+            let valuef = '';
+            $.get('{{LINK aj/application/checked}}?' + "hash=<?php echo CreateMainSession() ?>", { id: ids, value: valuef }, function (data) {
+                if (data.status == 200) {
+
+                    toastr.options = {
+                        timeOut: 2000,
+                        progressBar: true,
+                        showMethod: "slideDown",
+                        hideMethod: "slideUp",
+                        showDuration: 200,
+                        hideDuration: 200
+                    };
+                    toastr.success('Checked');
+                    location.reload();
+                }
+            });
+        }
+    });
+
+
+
+
+    function moday() {
+        let statuss = $(`#change_status_value_${last_set_id}`).val();
+
+        let id = '<?php echo $apn->application_no; ?>';
+        let applicant_email = '<?php echo $apn->email; ?>';
+        let first_name = ' <?php echo $apn->first_name; ?>';
+        let last_name = ' <?php echo $apn->last_name; ?>';
+        let middle_name = ' <?php echo $apn->middle_name; ?>';
+        let university_name = '<?php echo GetuniversityByID($apn->university_id); ?>';
+        let program_name = '<?php echo GetProgramByID($apn->program_id); ?>';
+
+        $.get('{{LINK aj/front_end_api/university_status}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, status: statuss, last_name: last_name, middle_name: middle_name, first_name: first_name, applicant_email: applicant_email, university_name: university_name, program_name: program_name, last_set_id: last_set_id }, function (data) {
+            if (data.status == 200) {
+                $('#modal_data').modal('hide');
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 200,
+                    hideDuration: 200
+                };
+                toastr.success('Applicant Status Updated!');
+                location.reload();
+            }
+        });
+    }
+
+
+    function renderApplicantData(data) {
+        // console.log("CHAT_INFO", data.chats)
+        let names = data.applicant_info.first_name + " " + data.applicant_info.middle_name + " " + data.applicant_info.last_name
+        let email = data.applicant_info.email
+        let refID = data.applicant_info.reference_id
+        let appID = data.applicant_info.application_no
+        let fname = data.applicant_info.first_name
+        let mname = data.applicant_info.middle_name
+        let lname = data.applicant_info.last_name
+        let dob = data.applicant_info.date_of_birth
+        let phone1 = data.applicant_info.phone_number
+        let phone2 = data.applicant_info.phone_number_2
+        let nationality = data.applicant_info.nationality
+        let country = data.applicant_info.country_of_residence
+        let fathersName = data.applicant_info.fathers_name
+        let mothersName = data.applicant_info.mothers_name
+
+
+        document.getElementById("applicant_names").innerHTML = names
+        document.getElementById("applicant_email1").innerHTML = email
+        document.getElementById("reference_id").innerHTML = refID
+        document.getElementById("first_name").innerHTML = ": " + fname
+        document.getElementById("middle_name").innerHTML = ": " + mname
+        document.getElementById("last_name").innerHTML = ": " + lname
+        document.getElementById("d_o_b").innerHTML = ": " + dob
+        document.getElementById("father_name").innerHTML = ": " + fathersName
+        document.getElementById("mother_name").innerHTML = ": " + mothersName
+
+        document.getElementById("app_id").innerHTML = ": " + appID
+        document.getElementById("email2").innerHTML = ": " + email
+        document.getElementById("phone1").innerHTML = ": " + phone1
+        document.getElementById("phone2").innerHTML = ": " + phone2
+        document.getElementById("nation").innerHTML = ": " + nationality
+        document.getElementById("country").innerHTML = ": " + country
+        // document.getElementById("applicant-email").innerHTML = data.applicant_info.email
+        document.getElementById("input-names").value = data.applicant_info.first_name + " " + data.applicant_info.last_name
+        document.getElementById("input-email").value = data.applicant_info.email
+
+        console.log("APPLICANT INFO", data.applicant_info)
+        document.getElementById("attachemnets").innerHTML = `  
+            <tr>
+                <th>Document</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Photo ID</td>
+                <td>${data.applicant_info.id_photo_name ? "<a class='upload-letter' href="+data.applicant_info.id_photo+"  download>Open</a>":"<p style='color:tomato'>File Missing</p>"}</td>
+            </tr>
+
+            <tr>
+                <td>Diploma</td>
+                <td>${data.applicant_info.diploma_name ? "<a class='upload-letter' href="+data.applicant_info.diploma_file+"  download>Open</a>":"<p style='color:tomato'>File Missing</p>"}</td>
+            </tr>
+            <tr>
+                <td>Passport</td>
+                <td>${data.applicant_info.passport_name ? "<a class='upload-letter' href="+data.applicant_info.passport_file+"  download>Open</a>":"<p style='color:tomato'>File Missing</p>"}</td>
+            </tr>
+            <tr>
+                <td>Transcript</td>
+                <td>${data.applicant_info.transcript_name ? "<a class='upload-letter' href="+data.applicant_info.transcript_file+"  download>Open</a>":"<p style='color:tomato'>File Missing</p>"}</td>
+            </tr>
+            <tr>
+                <td>Language Certificate</td>
+                <td>${data.applicant_info.language_certificate_name ? "<a class='upload-letter' href="+data.applicant_info.language_certificate+"  download>Open</a>":"<p style='color:tomato'>File Missing</p>"}</td>
+            </tr>
+       
+        `;
+
+    }
+    function upload_acceptance_letter(id){
+        new_obj = new FormData();
+        let file_data = document.getElementById(`tableFormInput${id}`).files[0];
+        new_obj.append('id', id);
+        new_obj.append('file_na', file_data)
+        $.ajax({
+                url: '{{LINK aj/application/upload_acceptance}}?hash=<?php echo CreateMainSession(); ?>',
+                method: "POST",
+                data: new_obj,
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    if (data.status == 200) {
+                        // hideModalC()
+                        renderTableData(data) 
+                    }
+                }
+            });
+    }
+
+    function renderTableData(data) {
+        let color = "black"
+        let tableRows = ""
+        data.data.forEach(element => {
+            if(element.is_checked === "accepted") color = "#33cd86"
+            if(element.is_checked === "rejected") color = "tomato"
+
+            let appLetterRow = `
+                <label for="tableFormInput${element.id}" class="upload-letter upload_acceptance">Upload</label>
+                <input type="file" name="acceptance_letter" onchange="upload_acceptance_letter(${element.id})" id="tableFormInput${element.id}"  hidden/> 
+            `
+            if(element.acceptance_letter !== null){
+                appLetterRow = `
+                    <select style="border:none" id="appLetterActions${element.id}" onchange="handleAppLetterAction('${element.id}', '${element.acceptance_letter_url}')">
+                        <option selected disabled value>Uploaded</option>
+                        <option  id="appLetterActionss${element.id}">Edit</option>
+                        <option>Open</option>
+                    </select>
+                `
+            }
+            if(element.is_checked !== "accepted") appLetterRow = "N/A"
+            tableRows += `
+                <tr>
+                    <td>${element.priority}</td>
+                    <td>${element.university_name.toLowerCase()}</td>
+                    <td>${element.program_name.toLowerCase()}</td>
+                    <td>
+                        <select style="border:none; color:${color}" id="change_status_value_${element.id}" onchange="ChangeStatus(${element.id});">
+                            <option value="queued" ${element.is_checked === "queued" ? "selected" : ""}>Queued</option>
+                            <option value="accepted" ${element.is_checked === "accepted" ? "selected" : ""}>Accepted</option>
+                            <option value="rejected" ${element.is_checked === "rejected" ? "selected" : ""}>Rejected</option>
+                        </select>
+                    </td>
+                    <td>${appLetterRow}</td>
+                    <td>${element.created_at.substr(0,10)}</td>
+                    <td>
+                        <p style="display:${(element.edit_request === 'none') ? 'block' : 'none' }">
+                           N/A
+                        </p>
+                        <button class="table-action-btn" onclick="send_request(${element.id})" style="display:${(element.edit_request === 'requested')? 'block' : 'none' }">                         
+                            Approve 
+                        </button>
+                        <p style="display:${(element.edit_request === 'approved') ? 'block' : 'none' }; color:#33cd86 ">
+                          Approved
+                        </p>
+                    </td>
+                </tr>
+            `
+            color = "black"
+        });
+
+        document.getElementById("all_applications").innerHTML = tableRows
+    }
+    function renderMessages(data) {
+        let messageRows = ""
+        data.forEach(element => {
+            // console.log("Message",element.message)
+            // console.log("from", element.from)
+            if (element.from === "admin") {
+                let action = ""
+                if(element.action_slug !== null) action = `<button class="action-btn">${element.action}</button>`
+                messageRows += `
+                <div class="right-message message-rows">
+                    <div class="message-area">
+                        <div class="message-bubble" style="display:${element.message !== "" ? "block":"none"}">${element.message}</div>
+                        ${action}
+                        <p class="message-arrival">3 min ago</p>
+                    </div>
+                    <img src="https://www.globalacademia.com/wp-content/uploads/2017/11/global-academia-logo.jpg" alt="">
+                </div>
+            `
+            } else {
+                messageRows += `
+                <div class="left-message message-rows">
+                    <img src="https://history.ubc.ca/wp-content/uploads/sites/23/2020/01/Kevin-website.jpg" alt="">
+                    <div class="message-area">
+                        <div class="message-bubble">${element.message}</div>
+                        <p class="message-arrival">3 min ago</p>
+                    </div>
+                </div>
+            `
+            }
+        })
+
+        document.getElementById("rendered-message").innerHTML = messageRows
+        var element = document.getElementById('rendered-message');
+        element.scrollTop = element.scrollHeight;
+    }
+
+    function messagesModal(action) {
+        document.querySelector(".messages-modal").style.display = action
+        var element = document.getElementById('rendered-message');
+        element.scrollTop = element.scrollHeight;
+    }
+    function openSendAction(action) {
+        document.getElementById("action-pad").style.display = action
+    }
+    function showEditCommision(action){
+        if(action ==="SHOW"){
+            document.getElementById("show-commission").style.display = "none"
+            document.getElementById("edit-commission-form").style.display = "block"
+        }
+    }
+    function handleAppLetterAction(id, link){
+        const value = document.getElementById(`appLetterActions${id}`).value
+               
+        if(value === "Open"){
+            window.open(link)
+            window.location.reload()
+        }
+        if(value === "Edit") {
+            document.getElementById("editApplicationLetter").click()
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = () => {
+                let files = Array.from(input.files);
+
+                new_obj = new FormData();
+                let file_data = files[0];
+                new_obj.append('id', id);
+                new_obj.append('file_na', file_data)
+                $.ajax({
+                    url: '{{LINK aj/application/upload_acceptance}}?hash=<?php echo CreateMainSession(); ?>',
+                    method: "POST",
+                    data: new_obj,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function () {
+
+                    },
+                    success: function (data) {
+                        if (data.status == 200) {
+                            // hideModalC()
+                            renderTableData(data) 
+                        }
+                    }
+                });
+            };
+            input.click()
+        }
+        if(value === "Delete") {
+            console.log(id, value)
+            delete_application(id,"programs")
+        }
+    }
+    function delete_application(id,type) {
+       
+       $.get('{{LINK aj/front_end_api/delete_application}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, type: type}, function (data) {
+           if (data.status == 200) {
+            renderTableData(data) 
+           }
+       });
+   }
+
+
+
+</script>

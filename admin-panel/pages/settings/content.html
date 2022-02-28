@@ -1,0 +1,478 @@
+<div class="page-header">
+    <div>
+        <h3>Settings</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href=index.html>Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Pages</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Settings</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                   
+                    <a class="nav-item nav-link active" id="v-pills-general-settings-tab" data-toggle="pill"
+                       href="#v-pills-general-settings" role="tab" aria-controls="v-pills-general-settings" aria-selected="false">General Settings</a>
+                     <a class="nav-item nav-link" id="v-pills-site-settings-tab" data-toggle="pill"
+                       href="#v-pills-site-settings" role="tab" aria-controls="v-pills-site-settings" aria-selected="false">Site Settings</a>
+                    <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
+                       role="tab" aria-controls="v-pills-profile" aria-selected="false">Password</a>
+                    <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill"
+                       href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Email
+                        & SMS Settings</a>
+                    <a class="nav-item nav-link" id="v-pills-settings-tab" data-toggle="pill"
+                       href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Integrations</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                   
+                    <div class="tab-pane fade show active" id="v-pills-general-settings" role="tabpanel"
+                         aria-labelledby="v-pills-general-settings-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">General Settings</h6>
+                                    <hr>
+
+                                            <form class="user-settings" method="POST">
+                                                <h5 class="mb-3">User Settings</h5>
+                                                <div class="user-settings-alert"></div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" id="customSwitch1208" name="user_registration" class="custom-control-input" <?php echo ($kd->config->user_registration == 'on') ? 'checked': ''; ?>>
+                                                        <label class="custom-control-label" for="customSwitch1208">User Registration</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox"  name="validation"  class="custom-control-input" 
+                                                               id="customSwitch1209" <?php echo ($kd->config->validation == 'on') ? 'checked': '';?>>
+                                                        <label class="custom-control-label" for="customSwitch1209">User Email Verification</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="customSwitch1210" name="delete_account"  <?php echo ($kd->config->delete_account == 'on') ? 'checked': '';?>>
+                                                        <label class="custom-control-label" for="customSwitch1210">Delete User Account</label>
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group">
+                                                                <label>How many posts a user can post per hour?</label>
+                                                                <input type="text" name="max_post_per_hour" class="form-control"
+                                                                       value="{{CONFIG max_post_per_hour}}">
+                                                            </div>
+                                             
+                                              
+                                                <button class="btn btn-primary">Save</button>
+                                            </form>
+                                    <div class="clear-fix"></div>
+                                </div>
+                            </div>                   
+                    </div>
+                    <div class="tab-pane fade show" id="v-pills-site-settings" role="tabpanel"
+                         aria-labelledby="v-pills-site-settings-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Site Settings</h6>
+                                      <hr>
+                                       
+                                        <div class="site-settings-alert" role="alert"></div>
+                                         <form class="site-settings" method="POST">
+                                            <h5 class="mb-3">Website Settings</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Site Title</label>
+                                                            <input type="text" name="title" class="form-control" value="{{CONFIG title}}">
+                                                        </div>
+                                                        <div class="form-line focused">
+                                                            <label>Site Name</label>
+                                                            <input type="text" name="name" class="form-control" value="{{CONFIG name}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Site key Words</label>
+                                                            <textarea class="form-control" name="keyword" cols="30" rows="5">{{CONFIG keyword}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Site Description</label>
+                                                            <textarea class="form-control" name="description" cols="30" rows="5">{{CONFIG description}}</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="text" name="email" class="form-control" value="{{CONFIG email}}">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                      <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Twitter</label>
+                                                                <input type="text"  name="twitter_url" class="form-control"
+                                                                       value="{{CONFIG twitter_url}}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Facebook</label>
+                                                                <input type="text"  name="facebook_url" class="form-control"
+                                                                       value="{{CONFIG facebook_url}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                          <!--   <div class="form-group">
+                                                                <label>Instagram</label>
+                                                                <input type="text" name="twitter_url" class="form-control"
+                                                                       value="https://www.instagram.com/roxana-roussell/">
+                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label>Google</label>
+                                                                <input type="text" name="google_url" class="form-control"
+                                                                       value="{{CONFIG google_url}}">
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                              
+                                            <button class="btn btn-primary">Save</button>
+                                        </form>
+                                    <div class="clear-fix"></div> 
+                                    <hr>
+                                        <form class="other-settings" method="POST">
+                                            <div class="other-settings-alert"></div>
+                                            <h5 class="mb-3">Other Settings</h5>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                       
+                                                       
+                                                       <div class="form-group">
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" id="customSwitch1205" name="profile_visit_notification" class="custom-control-input" 
+                                                                       <?php echo ($kd->config->profile_visit_notification == 'on') ? 'checked': '';?>>
+                                                                <label class="custom-control-label" for="customSwitch1205">Profile Visit Notification</label>
+                                                            </div>
+                                                        </div>
+
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox" id="customSwitch1206" name="recaptcha" class="custom-control-input" 
+                                                                      <?php echo ($kd->config->recaptcha == 'on')  ? 'checked': '';?>>
+                                                                <label class="custom-control-label" for="customSwitch1206">Recaptcha</label>
+                                                            </div>
+
+                                                        <div class="form-group">
+                                                            <label>Recaptcha Key</label>
+                                                            <input type="text" class="form-control" name="recaptcha_key" value="{{CONFIG recaptcha_key}}">
+                                                        </div>
+                                                        <label for="language">Default Language</label>
+                                                        <select class="form-control show-tick" id="language" name="language">
+                                                            <option value="">-- Please select --</option>
+                                                            <?php 
+                                                            $langs__footer = $kd->langs;
+                                                            $langs_html    = '';
+                                                            foreach ($langs__footer as $key => $language) {
+                                                                $lang_explode = explode('.', $language);
+                                                                $language     = $lang_explode[0];
+                                                                $language_    = ucfirst($language);
+                                                                $selected = ($kd->config->language == $language) ? 'selected': '';
+                                                                $langs_html .= '<option value="' . $language . '" ' . $selected . '>' . $language_ . '</option>';
+                                                            }
+                                                            echo $langs_html;
+                                                            ?>
+                                                        </select>
+                                                        <div class="clearfix"></div>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-line focused">
+                                                            <label>Google Analytics ID</label>
+                                                            <input type="text" class="form-control" name="google" value="{{CONFIG google}}">
+                                                        </div>
+                                                         <div class="form-line focused">
+                                                            <label>Google place api</label>
+                                                            <input type="text" class="form-control" name="google_place_api" value="{{CONFIG google_place_api}}">
+                                                        </div>
+                                                         <div class="form-line focused">
+                                                            <label>Google map api</label>
+                                                            <input type="text" class="form-control" name="google_map_api" value="{{CONFIG google_map_api}}">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Censored Words</label>
+                                                            <textarea class="form-control" name="censored_words" cols="30" rows="5">{{CONFIG censored_words}}</textarea>
+                                                        </div>
+
+                                                        
+                                                    </div>
+                                                </div>
+                                                              
+                                            <button class="btn btn-primary">Save</button>
+                                        </form>
+                                    <div class="clear-fix"></div>                       
+                                </div>
+                            </div>              
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                         aria-labelledby="v-pills-profile-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Password</h6>
+                                    <form  class="change_password" method="POST">
+                                        <div class="site-settings-alert"></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Old Password</label>
+                                                    <input type="password" name="current_password" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>New Password</label>
+                                                    <input type="password" name="new_password" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>New Password Repeat</label>
+                                                    <input type="password" name="confirm_new_password" class="form-control">
+                                                </div>
+                                                <input type="hidden" name="user_id" value="<?php echo $kd->user->id; ?>" />
+                                                <input type="hidden" name="username" value="<?php echo $kd->user->username; ?>" />
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary password_save_btn">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                         aria-labelledby="v-pills-messages-tab">
+                            <div class="card">
+                                <div class="card-body">
+                                      <div class="email-settings-alert"></div>
+                                    <form class="email-settings" method="POST">
+                                        <h5 class="mb-3">E-mail Settings</h5>
+                                         <label for="smtp_or_mail">Server Type</label>
+                                        <div class="form-group">
+                                            <input type="radio" name="smtp_or_mail" id="smtp_or_mail-enabled" value="smtp" <?php echo ($kd->config->smtp_or_mail == 'smtp') ? 'checked': '';?>>
+                                            <label for="smtp_or_mail-enabled">SMTP Server</label>
+                                            <input type="radio" name="smtp_or_mail" id="smtp_or_mail-disabled" value="mail" <?php echo ($kd->config->smtp_or_mail == 'mail') ? 'checked': '';?>>
+                                            <label for="smtp_or_mail-disabled" class="m-l-20">Server Mail (Default)</label>
+                                        </div>
+                                        <br>
+                                          <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <input type="text" id="smtp_host" name="smtp_host" class="form-control" value="{{CONFIG smtp_host}}">
+                                                    <label class="form-label">SMTP Host</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <input type="text" id="smtp_username" name="smtp_username" class="form-control" value="{{CONFIG smtp_username}}">
+                                                    <label class="form-label">SMTP Username</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <input type="text" id="smtp_password" name="smtp_password" class="form-control" value="{{CONFIG smtp_password}}">
+                                                    <label class="form-label">SMTP Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    <input type="text" id="smtp_port" name="smtp_port" class="form-control" value="{{CONFIG smtp_port}}">
+                                                    <label class="form-label">SMTP Port</label>
+                                                </div>
+                                            </div>
+                                            <label for="smtp_encryption">SMTP Encryption</label>
+                                            <div class="form-group">
+                                                <input type="radio" name="smtp_encryption" id="smtp_encryption-enabled" value="tls" <?php echo (strtolower($kd->config->smtp_encryption) == 'tls') ? 'checked': '';?>>
+                                                <label for="smtp_encryption-enabled">TLS</label>
+                                                <input type="radio" name="smtp_encryption" id="smtp_encryption-disabled" value="ssl" <?php echo (strtolower($kd->config->smtp_encryption) == 'ssl') ? 'checked': '';?>>
+                                                <label for="smtp_encryption-disabled" class="m-l-20">SSL</label>
+                                            </div>
+                                        <button class="btn btn-primary">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                         aria-labelledby="v-pills-settings-tab">
+                            <div class="card">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <figure class="mb-0 mr-3">
+                                            <img
+                                                src="https://pipeline.mediumra.re/assets/img/logo-integration-slack.svg"
+                                                alt="...">
+                                        </figure>
+                                        <div>
+                                            <h6 class="card-title mb-1">Slack</h6>
+                                            <div class="text-muted">Permissions: Read, Write, Comment</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger">Remove</button>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <figure class="mb-0 mr-3">
+                                            <img
+                                                src="https://pipeline.mediumra.re/assets/img/logo-integration-drive.svg"
+                                                alt="...">
+                                        </figure>
+                                        <div>
+                                            <h6 class="card-title mb-1">Google Drive</h6>
+                                            <div class="text-muted">Permissions: Read, Write</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger">Remove</button>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <figure class="mb-0 mr-3">
+                                            <img
+                                                src="https://pipeline.mediumra.re/assets/img/logo-integration-dropbox.svg"
+                                                alt="...">
+                                        </figure>
+                                        <div>
+                                            <h6 class="card-title mb-1">Dropbox</h6>
+                                            <div class="text-muted">Permissions: Read, Write, Upload</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger">Remove</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+    "use strict";
+    var form_site_settings = $('form.site-settings');
+    var form_other_settings = $('form.other-settings');
+    var form_upload_settings = $('form.upload-settings');
+    var form_password_settings = $('form.change_password');
+
+
+    form_password_settings.ajaxForm({
+        url: '{{LINK aj/user/change-pass}}?hash=<?php echo CreateMainSession(); ?>',
+        beforeSend: function() {
+            form_password_settings.find('button').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_password_settings.find('button').text('Save');
+                $('.site-settings-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('.site-settings-alert').empty();
+                }, 2000);
+            } else {
+                form_password_settings.find('button').text('Save');
+                $('.site-settings-alert').html(`<div class="alert alert-danger">${data.errors[0]}</div>`);
+                setTimeout(function () {
+                    $('.site-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    form_site_settings.ajaxForm({
+        url: '{{LINK aj/ap/save-settings}}',
+        beforeSend: function() {
+            form_site_settings.find('button').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_site_settings.find('button').text('Save');
+                $('.site-settings-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('.site-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+    form_other_settings.ajaxForm({
+
+        url: '{{LINK aj/ap/save-other-settings}}',
+        beforeSend: function() {
+            form_other_settings.find('.waves-effect').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_other_settings.find('.waves-effect').text('Save');
+                $('.other-settings-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('.other-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+    form_upload_settings.ajaxForm({
+        url: '{{LINK aj/ap/save-settings}}',
+        beforeSend: function() {
+            form_other_settings.find('.waves-effect').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_other_settings.find('.waves-effect').text('Save');
+                $('.other-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                setTimeout(function () {
+                    $('.other-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+
+    var form_user_settings = $('form.user-settings');
+
+    form_user_settings.ajaxForm({
+        url: '{{LINK aj/ap/save-general-settings}}',
+        beforeSend: function() {
+            form_user_settings.find('button').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_user_settings.find('button').text('Save');
+                $('.user-settings-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('.user-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+      var form_email_settings = $('form.email-settings');
+
+    form_email_settings.ajaxForm({
+        url: '{{LINK aj/ap/save-settings}}',
+        beforeSend: function() {
+            form_email_settings.find('button').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+            if (data.status == 200) {
+                form_email_settings.find('button').text('Save');
+                $('.email-settings-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                setTimeout(function () {
+                    $('.email-settings-alert').empty();
+                }, 2000);
+            }
+        }
+    });
+
+});
+
+</script>

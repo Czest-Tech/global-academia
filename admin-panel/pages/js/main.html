@@ -1,0 +1,124 @@
+$(function() {
+    "use strict";
+    $('.delete-button').on('click', function(event) {
+        event.preventDefault();
+        var ajax_type = $(this).attr('data-type');
+        var id = $('#delete-modal').attr('data-id');
+        $('#list-' + id).remove();
+        $.post('{{LINK aj/ap/delete-' + ajax_type + '}}', {id: id});
+    });
+
+     $('.add_to_featured-button').on('click', function(event) {
+        event.preventDefault();
+        var ajax_type = $(this).attr('data-type');
+        var id = $('#featured-modal').attr('data-id');
+        var job_usr_id = $('#featured-modal').attr('data-user-id');
+        $('#list-' + id).remove();
+        $.post('{{LINK aj/ap/add_feature-' + ajax_type + '}}', {job_id: id, job_user_id: job_usr_id});
+    });
+
+
+});
+
+var PT_Delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+ $(document).ready(function () {
+        $('.hdr-dropdown-toggle').dropdown();
+    });
+
+    jQuery(document).ready(function($) {
+
+        get_notifications({type:'new'});
+
+        $(".nav-link-notify").on('click', function(event) {
+            console.log('click');
+            //if ($('#notifications').css('display') == 'none') {
+                if ($("span#new-notifications").html() != '') {
+                    //$("#all-notifications").text($(this).find('span#new-notifications').text());
+                    $(this).find('span#new-notifications').empty().attr('style', 'background: transparent !important');
+                    get_notifications({type:'all'});
+                }else{
+                    get_notifications({sa:1});
+                }
+            //}
+        });
+
+        setInterval(function(){
+            get_notifications({type:'all'});
+        }, 6000);
+    });
+
+    function get_notifications(args){
+       if (!args) {
+            args = {};
+        } 
+       
+        
+        var notfi_set  = $("ul#notifyy");
+
+        defparams = {
+            type: false,
+            sa:false
+        }
+
+        options = Object.assign(defparams,args);
+         data    = {'hash':'<?php echo  CreateMainSession(); ?>'};
+
+        if (options['type']) {
+         
+
+            data['t'] = options['type']
+        }
+
+        if (options['sa']) {
+
+            data['sa'] = options['sa'];
+           
+        }
+        data['target'] = 'all';
+
+
+        $.ajax({
+            url: '{{LINK aj/get_notifications/notifications}}',
+            type: 'GET',
+            dataType: 'json',
+            data:data
+        })
+            .done(function(data) {
+                if (data.status == 200) {
+                    if (data.new) {
+                        $("span#new-notifications").html(data.new).attr('style', 'background: #d44d43 !important');
+                        //notfi_set.find('b').text(data.new);
+                        // $('.seen_notf').hide();
+                        // $('.unseen_notf').show();
+                    }
+                    else{
+                        $('#all-notifications').text(data.len);
+                        notfi_set.html(data.html);
+                        
+                        // $('.seen_notf').show();
+                        // $('.unseen_notf').hide();
+                    }
+                }
+                else {
+                    notfi_set.html(data.html
+                    );
+                    $('#all-notifications').text('');
+                    $('#mark_as_read').html('');
+                    
+                }
+
+                
+
+               
+
+           })
+            .fail(function() {
+                console.log("error");
+            });
+    }

@@ -1,0 +1,175 @@
+<main class="mainAreaDetails8">
+    <div class="detailsTop"  style=" background-image: url('<?php echo (GetMedia($kd->university->main_image)) ? GetMedia($kd->university->main_image) : 'https://png.pngitem.com/pimgs/s/23-238941_duke-university-logo-transparent-hd-png-download.png' ?>');
+        background-position: center;
+        background-size: cover;
+        display: flex;">
+        <div class="coverRow">
+            <div class="coverRowDetails">
+                <div class="CoverUniLogo">
+                    <img src="<?php echo (GetMedia($kd->university->university_logo)) ? GetMedia($kd->university->university_logo) : 'https://png.pngitem.com/pimgs/s/23-238941_duke-university-logo-transparent-hd-png-download.png' ?>" alt="" srcset="">
+                </div>
+                <div class="coverUniText">
+                    <span class="coverUniName"><?php echo $kd->university->university; ?></span>
+                    <span class="coverUniPro"><?php echo $kd->university->location; ?></span>
+                </div>
+            </div>
+            <a href="{{LINK university-programs/}}<?php echo $kd->university->id;?>"> <button class="redBtn8">{{LANG Apply}}</button></a>
+        </div>
+    </div>
+    <div class="mainDetialsContainer">
+        <div class="leftMainDetails">
+             <div class="leftMainDetailsRows">
+                 <h2>Description</h2>
+                 <h4><?php echo $kd->university->description; ?></h4>
+             </div>
+             <hr>
+            <div class="leftMainDetailsRows">
+                
+                 <h2>Departments</h2>
+                 <?php if(!empty($departments_all)){
+                   foreach($departments_all  as $dp){?>
+                        <h5><?php echo $dp->department; ?></h5>
+                    <?php } 
+                   } else{
+                    ?>
+                    <h5>No Departmetns Add yet</h5> <?php } ?>
+                 
+             </div>
+             
+             <hr>
+             
+            <div class="leftMainDetailsRows">
+                <p class="leftDetialsHeader">{{LANG Disciplines}}</p>
+                <div class="displines8">
+                    <p>{{LANG Medicine And Health}}</p>
+                    <p>{{LANG Engineering}}</p>
+                    <p>Computer Science And IT</p>
+                    <p>Arts And Design Architecture</p>
+                    <p>Law</p>
+                    <p>Natural Science And Mathematics</p>
+                    <p>ocial Sciences</p>
+                </div>
+            </div>
+                <div class="leftMainDetailsRows">
+                <p class="leftDetialsHeader">Overview</p>
+                <div class="overViewIcons">
+                    <span class="overViewIcon <?php if($kd->university->library != "0") {echo "activeOverview"; }?>"><i class="fas fa-book-open pr-3"></i>{{LANG Library}}</span>
+                    <span class="overViewIcon <?php if($kd->university->wifi != "0") {echo "activeOverview"; }?>"><i class="fas fa-wifi pr-3"></i>{{LANG Wifi}}</span>
+                    <span class="overViewIcon <?php if($kd->university->gym != "0") {echo "activeOverview"; }?>"><i class="fas fa-dumbbell pr-3"> </i>{{LANG Gym }}</span>
+                    <span class="overViewIcon <?php if($kd->university->cafeteria != "0") {echo "activeOverview"; }?>"><i class="fas fa-hamburger pr-3"> </i>{{LANG Cafeteria}} </span>
+                    <span class="overViewIcon <?php if($kd->university->hairdresser != "0") {echo "activeOverview"; }?>"><i class="fas fa-cut pr-3"> </i>{{LANG Hairdresser}} </span>
+                    <span class="overViewIcon <?php if($kd->university->atm != "0") {echo "activeOverview"; }?>"><i class="far fa-credit-card pr-3"> </i>{{LANG Atm}} </span>
+                    <span class="overViewIcon <?php if($kd->university->car_park != "0") {echo "activeOverview"; }?>"><i class="fas fa-parking pr-3"> </i>{{LANG Car Park }} </span>
+                    <span class="overViewIcon <?php if($kd->university->bank != "0") {echo "activeOverview"; }?>"><i class="fas fa-money-bill-alt pr-3"> </i>{{LANG Bank}} </span>
+                    <span class="overViewIcon <?php if($kd->university->security != "0") {echo "activeOverview"; }?>"><i class="fas fa-shield-alt pr-3"> </i>{{LANG Security}} </span>
+                    <span class="overViewIcon <?php if($kd->university->vertural_court != "0") {echo "activeOverview"; }?>"><i class="fas fa-gavel pr-3"> </i>{{LANG Virtual Court}} </span>
+                    <span class="overViewIcon <?php if($kd->university->walking_track != "0") { echo "activeOverview";} ?>"><i class="fas fa-walking pr-3"> </i>{{LANG Walking Track}}</span>
+                    <span class="overViewIcon <?php if($kd->university->barrier_free != "0") {echo "activeOverview"; }?>"><i class="fas fa-street-view pr-3"> </i>{{LANG Barrier Free Campus}}</span>
+                    <span class="overViewIcon <?php if($kd->university->tennis_court != "0") { echo "activeOverview"; }?>"><i class="fas fa-baseball-ball pr-3"> </i>{{LANG Tennis Court}} </span>
+                    <span class="overViewIcon <?php if($kd->university->dining_hall != "0") { echo "activeOverview"; } ?>"><i class="fas fa-utensils pr-3"> </i>{{LANG Dining Hall}} </span>
+                    <span class="overViewIcon <?php if($kd->university->auditorium != "0") { echo "activeOverview"; } ?>"><i class="fas fa-chalkboard-teacher pr-3"> </i>{{LANG Auditorium}} </span>
+                    <span class="overViewIcon <?php if($kd->university->medial_center != "0") { echo "activeOverview"; }?>"><i class="fas fa-band-aid pr-3"> </i>{{LANG Medical Center First Aid}} </span>
+                </div>
+            </div>
+        </div>
+        <div class="rightMainDetails">
+            <a href="{{LINK university-programs/}}<?php echo $kd->university->id;?>"> 
+                <button class="blueBtn8">
+                    {{LANG See Programs}}
+                </button>
+            </a>
+            <p class="rightMainDetHeader">{{LANG University Overview}}</p>
+            <p>
+                <span class="DetText8">{{LANG Location}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->location; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG University type}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->university_type; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Foundation Year}}:</span>
+                <span class="DetHeader8"><?php echo $kd->university->foundation; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Languages}} :</span>
+                <span class="DetHeader8"> <?php 
+                    if($kd->university->lang_edu_en == 1 && $kd->university->lang_edu_tk == 1) echo "English/Turkish"; 
+                    else {
+                        if($kd->university->lang_edu_en == 1) echo "English";
+                        else if ($kd->university->lang_edu_tk == 1) echo "Turkish";
+                      } ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Education}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->location; ?></span>
+            </p>
+
+            <p>
+                <span class="DetText8">{{LANG Sports Facilities}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->sp_facilitie; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Student Associations}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->st_associations; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Laboratories}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->laboratories; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Study Mode}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->study_mode; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG International Students}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->international_students; ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Total Students}} :</span>
+                <span class="DetHeader8"><?php echo $kd->university->total_students; ?></span>
+            </p>
+  
+            <br/>
+            <p class="rightMainDetHeader">Programs Offered</p>
+            <p>
+                <span class="DetText8">{{LANG Associate Degree}} : </span>
+                <span class="DetHeader8"><span><?php echo ($kd->university->asso_degrees != '0') ? __('yes') : __('no') ?> </span></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Undergraudate Program}} :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->undergraduate_program != '0') ? __('yes') : __('no') ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Graudate Program}}  :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->master_programs != '0') ? __('yes') : __('no') ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Phd Program}}  :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->ph_d_programs != '0') ? __('yes') : __('no') ?></span>
+            </p>
+           
+            <br/>
+            <p class="rightMainDetHeader">{{LANG Accomodation}}</p>
+            <p>
+                <span class="DetText8">{{LANG Domitory}} :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->dormitory != '0') ? __('yes') : __('no') ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Female Domitory}} :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->female != '0') ? __('yes'): __('no') ?></span>
+            </p>
+            <p>
+                <span class="DetText8">{{LANG Male Domitory}} :</span>
+                <span class="DetHeader8"><?php echo ($kd->university->male != '0') ? __('yes'): __('no') ?></span>
+            </p>
+   
+            
+        </div>
+    </div>
+  </main>
+  <style>
+      span.overViewIcon.active {
+            color: rgb(151, 172, 151) !important;
+        }
+  </style>

@@ -1,0 +1,291 @@
+<?php 
+
+if (empty($_GET['id'])) {
+    header('Location: ' . UrlLink('404'));
+    exit();
+}
+$application = array();
+$id       = Secure($_GET['id']);
+$application  = $db->where('id',$id)->getOne(T_APPLICATIONS);
+
+?>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Edit Applications</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('dashboard'); ?>">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('manage-applications'); ?>">Manage Applicaiton</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Application</li>
+            </ol>
+        </nav>
+    </div>     
+</div>
+<div class="row">
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8 card">
+        <form class="applyContainer8 " method="post">
+            <div class="submit-alert"></div>
+          
+            <h2>Personal Details</h2>
+            <div class="applyRow">
+                <p class="apply-input-label">Names<span>*</span></p>
+                <div class="applyInputRow">
+                    <input type="text" name="first_name" id="first_name" value="<?php echo $application->first_name; ?>" placeholder="Firstname">
+                    <input type="text" name="middle_name" id="middle_name" value="<?php echo $application->middle_name; ?>" placeholder="Other">
+                    <input type="text" name="last_name" id="last_name" value="<?php echo $application->last_name; ?>" placeholder="Lastname">
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Phone Number<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="text" name="phone_number" id="phone_number" value="<?php echo $application->phone_number; ?>" placeholder="Line 1">
+                    <input type="text" name="phone_number_2" id="phone_number_2" value="<?php echo $application->phone_number_2; ?>" placeholder="Line 2 (Optional)">
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Email<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="text" name="email" id="email" value="<?php echo $application->email; ?>" placeholder="Your Email Address">
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Father's Name<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="text" name="fathers_name" id="fathers_name" value="<?php echo $application->fathers_name; ?>" placeholder="{{LANG Father Names}}">
+                    <!-- <input type="text" name="" id="" placeholder="Other">
+                    <input type="text" name="" id="" placeholder="Lastname"> -->
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Mother's Name<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="text" name="mothers_name" id="mothers_name" value="<?php echo $application->mothers_name; ?>" placeholder="{{LANG Mother Name}}">
+                 <!--    <input type="text" name="" id="" placeholder="Other">
+                    <input type="text" name="" id="" placeholder="Lastname"> -->
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Date of Birth<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="date" name="date_of_birth" value="<?php echo $application->date_of_birth; ?>" id="date_of_birth">
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Passport Number<span>*</span></div>
+                <div class="applyInputRow">
+                    <input type="text" name="passport_number" value="<?php echo $application->passport_number; ?>" id="passport_number">
+                </div>
+            </div>
+            <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            
+                            <th>University</th>
+                            <th>Program</th>
+                            <th>Remove</th>
+                        
+    
+                         </thead>
+                       
+                        
+                        <?php 
+                        
+                           $cart_applications = $db->where('email', $application->email)->get(T_APPLICANT_UNIVERSITIES);
+                           foreach($cart_applications as $lict){
+                        ?>
+                            <tr>
+                    
+                            <td><?php echo GetuniversityByID($lict->university_id); ?></td>
+                            <td><?php echo GetProgramByID($lict->program_id); ?></td>
+                            <td><?php if($kd->user->access_level == 1){ ?> <i class="ti-close" onclick="DeleleApplication(<?php echo $lict->id ?>)"></i> <?php } else {?><p> No Permission </p><?php } ?></td>
+                            
+                            </tr>
+                        
+                        <?php } ?>
+
+                       
+                    </table>
+            </div>  
+            <div class="applyRow">
+                <div class="apply-input-label">Nationality<span>*</span></div>
+                <div class="applyInputRow">
+                    
+
+                
+                    <select name="nationality" id="nationality" selected="<?php echo $application->nationality; ?>" >
+                        <?php  foreach ($kd->countries_name as $key => $value) { ?>
+                            <option value=" <?php echo $value; ?>"><?php echo $value; ?></option>
+                            <?php } ?>
+                    </select>
+                    
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Country of Residence<span>*</span></div>
+                <div class="applyInputRow">
+                    <select name="country_of_residence" id="country_of_residence" selected="<?php echo $application->country_of_residence; ?>">
+                        <?php  foreach ($kd->countries_name as $key => $value) { ?>
+                            <option value=" <?php echo $value; ?>"><?php echo $value; ?></option>
+                            <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <h2> Upload your Documents</h2>
+            <div class="applyRow">
+                <div class="apply-input-label">Diploma</div>
+                <div class="applyInputRow">
+                    <input type="file" name="diploma_file" value="<?php echo $application->diploma_file; ?>" id="diploma_file">
+                    <img src="<?php echo GetMedia($application->diploma_file); ?>" width="50%"/>
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label">Transcript</div>
+                <div class="applyInputRow">
+                    <input type="file" name="transcript_file" value="<?php echo $application->transcript_file; ?>" id="transcript_file">
+                    <img src="<?php echo GetMedia($application->transcript_file); ?>" width="50%">
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label"> Passport</div>
+                <div class="applyInputRow">
+                    <input type="file" name="passport_file"  value="<?php echo $application->passport_file; ?>"id="passport_file">
+                    <img src="<?php echo GetMedia($application->passport_file); ?>"width="50% "/>
+                </div>
+            </div>
+            <div class="applyRow">
+                <div class="apply-input-label"> Photo</div>
+                <div class="applyInputRow">
+                    <input type="file" name="id_photo" value="<?php echo $application->id_photo; ?>" id="id_photo">
+                    <img src="<?php echo GetMedia($application->passport_file); ?>" width="50%"/>
+                </div>
+            </div>
+            <input type="hidden" name="university_id" value="<?php echo $application->university_id; ?>">
+            <input type="hidden" name="program_id" value="<?php echo $application->program_id; ?>">
+            <input type="hidden" name="uniqid" value="<?php echo $application->application_no; ?>">
+            <input type="hidden" name="application_id" value="<?php echo $application->id; ?>">
+            
+            <button class="btn btn-primary" type="submit">Save</button>
+          <!--   <button class="redBtn8">Cancel</button> -->
+        </form>
+        
+      
+                <div class="comission_box">
+                    <input name="commision" id="commision" value="<?php echo $application->commision; ?>" type="number" />
+                </div>
+             
+
+            <button class="btn btn-primary save_note" onclick="submit_note()"> Save Commission</button>
+	</div>
+    </div>
+</div>
+    <div class="col-lg-2"></div>
+</div>
+<div id="modal_data" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm</h5>
+                <p type="button" class="btn-close" onclick="hideModal()" data-bs-dismiss="modal" aria-label="Close">X</p>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove of this program ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="hideModal()" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="remove()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="<?php echo LoadAdminLink('/vendors/ckeditor5/ckeditor.js'); ?>"></script>
+    <script>
+               function hideModal(){
+        $('#modal_data').modal('hide');
+     }
+    let data_id = 0;
+    function DeleleApplication(id){
+        
+       $('#modal_data').modal('show');
+       data_id = id;
+       
+    }
+    function submit_note() {
+        let id = '<?php echo $id; ?>';
+        let note = $('#p_note').val();
+        let signed_by = $('#signed_by').val();
+        let commision = $('#commision').val();
+
+        $.get('{{LINK aj/application/change_status_note}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, note: note, signed_by: signed_by, commision:commision }, function (data) {
+            if (data.status == 200) {
+
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 200,
+                    hideDuration: 200
+                };
+                toastr.success('Applicant Note Updated!');
+                location.reload();
+            }
+        });
+    }
+
+    $(function() {
+   
+
+          let form1 = $('form.applyContainer8');
+        form1.ajaxForm({
+            url: '{{LINK aj/application/single_update}}?hash=<?php echo CreateMainSession(); ?>',
+            dataTyep:'json',
+            beforeSend: function() {
+                form1.find('button').text("{{LANG please_wait}}");
+            },
+            success: function(data) {
+                if (data.status == 200) {
+                   
+                    
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-success",
+                        html: data.message
+                    }));
+                    $('.alert-success').fadeIn(300);
+                   
+                }
+                else {
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-danger",
+                        html: data.message
+                    }));
+                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                }
+            }
+        });
+    });
+
+    function remove() {
+        
+        $.get('{{LINK aj/application/delete_application}}?' + "hash=<?php echo CreateMainSession() ?>", {id:data_id}, function (data) {
+                if(data.status == 200){
+                 
+                      toastr.options = {
+                        timeOut: 2000,
+                        progressBar: true,
+                        showMethod: "slideDown",
+                        hideMethod: "slideUp",
+                        showDuration: 200,
+                        hideDuration: 200
+                      };
+                  toastr.success('Applicant Note Updated!');
+                 window.location =  data.url;
+                }
+        });
+    }
+    </script>
+

@@ -1,0 +1,304 @@
+<main class="mainArea8">
+    <div class="statusContainerz">
+        <div class="status-checker" id="status-checker">
+            <div class="status_div">
+                <form class="statusForm" action="submit" method="post">
+                    <p>Application status</p>
+                    <input class="statusInput" name="email" placeholder="{{LANG Application ID}}">
+                    <button class="greenBtn8" type="submit">Check Status</button>
+                </form>
+            </div>
+            <div class="status_div_rest">
+                <form class="resetStatusForm" action="submit" method="post">
+                    <p>{{LANG Forgot Reference id}}</p>
+                    <input class="statusInput" name="email" id="ref_email"
+                        placeholder="{{LANG Enter National ID or Passport No}}">
+                    <button class="greenBtn8" type="submit">{{LANG Send Confirmation}}</button>
+                </form>
+            </div>
+            <div class="forgot_Reference_id">
+                <p>{{LANG Forgot Reference id}} ? <a onclick="reset_id()">click here</a></p>
+                <div class="applicant_note_Tab">
+                    <textarea name="applicant_note" class="applicant_note" id="applicant_note"
+                        placeholder="Send note to admin"></textarea>
+                    <input type="hidden" class="applicant_id" id="applicant_id" />
+                    <button onclick="save_note()">{{LANG Send note}}</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="all_application" id="all_application">
+            <div class="all_applications_top">
+                <img src="https://img.huffingtonpost.com/asset/609849892600006a62b42932.jpeg?cache=V1ybIe4dNN&ops=scalefit_720_noupscale"
+                    alt="">
+                <div>
+                    <p id="applicant-fullnames">Full Names</p>
+                    <p id="applicant-email">Email</p>
+                    <p>Ref. ID : <span id="appID">Ref ID</span></p>
+                    <div class="message-pot" onclick="messagesModal('block')">
+                        <p>Messages</p>
+                        <div>3</div>
+                    </div>
+                    <p onclick="signOut()">Sign Out</p>
+                </div>
+            </div>
+            <br>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>University</th>
+                        <th>Program</th>
+                        <th>Status</th>
+                        <th>Edit Request</th>
+                    </tr>
+                </thead>
+                <tbody id="applications-table-body">
+                    <!-- Applications Render From JS .... renderAplications()-->
+                </tbody>
+            </table>
+            <br>
+            <div class="message-modal" id="message-modal">
+            <div class="message-pad89">
+                <div class="application-notes">
+                    <div class="messages-top-area">
+                        <p>Messages</p>
+                        <p onclick="messagesModal('none')">close</p>
+                    </div>
+                    <div id="message-admin">
+                        <!-- Messages rendered her -->
+                    </div>
+                </div>
+                <div id="file-container">
+                    <!-- Upload file name Comes Here -->
+                </div>
+                <form method="post" class="send-note-form" id="send-message">
+                    <input type="file" name="file" id="input-file" hidden>
+                    <input type="hidden" name="name" id="input-names" />
+                    <input type="hidden" name="email" id="input-email" />
+                    <div class="reply-pad">
+                        <label for="input-file">
+                            <i class="fas fa-upload"></i>
+                        </label>
+                        <input placeholder="Send message to admin.." name="message" id="input-message" />
+                        <button type="submit" id="send-message-btn">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div id="table-action-modal">
+            
+        </div>
+    </div>
+</main>
+<script>
+    let applicaion_numner;
+    function reset_id() {
+        document.querySelector('.status_div').style.display = 'none';
+        document.querySelector('.status_div_rest').style.display = 'flex';
+    }
+    function save_note() {
+        let applicant_note = document.getElementById("applicant_note").value;
+        let id = applicaion_numner;
+
+        $.get('{{LINK aj/application/applicant_save_note}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, applicant_note: applicant_note }, function (data) {
+            if (data.status == 200) {
+                $('.applicant_note_Tab').html(data.message);
+            }
+        });
+    }
+    function send_request(id) {
+       
+        $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
+            if (data.status == 200) {
+                openAction('none', null);
+                console.log("DATA", data.data)
+                renderAplications(data)
+            }
+        });
+    }
+
+    var applicant_email;
+    var applicant_name;
+
+
+
+    $(function () {
+        let form1 = $('form.statusForm');
+        let form2 = $('form.send-note-form');
+
+        form1.ajaxForm({
+            url: '{{LINK aj/front_end_api/status}}?hash=' + $('.main_session').val(),
+            dataTyep: 'json',
+            beforeSend: function () {
+                form1.find('button').text("{{LANG please_wait}}");
+            },
+            success: function (data) {
+                form1.find('button').text("{{LANG Check Status}}");
+                if (data.status == 200) {
+                    $('.results').html(data.html);
+                    applicant_name = data.applicant_info.first_name + " " + data.applicant_info.last_name;
+                    applicant_email = data.applicant_info.email;
+                    renderAplications(data)
+                    document.getElementById("status-checker").style.display = "none"
+                    document.getElementById("all_application").style.display = "block"
+                }
+                else {
+                    $('.results').html(data.message);
+                }
+            }
+        });
+
+        form2.ajaxForm({
+            url: '{{LINK aj/front_end_api/send_applicant_message}}?hash=' + $('.main_session').val(),
+            dataType: 'json',
+            beforeSend: function () {
+                form2.find('button').text("{{LANG ....}}");
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    renderMessages(data.chats)
+                    document.getElementById("send-message-btn").innerHTML = "Send"
+                    document.getElementById("input-message").value = ""
+                    document.getElementById("input-file").value = ""
+                    document.getElementById("file-container").innerHTML = ""
+                }
+                else {
+                    $('.results').html(data.message);
+                    document.getElementById("send-message-btn").innerHTML = "Failed"
+                    setTimeout(function () { document.getElementById("send-message-btn").innerHTML = "Send" }, 3000);
+                }
+            }
+        });
+    });
+    $(function () {
+        let form1 = $('form.resetStatusForm');
+        form1.ajaxForm({
+            url: '{{LINK aj/application/resend_status_id}}?hash=' + $('.main_session').val(),
+            dataTyep: 'json',
+            beforeSend: function () {
+                form1.find('button').text("{{LANG please_wait}}");
+            },
+            success: function (data) {
+                form1.find('button').text("{{LANG Check Status}}");
+                if (data.status == 200) {
+                    //  $('#ref_email').val() = '';  
+                    document.querySelector('.status_div').style.display = 'flex';
+
+                    document.querySelector('.status_div_rest').style.display = 'none';
+
+                }
+                else {
+                    $('.results').html(data.message);
+                }
+            }
+        });
+    });
+
+
+    function renderMessages(data) {
+        let messageRows = ""
+        data.forEach(element => {
+            if(element.from ==="admin"){
+                let action = ""
+                if(element.action_slug !== null) action = `<a href='{{LINK edit_application}}/${element.id}' class="action-btn">${element.action}</a>`
+                messageRows += `
+                <div class="left-message message-rows">
+                    <img src="https://www.globalacademia.com/wp-content/uploads/2017/11/global-academia-logo.jpg" alt="">
+                    <div class="message-area">
+                        <div class="message-bubble" style="display:${element.message !== "" ? "block":"none"}">${element.message}</div>
+                        ${action}
+                        <p class="message-arrival">3 min ago</p>
+                    </div>
+                </div>
+            `
+            }else{
+                messageRows += `
+                <div class="right-message message-rows">
+                    <div class="message-area">
+                        <div class="message-bubble">${element.message}</div>
+                        <p class="message-arrival">3 min ago</p>
+                    </div>
+                    <img src="https://history.ubc.ca/wp-content/uploads/sites/23/2020/01/Kevin-website.jpg" alt="">
+                </div>
+            `
+            } 
+        })
+        document.getElementById("message-admin").innerHTML = messageRows
+
+        var element = document.getElementById('message-admin');
+        element.scrollTop = element.scrollHeight;
+    }
+
+
+    function renderAplications(data) {
+        let tableRows = ""
+        data.data.forEach(element => {
+            console.log("App Letter",element)
+            let appTime =  new Date(element.created_at).getTime();
+            let app_length = (Date.now() - appTime)/86400000
+            let action = `<button class='status-table-btn' onclick="openAction('flex', ${element.id})">Request Changes</button>`
+            if(element.edit_request === 'approved') action = `<a href="{{LINK edit_application}}/${element.id}"  ><button class='blueBtn8'>Edit Now</button></a>`
+            if(element.edit_request === 'requested') action = `Requested`
+
+            let status = element.checked_translatino
+            if(element.acceptance_letter !== null) status = `<a href=${element.acceptance_letter_url} target="_blank" class='status-table-btn'>Acceptance Letter</a>`
+            tableRows += `
+                <tr>
+                    <td style="text-transform: capitalise">${element.university_name.toLowerCase()}</td>
+                    <td>${element.program_name.toLowerCase()}</td>
+                    <td>${status}</td>
+                    <td>
+                        ${action}
+                    </td>
+                </tr>
+            `
+        });
+        document.getElementById("applications-table-body").innerHTML = tableRows
+        document.getElementById("applicant-fullnames").innerHTML = data.applicant_info.first_name + " " + data.applicant_info.last_name
+        document.getElementById("applicant-email").innerHTML = data.applicant_info.email
+
+        document.getElementById("input-names").value = data.applicant_info.first_name + " " + data.applicant_info.last_name
+        document.getElementById("input-email").value = data.applicant_info.email
+
+        document.getElementById("appID").innerHTML = data.applicant_info.application_no
+        renderMessages(data.chats)
+    }
+
+    document.getElementById("input-file").addEventListener("change", function (e) {
+        console.log(e.target.files[0].name)
+        document.getElementById("file-container").innerHTML = `
+        <div>
+            <p>${e.target.files[0].name}</p>
+            <i class="fas fa-times" onclick="removeFile()"></i>
+        </div>
+        `
+    });
+
+    function removeFile() {
+        document.getElementById("input-file").value = ""
+        document.getElementById("file-container").innerHTML = ""
+    }
+
+    function signOut() {
+        location.reload();
+    }
+    function messagesModal(action){
+        document.getElementById("message-modal").style.display = action
+    }
+    function openAction(action, id){
+        document.getElementById("table-action-modal").style.display = action
+        document.getElementById("table-action-modal").innerHTML = `<div class="table-action-main">
+                    <p>Request will be proccessed after 48 hours</p>
+                    <p>Would you like to continue?</p>
+                    <div>
+                        <input type="hidden" id="request_change_id"  value=${id}/>
+                        <button onclick="openAction('none')">No</button>
+                        <button onclick="send_request(${id})">Yes</button>
+                    </div>
+            </div>`;
+        document.getElementById("request_change_id").value = id;
+    }
+</script>
