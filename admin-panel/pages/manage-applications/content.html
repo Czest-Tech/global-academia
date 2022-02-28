@@ -1,0 +1,378 @@
+<?php
+$page = (!empty($_GET['page-id'])) ? $_GET['page-id'] : 1;
+$filter_keyword = (!empty($_GET['query'])) ? Secure($_GET['query']) : '';
+$db->pageLimit  = 20;
+
+
+
+
+$new_obj = array();
+   
+    $filtered_list = array();
+    $jobs = $db->objectbuilder()->orderBy('id', 'DESC')->paginate(T_APPLICATIONS, $page);
+    
+    foreach($jobs as $key => $b){       
+        if(searchForId($b->email, $new_obj) == false){
+        array_push($new_obj, $b);
+            
+        }      
+    }
+    function searchForId($id, $array) {
+        $issee = false;
+        foreach ($array as $key => $val) {
+            if ($val->email === $id) {
+                $issee = true;
+            } 
+        }
+        return $issee;
+    }
+   
+if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
+    header("Location: " . LoadAdminLinkSettings('manage-universities'));
+    exit();
+}
+?>
+<style>
+    .admin-table {
+        /* max-width: 60vw; */
+        width: 100%;
+        margin: auto;
+        border-collapse: collapse;
+        font-size: 13px;
+        text-transform: capitalize;
+    }
+
+    .admin-table th {
+        border: 1px solid #5066e1;
+        padding: 7px 0;
+        background-color: #5066e1;
+        color: white;
+        text-align: center;
+    }
+
+    .admin-table td {
+        border: 1px solid #003eff17;
+        padding: 7px 0;
+        text-align: center;
+    }
+
+    .table-app-dp {
+        width: 50px;
+        object-fit: cover;
+        height: 50px;
+        border-radius: 4px;
+    }
+    .custom-modal{
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        left: 0;
+        background: rgba(0,0,0,0.7);
+        min-height: 100vh;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom-modal-main {
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 30%;
+        text-align: center;
+    }
+    .custom-modal-main button {
+        border-radius: 5px;
+        border: none;
+        padding: 5px 10px;
+        margin: 0 5px;
+        cursor: pointer;
+        color: white !important;
+    }
+    
+</style>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Manage Application</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href=index.html>Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Applications</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> Manage Applications</li>
+            </ol>
+        </nav>
+    </div>
+
+
+</div>
+<button class="btn btn-warning" onclick="ChangeStatus()">Send Multiple Notification Emails</button>
+
+<!-- Vertical Layout -->
+<div class="row">
+
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="admin-table">
+                    <thead>
+                        <!-- <th>Select</th> -->
+                        
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Applications</th>
+                        <th>Signed By</th>
+                        <th>Names</th>
+                        <th>Country</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody id="all_applications">
+                        <!-- application rendered from JS -->
+                    </tbody>
+                </table>
+                <br>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- #END# Vertical Layout -->
+<!-- <div id="featured-modal" class="modal fade" role="dialog" data-id="" data-user-id="">
+            <div class="modal-dialog">
+                <div class="modal-content modal-col-red">
+                    <div class="modal-header">
+                        <button type="button" class="close" onclick="hideModal()" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Send Application Status to all Applicants</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>This will send application status to all Applicants with active applications. Do you want to continue withthis action?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect add_to_featured-button" data-dismiss="modal" onclick="submit_note()" data-type="add">Send</button>
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" onclick="hideModal()">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+<div id="delete-applicaiton-modal" class="custom-modal" style="display: none;">
+    <div class="custom-modal-main">
+        <p> All Applications made by this Applicant will be deleted. Continue?</p>
+        <div>
+            <button onclick="deleteApplicant('NO')"style="background-color: #5066e1;">No</button>
+            <button onclick="deleteApplicant('YES')" style="background-color: tomato;">yes</button>
+        </div>
+    </div>
+</div>
+<div id="modal_data" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send Application Status to all Applicants</h5>
+                <p type="button" class="btn-close" onclick="hideModal()" data-bs-dismiss="modal" aria-label="Close">X
+                </p>
+            </div>
+            <div class="modal-body">
+                <p>This will send application status to all Applicants with active applications. Do you want to continue
+                    with this action?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="hideModal()"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="submit_note()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let delete_permission = '<?php echo  $kd->user->access_level; ?>';
+    let application_edit_url = "<?php echo LoadAdminLinkSettings('edit-application'); ?>";
+    let application_view_url = "<?php echo LoadAdminLinkSettings('view-application'); ?>";
+
+    const signedByColors = ['#007bff','#e83e8c','#20c997','#dc3545','#6f42c1','#fd7e14','#ffc107','#17a2b8','#6610f2','#343a40']
+
+    let selectedObj = [];
+    function SelectedApplications(id) {
+        let new_obj = [];
+        const index = selectedObj.indexOf(id);
+        if (index > -1) {
+            selectedObj.splice(index, 1);
+        } else {
+            selectedObj.push(id);
+        }
+        console.log(selectedObj)
+
+    }
+    $(document).ready(function () {
+        $.get('{{LINK aj/front_end_api/manage_applications}}?' + "hash=<?php echo CreateMainSession() ?>", function (data) {
+            if (data.status == 200) {
+                renderApplications(data.data, data.color_id)
+            }
+        });
+    });
+    function hideModal() {
+        $('#modal_data').modal('hide');
+    }
+    function ChangeStatus() {
+
+        $('#modal_data').modal('show');
+
+    }
+    function submit_note() {
+        hideModal();
+        toastr.options = {
+            timeOut: 2000,
+            progressBar: true,
+            showMethod: "slideDown",
+            hideMethod: "slideUp",
+            showDuration: 1000,
+            hideDuration: 1000
+        };
+        toastr.success('The Emails are being sent in the backgrount!');
+        $.get('{{LINK aj/ap/send_multiple_application_status}}?' + "hash=<?php echo CreateMainSession() ?>", function (data) {
+            if (data.status == 300) {
+
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 1000,
+                    hideDuration: 1000
+                };
+                toastr.success('The Emails are being sent in the backgrount!');
+
+
+            }
+            else if (data.status == 200) {
+
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 1000,
+                    hideDuration: 1000
+                };
+                toastr.success('The Emails are being sent in the backgrount!');
+
+
+            } else {
+                toastr.options = {
+                    timeOut: 2000,
+                    progressBar: true,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp",
+                    showDuration: 1000,
+                    hideDuration: 1000
+                };
+                toastr.success('No new rchanges to notify');
+            }
+        });
+    }
+
+    function SendMultiple() {
+
+
+    }
+    $(document).ready(function () {
+        $('#job-manage').DataTable({
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            "order": [[1, "desc"]], //or asc 
+
+        }).order([1, 'desc']).draw();
+    });
+    function PrintApplication() {
+
+    }
+
+    function renderApplications(data, user_id) {
+        
+        
+        let tableRows = ""
+        let user_color_obj = []
+        for (let index = 0; index < user_id.length; index++) {
+            user_color_obj.push({id:user_id[index],color:signedByColors[index]})
+        }
+        data.forEach(element => {
+            let sec = 1628618888939
+            let time = new Date(sec).toLocaleString('en-US',{timeZone:'UTC'})
+            var date = new Date(element.created_at * 1000)
+            var color = "white"
+            user_color_obj.forEach(item => {
+                if(element.sign_id == item.id){
+                    color = item.color
+                }
+            })
+            tableRows += `
+                    <tr>
+                        <td>${date.toString().substr(4,11)}</td>
+                        <td>${element.status}</td>
+                        <td>${element.active_applications}</td>
+                        <td style="background:${color}; color:${element.sign_id === null ? 'black':'white'}">${typeof element.signed_by_name === "string" ? element.signed_by_name.toLowerCase() : "N/A"}</td>
+                        <td>${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()}</td>         
+                        <td>${element.nationality}</td>
+                        <td>
+                            <select style="border:none" onchange="handleAction(${element.id})" id="table-actions${element.id}">
+                                <option value="Select">Select</option>
+                                <option value="view">View</option>
+                                <option value="edit">Edit</option>
+                                ${ (delete_permission == 1 )? '<option value="delete">Delete</option>' : ''}
+                            </select>
+                        </td>
+                    </tr>
+                `
+                color = "white"
+        });
+        document.getElementById("all_applications").innerHTML = tableRows
+    }
+    function handleAction(id) {
+
+        let action = document.getElementById(`table-actions${id}`).value
+        console.log(id, action)
+        if (action === "view")
+            window.open(`${application_view_url}?id=${id}`)
+        if (action === "edit")
+            window.open(`${application_edit_url}?id=${id}`)
+        if (action === "delete")
+            delete_application(id,"application") 
+
+        document.getElementById(`table-actions${id}`).value = "Select"
+    }
+    function delete_application(id,type) {
+        let obj = {
+            id:id,
+            type:type
+        }
+        localStorage.setItem("DEL_APP", JSON.stringify(obj))
+        document.getElementById("delete-applicaiton-modal").style.display = "flex"
+   }
+   function deleteApplicant(action){
+        if(action === "YES"){
+            let obj = JSON.parse(localStorage.getItem("DEL_APP"))
+            
+            localStorage.clear()
+            $.get('{{LINK aj/front_end_api/delete_application}}?' + "hash=<?php echo CreateMainSession() ?>", obj, function (data) {
+                if (data.status == 200) {
+                    window.location.reload()
+                    document.getElementById("delete-applicaiton-modal").style.display = "none"
+                }
+            });
+        }else{
+            localStorage.clear()
+            document.getElementById("delete-applicaiton-modal").style.display = "none"
+        }
+   }
+</script>

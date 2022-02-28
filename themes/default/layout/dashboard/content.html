@@ -1,0 +1,48 @@
+<main>
+	<nav class="main-menu">
+		<div class="nav-modal">
+			<div class="modal-header">
+				<span>
+					{{LANG Menu}}
+				</span>
+				<i onclick="toggleMenu()" class="fas fa-times"></i>
+			</div>
+
+			<div class="modal-body">
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'dashboard') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/dashboard/}}{{USER username}}" data-load="?link1=dashboard&page=dashboard&user={{USER username}}">
+					<i class="fa fa-dashboard"></i>
+					<span>{{LANG Dashboard}}</span>
+				</a>
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'applications') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/applications/}}{{USER username}}" data-load="?link1=dashboard&page=applications&user={{USER username}}">
+					<i class="fas fa-copy"></i>
+					<span>{{LANG My Applications}}</span>
+				</a>
+				
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'notifications') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/notifications/}}{{USER username}}" data-load="?link1=dashboard&page=notifications&user={{USER username}}">
+					<i class="fas fa-bell"></i>
+					<span>{{LANG Notifications}}</span>
+				</a>
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'messages') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/messages/}}{{USER username}}" data-load="?link1=dashboard&page=messages&user={{USER username}}">
+					<i class="fas fa-comments"></i>
+					<span>{{LANG Messages}}</span>
+					<span class="notification-bubble">22</span>
+				</a>
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'settings') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/settings/}}{{USER username}}" data-load="?link1=dashboard&page=settings&user={{USER username}}">
+					<i class="fas fa-settings"></i>
+					<span>{{LANG Settings}}</span>
+				</a>
+				<a  style="position: relative" <?php echo ($kd->dashboard_page == 'profile') ? 'class="nav-item nav-option-active"': 'class="nav-item" ';?>  href="{{LINK dashboard/profile/}}{{USER username}}" data-load="?link1=dashboard&page=profile&user={{USER username}}">
+					<i class="fas fa-user"></i>
+					<span>{{LANG My Profile}}</span>
+				</a>
+				<a  class="nav-item"  href="{{LINK logout}}" data-load="?link1=logout">
+					<i class="fas fa-sign-out-alt"></i>
+					<span>{{LANG Logout}}</span>
+				</a>
+			</div>
+		</div>
+	</nav>
+	<section>
+		{{PROFILE_PAGE}}
+	</section>
+</main>

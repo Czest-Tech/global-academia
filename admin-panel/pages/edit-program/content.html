@@ -1,0 +1,294 @@
+<?php 
+
+if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: ' . UrlLink('404'));
+    exit();
+}
+$edit_program = array();
+$id       = Secure($_GET['id']);
+$edit_program  = $db->where('id',$id)->getOne(T_PROGRAM);
+$uni = $db->get(T_UNIVERSITY);
+
+?>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Edit Program</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('dashboard'); ?>">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('manage-programs'); ?>">Manage Programs</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Program Edit</li>
+            </ol>
+        </nav>
+    </div>     
+</div>
+<div class="row">
+	
+	<div class="col-lg-12">
+        <div class="card" id="kt_page_sticky_card">
+            <form class="edit_sub" id="kt_form" method="post">
+            
+                <div class="create-job-alert"></div>
+                <div class="card-header d-flex" style="justify-content:space-between;">
+                    <div class="card-title">
+                        <h3 class="card-label">Course Information
+                        <i class="mr-2"></i></h3>
+                    </div>
+                 
+                    <div class="card-toolbar">
+                        <a href="<?php echo LoadAdminLinkSettings('manage-programs'); ?>" class="btn btn-light-primary font-weight-bolder mr-2">
+                        <i class="ki ki-long-arrow-back icon-xs"></i>Back</a>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary font-weight-bolder sett_btn">
+                            <i class="ki ki-check icon-xs"></i>Save Form</button>
+                           <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!--begin::Form-->
+                
+                      
+                        <div class="row">
+                            <div class="col-xl-2"></div>
+                            <div class="col-xl-8">
+                                <div class="my-5">
+                                    <h3 class="text-dark font-weight-bold mb-10">Customer Info:</h3>
+                                    <div class="form-group row">
+                                        <label class="col-3">Main image</label>
+                                        <div class="col-9">
+                                            <input type="file" name="image" id="main_image" class="form-control" onchange="readURL(this)">
+                                        </div>
+                                        <div class="w-100 text-center">
+                                          <img src="<?php echo  (!empty(GetMedia($edit_program->main_image)))? GetMedia($edit_program->main_image) : 'https://www.westernheights.k12.ok.us/wp-content/uploads/2020/01/No-Photo-Available.jpg'; ?>" id="preview" style="width:300px; height:100px;"/>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">University</label>
+                                          
+                                           
+                                           
+                                         <div class="col-9">
+                                                 <select class="form-select" name="university_id" aria-label="Default select example" selected="<?php echo  $edit_program->university_id; ?>">
+                                                    
+                                                   <?php  foreach($uni as $dat) { ?>
+                                                         <option value="<?php echo $dat->id; ?>"><?php echo $dat->university; ?></option>
+                                                   
+                                                <?php  } ?>
+                                                
+                                                </select>
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Department</label>
+                                        <div class="col-9">
+                                            <input class="form-control" type="text" name="department" value="<?php echo  $edit_program->department ?>" placeholder="Department" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Language</label>
+                                        <div class="col-9">
+                                            <select class="form-control" name="language" selected="<?php echo  $edit_program->language ?>">
+                                                <option>Select Language...</option>
+                                                <option value="id">Bahasa Indonesia - Indonesian</option>
+                                                <option value="msa">Bahasa Melayu - Malay</option>
+                                                <option value="ca">Català - Catalan</option>
+                                                <option value="cs">Čeština - Czech</option>
+                                                <option value="da">Dansk - Danish</option>
+                                                <option value="de">Deutsch - German</option>
+                                                <option value="en" selected="selected">English</option>
+                                                <option value="en-gb">English UK - British English</option>
+                                                <option value="es">Español - Spanish</option>
+                                                <option value="eu">Euskara - Basque (beta)</option>
+                                                <option value="fil">Filipino</option>
+                                                <option value="fr">Français - French</option>
+                                                <option value="ga">Gaeilge - Irish (beta)</option>
+                                                <option value="gl">Galego - Galician (beta)</option>
+                                                <option value="hr">Hrvatski - Croatian</option>
+                                                <option value="it">Italiano - Italian</option>
+                                                <option value="hu">Magyar - Hungarian</option>
+                                                <option value="nl">Nederlands - Dutch</option>
+                                                <option value="no">Norsk - Norwegian</option>
+                                                <option value="pl">Polski - Polish</option>
+                                                <option value="pt">Português - Portuguese</option>
+                                                <option value="ro">Română - Romanian</option>
+                                                <option value="sk">Slovenčina - Slovak</option>
+                                                <option value="fi">Suomi - Finnish</option>
+                                                <option value="sv">Svenska - Swedish</option>
+                                                <option value="vi">Tiếng Việt - Vietnamese</option>
+                                                <option value="tr">Türkçe - Turkish</option>
+                                                <option value="el">Ελληνικά - Greek</option>
+                                                <option value="bg">Български език - Bulgarian</option>
+                                                <option value="ru">Русский - Russian</option>
+                                                <option value="sr">Српски - Serbian</option>
+                                                <option value="uk">Українська мова - Ukrainian</option>
+                                                <option value="he">עִבְרִית - Hebrew</option>
+                                                <option value="ur">اردو - Urdu (beta)</option>
+                                                <option value="ar">العربية - Arabic</option>
+                                                <option value="fa">فارسی - Persian</option>
+                                                <option value="mr">मराठी - Marathi</option>
+                                                <option value="hi">हिन्दी - Hindi</option>
+                                                <option value="bn">বাংলা - Bangla</option>
+                                                <option value="gu">ગુજરાતી - Gujarati</option>
+                                                <option value="ta">தமிழ் - Tamil</option>
+                                                <option value="kn">ಕನ್ನಡ - Kannada</option>
+                                                <option value="th">ภาษาไทย - Thai</option>
+                                                <option value="ko">한국어 - Korean</option>
+                                                <option value="ja">日本語 - Japanese</option>
+                                                <option value="zh-cn">简体中文 - Simplified Chinese</option>
+                                                <option value="zh-tw">繁體中文 - Traditional Chinese</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Degree</label>
+                                        <div class="col-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="degree" value="<?php echo  $edit_program->degree; ?>" placeholder="degree" />
+                                            </div>
+                                            <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Duration</label>
+                                        <div class="col-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="duration" value="<?php echo  $edit_program->duration; ?>" placeholder="Duration" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Tuition Fees</label>
+                                        <div class="col-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="tuition_fees" value="<?php echo  $edit_program->tuition_fees; ?>" placeholder="Tuition Fees" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-3">Our discounted fees</label>
+                                        <div class="col-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="discounted_fees" value="<?php echo  $edit_program->discounted_fees; ?>" placeholder="Our discounted fees" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    
+                                    <div class="form-group row">
+                                        <label class="col-3">Discipline</label>
+                                        <div class="col-9">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="<?php echo  $edit_program->discipline; ?>" name="discipline"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="separator separator-dashed my-10"></div>
+                                
+                            </div>
+                            
+                        </div>
+                    <!--end::Form-->
+                </div>
+            </form>
+        </div>
+	</div>
+    
+</div>
+   
+
+
+    <script>
+       $(function() {
+                    "use strict";
+                    
+                    var form_university = $('form.edit_sub');
+                    form_university.ajaxForm({
+                        url: '{{LINK aj/application/edit_program}}?hash=<?php echo CreateMainSession(); ?>',
+                        beforeSend: function() {
+                            $('.sett_btn').text('PLEASE WAIT..');
+                        },
+                       success: function(data) {
+                            if (data.status == 200) {
+
+                                $('.sett_btn').text('SAVE CHANGES');
+                                  toastr.options = {
+                                        timeOut: 2000,
+                                        progressBar: true,
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        showDuration: 200,
+                                        hideDuration: 200
+                                      };
+                                  toastr.success('Program Updated!');
+                                
+                              
+                                 $('.create-job-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                                $('.alert-success').fadeIn('fast', function() {
+                                    $(this).delay(2000).slideUp(500, function() {
+                                        $(this).remove();
+                                        
+                                    });
+                                 });
+                            }
+                        }
+                    });
+                });
+ 
+         function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#preview')
+                            .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+             function readURL2(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#preview_uni')
+                            .attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+           
+                jQuery('.off').click(function() {
+                    jQuery(this).removeClass('off');
+                    jQuery(this).addClass('on');
+                });
+
+                jQuery('.on').click(function() {
+                    jQuery(this).removeClass('off');
+                    jQuery(this).addClass('on');
+                });
+
+
+             
+    </script>
+ 
+

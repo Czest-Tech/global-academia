@@ -1,0 +1,426 @@
+
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Add University</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('dashboard'); ?>">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="<?php echo LoadAdminLinkSettings('manage-universities'); ?>">Manage Universities</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Add University</li>
+            </ol>
+        </nav>
+    </div>     
+</div>
+<div class="row">
+    
+	<div class="col-lg-2"></div>
+	<div class="col-lg-8 card">
+        <div>
+		<form class="job_box mb-3" method="post" id="create-job">
+			<div id="create-job-alert"></div>
+			<div class="row">
+                <h4 class="col-12 subtitle">GENERAL INFORMATION</h4>
+                        
+                <div class="form-group col-12 row">
+                    <label for="main_image" class="col-3">University Image</label>
+                    <div class="col-9">
+                        <input type="file" name="main_image" id="main_image" class="form-control" onchange="readURL(this)">
+                    </div>
+                    <div class="col-3"></div>
+                    <div >
+                    <img  id="preview" style="width:300px; height:100px;"/>
+                    </div>
+                </div>
+                <div class="form-group col-12 row">
+                    <label for="main_image" class="col-3">University Logo</label>
+                    <div class="col-9">
+                    <input type="file"  name="university_logo" id="university_logo" class="form-control" onchange="readURL2(this)">
+                    </div>
+                    <div class="col-3"></div>
+                    <div >
+                    <img  id="preview_uni" style="width:300px; height:100px;"/>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label for="title" class="col-3">University page title</label>
+                    <div class="col-9">
+                        <input class="form-control" type="text" name="university_title" id="title">
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label for="description" class="col-3">University description</label>
+                    <div class="col-9">
+                        <textarea class="form-control mb-3" rows="10"; type="text" name="description" id="title"></textarea>
+                    </div>
+                </div>
+        
+                <div class="form-group row col-12">
+                    <label class="col-3">University</label>
+                    <div class="col-9">
+                        <input class="form-control" name="university_name" type="text" />
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Location</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control"  />
+                        </div>
+                        <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">University Type</label>
+                   
+                    <div class="col-9">
+                         <select class="form-select" name="university_type" aria-label="Default select example">
+                            <option selected>Type</option>
+                            <option value="Private">Private</option>
+                            <option value="State">State</option>
+                        
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Foundation</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="foundation" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100"/>
+                <h4 class="col-12 subtitle">LANGUAGE</h4>
+                <div class="form-group row col-12">
+                    <label class="col-3">Language Education English</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="lang_edu_en" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Language Education Turkey</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="lang_edu_tr" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100" />
+                <h4 class="col-12 subtitle">STUDENT</h4>
+                
+                <div class="form-group row col-12">
+                    <label class="col-3">Sports Facilities</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sp_facilities" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Sports Teams</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="sports_teams" />
+
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Student Associations</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="student_associations" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Laboratories</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="Laboratories" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100" />
+                <h4 class="col-12 subtitle">PROGRAMS OFFERED</h4>
+                
+                <div class="form-group row col-12">
+                    <label class="col-3">Associate Degrees</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="associate_degrees" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Undergraduate Programs</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="undergraduate_programs" />
+
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Master Programs</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="master_programs" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">PH.P programs</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="PH_P_programs" />
+
+                        </div>
+                    </div>
+                </div>
+            
+                <hr class="w-100" />
+                <h4 class="col-12 subtitle">NUMBER OF STUDENTS</h4>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">International Students</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="international_students" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Total Students</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="total_students" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="w-100" />
+                <h4 class="col-12 subtitle">STUDY MODE</h4>
+
+
+                <div class="form-group row col-12">
+                    <label class="col-3">Study mode</label>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="study_mode" />
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="w-100"/>
+                <div class="paragraph campus-facilities">
+                    
+                    <ul class="row">
+                        <h4 class="col-12 subtitle">ACCOMODATION (YES OR NO)</h4>
+                        <div class="form-group col-4"><label for="dormitory"><input type="checkbox" name="dormitory" id="dormitory"><a class="off">Dormitory</a></label></div>
+                        <div class="form-group col-4"><label for="f_domitory"><input type="checkbox" name="f_domitory" id="f_domitory"><a class="off">Female Dormitory</a></label></div>
+                        <div class="form-group col-4"><label for="m_domitory"><input type="checkbox" name="m_domitory" id="m_domitory"><a class="off">Male Dormitory</a></label></div>
+                        <h4 class="col-12 subtitle">CAMPUS FACILITIES (YES OR NO)</h4>
+                        <div class="form-group col-4"><label for="library"><input type="checkbox" name="library" id="library"><a class="off">Library</a></label></div>
+                        <div class="form-group col-4"><label for="wifi"><input type="checkbox" name="wifi" id="wifi"><a class="off">WiFi</a></label></div>
+                        <div class="form-group col-4"><label for="gym"><input type="checkbox" name="gym" id="gym"><a class="off">Gym</a></label></div>
+                        <div class="form-group col-4"><label for="cafeteria"><input type="checkbox" name="cafeteria" id="cafeteria"><a class="off">Cafeteria</a></label></div>
+                        <div class="form-group col-4"><label for="copy_center"><input type="checkbox" name="copy_center" id="copy_center"><a class="off">Copy Center</a></label></div>
+                        <div class="form-group col-4"><label for="hairdresser"><input type="checkbox" name="hairdresser" id="hairdresser"><a class="off">Hairdresser</a></label></div>
+                        <div class="form-group col-4"><label for="atm"><input type="checkbox" name="atm" id="atm"><a class="off">ATM</a></label></div>
+                        <div class="form-group col-4"><label for="car_park"><input type="checkbox" name="car_park" id="car_park"><a class="off">Car Park</a></label></div>
+                        <div class="form-group col-4"><label for="bank"><input type="checkbox" name="bank" id="bank"><a class="off">Bank</a></label></div>
+                        <div class="form-group col-4"><label for="security"><input type="checkbox" name="security" id="security"><a class="off">Security</a></label></div>
+                        <div class="form-group col-4"><label for="virtual_court"><input type="checkbox" name="virtual_court" id="virtual_court"><a class="off">Virtual Court</a></label></div>
+                        <div class="form-group col-4"><label for="walking_track"><input type="checkbox" name="walking_track" id="walking_track"><a class="off">Walking Track</a></label></div>
+                        <div class="form-group col-4"><label for="barrier_free_campus"><input type="checkbox" name="barrier_free_campus" id="barrier_free_campus"><a class="off">Barrier-free Campus</a></label></div>
+                        <div class="form-group col-4"><label for="tennis_court"><input type="checkbox" name="tennis_court" id="tennis_court"><a class="off">Tennis Court</a></label></div>
+                        <div class="form-group col-4"><label for="dining_hall"><input type="checkbox" name="dining_hall" id="dining_hall"><a class="off">Dining Hall</a></label></div>
+                        <div class="form-group col-4"><label for="auditorium"><input type="checkbox" name="auditorium" id="auditorium"><a class="off">Auditorium</a></label></div>
+                        <div class="form-group col-4"><label for="medial_first_aid"><input type="checkbox" name="medial_first_aid" id="medial_first_aid"><a class="off">Medical Center & First Aid</a></label></div>
+                        <h4 class="col-12 subtitle">DEGREES (YES OR N0)</h4>
+                        <div class="form-group col-4"><label for="hospital"><input type="checkbox" name="hospital" id="hospital"><a class="off">Hospital</a></label></div>
+                        <div class="form-group col-4"><label for="bachelor"><input type="checkbox" name="bachelor" id="bachelor"><a class="off">Bachelor</a></label></div>
+                        <div class="form-group col-4"><label for="master"><input type="checkbox" name="master" id="master"><a class="off">Master</a></label></div>
+                        <div class="form-group col-4"><label for="certificate"><input type="checkbox" name="certificate" id="certificate"><a class="off">Certificate</a></label></div>
+                        <div class="form-group col-4"><label for="phd"><input type="checkbox" name="phd" id="phd"><a class="off">PhD</a></label></div>
+                        <div class="form-group col-4"><label for="associate_degree"><input type="checkbox" name="associate_degree" id="associate_degree"><a class="off">Associate Degree</a></label></div>
+                        <h4 class="col-12 subtitle">DISCIPLINES (YES OR NO)</h4>
+                        <div class="form-group col-4"><label for="medicine_health"><input type="checkbox" name="medicine_health" id="medicine_health"><a class="off">Medicine & Health</a></label></div>
+                        <div class="form-group col-4"><label for="pharmacy"><input type="checkbox" name="pharmacy" id="pharmacy"><a class="off">Pharmacy</a></label></div>
+                        <div class="form-group col-4"><label for="dentistry"><input type="checkbox" name="dentistry" id="dentistry"><a class="off">Dentistry</a></label></div>
+                        <div class="form-group col-4"><label for="engineering"><input type="checkbox" name="engineering" id="engineering"><a class="off">Engineering</a></label></div>
+                        <div class="form-group col-4"><label for="computer_it"><input type="checkbox" name="computer_it" id="computer_it"><a class="off">Computer Science & IT</a></label></div>
+                        <div class="form-group col-4"><label for="agriculture_forestry"><input type="checkbox" name="agriculture_forestry" id="agriculture_forestry"><a class="off">Agriculture & Forestry</a></label></div>
+                        <div class="form-group col-4"><label for="arts_design_architecture"><input type="checkbox" name="arts_design_architecture" id="arts_design_architecture"><a class="off">Arts & Design & Architecture</a></label></div>
+                        <div class="form-group col-4"><label for="business_management"><input type="checkbox" name="business_management" id="business_management"><a class="off">Business & Management  </a></label></div>
+                        <div class="form-group col-4"><label for="education_training"><input type="checkbox" name="education_training" id="education_training"><a class="off">Education & Training</a></label></div>
+                        <div class="form-group col-4"><label for="engineering1"><input type="checkbox" name="engineering1" id="engineering1"><a class="off">Engineering</a></label></div>
+                        <div class="form-group col-4"><label for="sports"><input type="checkbox" name="sports" id="sports"><a class="off">Sports</a></label></div>
+                        <div class="form-group col-4"><label for="journalism_media"><input type="checkbox" name="journalism_media" id="journalism_media"><a class="off">Journalism & Media</a></label></div>
+                        <div class="form-group col-4"><label for="law"><input type="checkbox" name="law" id="law"><a class="off">Law</a></label></div>
+                        <div class="form-group col-4"><label for="medicine_health1"><input type="checkbox" name="medicine_health1" id="medicine_health1"><a class="off">Medicine & Health</a></label></div>
+                        <div class="form-group col-4"><label for="Natural_mathematics"><input type="checkbox" name="Natural_mathematics" id="Natural_mathematics"><a class="off">Natural Sciences & Mathematics</a></label></div>
+                        <div class="form-group col-4"><label for="social_science"><input type="checkbox" name="social_science" id="social_science"><a class="off">Social Sciences</a></label></div>
+                        <div class="form-group col-4"><label for="medicine"><input type="checkbox" name="medicine" id="medicine"><a class="off">Medicine</a></label></div>
+                        <div class="form-group col-4"><label for="applied_science"><input type="checkbox" name="applied_science" id="applied_science"><a class="off">Applied Sciences</a></label></div>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                    <input type="hidden" name="hash_id" value="<?php echo CreateSession()?>">
+                    <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
+                    <button type="submit" class="btn btn-primary sett_btn"> Add Univerisity</button>
+            </div>
+             
+		</form>
+	</div>
+ 
+</div>
+   <div class="col-lg-2"></div>
+</div>
+ </div>   
+</div>
+    <script src="<?php echo LoadAdminLink('/vendors/ckeditor5/ckeditor.js'); ?>"></script>
+    <script>
+          function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#preview')
+                                .attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                function readURL2(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#preview_uni')
+                                .attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                jQuery('.off').click(function() {
+                    jQuery(this).removeClass('off');
+                    jQuery(this).addClass('on');
+                });
+
+                jQuery('.on').click(function() {
+                    jQuery(this).removeClass('off');
+                    jQuery(this).addClass('on');
+                });
+                
+
+                $(function() {
+                    "use strict";
+                    
+                    var form_university = $('form.job_box');
+                    form_university.ajaxForm({
+                        url: '{{LINK aj/ap/university_add}}',
+                        beforeSend: function() {
+                            $('.sett_btn').text('PLEASE WAIT..');
+                        },
+                        success: function(data) {
+                            if (data.status == 200) {
+
+                                $('.btn-save').text('SAVE CHANGES');
+                              
+                                toastr.options = {
+                                        timeOut: 2000,
+                                        progressBar: true,
+                                        showMethod: "slideDown",
+                                        hideMethod: "slideUp",
+                                        showDuration: 200,
+                                        hideDuration: 200
+                                      };
+                                  toastr.success('University Saved!');
+                              
+                                 $('.create-job-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
+                                $('.alert-success').fadeIn('fast', function() {
+                                    $(this).delay(2000).slideUp(500, function() {
+                                        $(this).remove();
+                                        
+                                    });
+                                 });
+                            }
+                        }
+                    });
+                });
+    </script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#jb_respd' ), {
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                    ]
+                }
+            });
+        ClassicEditor
+            .create( document.querySelector( '#jb_quald' ), {
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                    ]
+                }
+            });
+        ClassicEditor
+            .create( document.querySelector( '#jb_descd' ), {
+                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                    ]
+                }
+            });
+    </script>
+

@@ -1,0 +1,56 @@
+<?php 
+
+
+    $single_page = $data['PAGE']['pages'];
+    $total_page = $data['PAGE']['totalPages'];
+    $route = $data['PAGE']['link'];
+    $filter_search_keyword = $data['PAGE']['filter_search_keyword'];
+
+?>
+
+ <div class="pull-left">
+    <?php echo "Showing ". $single_page ." out of " . $total_page; ?>
+</div>
+
+<div class="pull-right">
+
+        <ul class="pagination">
+            <li>
+                <a href='{{LINK program}}?page-id=1&filter_search_keyword=<?php echo $filter_search_keyword; ?>'  class="waves-effect" title='First Page'>
+                    <i class="material-icons">first_page</i>
+                </a>
+            </li>
+            <?php if ($single_page > 1) {  ?>
+            <li>
+                <a href="<?php echo UrlLink( $route)?>?page-id=<?php echo ($single_page - 1); ?>&filter_search_keyword=<?php echo $filter_search_keyword; ?>" class="waves-effect" title='Previous Page'>
+                    <i class="material-icons">chevron_left</i>
+                </a>
+            </li>
+            <?php  } ?>
+            <?php 
+            $nums = 0;
+            $nums_pages = ($single_page > 4) ? ($single_page - 4) : $single_page;
+            for ($i=$nums_pages; $i <= $total_page; $i++) { 
+                if ($nums < 20) {
+                ?>
+                <li class="<?php echo ($single_page == $i) ? 'active' : ''; ?>"><a href="<?php echo UrlLink( $route)?>?page-id=<?php echo $i; ?>&filter_search_keyword=<?php echo $filter_search_keyword; ?>" class="waves-effect"><?php echo $i; ?></a></li>
+                <?php
+                }
+                $nums++;
+            }
+            ?>
+            <?php if ($total_page > $single_page) { ?>
+            <li>
+                <a href="<?php echo UrlLink( $route)?>?page-id=<?php echo ($single_page + 1); ?>&filter_search_keyword=<?php echo $filter_search_keyword; ?>" class="waves-effect" title="Next Page">
+                    <i class="material-icons">chevron_right</i>
+                </a>
+            </li>
+            <?php } ?>
+            <li>
+                <a href="<?php echo UrlLink( $route)?>?page-id=<?php echo $total_page; ?>&filter_search_keyword=<?php echo $filter_search_keyword; ?>" class="waves-effect" title='Last Page'>
+                    <i class="material-icons">last_page</i>
+                </a>
+            </li>
+        </ul>
+
+</div>

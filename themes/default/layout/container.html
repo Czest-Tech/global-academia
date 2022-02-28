@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property="og:title" content="<?php echo $kd->title;  ?>" />
+	<meta property="og:url" content="<?php echo $kd->page_url_; ?>" />
+	<meta property="og:image" content="https://apply.globalacademia.com/img/global-logo-Kopie.webp" />
+	<meta property="og:description" content="<?php $kd->description; ?>" /> 
+
+    <link rel="stylesheet" type="text/css" href="{{CONFIG theme_url}}/css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- <script src="https://kit.fontawesome.com/f2cac76c1a.js" crossorigin="anonymous"></script> -->
+	<script src="{{CONFIG theme_url}}/js/jquery-2.1.1.min.js"></script>
+	<script src="https://kit.fontawesome.com/f2cac76c1a.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+	
+	
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	
+	
+
+	<title>{{CONTAINER_TITLE}}</title>
+  </head>
+<body style = "font-family: 'Quicksand', sans-serif;">
+	<input type="hidden" class="main_session" value="<?php echo CreateMainSession();?>" />
+
+  <div class="newContainer8">
+  	<?php if($kd->page != 'login'){ ?> 
+       {{HEADER_LAYOUT}}
+  	<?php } ?>
+
+{{CONTAINER_CONTENT}}
+   </div>
+{{FOOTER_LAYOUT_ALL}}
+
+   
+{{EXTRA_JS}}
+<?php  if($kd->page == 'dashboard'){ ?>
+	    <script src="{{CONFIG theme_url}}/js/dashboard.js"></script> 
+		<?php } else { ?>
+		<script src="{{CONFIG theme_url}}/js/script.js"></script>
+		<?php } ?>
+        <script src="{{CONFIG theme_url}}/js/jquery.form.min.js"></script>
+				
+</body>
+
+</html>

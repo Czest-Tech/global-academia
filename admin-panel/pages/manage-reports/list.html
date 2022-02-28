@@ -1,0 +1,11 @@
+<tr id="list-{{REPORT id}}">
+    <td>{{REPORT id}}</td>
+    <td><a href="{{USER url}}"><figure class="avatar avatar-sm mr-2"><img src="{{USER avatar}}" class="rounded-circle" alt="avatar"> {{USER username}} </figure></a></td>
+    <td><a href="{{LINK post/}}{{REPORT job_id}}" target="_blank">{{REPORT text}}</a></td>
+    <td><?php echo Time_Elapsed_String($data['REPORT_DATA']->time);?></td>
+    <td>
+        <a class="btn bg-cyan waves-effect waves-light" href="{{LINK apply/}}{{REPORT job_id}}" target="_blank">VIEW</a>
+        <button class="btn btn-danger waves-effect waves-light delete-content" data-id="{{REPORT id}}">DELETE</button>
+    </td>
+</tr>
+

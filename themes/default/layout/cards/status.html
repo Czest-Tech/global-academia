@@ -1,0 +1,31 @@
+<div class="result-status-card">
+      <div class="results-card-top">
+        <div class="cardTopLeftImg" style="background-image: url({{photo}});"></div>
+        <div class="cardTopRight">
+          <span class="status-result-card-name" >{{name}}</span>
+          <span class="status-result-card-uni">{{university}}</span>
+          <span class="status-result-card-pro">{{program}}</span>
+          <div>
+              <span class="DetText8">{{LANG Status}} :</span>
+              <span class="status-message">{{status}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="result-status-bubble">
+         {{add_missing}}
+          <div class="status-accepted-message">{{acceptance}}</div>
+
+          <button onclick="make_request({{id}})" class="request_changes2">{{LANG Request Changes}}</button>
+          <a href="{{LINK edit_application}}/{{id}}"><button  class="request_changes1">{{LANG Edit Application}}</button></a>
+          <input type="hidden" id="request_request" value="{{id}}" />
+        <p class="reviewer_note">{{note}}</p>
+        <!-- <div class="add_note_student">
+          <button class="add_note" onclick="add_notes()">{{LANG Add Note}}</button>
+        </div> -->
+      </div>
+</div>
+<script>
+  function add_notes(){
+
+  }
+</script>

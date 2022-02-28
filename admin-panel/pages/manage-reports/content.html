@@ -1,0 +1,139 @@
+<?php
+UpdateSeenReports();
+$page = (!empty($_GET['page-id'])) ? $_GET['page-id'] : 1;
+$db->pageLimit  = 50;
+$users = $db->objectbuilder()->orderBy('id', 'DESC')->paginate(T_REPORTS, $page);
+
+if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
+    header("Location: " . LoadAdminLinkSettings('manage-reports'));
+    exit();
+}
+?>
+<div class="page-header d-md-flex justify-content-between">
+    <div>
+        <h3>Users > Manage Reports</h3>
+        <nav aria-label="breadcrumb" class="d-flex align-items-start">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href=index.html>Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Pages</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Reports</li>
+            </ol>
+        </nav>
+    </div>     
+</div>
+
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+               
+                <div class="card-body">
+                    <div class="clearfix"></div>
+                    <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover" id="reports">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Reporter</th>
+                                <th>Report text</th>
+                                <th>Report Time</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                                foreach ($users as $key => $user) {
+                                    $user_data = UserData($user->user_id);
+                                    echo LoadAdminPage('manage-reports/list', array('REPORT_DATA' => $user,'USER_DATA' => $user_data));
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pull-left">
+                        
+                    </div>
+                    <div class="pull-right">
+                        <nav>
+                          <ul class="pagination">
+                                
+                                <?php if ($page > 1) {  ?>
+                                <li class="page-item">
+                                    <a href="<?php echo LoadAdminLinkSettings('manage-users?page-id=' . ($page - 1)); ?>" class="waves-effect" title='Previous Page'>
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <?php  } ?>
+                                <?php 
+                                $nums = 0;
+                                $nums_pages = ($page > 4) ? ($page - 4) : $page;
+                                for ($i=$nums_pages; $i <= $db->totalPages; $i++) { 
+                                    if ($nums < 20) {
+                                    ?>
+                                    <li class="page-item <?php echo ($page == $i) ? 'active' : ''; ?>"><a href="<?php echo LoadAdminLinkSettings('manage-users?page-id=' . ($i)); ?>" class="waves-effect"></a></li>
+                                    <?php
+                                    }
+                                    $nums++;
+                                }
+                                ?>
+                                <?php if ($db->totalPages > $page) { ?>
+                                <li class="page-item">
+                                    <a href="<?php echo LoadAdminLinkSettings('manage-users?page-id=' . ($page + 1)); ?>" class="waves-effect" title="Next Page">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                                <?php } ?>
+                               
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    <!-- #END# Vertical Layout -->
+    <div id="delete-modal" class="modal fade" role="dialog" data-id="">
+        <div class="modal-dialog">
+            <div class="modal-content modal-col-red">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">DELETE REPORT</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to continue? this action can't be undo</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link waves-effect delete-button" data-dismiss="modal" data-type="reports">DELETE</button>
+                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         $(document).ready(function (){
+            $('#reports').DataTable({
+                "scrollY": "400px",
+                "scrollCollapse": true
+            });
+        });
+        function getUserId(user_id) {
+            $('#user_id').val(user_id);
+        }
+
+        $(function() {
+    "use strict";
+            $('.delete-content').on('click', function(event) {
+                event.preventDefault();
+                $('#delete-modal').attr('data-id', $(this).attr('data-id')).modal('show');
+            });
+        });
+
+
+    </script>

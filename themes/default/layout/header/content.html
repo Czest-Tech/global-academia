@@ -1,0 +1,279 @@
+<header class="navBarMain8">
+  <div class="topBar8">
+    <div class="topBarCols">
+
+      <?php 
+      echo (IS_LOGGED) ? 
+      '<span onclick="toggleUser()" style="position:relative">
+        <i class="fas fa-user-circle"></i>
+        <span>'.$kd->user->username .'</span>
+        <i class="fas fa-angle-down"></i>
+        
+      </span>
+      
+      <div class="userDrop">
+        <a href="{{LINK admin-cp}}" ><span>{{LANG Dashboard}}</span></a>
+          <a href="{{LINK logout}}"><span>{{LANG Logout}}</span></a>
+      </div>
+      
+      ' :
+      '<span>
+        <i class="far fa-user-circle"></i>
+        <a href="{{LINK login}}">{{LANG Login}}</a>
+      </span>'; ?>
+    </div>
+    <div class="topBaCols">
+      <a href="https://wa.me/905071536633"><span class="midTopIcon">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </span> </a>
+      <a href="tel:902165500068"><span class="midTopIcon">
+        <i class="fas fa-phone-volume"></i>
+        <span>{{LANG Phone}}</span>
+      </span> </a>
+      <a href="https://www.globalacademia.com/iletisim/"><span class="midTopIcon">
+        <i class="fas fa-comment-dots"></i>
+        <span>{{LANG Message}}</span>
+      </span></a>
+      <span onclick="toggleLang()" class="langSpan">
+        <span><img src="{{CONFIG theme_url}}/img/flags/{{ACTIVE_LANG}}.svg" alt="" srcset="" /></span>
+        <i class="fas fa-caret-down"></i>
+      </span>
+      <div class="langDropTop">  
+       {{LANGUAGES_LANG}}
+      </div>
+
+    </div>
+  </div>
+  <div class="navBar8">
+    <div class="logoSide8">
+    <a href="http://globalacademia.com"><img src="https://apply.globalacademia.com/img/global-logo-Kopie.webp" alt="" srcset="" /></a>  
+    </div>
+    <div class="navLinks8">
+      <a href="http://globalacademia.com"><span class="navLink8">{{LANG Home}}</span></a>
+      <a href="{{LINK program}}" class="navLink8">
+        <span 
+          <?php echo ($kd->page == 'program' || $kd->page == 'program_details' ) ?
+          'class="navLinkActive8"' : '' ?> >{{LANG Program}}
+        </span>
+      </a>
+      <a href="{{LINK university}}" class="navLink8">
+        <span 
+          <?php echo ($kd->page == 'university' || $kd->page == 'university_details') ?
+          'class="navLinkActive8"' : '' ?> >{{LANG University}}
+        </span>
+      </a>
+      <div style="position: relative;">
+        <span <?php echo ($kd->page == 'status' || $kd->page == 'status') ?
+          'class="navLinkActive8"' : 'class="navLink8"' ?>  onclick="toggleStatus()">
+          {{LANG Application}}
+          <i class="fas fa-angle-down" style="margin-left: 5px;"></i>
+        </span>
+        <div class="appDrop">
+          <a href="{{LINK status}}">{{LANG Status}}</a>
+        </div>
+      </div>
+      <span class="cartBasket8" onclick="showlist()">
+        <div class="cartNum" id="cartNum">0</div>
+        <i class="fas fa-shopping-cart"></i>
+      </span>
+    </div>
+    <span class="toggleNav8"><i onclick="toggleNav()" class="fas fa-bars"></span></i>
+  </div>
+  <div class="cartModal8">
+    <div class="cartListContainer8">
+      <div class="cartItems8">
+        <div class="cart8Header">
+            
+            <div class="cartBubbleNum" id="cartNumCart">0</div>
+            <p>&nbsp;&nbsp;Drag to set priority</p>
+          </div>
+        <span class="cartCloser" onclick="hidelist()">
+          <i class="fas fa-times"></i>
+        </span>
+      </div>
+      <div class="uniListCart" id="uniListCart">
+        <!-- cart list goes here -->
+      </div>
+      <div class="FooterListCart">
+        <button onclick="removeAll()" class="redBtn8">
+          Clear All
+        </button>
+        <a href="{{LINK multiple_applications}}"> <button class="greenBtn8">
+          Apply All
+        </button></a>
+      </div>
+    </div>
+  </div>
+</header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"
+    integrity="sha512-zYXldzJsDrNKV+odAwFYiDXV2Cy37cwizT+NkuiPGsa9X1dOz04eHvUWVuxaJ299GvcJT31ug2zO4itXBjFx4w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  // document.getElementById("cartNum").innerHTML = (JSON.parse(localStorage.getItem('CARTLIST')))? JSON.parse(localStorage.getItem('CARTLIST')).length : 0;
+  var toggleUserOut = false
+  function toggleUser(){
+    if(toggleUserOut){
+      toggleUserOut = false
+      document.querySelector(".userDrop").style.display = "none"
+    }else{
+      document.querySelector(".userDrop").style.display = "flex"
+      toggleUserOut = true
+    }
+  }
+
+  var toggleStatusOut = false
+  function toggleStatus(){
+    if(toggleStatusOut){
+      toggleStatusOut = false
+      document.querySelector(".appDrop").style.display = "none"
+    }else{
+      document.querySelector(".appDrop").style.display = "flex"
+      toggleStatusOut = true
+    }
+  }
+  
+
+</script>
+<script>
+  /************************* Cart logic ***************************************/
+  const showlist = () => {
+    $(".cartModal8").css("height","90vh")
+  }
+ 
+  function hidelist() {
+    $(".cartModal8").css("height","0");
+  }
+
+var cartList = []
+if(localStorage.getItem('CARTLIST')){
+    cartList = JSON.parse(localStorage.getItem('CARTLIST'));
+    renderCart(cartList)
+}
+
+
+function AddToList(id, department,university, type, university_id){
+    let obj = {
+        id:id,
+        university:university,
+        department: department,
+        type: type,
+        university_id:university_id
+    }
+
+    let exists = false
+    cartList.forEach((element) => {
+       if(element.university == university && element.department == department && element.type == type) exists = true
+    });
+
+    if(!exists && cartList.length < 5){
+       
+          cartList.push(obj)
+          localStorage.setItem('CARTLIST', JSON.stringify(cartList));
+          renderCart(cartList)
+    }
+}
+
+function renderCart(cartArray){
+    let num = 1
+    let list = ""
+    cartArray.forEach(element => {
+        var priorityList = []
+        cartArray.forEach(list => {
+            if(element.department == list.department){
+                priorityList.push(list.university)
+            }
+        });
+        list += `
+        <div class="uniListsCard drags" ondragend="dragEnd()" id=${element.id} >
+            <div class="numCart2">
+                ${num}
+            </div>
+            <div class="detailsCart2">
+                <div class="cartDetailsHeader1">
+                  <span class="newCartUni">${element.department.toLowerCase()}</span>
+                  <i class="fas fa-trash redBtn8 removeIcon8" onclick="removeFromCart('`+element.id+`')"></i>
+                </div>
+                <div class="cartDetailsHeader1">
+                  <p class="newCartPro">${element.university.toLowerCase()}</p>
+                  <i class="fas fa-arrows-alt draggable-icon"></i>
+                </div>
+                
+            </div>
+        </div>
+        `
+        num++
+    });
+    document.getElementById("uniListCart").innerHTML = list
+    document.getElementById("cartNum").innerHTML = cartArray.length
+    document.getElementById("cartNumCart").innerHTML = cartArray.length
+}
+function switchPriority(id){
+    let option = document.getElementById("selectOption"+id).value
+    option = option.slice(3)
+
+    let first = 0
+    for (let i = 0; i < cartList.length; i++) {
+        if(cartList[i].id == id){
+            first = i
+            break
+        }
+    }
+    let second = 0
+    for (let i = 0; i < cartList.length; i++) {
+        if(cartList[i].university == option){
+            second = i
+            break
+        }
+    }
+
+    let temp = cartList[first]
+    cartList[first] = cartList[second]
+    cartList[second] = temp
+    renderCart(cartList)
+
+}
+
+function setPriorityString(myArray){
+    let result = ""
+    let num = 1
+    myArray.forEach(element => {
+        result +=`<option>${num}. ${element.toLowerCase()} </option>`
+        num++
+    });
+    return result
+}
+
+function removeAll(){
+    cartList = []
+    renderCart(cartList)
+    localStorage.removeItem('CARTLIST')
+}
+
+function removeFromCart(id){
+    for (let i = 0; i < cartList.length; i++) {
+        if(cartList[i].id == id){
+            cartList.splice(i,1)
+            break
+        }
+    }
+    localStorage.setItem("CARTLIST", cartList);
+    renderCart(cartList)
+}
+const dragArea = document.getElementById("uniListCart")
+new Sortable(dragArea, { aimation: 350 })
+function dragEnd() {
+        let selectedItems = [...document.querySelectorAll(".drags")]
+        let newArray = []
+        selectedItems.forEach(element => {
+            JSON.parse(localStorage.getItem("CARTLIST")).forEach(item => {
+                if (item.id === parseInt(element.id)) newArray.push(item)
+            })
+        })
+        localStorage.setItem("CARTLIST", JSON.stringify(newArray));
+        renderCart(newArray)
+
+    }
+
+
+</script>

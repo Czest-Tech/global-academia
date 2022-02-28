@@ -1,0 +1,59 @@
+<main class="mainArea8">
+   {{FILTER}}
+    <div class="mainAreaLeft8">
+      <div class="cardList8">
+        <div class="forUniList">
+           {{UNIVERSITY_CARD}}
+        </div>    
+      
+      </div>
+      <div class="cardListPages8">
+          <div class="pagination8">
+              {{PAGINATION}}
+          </div>
+      </div>
+    </div>
+  </main>
+  <input type="hidden" name="filter_type" value="university" id="filter_type">
+
+<input type="hidden" name="hash_id" id="hash_id" value="<?php echo CreateSession(); ?>">
+<input type="hidden" name="user_id" id="user_id" value="0">
+<script>
+  var check_id;
+  $('input:checkbox').change(function(){
+        if($(this).is(':checked')){
+          
+           check_id = $(this).attr('id');
+        
+          
+
+        }
+        filter_search_results();
+    });
+	function filter_search_results(){
+
+    
+	    let department = $('#programs_filter').val();
+	    let location = $('#location').val();
+	    let salary = $('#salary').val();
+      let degree = check_id;
+	    let university = $('#university_filter').val();
+	    let experience = $('#experience').val();
+	    let company_size = $('#company_size').val();
+	    let hash_id = $('#hash_id').val();
+
+	    let user_id = $('#user_id').val(); 
+	    let filter_search_keyword = $('#filter_search_keyword').val();
+	    let filter_type = $('#filter_type').val();
+
+         $.get('{{LINK aj}}' + "/program-filter?hash=" + $('.main_session').val(), {user_id : user_id, hash_id:hash_id, department: department, location: location, degree: degree, university: university, filter_search_keyword: filter_search_keyword, filter_type: filter_type}, function (data) {
+        	if(data.status == 200){
+        	    $('.forUniList').html(data.html);
+              $('.pagination8').html(data.pagination);
+			}
+        });
+
+	}
+
+
+</script>
