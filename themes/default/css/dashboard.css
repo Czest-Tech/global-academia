@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
 *{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
 :root{
@@ -33,6 +33,10 @@
     min-height: 89vh;
     max-height: 90vh;
 }
+.user_panel > *{
+    min-height: 89vh;
+    max-height: 90vh;
+}
 .dashoard_sidebar{
     display: flex;
     flex-direction: column;
@@ -52,7 +56,9 @@
 .dashboard_top p{
     margin-top: 5px;
 }
-
+.user_panel > section{
+    flex: 1;
+}
 
 
 .nav_link{
@@ -75,6 +81,7 @@
 .messages{
     display: flex;
     height: 100%;
+    flex: 1;
 }
 .message_list{
     border-right: 1px solid #f1f1f1;
@@ -117,4 +124,109 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.message_pad{
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.message_pad_messages{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-bottom: 100px;
+}
+.reply_pad{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    padding: 10px;
+    padding-bottom: 15px;
+    background-color: var(--BLUE);
+}
+.enter_message{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.enter_message i{
+    cursor: pointer;
+    margin: 5px;
+    margin-left: 10px;
+    color: white;
+    font-size: 20px;
+}
+.enter_message input{
+    flex: 1;
+    background-color: #fff;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+.get_image{
+    margin-right: 10px;
+}
+.message_upload{
+    font-size: 20px;
+    color: white;
+}
+
+.message_row{
+    width: 100%;
+    display: flex;
+    padding: 10px 0;
+}
+.message_row > *{
+    display: flex;
+}
+.right_message{
+    justify-content: flex-end;
+
+}
+.bubble_text{
+    max-width: 70%;
+    min-width: 30%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 7px 7px 3px 7px;
+}
+.bubble_text .bold300{
+    margin: 4px 0;
+}
+.left_bubble .bubble_text_arrival{
+    width: 100%;
+    text-align: end;
+}
+.message_row_image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 10px;
+}
+.left_bubble .bubble_text{
+    background-color: #EAEAEA;
+    color: #4A4A4A;
+}
+.bubble_text_right{
+    background-color: var(--BLUE);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+    min-width: 30%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 7px 7px 3px 7px;
+    margin-right: 10px;
+}
+.bubble_text_right .bold300{
+    margin-bottom: 5px;
 }
