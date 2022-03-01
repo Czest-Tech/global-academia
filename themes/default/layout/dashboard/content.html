@@ -9,34 +9,48 @@
 			<p class="font2">Student</p>
 		</div>
 		<div class="sidebar_navlinks">
-			<div class="nav_link">
-				<i class="fas fa-th-large"></i>
-				<p>{{LANG Dashboard}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-envelope"></i>
-				<p>{{LANG Messages}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-file"></i>
-				<p>{{LANG Applications}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-bell"></i>
-				<p>{{LANG Notifications}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-user-circle"></i>
-				<p>{{LANG Profile}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-cog"></i>
-				<p>{{LANG Settings}}</p>
-			</div>
-			<div class="nav_link">
-				<i class="fas fa-sign-out-alt"></i>
-				<p>{{LANG Logout}}</p>
-			</div>
+			<a href="{{LINK dashboard/dashboard/}}{{USER username}}" data-load="?link1=dashboard&page=dashboard&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-th-large"></i>
+					<p>{{LANG Dashboard}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/messages/}}{{USER username}}" data-load="?link1=dashboard&page=messages&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-envelope"></i>
+					<p>{{LANG Messages}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/applications/}}{{USER username}}" data-load="?link1=dashboard&page=applications&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-file"></i>
+					<p>{{LANG Applications}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/notifications/}}{{USER username}}" data-load="?link1=dashboard&page=notifications&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-bell"></i>
+					<p>{{LANG Notifications}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/notifications/}}{{USER username}}" data-load="?link1=dashboard&page=notifications&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-user-circle"></i>
+					<p>{{LANG Profile}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/settings/}}{{USER username}}" data-load="?link1=dashboard&page=settings&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-cog"></i>
+					<p>{{LANG Settings}}</p>
+				</div>
+			</a>
+			<a href="{{LINK dashboard/settings/}}{{USER username}}" data-load="?link1=dashboard&page=settings&user={{USER username}}">
+				<div class="nav_link">
+					<i class="fas fa-sign-out-alt"></i>
+					<p>{{LANG Logout}}</p>
+				</div>
+			</a>
 		</div>
 	</nav>
 	<section>
