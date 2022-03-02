@@ -7,7 +7,7 @@
         <p>GLOBAL ACADEMIA</p>
       </div>
       <div class="loginRight">
-          <span class="loginToggle">
+          <span class="loginToggle" id="auth_login">
                 <p>{{LANG Login}}</p>
                 <form id="login-form" class="loginForm" method="post" role="form">
                     <div class="login-alert"></div>    
@@ -17,19 +17,25 @@
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
                     <button class="whiteBtn8" type="submit">{{LANG Login}}</button> 
                 </form>
+                <button class="switch_auth" onclick="switchAuth()">Dont have an Account?</button>
           </span>
-          <span class="registerToggle">
+          <span class="registerToggle" id="auth_register">
             <p>{{LANG Register}}</p>
             <form id="register-form" class="loginForm" method="post" role="form">
                 <div class="register-alert"></div> 
-                <label>{{LANG Account Types}}</label>
+                <!-- <label>{{LANG Account Types}}</label>
                 <input type="radio" id="agent" name="account_type" value="agent">
                 <label for="agent">{{LANG Agent}}</label><br>
                 <input type="radio" id="agent" name="account_type" value="applicant">
-                <label for="applicant">{{LANG Applicant}}</label><br>
-                <label>{{LANG Name}}</label>
+                <label for="applicant">{{LANG Applicant}}</label><br> -->
+                <label>{{LANG Account Type}}</label>
+                <select name="account_type" id="">
+                    <option value="applicant">Student</option>
+                    <option value="agent">Agent</option>
+                </select>
+                <label>{{LANG First Name}}</label>
                 <input type="text" name="firstname" id="firstname" placeholder="{{LANG firstname}}">
-                <label>{{LANG Lastname}}</label>
+                <label>{{LANG Last Name}}</label>
                 <input type="text" name="lastname" id="lastname" placeholder="{{LANG lastname}}">
                 <label>{{LANG Email}}</label>
                 <input type="text" name="email" id="email" placeholder="{{LANG email}}">
@@ -39,11 +45,27 @@
                 <input type="password" name="c_password" id="c_password" placeholder="{{LANG comfirm password}}">
                 <button class="whiteBtn8" type="submit">{{LANG Register}}</button> 
             </form>
+            <button class="switch_auth" onclick="switchAuth()">Already have an Account?</button>
       </span>
          
       </div>
 </div>
+
 <script>
+    let auth_switch = true
+    switchAuth()
+    function switchAuth(){
+        if(auth_switch){
+            document.getElementById("auth_register").style.display = "none"
+            document.getElementById("auth_login").style.display = "flex"
+            auth_switch = false
+        }else{
+            document.getElementById("auth_register").style.display = "flex"
+            document.getElementById("auth_login").style.display = "none"
+            auth_switch = true
+        }
+    }
+
     $(function() {
    
         let form = $('form#register-form');
