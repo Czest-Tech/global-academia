@@ -1,8 +1,8 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', true);
-error_reporting(E_ALL);
- @ini_set('max_execution_time', 0);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', true);
+// error_reporting(E_ALL);
+//  @ini_set('max_execution_time', 0);
 
 require 'config.php';
 require 'phpMailer_config.php';
