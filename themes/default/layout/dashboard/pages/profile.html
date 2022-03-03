@@ -30,5 +30,126 @@
             </div>
         </div>
         <button class="profile_save_btn">Save Changes</button>
+        <div class="profile_card_body">
+            <div class="profile_card_inputs">
+                <p class="font2">First Name</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Last Name</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Email</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Password</p>
+                <input type="password">
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Fathers Name}}<span class="apply-input-checker" id="dn-checker">*</span></p>
+                <div class="inputs5-1">
+                    <input type="text"  id="fathers_name" placeholder="{{LANG Father Names}}" required>
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Mothers Name}}<span class="apply-input-checker" id="mn-checker">*</span></p>
+                <div class="inputs5-1">
+                    <input type="text"  id="mothers_name" placeholder="{{LANG Mother Name}}" required>
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Date of Birth}}<span class="apply-input-checker" id="dob-checker">*</span></p>
+                <div class="inputs5-1">
+                    <input type="date"  id="date_of_birth" required>
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Phone Number}}<span class="apply-input-checker" id="line-checker">*</span></p>
+                <div class="inputs5-2">
+                    <input type="text" id="phone_number" placeholder="Line 1" required>
+                    <input type="text" id="phone_number_2"  placeholder="line 2 ( {{LANG optional}} )">
+                </div>
+            </div>
+         <div class="profile_card_inputs">
+                <p>{{LANG Email}}<span class="apply-input-checker" id="email-checker">*</span></p>
+                <div class="inputs5-1">
+                    <input type="text" id="email" placeholder="Your Email Address" required>
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Passport}}<span class="apply-input-checker" id="passport-checker">*</span></p>
+                <div class="inputs5-1">
+                    <input type="text"  id="passport_number" placeholder="Passport number">
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Nationality}}<span class="apply-input-checker" id="nationality-checker">*</span></p>
+                <div class="inputs5-1">
+                    <select id="nationality">
+                        {{COUNTRIES_LAYOUT}}
+                    </select>
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Country of Residence}}<span class="apply-input-checker" id="country-checker">*</span></p>
+                <div class="inputs5-1">
+            
+                        <select  id="country_of_residence">
+                            {{COUNTRIES_LAYOUT}}
+                        </select>
+                
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Diploma}}</p>
+                <div class="inputs5-1">
+                    <span class="click_diploma_file"><img src="https://img.icons8.com/plasticine/100/000000/certificate.png"/>
+                        <span id="diploma_name">{{LANG Click to upload}}</span>
+                    </span>
+                    <input type="file"  name="diploma_file" class="diploma_file" style="display:none;" id="diploma_file">
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Transcript}}</p>
+                <div class="inputs5-1">
+                    <span class="click_transcript_file"><img src="https://img.icons8.com/bubbles/50/000000/report-card.png"/>
+                        <span id="transcript_name">{{LANG Click to upload}}</span>
+                    </span>
+                    <input type="file" name="transcript_file" class="transcript_file"  style="display:none;" id="transcript_file">
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Certificate}}</p>
+                <div class="inputs5-1">
+                    <span class="click_language_certificate">
+                        <img src="https://img.icons8.com/plasticine/100/000000/certificate.png"/>
+                        <span id="certificate_name">{{LANG Click to upload}}</span>
+                    </span>
+                    <input type="file" name="language_certificate" class="language_certificate"  style="display:none;" id="language_certificate">
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Passport}}</p>
+                <div class="inputs5-1">
+                    <span id="click_passaport_file">
+                        <img src="https://img.icons8.com/office/50/000000/passport.png"/>
+                        <span id="passport_name">{{LANG Click to upload}}</span>
+                    </span>
+                    <input type="file" name="passport_file"   class="passport_file" id="passport_file" style="display:none;">
+                </div>
+            </div>
+            <div class="profile_card_inputs">
+                <p>{{LANG Photo}}</p>
+                <div class="inputs5-1">
+                    <span id="click_id_photo"> 
+                        <img src="https://img.icons8.com/color/48/000000/person-male.png"/>
+                        <span id="id_photo_name">{{LANG Click to upload}}</span>
+                    </span>
+                    <input type="file" name="id_photo" class="id_photo" id="id_photo" style="display:none;">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
