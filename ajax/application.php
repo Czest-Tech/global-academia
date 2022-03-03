@@ -1019,6 +1019,7 @@ if($first == "multiple" ){
         $application_data->nationality = Secure($_POST['nationality']);
         $application_data->country_of_residence = Secure($_POST['country_of_residence']);
         $application_data->application_no = $uniqid;
+        $application_data->user_id = (IS_LOGGED == true)? $kd->user->id : NULL;
         $application_data->middle_name = Secure($_POST['middle_name']);
         $application_sent = false;
         $push_application_data;
@@ -1135,7 +1136,7 @@ if($first == "multiple" ){
             'job_id' => '0',
             'type' => 'job_applied',
             'text' => ' Applied at <b>'.GetuniversityByID($application_data->university_id). '</b> in'.GetProgramByID($application_data->program_id).'</b>', 
-            'url' => ('/admin-cp/view-application?id='.$uniqid),
+            'url' => UrlLink('/admin-cp/view-application?id='.$uniqid),
             'time' => time(),
             'target' => 'all',
         );

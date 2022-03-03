@@ -63,7 +63,8 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     if (strlen($password) < 4) {
         $errors[] = __('password_is_short');
     }
-    $active = ($kd->config->validation == 'on') ? 0 : 1;
+  //  $active = ($kd->config->validation == 'on') ? 0 : 1;
+    $active = ($account_type == 'agent') ? 0 : 1;
     if (empty($errors)) {
         $email_code              = sha1(time() + rand(111, 999));
         $insert_data             = array(
@@ -85,15 +86,22 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $insert_data['language'] = $_SESSION['lang'];
             }
         }
-        var_dump($insert_data);
+      
         $user_id = $db->insert(T_USERS, $insert_data);
         if (!empty($user_id)) {
             $session_id  = sha1(rand(11111, 99999)) . time() . md5(microtime());
+
             $insert_data = array(
                 'user_id' => $user_id,
                 'session_id' => $session_id,
                 'time' => time()
             );
+            $insert_request_data = array(
+                'user_id' => $user_id,
+                'approved' => 0,
+                'created_at' => time()
+            );
+            $submit_approval_Request = $db->insert(T_AGENT_REQUESTS, $insert_request_data);
             $insert      = $db->insert(T_SESSIONS, $insert_data);
             $data        = array(
                 'status' => 200,

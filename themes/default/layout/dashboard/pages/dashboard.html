@@ -100,7 +100,7 @@
     </div>
 </div>
 <script>
-    $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), function (data) {
+    $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         	console.log(data)
-        });
+        }));
 </script>
