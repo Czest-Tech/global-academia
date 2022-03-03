@@ -31,5 +31,6 @@ define('T_DEPARTMENTS', 'departments');
 define('T_APPLICANT_UNIVERSITIES', 'applican_universities');
 define('T_APPLICANT_CHAT', 'applicant_chat');
 define('T_AGENT_REQUESTS', 'agent_requests');
+define('T_APPLICANT_EDUCATION_INFO','applicant_education_info')
 
 
