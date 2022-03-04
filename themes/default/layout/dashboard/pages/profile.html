@@ -11,7 +11,13 @@
                 <p class="font2 bold400">Agent Account</p>
             </div>
         </div>
-        <div class="profile_card_body">
+        <div class="profile_nav">
+            <button id="btn_information" onclick="profile_tab('information')">Information</button>
+            <button id="btn_details" onclick="profile_tab('details')">Details</button>
+            <button id="btn_documents" onclick="profile_tab('documents')">Documents</button>
+            <button id="btn_security" onclick="profile_tab('security')">Security</button>
+        </div>
+        <div class="profile_card_body" id="information">
             <div class="profile_card_inputs">
                 <p class="font2">First Name</p>
                 <input type="text">
@@ -21,16 +27,81 @@
                 <input type="text">
             </div>
             <div class="profile_card_inputs">
+                <p class="font2">Fathers Name</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Mothers Name</p>
+                <input type="password">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Date of Birth</p>
+                <input type="date">
+            </div>
+            <button class="profile_save_btn">Save Changes</button>
+        </div>
+        <div class="profile_card_body" id="details">
+            <div class="profile_card_inputs">
+                <p class="font2">Phone Number 1</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Phone Number 2 (optional)</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
                 <p class="font2">Email</p>
                 <input type="text">
             </div>
             <div class="profile_card_inputs">
-                <p class="font2">Password</p>
+                <p class="font2">Passport</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Country of Residence</p>
                 <input type="password">
             </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Nationality</p>
+                <input type="password">
+            </div>
+            <button class="profile_save_btn">Save Changes</button>
         </div>
-        <button class="profile_save_btn">Save Changes</button>
-        <div class="profile_card_body">
+        <div class="profile_card_body" id="documents">
+            <div class="profile_card_inputs">
+                <p class="font2">Diploma</p>
+                <input type="file">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Transcript</p>
+                <input type="file">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Certificate</p>
+                <input type="file">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Passport</p>
+                <input type="file">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">ID Photo</p>
+                <input type="file">
+            </div>
+            <button class="profile_save_btn">Save Changes</button>
+        </div>
+        <div class="profile_card_body" id="security">
+            <div class="profile_card_inputs">
+                <p class="font2">Password</p>
+                <input type="text">
+            </div>
+            <div class="profile_card_inputs">
+                <p class="font2">Confirm Password</p>
+                <input type="text">
+            </div>
+            <button class="profile_save_btn">Save Changes</button>
+        </div>
+        <!-- <div class="profile_card_body">
             <div class="profile_card_inputs">
                 <p class="font2">First Name</p>
                 <input type="text">
@@ -150,6 +221,26 @@
                     <input type="file" name="id_photo" class="id_photo" id="id_photo" style="display:none;">
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
+
+<script>
+    profile_tab('information')
+    function profile_tab(id){
+        document.getElementById("information").style.display = "none"
+        document.getElementById("details").style.display = "none"
+        document.getElementById("security").style.display = "none"
+        document.getElementById("documents").style.display = "none"
+
+        document.getElementById(id).style.display = "flex"
+
+        document.getElementById("btn_information").classList.remove("profile_nav_active")
+        document.getElementById("btn_details").classList.remove("profile_nav_active")
+        document.getElementById("btn_security").classList.remove("profile_nav_active")
+        document.getElementById("btn_documents").classList.remove("profile_nav_active")
+        
+        document.getElementById("btn_" + id).classList.add("profile_nav_active")
+    }
+
+</script>

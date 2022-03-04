@@ -303,7 +303,7 @@
     margin:  0 auto;
     margin-top: 20px;
     padding: 10px;
-    width: 200px;
+    width: 500px;
     color: white;
     background-color: var(--BLUE);
     border-radius: 5px;
@@ -327,4 +327,28 @@
 }
 .notification_text{
     margin: 5px 0;
+}
+.profile_nav{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.profile_nav > button{
+    min-width: 120px;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+    border: 1px solid var(--BLUE);
+    background-color: white;
+    color: var(--BLUE);
+    cursor: pointer;
+}
+.profile_nav > button:hover{
+    background-color: var(--BLUE);
+    color: white;
+}
+.profile_nav_active{
+    background-color: var(--BLUE) !important;
+    color: white !important;
 }
