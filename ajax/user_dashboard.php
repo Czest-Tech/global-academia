@@ -14,6 +14,17 @@
             $allProgram->program_id = GetProgramByID($allProgram->program_id);
             $allProgram->application_status_slug =  __($allProgram->application_status);
         }
+        foreach($get_user_notificatins as $nf){
+            if($nf->type == "application_status"){
+               $nf->subject = "Application status update";
+
+
+            } else {
+                $nf->subject = "New message from Global Academia";
+
+            }
+            $nf->url = UrlLink($nf->url);
+        }
 
       
         if( $get_user_applications) {
