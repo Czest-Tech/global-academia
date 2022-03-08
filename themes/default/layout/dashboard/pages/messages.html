@@ -27,6 +27,13 @@
 </div>
 
 <script>
+
+  $.get('{{LINK aj}}' + "/user_dashboard/get_user_messages?hash=" + $('.main_session').val(), {}, (data => {
+      if(data.status === 200){
+        console.log(data)
+      }
+  }));
+
     const messages = [
   {
     "id": 4,
