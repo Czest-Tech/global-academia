@@ -4,28 +4,28 @@
             <p class="card_title font2">All Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file"></i>
-                <p>203</p>
+                <p id="total_apps">0</p>
             </div>
         </div>
         <div class="dash_card">
             <p class="card_title font2">Pending Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-alt"></i>
-                <p>123</p>
+                <p id="pending_apps">0</p>
             </div>
         </div>
         <div class="dash_card">
             <p class="card_title font2">Accepted Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-contract"></i>
-                <p>89</p>
+                <p id="accepted_apps">0</p>
             </div>
         </div>
         <div class="dash_card">
             <p class="card_title font2">Rejected Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-excel"></i>
-                <p>0</p>
+                <p id="rejected_apps">0</p>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
                     <tr>
                         <th>#</th>
                         <th>University</th>
-                        <th>Applicants</th>
+                        <th>Program</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,6 +101,22 @@
 </div>
 <script>
     $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
-        	console.log(data)
-        }));
+        render_dashboard_cards(data)
+        render_dashboard_app_table(data)
+    }));
+
+    function render_dashboard_cards(data){
+        let total_apps = data.number_of_applications
+        let accepted_apps = data.number_of_accepted_applications
+        let pending_apps = data.number_of_pending_applications
+        let rejected_apps = data.number_of_rejected_applications
+        document.getElementById("total_apps").innerHTML = total_apps
+        document.getElementById("accepted_apps").innerHTML = accepted_apps
+        document.getElementById("pending_apps").innerHTML = pending_apps
+        document.getElementById("rejected_apps").innerHTML = rejected_apps
+    }
+
+    function render_dashboard_app_table(data){
+        console.log(data)
+    }
 </script>
