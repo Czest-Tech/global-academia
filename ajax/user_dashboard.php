@@ -14,6 +14,7 @@
             $allProgram->program_id = GetProgramByID($allProgram->program_id);
             $allProgram->application_status_slug =  __($allProgram->application_status);
         }
+
       
         if( $get_user_applications) {
             
@@ -27,7 +28,8 @@
                 'number_of_accepted_applications' => $get_accepted_application_count,
                 'number_of_rejected_applications' => $get_rejected_application_count,
                 'user_notifications' => $get_user_notificatins,
-                'user_new_notification_count' => $get_user_notificatins_count
+                'user_new_notification_count' => $get_user_notificatins_count,
+                // 'user_number_of_applicaions' => GetUserAppliedToUniversities($email, 'applicant')
 
 
             );

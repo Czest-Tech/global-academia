@@ -1355,3 +1355,15 @@ function GetNotificationText($university_id = null, $program_id = null, $status 
 
 
 }
+// function GetUserAppliedToUniversities($email, $type){
+//      global $kd, $db;
+//      $new_obj_respo = array();
+//      $get_all_applications = $db->where('email', $email)->get(T_APPLICANT_UNIVERSITIES);
+
+//      foreach($get_all_applications as $ad ){
+
+//      }
+
+
+
+// }
