@@ -208,4 +208,19 @@
         }
     }
 
-
+if($first === "get_user_messages"){
+    $new_message = $db->where('applicant_email', $kd->user->email)->get(T_APPLICANT_CHAT);
+    foreach($new_message as $cts){
+        if(!empty($cts->action_slug)){
+            $cts->action = __($cts->action_slug);
+        } else {
+        $cts->action = '';
+        }
+        $cts->file = GetMedia($cts->file);
+    }
+    $data = array(
+        'status' => 200,
+        'chats' => $new_message,
+        
+     );
+}
