@@ -367,8 +367,60 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-
+.modal_container{
+    position: absolute;
+    top: 0;
+    min-height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.74);
+    left: 0;
+    display: none;
+}
+.modal_main{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+}
+.modal_pad{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.modal_body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal_body_btn{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.modal_body_btn > *{
+    margin: 5px 10px;
+    padding: 6px 50px;
+    border: none;
+    background:none;
+    color: white;
+    border-radius: 5px;
+}
+.modal_body_btn > *:nth-child(1){
+    background:var(--GREEN);
+}
+.modal_body_btn > *:nth-child(2){
+    background:var(--DARK);
+}
+.app_modal{
+    max-width: 400px;
+    text-align: center;
+    padding: 20px 15px 10px 15px;
+}
 @media only screen and (max-width: 1120px) {
     .dash_card {
         max-width: 400px;
