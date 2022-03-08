@@ -133,6 +133,13 @@
     let save_info = $(".save_info");
     let change_password = $('.save_change_password');
 
+    $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
+        if(data.status === 200){
+          console.log(data)
+        }
+    }));
+
+
     profile_tab('information')
     function profile_tab(id){
         document.getElementById("information").style.display = "none"
