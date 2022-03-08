@@ -53,8 +53,9 @@
 .message_pad_messages{ display: flex; flex-direction: column; height: 100%; max-height: 100%; overflow-y: auto; padding-bottom: 100px; }
 .reply_pad{ display: flex; align-items: center; width: 100%; bottom: 0; position: absolute; padding: 10px; padding-bottom: 15px; background-color: var(--BLUE); }
 .enter_message{ flex: 1; display: flex; align-items: center; }
+.enter_message button{ background: none; border: none; }
 .enter_message i{ cursor: pointer; margin: 5px; margin-left: 10px; color: white; font-size: 20px; }
-.enter_message input{ flex: 1; background-color: #fff; outline: none; border-radius: 5px; border: none; padding: 5px; }
+.enter_message input{ flex: 1; background-color: #fff; outline: none; border-radius: 5px; border: none; padding: 7px; }
 .get_image{ margin-right: 10px; }
 .message_upload{ font-size: 20px; color: white; }
 
