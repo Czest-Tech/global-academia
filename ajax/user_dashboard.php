@@ -1,22 +1,38 @@
 <?php 
   
     if ($first == 'get_user_applications') {
-        $get_user_applications = $db->where("user_id", $kd->user->id)->get(T_APPLICATIONS);
+        $get_user_applications = $db->where("user_id", $kd->user->id)->getOne(T_APPLICATIONS);
+        $get_univiversities = $db->where("email", $get_user_applications->email)->get(T_APPLICANT_UNIVERSITIES);
+        $get_pending_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "queued")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+        $get_accepted_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "accepted")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+        $get_rejected_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "rejected")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+        $get_user_notificatins = $db->where('recipient_id', $kd->user->id)->get(T_USER_NOTIFACATIONS);
+        foreach($get_univiversities as $allProgram){
+            $allProgram->university_id = GetuniversityByID($application_data->university_id);
+            $allProgram->program_id = GetProgramByID($application_data->program_id);
+        }
       
-        if ( $get_user_applications) {
+        if( $get_user_applications) {
             
             $data = array(
                 'status' => 200,
-                'data' => $get_user_applications
+                'application_data' => $get_user_applications,
+                'applied_to_universities' => $get_univiversities,
+                'number_of_applications' => count($get_univiversities),
+                'number_of_pending_applications' => $get_pending_application_count,
+                'number_of_accepted_applications' => $get_accepted_application_count,
+                'number_of_rejected_applications' => $get_rejected_application_count,
+                'user_notifications' => $get_user_notificatins
+
+
             );
-            echo json_encode($data);
         } else {
             
             $send_errors_data = array(
                 'status' => 400,
-                'message' => "ERROR"
+                'message' => "ERROR",
+            
             );
-            echo json_encode($send_errors_data);
         }
     }
 
@@ -27,6 +43,39 @@
         );
     }
     if($first  === 'update_education_user_info'){
+        $update_education = new stdClass();
+        $isSent = '';
+       
+        $update_education->type = "multiple";
+        $update_education->created_at = time();
+        $update_education->date_of_birth = Secure($_POST['date_of_birth']);
+        $update_education->phone_number = Secure($_POST['phone']);
+        $update_education->phone_number_2 = Secure($_POST['phone_2']);
+        $update_education->fathers_name = Secure($_POST['fathers_name']);
+        $update_education->mothers_name = Secure($_POST['mothers_name']);
+        $update_education->passport_number = Secure($_POST['passport']);
+        $update_education->nationality = Secure($_POST['nationality']);
+        $update_education->country_of_residence = Secure($_POST['country_of_residence']);
+        $update_educationa_data = $db->where('user_id', $kd->user->id)->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
+        
+        if($update_educationa_data){
+            $get_data = $db->where('user_id', $kd->user->id)->get(T_APPLICANT_EDUCATION_INFO);
+
+            $data = array(
+                'status' => 200,
+                'data' => $get_data,
+                'user_data' => $kd->user,
+                'url' => UrlLink($redirectlink)
+             );
+        } else {
+            $data = array(
+                'status' => 401,
+                'message' => __('your_application_was_submited'),
+                'url' => UrlLink($redirectlink)
+             );
+        }
+    }
+    if($first  === 'update_education_documents'){
         $update_education = new stdClass();
         $isSent = '';
         if (!empty($_FILES['id_photo']['tmp_name'])) {
@@ -120,18 +169,7 @@
                 $update_education->other_files = $file_upload['filename'];
             }
         }
-        $update_education->first_name = Secure($_POST['first_name']);
-        $update_education->type = "multiple";
-        $update_education->last_name = Secure($_POST['last_name']);
-        $update_education->created_at = time();
-        $update_education->date_of_birth = Secure($_POST['date_of_birth']);
-        $update_education->phone_number = Secure($_POST['phone_number']);
-        $update_education->phone_number_2 = Secure($_POST['phone_number_2']);
-        $update_education->fathers_name = Secure($_POST['fathers_name']);
-        $update_education->mothers_name = Secure($_POST['mothers_name']);
-        $update_education->passport_number = Secure($_POST['passport_number']);
-        $update_education->nationality = Secure($_POST['nationality']);
-        $update_education->country_of_residence = Secure($_POST['country_of_residence']);
+ 
         $update_educationa_data = $db->where('user_id', $kd->user->id)->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
         
         if($update_educationa_data){
@@ -140,6 +178,7 @@
             $data = array(
                 'status' => 200,
                 'data' => $get_data,
+                'user_data' => $kd->user,
                 'url' => UrlLink($redirectlink)
              );
         } else {

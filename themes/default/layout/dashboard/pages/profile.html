@@ -17,215 +17,117 @@
             <button id="btn_documents" onclick="profile_tab('documents')">Documents</button>
             <button id="btn_security" onclick="profile_tab('security')">Security</button>
         </div>
-        <div class="profile_card_body" id="information">
+        <div class="profile_card_body profile_info" id="information">
             <div class="profile_card_inputs">
-                <p class="font2">First Name</p>
-                <input type="text">
+                <p class="font2">{{LANG First Name}}</p>
+                <input type="text" name="first_name" value="{{USER first_name}}">
             </div>
             <div class="profile_card_inputs">
-                <p class="font2">Last Name</p>
-                <input type="text">
+                <p class="font2">{{LANG Last Name}}</p>
+                <input type="text" name="last_name" value="{{USER last_name}}">
             </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Fathers Name</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Mothers Name</p>
-                <input type="password">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Date of Birth</p>
-                <input type="date">
-            </div>
-            <button class="profile_save_btn">Save Changes</button>
+            
+         
+            <button class="profile_save_btn">{{LANG Save Changes}}</button>
         </div>
         <div class="profile_card_body" id="details">
-            <div class="profile_card_inputs">
-                <p class="font2">Phone Number 1</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Phone Number 2 (optional)</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Email</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Passport</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Country of Residence</p>
-                <input type="password">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Nationality</p>
-                <input type="password">
-            </div>
-            <button class="profile_save_btn">Save Changes</button>
+            <form class="save_info" method="post">
+                <div class="save_info_alert"></div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Fathers Name}}</p>
+                    <input type="text" name="fathers_name" value="<?php echo $kd->user->education_info->fathers_name; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Mothers Name}}</p>
+                    <input type="text" name="mothers_name"  value="<?php echo $kd->user->education_info->mothers_name; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Phone Number 1}}</p>
+                    <input type="text" name="phone" value="<?php echo $kd->user->education_info->phone_number; ?>" >
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Phone Number 2}}  ( {{LANG Optional}} )</p>
+                    <input type="text" name="phone_2" value="<?php echo $kd->user->education_info->phone_number_2; ?>"/>
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Email}}</p>
+                    <input type="text" name="email" value="{{USER email}}">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Passport}}</p>
+                    <input type="text" value="<?php echo $kd->user->education_info->passport_number; ?>" name="passport">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Country of Residence}}</p>
+                    <input type="text" value="<?php echo $kd->user->education_info->country_of_residence; ?>" name="country_of_residence">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Nationality}}</p>
+                    <input type="text" name="nationality" value="<?php echo $kd->user->education_info->nationality; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Date of Birth}}</p>
+                    <input type="date" name="date_of_birth" value="<?php echo $kd->user->education_info->date_of_birth; ?>">
+                </div>
+                <button class="profile_save_btn">{{LANG Save Changes}}</button>
+            </form>
+
         </div>
         <div class="profile_card_body" id="documents">
-            <div class="profile_card_inputs">
-                <p class="font2">Diploma</p>
-                <input type="file">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Transcript</p>
-                <input type="file">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Certificate</p>
-                <input type="file">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Passport</p>
-                <input type="file">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">ID Photo</p>
-                <input type="file">
-            </div>
-            <button class="profile_save_btn">Save Changes</button>
+            <form class="save_documents" method="post"> 
+                <div class="save_documents_info_alert"></div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Diploma}}</p>
+                    <input type="file" name="diploma" value="<?php echo $kd->user->education_info->diploma; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Transcript}}</p>
+                    <input type="file" name="transcript_file" value="<?php echo $kd->user->education_info->transcript_file; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Certificate}}</p>
+                    <input type="file" name="certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Passport}}</p>
+                    <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG ID Photo}}</p>
+                    <input type="file" value="<?php echo $kd->user->education_info->id_photo; ?>" name="id_photo">
+                </div>
+                <button class="profile_save_btn">{{LANG Save Changes}}</button>
+            </form>
         </div>
         <div class="profile_card_body" id="security">
-            <div class="profile_card_inputs">
-                <p class="font2">Password</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Confirm Password</p>
-                <input type="text">
-            </div>
-            <button class="profile_save_btn">Save Changes</button>
-        </div>
-        <!-- <div class="profile_card_body">
-            <div class="profile_card_inputs">
-                <p class="font2">First Name</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Last Name</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Email</p>
-                <input type="text">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">Password</p>
-                <input type="password">
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Fathers Name}}<span class="apply-input-checker" id="dn-checker">*</span></p>
-                <div class="inputs5-1">
-                    <input type="text"  id="fathers_name" placeholder="{{LANG Father Names}}" required>
+            <form class="save_change_password" method="post">
+                <div class="save_pass_alert"></div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Old Password}}</p>
+                    <input type="password" name="current_password">
                 </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Mothers Name}}<span class="apply-input-checker" id="mn-checker">*</span></p>
-                <div class="inputs5-1">
-                    <input type="text"  id="mothers_name" placeholder="{{LANG Mother Name}}" required>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG New Password}}</p>
+                    <input type="password" name="new_password">
                 </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Date of Birth}}<span class="apply-input-checker" id="dob-checker">*</span></p>
-                <div class="inputs5-1">
-                    <input type="date"  id="date_of_birth" required>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Confirm Password}}</p>
+                    <input type="password" name="confirm_new_password">
                 </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Phone Number}}<span class="apply-input-checker" id="line-checker">*</span></p>
-                <div class="inputs5-2">
-                    <input type="text" id="phone_number" placeholder="Line 1" required>
-                    <input type="text" id="phone_number_2"  placeholder="line 2 ( {{LANG optional}} )">
-                </div>
-            </div>
-         <div class="profile_card_inputs">
-                <p>{{LANG Email}}<span class="apply-input-checker" id="email-checker">*</span></p>
-                <div class="inputs5-1">
-                    <input type="text" id="email" placeholder="Your Email Address" required>
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Passport}}<span class="apply-input-checker" id="passport-checker">*</span></p>
-                <div class="inputs5-1">
-                    <input type="text"  id="passport_number" placeholder="Passport number">
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Nationality}}<span class="apply-input-checker" id="nationality-checker">*</span></p>
-                <div class="inputs5-1">
-                    <select id="nationality">
-                        {{COUNTRIES_LAYOUT}}
-                    </select>
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Country of Residence}}<span class="apply-input-checker" id="country-checker">*</span></p>
-                <div class="inputs5-1">
-            
-                        <select  id="country_of_residence">
-                            {{COUNTRIES_LAYOUT}}
-                        </select>
                 
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Diploma}}</p>
-                <div class="inputs5-1">
-                    <span class="click_diploma_file"><img src="https://img.icons8.com/plasticine/100/000000/certificate.png"/>
-                        <span id="diploma_name">{{LANG Click to upload}}</span>
-                    </span>
-                    <input type="file"  name="diploma_file" class="diploma_file" style="display:none;" id="diploma_file">
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Transcript}}</p>
-                <div class="inputs5-1">
-                    <span class="click_transcript_file"><img src="https://img.icons8.com/bubbles/50/000000/report-card.png"/>
-                        <span id="transcript_name">{{LANG Click to upload}}</span>
-                    </span>
-                    <input type="file" name="transcript_file" class="transcript_file"  style="display:none;" id="transcript_file">
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Certificate}}</p>
-                <div class="inputs5-1">
-                    <span class="click_language_certificate">
-                        <img src="https://img.icons8.com/plasticine/100/000000/certificate.png"/>
-                        <span id="certificate_name">{{LANG Click to upload}}</span>
-                    </span>
-                    <input type="file" name="language_certificate" class="language_certificate"  style="display:none;" id="language_certificate">
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Passport}}</p>
-                <div class="inputs5-1">
-                    <span id="click_passaport_file">
-                        <img src="https://img.icons8.com/office/50/000000/passport.png"/>
-                        <span id="passport_name">{{LANG Click to upload}}</span>
-                    </span>
-                    <input type="file" name="passport_file"   class="passport_file" id="passport_file" style="display:none;">
-                </div>
-            </div>
-            <div class="profile_card_inputs">
-                <p>{{LANG Photo}}</p>
-                <div class="inputs5-1">
-                    <span id="click_id_photo"> 
-                        <img src="https://img.icons8.com/color/48/000000/person-male.png"/>
-                        <span id="id_photo_name">{{LANG Click to upload}}</span>
-                    </span>
-                    <input type="file" name="id_photo" class="id_photo" id="id_photo" style="display:none;">
-                </div>
-            </div>
-        </div> -->
+                <input type="hidden" name="user_id" value="{{ME id}}">
+                <button class="profile_save_btn">{{LANG Save Changes}}</button>
+            </form>
+                
+        </div>
     </div>
 </div>
 
 <script>
+    let save_documents = $(".save_documents");
+    let save_info = $(".save_info");
+    let change_password = $('.save_change_password');
+
     profile_tab('information')
     function profile_tab(id){
         document.getElementById("information").style.display = "none"
@@ -242,5 +144,90 @@
         
         document.getElementById("btn_" + id).classList.add("profile_nav_active")
     }
+    
+    $(function() { 
+        save_documents.ajaxForm({
+            url: '{{LINK aj/user_dashboard/update_education_documents}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                save_documents.find('button').text("{{LANG please_wait}}");
+            },
+                success: function(data) {
+                    if (data.status == 200) { 
+                        $('.submission_message').hide(); 
+
+                        $('.save_documents_info_alert').html($('<div>',{
+                            class: "alert alert-success",
+                            html: data.message
+                        }));
+                        $('.alert-success').fadeIn(5000);
+                       
+                        window.location = data.url
+                    }
+                    else {
+                        $('.save_documents_info_alert').html($('<div>',{
+                            class: "alert alert-danger",
+                            html: data.message
+                        }));
+                        save_documents.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                    }
+                }
+        });
+        save_info.ajaxForm({
+            url: '{{LINK aj/user_dashboard/update_education_user_info}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                save_info.find('button').text("{{LANG please_wait}}");
+            },
+                success: function(data) {
+                    if (data.status == 200) { 
+                        $('.submission_message').hide(); 
+
+                        $('.save_info_alert').html($('<div>',{
+                            class: "alert alert-success",
+                            html: data.message
+                        }));
+                        $('.alert-success').fadeIn(5000);
+                       
+                        window.location = data.url
+                    }
+                    else {
+                        $('.save_info_alert').html($('<div>',{
+                            class: "alert alert-danger",
+                            html: data.message
+                        }));
+                        save_info.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                    }
+                }
+        });
+        change_password.ajaxForm({
+            url: '{{LINK aj/user/change-pass}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                change_password.find('button').text("{{LANG please_wait}}");
+            },
+                success: function(data) {
+                    if (data.status == 200) { 
+                        $('.submission_message').hide(); 
+
+                        $('.save_pass_alert').html($('<div>',{
+                            class: "alert alert-success",
+                            html: data.message
+                        }));
+                        $('.alert-success').fadeIn(5000);
+                       
+                        window.location = data.url
+                    }
+                    else {
+                        $('.save_pass_alert').html($('<div>',{
+                            class: "alert alert-danger",
+                            html: data.message
+                        }));
+                        change_password.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                    }
+                }
+        });
+    });
+    
 
 </script>

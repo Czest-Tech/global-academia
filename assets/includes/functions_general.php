@@ -1109,6 +1109,24 @@ function GetNotification($args = array()){
 
     return $data;
 }
+function NotifyUser($data = array()){
+    global $db;
+    if (empty($data) || !is_array($data)) {
+        return false;
+    }
+
+    if( isset($data['notifier_id']) && isset($data['recipient_id']) ){
+        if( $data['notifier_id'] == $data['recipient_id'] ){
+            return false;
+        }
+    }
+    $t_notif = T_USER_NOTIFACATIONS;
+    $query   = $db->insert($t_notif,$data);
+//    if ($jb->config->push_notifications == 1) {
+//        NotificationWebPushNotifier();
+//    }
+    return $query;
+}
 function Notify($data = array()){
     global $db;
     if (empty($data) || !is_array($data)) {

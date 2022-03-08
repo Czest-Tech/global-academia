@@ -23,13 +23,25 @@ function GetConfig() {
 }
 function UserData($user_id = 0, $options = array()) {
     global $db, $kd, $lang, $countries_name;
-
+     
+    
     if (!empty($options['data'])) {
         $fetched_data   = $user_id;
     }
 
     else {
         $fetched_data   = $db->where('id', $user_id)->getOne(T_USERS);
+        if($fetched_data->account_type == "applicant"){
+            $fetched_data2_education   = $db->where('user_id', $user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
+            $fetched_data2_education->passport_file = GetMedia($fetched_data2_education->passport_file);
+            $fetched_data2_education->transcript_file = GetMedia($fetched_data2_education->transcript_file);
+            $fetched_data2_education->diploma_file = GetMedia($fetched_data2_education->diploma_file);
+            $fetched_data2_education->id_photo = GetMedia($fetched_data2_education->id_photo);
+            $fetched_data2_education->language_certificate = GetMedia($fetched_data2_education->language_certificate);
+            $fetched_data2_education->other_files = GetMedia($fetched_data2_education->other_files);
+            
+        }
+ 
     }
 
     if (empty($fetched_data)) {
@@ -43,6 +55,7 @@ function UserData($user_id = 0, $options = array()) {
     $fetched_data->cover  = GetMedia($fetched_data->cover);
     $fetched_data->url    = UrlLink('@' . $fetched_data->username);
     $fetched_data->about_decoded = br2nl($fetched_data->about);
+    $fetched_data->education_info = !empty($fetched_data2_education)? $fetched_data2_education : null;
 
     if (!empty($fetched_data->first_name)) {
         $fetched_data->name = $fetched_data->first_name . ' ' . $fetched_data->last_name;
@@ -1307,4 +1320,38 @@ function GetApplicationsCount($email){
     $get_all_applications =  $db->where('email',$email)->get(T_APPLICANT_UNIVERSITIES);
     
     return count($get_all_applications);
+}
+function HasEducationalInfo($id){
+    global $kd, $db;
+    
+    $check_data  = $db->where("user_id", $id)->getOne(T_APPLICANT_EDUCATION_INFO);
+
+    return !empty($check_data)? true : false;
+}
+function GetApplicantUserId($id){
+    global $kd, $db;
+    $get_email = $db->where('id', $id)->getOne(T_APPLICANT_UNIVERSITIES);
+    
+    if($get_email){
+        $get_user_id = $db->where('email', $get_email->email)->getOne(T_APPLICATIONS);
+        if($get_user_id && $get_user_id->user_id !== null){
+            return $get_user_id->user_id;
+        }
+    }
+
+    return 0;
+}
+function GetNotificationText($university_id = null, $program_id = null, $status = null,$type){
+   
+     if($type === "status"){
+        return 'Your application at'.$university_id.' in '.$program_id.' status changed to '.$status;
+     } elseif($type === "edit_request"){
+        return 'Your edit request for'.$university_id.' in '.$program_id.' has been approved';
+
+     }else{
+         return 'MESSAGE FROM ADMIN - '.$status;
+     }
+     
+
+
 }
