@@ -125,6 +125,7 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 15px;
+    background-color: white;
 }
 .ga_table th{
     background-color: var(--BLUE);
@@ -153,10 +154,14 @@
     padding: 10px 20px;
     color: var(--DARK);
     font-size: 15px;
+    cursor: pointer;
+    background-color: white;
 }
+
 .dash_notifications .nofify_rows:nth-child(odd){
     background: #1fe1fb0b;
 }
+
 .notify_rows_time{
     margin-top: 5px;
     color: var(--BLUE);
