@@ -1,10 +1,9 @@
 <div class="messages">
-    <div class="message_list">
+    <!-- <div class="message_list">
         <p>All Messages</p>
         <div class="message_links" id="message_links">
-            <!-- Message Links From JS -->
         </div>
-    </div>
+    </div> -->
     <div class="message_pad" >
         <div class="message_pad_messages" id="message_pad">
             <!-- Messages Rendered From JS -->
@@ -192,19 +191,19 @@
 ]
 
     let links = ""
-    messages.forEach(element => {
+    // messages.forEach(element => {
         
-        document.getElementById("message_links").innerHTML += `
-                <div class="message_link">
-                    <img src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=233" alt="message_image" class="message_image">
-                    <div class="message_details">
-                        <p class="message_name font2 bold600 dark_color">${element.name}</p>
-                        <p class="message_text font2 bold300 dark_gray_color">${element.company.catchPhrase}</p>
-                        <p class="font1 bold400 dark_gray_color">3 min</p>
-                    </div>
-                </div>
-        `
-    });
+    //     document.getElementById("message_links").innerHTML += `
+    //             <div class="message_link">
+    //                 <img src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=233" alt="message_image" class="message_image">
+    //                 <div class="message_details">
+    //                     <p class="message_name font2 bold600 dark_color">${element.name}</p>
+    //                     <p class="message_text font2 bold300 dark_gray_color">${element.company.catchPhrase}</p>
+    //                     <p class="font1 bold400 dark_gray_color">3 min</p>
+    //                 </div>
+    //             </div>
+    //     `
+    // });
 
     const chats = [
   {
