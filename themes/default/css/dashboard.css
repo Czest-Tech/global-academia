@@ -294,7 +294,7 @@
     flex-wrap: wrap;
 }
 .profile_card_inputs{
-    width: 49%;
+    width: 48%;
     margin-top: 10px;
     color: var(--DARK);
 }
@@ -340,9 +340,11 @@
     align-items: center;
     width: 100%;
     justify-content: center;
+    margin-top: 5px;
 }
 .profile_nav > button{
-    min-width: 120px;
+    max-width: 120px;
+    flex: 1;
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
@@ -359,8 +361,12 @@
     background-color: var(--BLUE) !important;
     color: white !important;
 }
-
-
+.profile_detail_container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
 
 @media only screen and (max-width: 1120px) {
