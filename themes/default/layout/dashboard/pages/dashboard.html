@@ -39,70 +39,24 @@
                         <th>Program</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Khalifa University</td>
-                        <td>34</td>
-                    </tr>
+                <tbody id="app_table_rows">
+                    <!-- table rows rendered from JS -->
                 </tbody>
             </table>
         </div>
-        <div class="dash_notifications ">
+        <div class="dash_notifications " id="system_notifications">
             <p>System Notifications</p>
-            <div class="nofify_rows">
-                <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-                <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-                <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-            </div>
-            <div class="nofify_rows">
-                <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-                <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-                <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-            </div>
-            <div class="nofify_rows">
-                <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-                <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-                <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-            </div>
-            <div class="nofify_rows">
-                <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-                <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-                <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-            </div>
-            
+            <!-- Notifications Rendered here from javascript -->
         </div>
     </div>
 </div>
 <script>
     $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
-        render_dashboard_cards(data)
-        render_dashboard_app_table(data)
+        if(data.status === 200){
+            render_dashboard_cards(data)
+            render_dashboard_app_table(data.applied_to_universities)
+            render_dashboard_notification(data.user_notifications)
+        }
     }));
 
     function render_dashboard_cards(data){
@@ -117,6 +71,38 @@
     }
 
     function render_dashboard_app_table(data){
-        console.log(data)
+        data.forEach((element,index) => {
+            document.getElementById("app_table_rows").innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td class="table_data">${element.university_id.toLowerCase()}</td>
+                    <td class="table_data">${element.program_id.toLowerCase()}</td>
+                </tr>
+            `
+        });
+
+        // 
+    }
+    function render_dashboard_notification(data){
+        data.forEach(element => {
+            console.log(element)
+            let date = new Date(element.time * 1000)
+            document.getElementById("system_notifications").innerHTML += `
+                <div class="nofify_rows">
+                    <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
+                    <p class="notification_text dark_color font2">${element.text}</p>
+                    <p class="notify_rows_time bold600 font1">${date.toDateString()}</p>
+                </div>
+            `
+        });
+        if(data.length < 1){
+            document.getElementById("system_notifications").innerHTML += `
+                <div class="nofify_rows">
+                    <p class="notification_title dark_color font2 bold600">No Notifications</p>
+                </div>
+            `
+        }
+
+        // 
     }
 </script>

@@ -2100,3 +2100,6 @@ span.registerToggle {
     flex-direction:column;
     align-items: center;
 }
+.table_data{
+    text-transform: capitalize;
+}
