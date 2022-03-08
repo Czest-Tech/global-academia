@@ -7,6 +7,8 @@
         $get_accepted_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "accepted")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
         $get_rejected_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "rejected")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
         $get_user_notificatins = $db->where('recipient_id', $kd->user->id)->get(T_USER_NOTIFACATIONS);
+        $get_user_notificatins_count = $db->where('recipient_id', $kd->user->id)->where("seen", 0)->getValue(T_USER_NOTIFACATIONS, "count(*)");
+
         foreach($get_univiversities as $allProgram){
             $allProgram->university_id = GetuniversityByID($application_data->university_id);
             $allProgram->program_id = GetProgramByID($application_data->program_id);
@@ -23,7 +25,8 @@
                 'number_of_pending_applications' => $get_pending_application_count,
                 'number_of_accepted_applications' => $get_accepted_application_count,
                 'number_of_rejected_applications' => $get_rejected_application_count,
-                'user_notifications' => $get_user_notificatins
+                'user_notifications' => $get_user_notificatins,
+                'user_new_notification_count' => $get_user_notificatins_count
 
 
             );
