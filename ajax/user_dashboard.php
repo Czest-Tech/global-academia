@@ -16,6 +16,7 @@
             
             $data = array(
                 'status' => 200,
+                'user_data' => $kd->user,
                 'application_data' => $get_user_applications,
                 'applied_to_universities' => $get_univiversities,
                 'number_of_applications' => count($get_univiversities),
