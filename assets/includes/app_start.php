@@ -79,7 +79,7 @@ if (IsLogged() == true) {
     $session_id        = (!empty($_SESSION['user_id'])) ? $_SESSION['user_id'] : $_COOKIE['user_id'];
     $kd->user_session  = GetUserFromSessionID($session_id);
     $user = $kd->user  = UserData($kd->user_session);
-
+    unset($kd->user->password);
     //$user->wallet      = number_format($user->wallet,2);
 
     if (!empty($user->language) && in_array($user->language, $langs)) {
