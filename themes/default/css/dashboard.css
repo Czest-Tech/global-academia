@@ -359,3 +359,26 @@
     background-color: var(--BLUE) !important;
     color: white !important;
 }
+
+
+
+
+@media only screen and (max-width: 1120px) {
+    .dash_card {
+        max-width: 400px;
+        width: 30%;
+    }
+    .dash_mid {
+        flex-direction: column;
+    }
+    .dash_mid > *{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 940px) {
+    .dash_card {
+        max-width: 500px;
+        width: 48%;
+    }
+}
