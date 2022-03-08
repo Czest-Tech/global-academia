@@ -1,32 +1,32 @@
-<div class="notifications_page">
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
-    <div class="notification_rows">
-        <p class="notification_title dark_color font2 bold600">Student Application has being accepted</p>
-        <p class="notification_text dark_color font2">Duis Lorem ullamco nulla proident labore aliquip irure nostrud proident ipsum proident dolore laboris consectetur.</p>
-        <p class="notify_rows_time bold600 font1">12/08/2022 (2 min ago)</p>
-    </div>
+<div class="notifications_page" id="system_notifications">
+    <!-- notifications rendered from JS -->
 </div>
+
+<script>
+    $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
+        if(data.status === 200){
+          render_dashboard_notification(data.user_notifications);
+        }
+    }));
+    function render_dashboard_notification(data){
+        data.forEach(element => {
+            let date = new Date(element.time * 1000)
+            document.getElementById("system_notifications").innerHTML += `
+                <div class="notification_rows" onclick="open_link_to_new_table('${element.url}')">
+                    <p class="notification_title dark_color font2 bold600">${element.subject}</p>
+                    <p class="notification_text dark_color font2">${element.text}</p>
+                    <p class="notify_rows_time bold600 font1">${date.toDateString()}</p>
+                </div>
+            `
+        });
+        if(data.length < 1){
+            document.getElementById("system_notifications").innerHTML = `
+                <div class="notification_rows">
+                    <p class="notification_title dark_color font2 bold600">No Notifications</p>
+                </div>
+            `
+        }
+
+        // 
+    }
+</script>

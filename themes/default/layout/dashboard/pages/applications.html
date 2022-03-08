@@ -23,7 +23,6 @@
   }));
   function render_application(data){
     data.forEach(element => {
-      console.log(element.created_at.substr(0,10))
       document.getElementById("ga_table-body").innerHTML += `
             <tr>
                 <td>${element.created_at.substr(0,10)}</td>
