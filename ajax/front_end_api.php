@@ -90,8 +90,9 @@ if($first == "send_applicant_message"){
         $send_msg = $db->insert(T_APPLICANT_CHAT, ToArray($message_data));
 
         if($send_msg){
+
             $new_message = $db->where('applicant_email', Secure($_POST['email']))->get(T_APPLICANT_CHAT);
-    
+            
             foreach($new_message as $cts){
                if(!empty($cts->action_slug)){
                    $cts->action = __($cts->action_slug);
@@ -132,6 +133,32 @@ if($first == "view_application"){
        $get_init_data->language = $get_init_data->language_certificate;
        $get_init_data->passport = $get_init_data->passport_file;
        $get_init_data->photo = $get_init_data->id_photo;
+       if(!empty($get_init_data->user_id) && HasEducationalInfo($get_init_data->user_id)){
+         $get_init_data2 = $db->where('user_id', $get_init_data->user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
+
+         $get_init_data->transcript_file = (GetMedia($get_init_data2->transcript_file))? GetMedia($get_init_data2->transcript_file) : '';
+
+       $get_init_data->diploma_file = (GetMedia($get_init_data2->diploma_file))? GetMedia($get_init_data2->diploma_file) : '';
+       $get_init_data->other_files = (GetMedia($get_init_data2->other_files))? GetMedia($get_init_data2->other_files) : '';
+       $get_init_data->language_certificate = (GetMedia($get_init_data2->language_certificate)) ? GetMedia($get_init_data2->language_certificate) : '';
+       $get_init_data->passport_file = (GetMedia($get_init_data2->passport_file))? GetMedia($get_init_data2->passport_file) : '';
+       $get_init_data->id_photo = (GetMedia($get_init_data2->id_photo))? GetMedia($get_init_data2->id_photo) :'';
+       $get_init_data->language_certificate_name = $get_init_data2->language_certificate_name;
+       $get_init_data->transcript_name = $get_init_data2->transcript_name;
+       $get_init_data->diploma_name = $get_init_data2->diploma_name;
+       
+ 
+
+
+       $get_init_data->transcript = $get_init_data2->transcript_file;     
+       $get_init_data->diploma = $get_init_data2->diploma_file;
+       $get_init_data->other = $get_init_data2->other_files;
+       $get_init_data->language = $get_init_data2->language_certificate;
+       $get_init_data->passport = $get_init_data2->passport_file;
+       $get_init_data->photo = $get_init_data2->id_photo;
+       $get_init_data->emai = $get_init_data2->email;
+       }
+      
        if($get_init_data){
            $get_university_data = $db->where('email', $get_init_data->email)->get(T_APPLICANT_UNIVERSITIES);
            $chats = $db->where('applicant_email', $get_init_data->email)->get(T_APPLICANT_CHAT);
@@ -210,6 +237,18 @@ if($first == "send_admin_message"){
    }
 
     if($isSentD){
+        $status = $message_data->message;
+        $notif_data = array(
+            'notifier_id' => 0,
+            'recipient_id' => $update_id->user_id,
+            'application_no' => $update_id->uniqid,
+            'type' => 'application_status',
+            'text' => GetNotificationText(null, null,$status, 'message'), 
+            'url' => ('/admin-cp/view-application?id='.$update_id->$uniqid),
+            'time' => time(),
+            'target' => 'all',
+        );
+        NotifyUser($notif_data);
         $new_message = $db->where('applicant_email', Secure($_POST['email']))->get(T_APPLICANT_CHAT);
         foreach($new_message as $cts){
             if(!empty($cts->action_slug)){
@@ -243,6 +282,19 @@ if($first === "university_status"){
    $update_status = $db->where('id', $id)->update(T_APPLICANT_UNIVERSITIES,$update_data);
 
    if($update_status){
+    $update_status_respo = $db->where('id', $id)->getOne(T_APPLICANT_UNIVERSITIES);
+    $status = __($update_status_respo->is_checked);
+    $notif_data = array(
+        'notifier_id' => 0,
+        'recipient_id' => GetApplicantUserId($id),
+        'application_no' => $update_status_respo->uniqid,
+        'type' => 'application_status',
+        'text' => GetNotificationText(GetuniversityByID($update_status_respo->university_id), GetProgramByID($update_status_respo->program_id),$status, 'status'), 
+        'url' => ('/admin-cp/view-application?id='.$update_status_respo->$uniqid),
+        'time' => time(),
+        'target' => 'all',
+    );
+    NotifyUser($notif_data);
     $data = array(
         'status' => 200,    
      );
@@ -303,6 +355,21 @@ if($first === "admin_approve_request"){
     $update_status = $db->where('id', $id)->update(T_APPLICANT_UNIVERSITIES,$update_data);
  
     if($update_status){
+        $update_status_respo = $db->where('id', $id)->getOne(T_APPLICANT_UNIVERSITIES);
+
+        $status = 'Edit request has been approved';
+
+        $notif_data = array(
+            'notifier_id' => 0,
+            'recipient_id' => GetApplicantUserId($id),
+            'application_no' => $update_status_respo->uniqid,
+            'type' => 'application_status',
+            'text' => GetNotificationText(GetuniversityByID($update_status_respo->university_id), GetProgramByID($update_status_respo->program_id),$status, 'edit_request'), 
+            'url' => ('/admin-cp/view-application?id='.$update_status_respo->$uniqid),
+            'time' => time(),
+            'target' => 'all',
+        );
+        NotifyUser($notif_data);
         $get_university_data = $db->where('email', $getEmail->email)->get(T_APPLICANT_UNIVERSITIES);
         
         foreach($get_university_data as $key => $rd){
@@ -356,6 +423,13 @@ if($first === "manage_applications"){
     }
   
     foreach($bew_arrat as $vb){
+        if(!empty($vb->user_id)){
+          $logged_user_data =  $db->where('user_id', $user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
+
+          if(!empty($logged_user_data)){
+              $vb = $logged_user_data;
+          }
+        }
         $vb->id_photo = GetMedia($vb->id_photo);
         $vb->name = $vb->first_name .' '. $vb->last_name; 
         $vb->university = ($vb->type === 'multiple')? 'MULTIPLE APPLICATION': GetuniversityByID($vb->university_id);

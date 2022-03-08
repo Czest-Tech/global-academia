@@ -199,8 +199,11 @@ if ($first == 'change-pass') {
             $errors[] = $error_icon . __('please_check_details');
         } else {
             if ( !IsAdmin() ) {
-                if ($user_data->password != sha1($_POST['current_password'])) {
+                if ( !password_verify($user_data->password,$_POST['current_password'])) {
+
+                  
                     $errors[] = $error_icon . __('current_password_dont_match');
+
                 }
             }
             if (strlen($_POST['new_password']) < 4) {

@@ -13,7 +13,7 @@ $randon_divider = '';
 $lastname     = '';
 $session_id   = '';
 $defaulGender = 'selectGender';
-if (empty($_POST['lastname']) || empty($_POST['firstname']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['c_password'])) {
+if (empty($_POST['last_name']) || empty($_POST['first_name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['c_password'])) {
     $data = array(
         'status' => '400',
         'errors' => array(
@@ -30,8 +30,8 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
     $password        = Secure($_POST['password']);
     $c_password      = Secure($_POST['c_password']);
-    $firstname       = Secure($_POST['firstname']);
-    $lastname       = Secure($_POST['lastname']);
+    $firstname       = Secure($_POST['first_name']);
+    $lastname       = Secure($_POST['last_name']);
     $account_type = Secure($_POST["account_type"]);
     $randon_divider = random_str(4);
     $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
@@ -42,13 +42,13 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     //     $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
 
     // }
-    if (strlen($_POST['firstname']) < 4 || strlen($_POST['firstname']) > 32) {
+    if (strlen($firstname) <= 4 || strlen($firstname) > 32) {
         $errors[] = __('firstname_characters_length');
     }
-    if (strlen($_POST['lastname']) < 4 || strlen($_POST['lastname']) > 32) {
+    if (strlen($lastname) <= 4 || strlen($lastname) > 32) {
         $errors[] = __('lastname_characters_length');
     }
-    if (!preg_match('/^[\w]+$/', $_POST['firstname'])) {
+    if (!preg_match('/^[\w]+$/', $firstname)) {
         $errors[] = __('username_invalid_characters');
     }
     if (UserEmailExists($_POST['email'])) {
@@ -71,15 +71,17 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             'username' => $username,
             'password' => $password_hashed,
             'email' => $email,
-            'firstname' => $firstname,
-            'lastname' => $lastname,
+            'first_name' => $firstname,
+            'last_name' => $lastname,
             'account_type' => $account_type,
+            'access_level' => 0,
             'ip_address' => get_ip_address(),
             'active' => $active,
             'email_code' => $email_code,
             'last_active' => time(),
             'registered' => date('Y') . '/' . intval(date('m'))
         );
+        
         $insert_data['language'] = $kd->config->language;
         if (!empty($_SESSION['lang'])) {
             if (in_array($_SESSION['lang'], $langs)) {
@@ -101,7 +103,12 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 'approved' => 0,
                 'created_at' => time()
             );
-            $submit_approval_Request = $db->insert(T_AGENT_REQUESTS, $insert_request_data);
+            if($account_type === "agent"){
+                $submit_approval_Request = $db->insert(T_AGENT_REQUESTS, $insert_request_data);
+
+            }
+            $init_db_user_dashboard = $db->insert(T_APPLICANT_EDUCATION_INFO, array('user_id' => $user_id));
+            var_dump($init_db_user_dashboard);
             $insert      = $db->insert(T_SESSIONS, $insert_data);
             $data        = array(
                 'status' => 200,

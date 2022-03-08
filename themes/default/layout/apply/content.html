@@ -166,9 +166,10 @@
             <!-- <input type="hidden" name="diploma_file" class="diploma"   id="diploma">
             <input type="hidden" name="transcript_file" class="transcript8" id="transcript8">
             <input type="hidden" name="passport_file" class="passport_file8"   id="passport_file8"> -->
-            <!-- <input type="hidden" name="id_photo"   class="photo8"     id="photo8"> -->
+            <input type="hidden" name="user_id"   value="{{ME id}}">
             <input type="hidden" name="university_id" value="<?php echo $kd->apply_university; ?>">
             <input type="hidden" name="program_id" value="<?php echo $kd->apply_program; ?>">
+
             <div class="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
               <button type="submit">{{LANG Confirm}}</button>
@@ -197,6 +198,12 @@
     
     
     let appModalOut = false
+    let isLogged = '<?php echo IsLogged(); ?>';
+    if(isLogged == '1'){
+        document.getElementById("appModal").style.display = "flex"
+            appModalOut = true
+            renderApply()
+    } 
     function appModal(){
         if(appModalOut){
             document.getElementById("appModal").style.display = "none"
@@ -266,22 +273,24 @@
     });
     
     function renderApply(){
-        document.getElementById("Applicant_fname").value = document.getElementById("first_name").value
-        document.getElementById("Applicant_mname").value = '';
-        document.getElementById("Applicant_lname").value = document.getElementById("last_name").value
-        document.getElementById("father_name").value     = document.getElementById("fathers_name").value
-        document.getElementById("mother_name").value     = document.getElementById("mothers_name").value
-        document.getElementById("d_o_b").value           = document.getElementById("date_of_birth").value
-        document.getElementById("phone8").value          = document.getElementById("phone_number").value
-        document.getElementById("phone28").value         = document.getElementById("phone_number_2").value 
-        document.getElementById("email8").value         = document.getElementById("email").value
-        document.getElementById("passport8").value       = document.getElementById("passport_number").value
-        document.getElementById("country8").value        = document.getElementById("nationality").value
-        document.getElementById("residence8").value      = document.getElementById("country_of_residence").value
-        // document.getElementById("diploma").value         = document.getElementById("diploma_file").files[0].path
-        // document.getElementById("transcript8").value     = document.getElementById("transcript_file").files[0].path
-        // document.getElementById("passport_file8").value  = document.getElementById("passport_file").files[0].path
-        // document.getElementById("photo8").value          = document.getElementById("id_photo").files[0].path
+        if(isLogged != '1'){
+            document.getElementById("Applicant_fname").value = document.getElementById("first_name").value
+            document.getElementById("Applicant_mname").value = '';
+            document.getElementById("Applicant_lname").value = document.getElementById("last_name").value
+            document.getElementById("father_name").value     = document.getElementById("fathers_name").value
+            document.getElementById("mother_name").value     = document.getElementById("mothers_name").value
+            document.getElementById("d_o_b").value           = document.getElementById("date_of_birth").value
+            document.getElementById("phone8").value          = document.getElementById("phone_number").value
+            document.getElementById("phone28").value         = document.getElementById("phone_number_2").value 
+            document.getElementById("email8").value         = document.getElementById("email").value
+            document.getElementById("passport8").value       = document.getElementById("passport_number").value
+            document.getElementById("country8").value        = document.getElementById("nationality").value
+            document.getElementById("residence8").value      = document.getElementById("country_of_residence").value
+            // document.getElementById("diploma").value         = document.getElementById("diploma_file").files[0].path
+            // document.getElementById("transcript8").value     = document.getElementById("transcript_file").files[0].path
+            // document.getElementById("passport_file8").value  = document.getElementById("passport_file").files[0].path
+            // document.getElementById("photo8").value          = document.getElementById("id_photo").files[0].path
+        }
     }
 
     function infoBtnNext(){
