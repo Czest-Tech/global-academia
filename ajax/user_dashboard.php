@@ -10,8 +10,9 @@
         $get_user_notificatins_count = $db->where('recipient_id', $kd->user->id)->where("seen", 0)->getValue(T_USER_NOTIFACATIONS, "count(*)");
 
         foreach($get_univiversities as $allProgram){
-            $allProgram->university_id = GetuniversityByID($application_data->university_id);
-            $allProgram->program_id = GetProgramByID($application_data->program_id);
+            $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+            $allProgram->program_id = GetProgramByID($allProgram->program_id);
+            $allProgram->application_status_slug =  __($allProgram->application_status);
         }
       
         if( $get_user_applications) {
