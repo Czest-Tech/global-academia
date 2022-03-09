@@ -304,14 +304,13 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                                             <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('agent-account-requests?page-id=1').$sort_link."&sort=DESC_i") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                         <?php } ?></th>
                                     <th>Username</th>
-                                    <th>PayPal E-mail</th>
-                                    <th>Amount
+                                    <th>E-mail</th>
+                                    <th>Date
                                         <?php if (!empty($_GET['sort']) && $_GET['sort'] == 'DESC_a') { ?>
                                             <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('agent-account-requests?page-id=1').$sort_link."&sort=ASC_a") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
                                         <?php }else{ ?>
                                             <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('agent-account-requests?page-id=1').$sort_link."&sort=DESC_a") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                         <?php } ?></th>
-                                    <th>Requested</th>
                                     <th>Status
                                         <?php if (!empty($_GET['sort']) && $_GET['sort'] == 'DESC_s') { ?>
                                             <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('agent-account-requests?page-id=1').$sort_link."&sort=ASC_s") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
@@ -324,14 +323,14 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                             <tbody>
                                 <?php 
                                     foreach ($register_requests as $key => $ag_requests) {
-                                       $ks->status = $wal_requests->status;
+                                       $kd->status = $ag_requests->status;
                                         $user_data = userData($ag_requests->user_id);
                                         echo LoadAdminPage('agent-account-requests/list',array(
                                             'ID' => $ag_requests->id,
                                             'USERNAME' => $user_data->name,
                                             'EMAIL' => $user_data->email,
                                             'DATE' => date("Y-F-d",$ag_requests->created_at),
-                                            'STATUS' => $wal_requests->status,
+                                            'STATUS' => $ag_requests->status,
                                         ));
                                     }
                                 ?>
@@ -394,7 +393,7 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                           <div class="col-lg-2 col-md-2">
                               <span>Action</span>
                               <select class="form-control show-tick" id="action_type">
-                                  <option value="paid">Paid</option>
+                                  <option value="paid">Approve</option>
                                   <option value="decline">Decline</option>
                                   <option value="delete">Delete</option>
                               </select>
