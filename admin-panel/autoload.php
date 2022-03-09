@@ -21,6 +21,7 @@ $pages = array(
     'edit-lang',
     'edit-application',
     'manage-reports',
+    'agent-account-requests',
     'manage-pages',
     'changelog',
     'ban-users',
@@ -409,6 +410,9 @@ if ($page == 'dashboard') {
                             </li>
                             <li>
                                 <a   href="<?php echo LoadAdminLinkSettings('manage-reports'); ?>">Manage Reports</a>
+                            </li>
+                            <li>
+                                <a   href="<?php echo LoadAdminLinkSettings('agent-account-requests'); ?>">Manage Join Agent Requests</a>
                             </li>
                             
                             

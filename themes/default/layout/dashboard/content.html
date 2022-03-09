@@ -59,7 +59,7 @@
 </main>
 
 <script>
-	$.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {type:"sidebar"}, (data => {
+	$.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {request_type:"sidebar"}, (data => {
 		console.log(data)
         if(data.status === 200){
         }

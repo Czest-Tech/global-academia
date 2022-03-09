@@ -25,8 +25,9 @@
 
     <form method="post" class="reply_pad" id="send-message">
       <input type="file" name="file" id="input-file" hidden>
-      <input type="hidden" name="name" id="input-names" />
-      <input type="hidden" name="email" id="input-email" />
+      <input type="hidden" name="name" id="input-names" value="{{ME first_name}} {{ME last_name}}" />
+      <input type="hidden" name="email" id="input-email" value="{{ME email}}" />
+      <input type="hidden" name="user_id" value="{{ME id}}" />
       <div class="get_image">
         <label for="input-file" class="message_upload pointer">
           <i class="fas fa-upload"></i>
@@ -54,7 +55,7 @@
 </div>
 
 <script>
-
+  let form2 = $('form.reply_pad');
   $.get('{{LINK aj}}' + "/user_dashboard/get_user_messages?hash=" + $('.main_session').val(), {}, (data => {
     if (data.status === 200) {
       render_messages(data.chats)
@@ -92,6 +93,31 @@
 
       const container = document.getElementById("message_pad")
       container.scrollTop = container.scrollHeight
+    });
+
+    $(function () { 
+
+        form2.ajaxForm({
+            url: '{{LINK aj/front_end_api/send_applicant_message}}?hash=' + $('.main_session').val(),
+            dataType: 'json',
+            beforeSend: function () {
+                form2.find('button').text("{{LANG ....}}");
+            },
+            success: function (data) {
+                if (data.status == 200) {
+                    renderMessages(data.chats)
+                    document.getElementById("send-message-btn").innerHTML = "Send"
+                    document.getElementById("input-message").value = ""
+                    document.getElementById("input-file").value = ""
+                    document.getElementById("file-container").innerHTML = ""
+                }
+                else {
+                    $('.results').html(data.message);
+                    document.getElementById("send-message-btn").innerHTML = "Failed"
+                    setTimeout(function () { document.getElementById("send-message-btn").innerHTML = "Send" }, 3000);
+                }
+            }
+        });
     });
   }
 
