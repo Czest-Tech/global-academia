@@ -28,6 +28,8 @@
 .pointer{cursor: pointer;}
 .dark_color{color:var(--DARK);}
 .dark_gray_color{color:var(--DARK_GRAY_TEXT);}
+
+
 .user_panel{ display: flex; min-height: 89vh; max-height: 90vh; }
 .user_panel > *{ min-height: 89vh; max-height: 90vh; }
 .dashoard_sidebar{ display: flex; flex-direction: column; background-color: var(--BLUE); width: 220px; }
