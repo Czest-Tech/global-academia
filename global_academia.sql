@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 08, 2022 at 07:58 PM
+-- Generation Time: Mar 09, 2022 at 01:13 AM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -44,15 +44,42 @@ CREATE TABLE `agent_requests` (
   `id` int(11) NOT NULL,
   `user_id` varchar(45) DEFAULT NULL,
   `approved` tinyint(4) DEFAULT '0',
-  `created_at` varchar(150) DEFAULT NULL
+  `created_at` varchar(150) DEFAULT NULL,
+  `seen` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `agent_requests`
 --
 
-INSERT INTO `agent_requests` (`id`, `user_id`, `approved`, `created_at`) VALUES
-(1, '10', 0, '1646294386');
+INSERT INTO `agent_requests` (`id`, `user_id`, `approved`, `created_at`, `seen`, `status`) VALUES
+(1, '10', 0, '1646294386', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `id` int(11) NOT NULL,
+  `text` text,
+  `time` int(32) NOT NULL DEFAULT '0',
+  `active` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcement_views`
+--
+
+CREATE TABLE `announcement_views` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `announcement_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -85,7 +112,8 @@ INSERT INTO `applicant_chat` (`id`, `admin_id`, `applicant_email`, `message`, `f
 (6, NULL, 'mehmederkekli@gmail.com', 'Send your passport photo', NULL, 'admin', 'dasas asasd', NULL, '2022-02-23 16:27:40'),
 (7, NULL, 'mehmederkekli@gmail.com', 'alright, i will send it', NULL, 'dasas asasd', 'admin', NULL, '2022-02-23 16:29:38'),
 (8, NULL, 'telo@masda.com', 'get', NULL, 'admin', '', NULL, '2022-03-08 19:46:42'),
-(9, NULL, 'telo@masda.com', 'ghey', NULL, 'admin', '', NULL, '2022-03-08 19:51:00');
+(9, NULL, 'telo@masda.com', 'ghey', NULL, 'admin', '', NULL, '2022-03-08 19:51:00'),
+(10, NULL, 'telo@masda.com', 'sdf', NULL, 'Teloas Mwanza', 'admin', NULL, '2022-03-09 00:04:36');
 
 -- --------------------------------------------------------
 
@@ -174,7 +202,7 @@ INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id
 (16, 5, 'asdasd@gmail.com', 7, 'awaiting_approval', 'queued', NULL, '0037', 'none', 2, '2022-03-03 07:14:41.000075', '4-0037'),
 (17, 5, '', 4, 'awaiting_approval', 'queued', NULL, '7556', 'none', 0, '2022-03-07 09:54:42.252023', NULL),
 (18, 5, 'telo@masda.com', 4, 'awaiting_approval', 'accepted', NULL, '6492', 'none', 0, '2022-03-07 12:35:28.424380', NULL),
-(19, 7, 'telo@masda.com', 9, 'awaiting_approval', 'rejected', NULL, '6544', 'none', 0, '2022-03-07 20:27:20.119003', NULL),
+(19, 7, 'telo@masda.com', 9, 'awaiting_approval', 'rejected', NULL, '6544', 'requested', 0, '2022-03-07 20:27:20.119003', NULL),
 (20, 7, 'telo@masda.com', 12, 'awaiting_approval', 'queued', NULL, '7396', 'none', 0, '2022-03-07 20:27:44.146395', NULL),
 (21, 7, 'telo@masda.com', 17, 'awaiting_approval', 'queued', NULL, '3814', 'none', 0, '2022-03-07 20:28:21.815297', NULL);
 
@@ -4019,7 +4047,9 @@ INSERT INTO `langs` (`id`, `lang_key`, `english`, `arabic`, `dutch`, `french`, `
 (673, 'phone_number_1', 'Phone Number 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (674, 'phone_number_2', 'Phone Number 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (675, 'id_photo', 'ID Photo', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(676, 'old_password', 'Old Password', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(676, 'old_password', 'Old Password', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(677, 'edit_request_will_be_sent.', 'Edit request will be sent.', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(678, 'wait_for_admin_approval_before_you_edit_your_application.', 'Wait for Admin approval before you edit your application.', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4179,102 +4209,102 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `notifier_id`, `recipient_id`, `application_id`, `replay_id`, `type`, `text`, `url`, `seen`, `time`, `sent_push`, `target`) VALUES
-(7, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=jskf', '1646769514', '1626508843', 0, 'all'),
-(8, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=auzg', '1646769514', '1626515338', 0, 'all'),
-(9, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=tipb', '1646769514', '1626515389', 0, 'all'),
-(10, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=ydww', '1646769514', '1626516750', 0, 'all'),
-(11, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=znjc', '1646769514', '1626517937', 0, 'all'),
-(12, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=mtqy', '1646769514', '1629116611', 0, 'all'),
-(13, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=srry', '1646769514', '1629116732', 0, 'all'),
-(14, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=zxul', '1646769514', '1629116739', 0, 'all'),
-(15, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=itky', '1646769514', '1629116973', 0, 'all'),
-(16, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=penm', '1646769514', '1629117100', 0, 'all'),
-(17, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=cfuf', '1646769514', '1629123269', 0, 'all'),
-(18, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=grnw', '1646769514', '1629123374', 0, 'all'),
-(19, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=iiut', '1646769514', '1629124696', 0, 'all'),
-(20, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=nabt', '1646769514', '1629140738', 0, 'all'),
-(21, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=pwup', '1646769514', '1629458032', 0, 'all'),
-(22, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=osum', '1646769514', '1629458079', 0, 'all'),
-(23, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=vtkt', '1646769514', '1629458083', 0, 'all'),
-(24, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=iyjw', '1646769514', '1629458415', 0, 'all'),
-(25, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=dghy', '1646769514', '1629458796', 0, 'all'),
-(26, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=oxih', '1646769514', '1629459107', 0, 'all'),
-(27, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=wkrt', '1646769514', '1629459441', 0, 'all'),
-(28, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=xbmx', '1646769514', '1629459642', 0, 'all'),
-(29, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=eykt', '1646769514', '1629540420', 0, 'all'),
-(30, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=cdqe', '1646769514', '1629540544', 0, 'all'),
-(31, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=agei', '1646769514', '1629541051', 0, 'all'),
-(32, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=iyre', '1646769514', '1629541087', 0, 'all'),
-(33, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=xdjw', '1646769514', '1629541349', 0, 'all'),
-(34, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=pqmn', '1646769514', '1629642772', 0, 'all'),
-(35, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=unyc', '1646769514', '1629644652', 0, 'all'),
-(36, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1629664288', 0, 'all'),
-(37, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=aovv', '1646769514', '1629698072', 0, 'all'),
-(38, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCHILD DEVELOPMENT</b>', '/admin-cp/view-application?id=ezvk', '1646769514', '1630487042', 0, 'all'),
-(39, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3pdw', '1646769514', '1630487187', 0, 'all'),
-(40, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=ueiq', '1646769514', '1630659080', 0, 'all'),
-(41, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1630660010', 0, 'all'),
-(42, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=w6xo', '1646769514', '1630660155', 0, 'all'),
-(43, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=lxyz', '1646769514', '1630660244', 0, 'all'),
-(44, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=cmtk', '1646769514', '1630660392', 0, 'all'),
-(45, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBUSINESS ADMINISTRATION</b>', '/admin-cp/view-application?id=jzib', '1646769514', '1632475234', 0, 'all'),
-(46, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING</b>', '/admin-cp/view-application?id=uzta', '1646769514', '1633073478', 0, 'all'),
-(47, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=qzgt', '1646769514', '1633073529', 0, 'all'),
-(48, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=qzzh', '1646769514', '1633087208', 0, 'all'),
-(49, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=srxi', '1646769514', '1633087395', 0, 'all'),
-(50, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=bhdd', '1646769514', '1633087396', 0, 'all'),
-(51, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=jero', '1646769514', '1633088612', 0, 'all'),
-(52, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=', '1646769514', '1633094197', 0, 'all'),
-(53, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1633258737', 0, 'all'),
-(54, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1633259708', 0, 'all'),
-(55, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=lwgr', '1646769514', '1633259864', 0, 'all'),
-(56, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=bjcf', '1646769514', '1633261897', 0, 'all'),
-(57, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=eexw', '1646769514', '1633262032', 0, 'all'),
-(58, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=wkkb', '1646769514', '1634133252', 0, 'all'),
-(59, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=4*yb', '1646769514', '1635686687', 0, 'all'),
-(60, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=ciyp', '1646769514', '1635686834', 0, 'all'),
-(61, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=n&7y', '1646769514', '1635687676', 0, 'all'),
-(62, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&', '1646769514', '1635694151', 0, 'all'),
-(63, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&amp;', '1646769514', '1635923971', 0, 'all'),
-(64, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&amp;', '1646769514', '1635924020', 0, 'all'),
-(65, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=1853', '1646769514', '1636286198', 0, 'all'),
-(66, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=cozq', '1646769514', '1636286482', 0, 'all'),
-(67, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=0469', '1646769514', '1636286883', 0, 'all'),
-(68, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1636447379', 0, 'all'),
-(69, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=5944', '1646769514', '1636621490', 0, 'all'),
-(70, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inELECTRICAL ELECTRONICS ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=mmez', '1646769514', '1636625143', 0, 'all'),
-(71, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1636913980', 0, 'all'),
-(72, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=fcef', '1646769514', '1637020482', 0, 'all'),
-(73, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=qixt', '1646769514', '1637020772', 0, 'all'),
-(74, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inHUMAN RESOURCES MANAGEMENT</b>', '/admin-cp/view-application?id=xpxj', '1646769514', '1637051885', 0, 'all'),
-(75, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=kfzm', '1646769514', '1637060302', 0, 'all'),
-(76, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=hdzx', '1646769514', '1637061795', 0, 'all'),
-(77, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=kwha', '1646769514', '1637062490', 0, 'all'),
-(78, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3940', '1646769514', '1637222070', 0, 'all'),
-(79, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=9468', '1646769514', '1637227228', 0, 'all'),
-(80, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=2366', '1646769514', '1637227601', 0, 'all'),
-(81, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=ydrv', '1646769514', '1637228030', 0, 'all'),
-(82, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1637302125', 0, 'all'),
-(83, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1637302273', 0, 'all'),
-(84, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1637307096', 0, 'all'),
-(85, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=elum', '1646769514', '1637576126', 0, 'all'),
-(86, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3063', '1646769514', '1637578434', 0, 'all'),
-(87, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=nwpq', '1646769514', '1637656958', 0, 'all'),
-(88, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=sgeh', '1646769514', '1637658310', 0, 'all'),
-(89, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=uuqo', '1646769514', '1637658400', 0, 'all'),
-(90, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=hpfd', '1646769514', '1637658456', 0, 'all'),
-(91, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1637658525', 0, 'all'),
-(92, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=0092', '1646769514', '1637679426', 0, 'all'),
-(93, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=4407', '1646769514', '1637679563', 0, 'all'),
-(94, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=0511', '1646769514', '1637680372', 0, 'all'),
-(95, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=0060', '1646769514', '1637682664', 0, 'all'),
-(96, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646769514', '1637682749', 0, 'all'),
-(97, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBUSINESS ADMINISTRATION</b>', '/admin-cp/view-application?id=0037', '1646769514', '1646291683', 0, 'all'),
-(98, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=7556', '1646769514', '1646646882', 0, 'all'),
-(99, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=6492', '1646769514', '1646656531', 0, 'all'),
-(100, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=6544', '1646769514', '1646684851', 0, 'all'),
-(101, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=7396', '1646769514', '1646684870', 0, 'all'),
-(102, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inERGOTHERAPY</b>', '/admin-cp/view-application?id=3814', '1646769514', '1646684906', 0, 'all');
+(7, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=jskf', '1646786228', '1626508843', 0, 'all'),
+(8, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=auzg', '1646786228', '1626515338', 0, 'all'),
+(9, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=tipb', '1646786228', '1626515389', 0, 'all'),
+(10, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=ydww', '1646786228', '1626516750', 0, 'all'),
+(11, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> in <b>Architecture</b>', '/admin-cp/view-application?id=znjc', '1646786228', '1626517937', 0, 'all'),
+(12, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=mtqy', '1646786228', '1629116611', 0, 'all'),
+(13, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=srry', '1646786228', '1629116732', 0, 'all'),
+(14, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=zxul', '1646786228', '1629116739', 0, 'all'),
+(15, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=itky', '1646786228', '1629116973', 0, 'all'),
+(16, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=penm', '1646786228', '1629117100', 0, 'all'),
+(17, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=cfuf', '1646786228', '1629123269', 0, 'all'),
+(18, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=grnw', '1646786228', '1629123374', 0, 'all'),
+(19, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=iiut', '1646786228', '1629124696', 0, 'all'),
+(20, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=nabt', '1646786228', '1629140738', 0, 'all'),
+(21, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=pwup', '1646786228', '1629458032', 0, 'all'),
+(22, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=osum', '1646786228', '1629458079', 0, 'all'),
+(23, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=vtkt', '1646786228', '1629458083', 0, 'all'),
+(24, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=iyjw', '1646786228', '1629458415', 0, 'all'),
+(25, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=dghy', '1646786228', '1629458796', 0, 'all'),
+(26, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=oxih', '1646786228', '1629459107', 0, 'all'),
+(27, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=wkrt', '1646786228', '1629459441', 0, 'all'),
+(28, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=xbmx', '1646786228', '1629459642', 0, 'all'),
+(29, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=eykt', '1646786228', '1629540420', 0, 'all'),
+(30, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=cdqe', '1646786228', '1629540544', 0, 'all'),
+(31, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=agei', '1646786228', '1629541051', 0, 'all'),
+(32, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=iyre', '1646786228', '1629541087', 0, 'all'),
+(33, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=xdjw', '1646786228', '1629541349', 0, 'all'),
+(34, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=pqmn', '1646786228', '1629642772', 0, 'all'),
+(35, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=unyc', '1646786228', '1629644652', 0, 'all'),
+(36, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1629664288', 0, 'all'),
+(37, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=aovv', '1646786228', '1629698072', 0, 'all'),
+(38, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCHILD DEVELOPMENT</b>', '/admin-cp/view-application?id=ezvk', '1646786228', '1630487042', 0, 'all'),
+(39, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3pdw', '1646786228', '1630487187', 0, 'all'),
+(40, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=ueiq', '1646786228', '1630659080', 0, 'all'),
+(41, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1630660010', 0, 'all'),
+(42, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=w6xo', '1646786228', '1630660155', 0, 'all'),
+(43, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=lxyz', '1646786228', '1630660244', 0, 'all'),
+(44, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=cmtk', '1646786228', '1630660392', 0, 'all'),
+(45, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBUSINESS ADMINISTRATION</b>', '/admin-cp/view-application?id=jzib', '1646786228', '1632475234', 0, 'all'),
+(46, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING</b>', '/admin-cp/view-application?id=uzta', '1646786228', '1633073478', 0, 'all'),
+(47, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=qzgt', '1646786228', '1633073529', 0, 'all'),
+(48, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=qzzh', '1646786228', '1633087208', 0, 'all'),
+(49, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=srxi', '1646786228', '1633087395', 0, 'all'),
+(50, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=bhdd', '1646786228', '1633087396', 0, 'all'),
+(51, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=jero', '1646786228', '1633088612', 0, 'all'),
+(52, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBIOMEDICAL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=', '1646786228', '1633094197', 0, 'all'),
+(53, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1633258737', 0, 'all'),
+(54, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1633259708', 0, 'all'),
+(55, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=lwgr', '1646786228', '1633259864', 0, 'all'),
+(56, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=bjcf', '1646786228', '1633261897', 0, 'all'),
+(57, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=eexw', '1646786228', '1633262032', 0, 'all'),
+(58, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=wkkb', '1646786228', '1634133252', 0, 'all'),
+(59, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=4*yb', '1646786228', '1635686687', 0, 'all'),
+(60, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=ciyp', '1646786228', '1635686834', 0, 'all'),
+(61, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=n&7y', '1646786228', '1635687676', 0, 'all'),
+(62, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&', '1646786228', '1635694151', 0, 'all'),
+(63, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&amp;', '1646786228', '1635923971', 0, 'all'),
+(64, 0, 2, 0, 0, 'job_applied', 'Applied at <b>Acibadem University</b>inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=u7*&amp;', '1646786228', '1635924020', 0, 'all'),
+(65, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=1853', '1646786228', '1636286198', 0, 'all'),
+(66, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=cozq', '1646786228', '1636286482', 0, 'all'),
+(67, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=0469', '1646786228', '1636286883', 0, 'all'),
+(68, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1636447379', 0, 'all'),
+(69, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=5944', '1646786228', '1636621490', 0, 'all'),
+(70, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inELECTRICAL ELECTRONICS ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=mmez', '1646786228', '1636625143', 0, 'all'),
+(71, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1636913980', 0, 'all'),
+(72, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=fcef', '1646786228', '1637020482', 0, 'all'),
+(73, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=qixt', '1646786228', '1637020772', 0, 'all'),
+(74, 0, 2, 0, 0, 'job_applied', ' Applied at <b>university not found</b> inHUMAN RESOURCES MANAGEMENT</b>', '/admin-cp/view-application?id=xpxj', '1646786228', '1637051885', 0, 'all'),
+(75, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=kfzm', '1646786228', '1637060302', 0, 'all'),
+(76, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=hdzx', '1646786228', '1637061795', 0, 'all'),
+(77, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=kwha', '1646786228', '1637062490', 0, 'all'),
+(78, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3940', '1646786228', '1637222070', 0, 'all'),
+(79, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=9468', '1646786228', '1637227228', 0, 'all'),
+(80, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=2366', '1646786228', '1637227601', 0, 'all'),
+(81, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=ydrv', '1646786228', '1637228030', 0, 'all'),
+(82, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1637302125', 0, 'all'),
+(83, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1637302273', 0, 'all'),
+(84, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1637307096', 0, 'all'),
+(85, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=elum', '1646786228', '1637576126', 0, 'all'),
+(86, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=3063', '1646786228', '1637578434', 0, 'all'),
+(87, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=nwpq', '1646786228', '1637656958', 0, 'all'),
+(88, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=sgeh', '1646786228', '1637658310', 0, 'all'),
+(89, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=uuqo', '1646786228', '1637658400', 0, 'all'),
+(90, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=hpfd', '1646786228', '1637658456', 0, 'all'),
+(91, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1637658525', 0, 'all'),
+(92, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=0092', '1646786228', '1637679426', 0, 'all'),
+(93, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inArchitecture</b>', '/admin-cp/view-application?id=4407', '1646786228', '1637679563', 0, 'all'),
+(94, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=0511', '1646786228', '1637680372', 0, 'all'),
+(95, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAVIATION MANAGEMENT</b>', '/admin-cp/view-application?id=0060', '1646786228', '1637682664', 0, 'all'),
+(96, 0, 2, 0, 0, 'job_applied', 'Missing Documents updated</b>', '/admin-cp/manage-applications', '1646786228', '1637682749', 0, 'all'),
+(97, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inBUSINESS ADMINISTRATION</b>', '/admin-cp/view-application?id=0037', '1646786228', '1646291683', 0, 'all'),
+(98, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=7556', '1646786228', '1646646882', 0, 'all'),
+(99, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=6492', '1646786228', '1646656531', 0, 'all'),
+(100, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=6544', '1646786228', '1646684851', 0, 'all'),
+(101, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inDENTISTRY (ENGLISH)</b>', '/admin-cp/view-application?id=7396', '1646786228', '1646684870', 0, 'all'),
+(102, 0, 2, 0, 0, 'job_applied', ' Applied at <b>Altinbas University</b> inERGOTHERAPY</b>', '/admin-cp/view-application?id=3814', '1646786228', '1646684906', 0, 'all');
 
 -- --------------------------------------------------------
 
@@ -4541,8 +4571,8 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (189, 'e37d8bc267a2dbb87dc8520cb451c46056a97a8616462949694fa7f9d3d9713808fe22a46ca7f1f0a0', 9, 'web', 1646294969),
 (192, '0f3a1ceaed86ba38f048bf241a6feca3723e3c141646376927c8820b0d4ed7d186d86870a6dae9a6c3', 9, 'web', 1646376927),
 (193, 'c7988c97ec1f9b259e63315ed4ca19ba91ae65611646578312a8cd06db1eca1bf46b0a3eb4439e77b9', 11, 'web', 1646578312),
-(195, '0a3bf9fe100eb627e96483e1a968fa204209294c1646600133b9f1ccc6a51de5f2ffc7dc5c91b8740b', 11, 'web', 1646600133),
-(196, '70e0c25f45cc18009dbb5c3db0d40e2c38087c7816466887401b409b7f7568b0e2d945a19d1cd04b51', 2, 'web', 1646688740);
+(196, '70e0c25f45cc18009dbb5c3db0d40e2c38087c7816466887401b409b7f7568b0e2d945a19d1cd04b51', 2, 'web', 1646688740),
+(199, '253f4b1c9bc22a054e42f5324d6e74aeab30573d1646783392358bedbe8224266573d9d6f59399e799', 11, 'web', 1646783392);
 
 -- --------------------------------------------------------
 
@@ -4768,14 +4798,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first_name`, `last_name`, `gender`, `email_code`, `language`, `avatar`, `cover`, `country_id`, `about`, `location`, `website`, `google`, `facebook`, `twitter`, `instagram`, `active`, `admin`, `access_level`, `verified`, `last_active`, `last_follow_id`, `registered`, `startup`, `birth_date`, `notification_on_application`, `notification_on_visit_profile`, `turn_on_email_notifications`, `share_my_profile`, `wallet`, `src`, `last_location_update`, `lat`, `lng`, `two_factor`, `new_email`, `two_factor_verified`, `new_phone`, `phone_number`, `user_upload_limit`, `account_type`) VALUES
-(2, 'root', 'cbmkboniface@gmail.com', '::1', '$2y$10$Cts1nSrcfuQ6pz/KbCGIu.EXYDRLTkNz0AtYDINfVXyXwgnElR3T.', 'BONIFACE', 'MWANZA', 'female', '6a94a0cfcbc31971e95206224ef13d04f9068fe7', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/2020/10/MbujiUzuXVstjtVzNvXi_02_13fa8e67f213a2dc6422251197109062_image.jpg', 0, '', '', '', '', '', '', '', 1, 1, 1, 0, 1625487735, 0, '2020/8', 2, '', 1, 1, 1, 1, '113', 'site', '1626092538', '39.77667', '30.52056', 0, NULL, 0, NULL, NULL, '0', 'applicant'),
+(2, 'root', 'cbmkboniface@gmail.com', '::1', '$2y$10$Cts1nSrcfuQ6pz/KbCGIu.EXYDRLTkNz0AtYDINfVXyXwgnElR3T.', 'BONIFACE', 'MWANZA', 'female', '6a94a0cfcbc31971e95206224ef13d04f9068fe7', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/2020/10/MbujiUzuXVstjtVzNvXi_02_13fa8e67f213a2dc6422251197109062_image.jpg', 0, '', '', '', '', '', '', '', 1, 1, 1, 0, 1625487735, 0, '2020/8', 2, '', 1, 1, 1, 1, '113', 'site', '1626092538', '39.77667', '30.52056', 0, NULL, 0, NULL, NULL, '0', 'admin'),
 (4, 'paul_jere939', 'pauljere@gmail.com', '::1', '$2y$10$ub8ZuKsxmESpe1tkS92yV.vZ6ImKLuI7TYUjOfJM3O38mfaT1pMOC', 'Paul', 'Jere', 'male', '6a03329353fb590efbca7b760d0f44cbf00fb3cc', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636174007, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
 (5, 'musa_mwanza426', 'asdaf@yahoo.com', '::1', '$2y$10$BI0sFJDqothtRSWBjmy/SuqLoSbKP/Aqd/rWDWODrn2vko9WMDrwe', 'Musa', 'Mwanza', 'male', '6d616ca916b6d759ae1c7697862a9262eb22b34b', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1636174137, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
 (6, 'mehmet_durmaz752', 'mehmed@gmail.com', '::1', '$2y$10$5TD.cjAZyDM9CHPAxemXPO5WmaeZtXasSbhaF.oH0ym/NPlshbM46', 'Mehmet', 'Durmaz', 'male', '39c7d17ba3bbe8f549340a432c20ee4cb69bbb3d', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1636284445, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
 (7, 'debagge_test966', 'debtest@gmail.com', '::1', '$2y$10$0eKjaNmt2qIZPMxrdWagX.efg4N7adCyZAuXmzcmemM4YVmH/EMMi', 'Debagge', 'TEst', 'male', '2645361158a9f04673456bdc2f7c055079be04df', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636446549, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
 (8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$m3omZlxKp6dHCkVsT9ku.eOgUnkf7w.EpHFknzL.gl5MWbXtmljZK', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
 (9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant'),
-(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', '', '', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent'),
+(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent'),
 (11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant');
 
 -- --------------------------------------------------------
@@ -4823,6 +4853,21 @@ ALTER TABLE `admin_invitations`
 --
 ALTER TABLE `agent_requests`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `active` (`active`);
+
+--
+-- Indexes for table `announcement_views`
+--
+ALTER TABLE `announcement_views`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `announcement_id` (`announcement_id`);
 
 --
 -- Indexes for table `applicant_chat`
@@ -5045,10 +5090,22 @@ ALTER TABLE `agent_requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `announcement`
+--
+ALTER TABLE `announcement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `announcement_views`
+--
+ALTER TABLE `announcement_views`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `applicant_chat`
 --
 ALTER TABLE `applicant_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `applicant_education_info`
@@ -5114,7 +5171,7 @@ ALTER TABLE `hashtags`
 -- AUTO_INCREMENT for table `langs`
 --
 ALTER TABLE `langs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=677;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=679;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -5156,7 +5213,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
 
 --
 -- AUTO_INCREMENT for table `terms`

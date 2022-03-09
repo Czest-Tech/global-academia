@@ -224,3 +224,14 @@ if($first === "get_user_messages"){
         
      );
 }
+// if($first === "get_user_settings"){
+//     $settings = new stdClass();
+//     $user_settings = UserData($kd->user->id);
+//     $settings->  
+    
+//     $data = array(
+//         'status' => 200,
+//         'data' => 
+//     );
+     
+// }

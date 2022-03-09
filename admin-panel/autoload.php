@@ -16,6 +16,7 @@ $pages = array(
     'settings',
     'manage-languages',
     'add-language',
+    'manage-announcements',
     'add-university',
     'add-program',
     'edit-lang',
@@ -414,6 +415,10 @@ if ($page == 'dashboard') {
                             <li>
                                 <a   href="<?php echo LoadAdminLinkSettings('agent-account-requests'); ?>">Manage Join Agent Requests</a>
                             </li>
+                            <li>
+                                <a   href="<?php echo LoadAdminLinkSettings('manage-announcements'); ?>">Manage Join Agent Requests</a>
+                            </li>
+                            
                             
                             
                         </ul>
