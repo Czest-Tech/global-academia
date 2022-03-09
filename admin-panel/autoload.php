@@ -416,7 +416,7 @@ if ($page == 'dashboard') {
                                 <a   href="<?php echo LoadAdminLinkSettings('agent-account-requests'); ?>">Manage Join Agent Requests</a>
                             </li>
                             <li>
-                                <a   href="<?php echo LoadAdminLinkSettings('manage-announcements'); ?>">Manage Join Agent Requests</a>
+                                <a   href="<?php echo LoadAdminLinkSettings('manage-announcements'); ?>">User Announcements</a>
                             </li>
                             
                             
