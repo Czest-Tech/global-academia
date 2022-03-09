@@ -319,18 +319,27 @@ if($first === "send_edit_request"){
  
     if($update_status){
         $isSent = $db->where('email',$getEmail->email)->get(T_APPLICANT_UNIVERSITIES);
- 
-            foreach($isSent as $key => $rd){
-              
-                $rd->university_name =  GetuniversityByID($rd->university_id);
-                $rd->program_name = GetProgramByID($rd->program_id);
-               
-                 $rd->application_status = __($rd->application_status);
-                 $rd->edit_request_translation = __($rd->edit_request);
-                 $rd->checked_translatino = __($rd->is_checked);
-                $rd->acceptance_letter_url = GetMedia($rd->acceptance_letter);
+          if(isset($_GET['user_id'])){
+                foreach($isSent as $allProgram){
+                    $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                    $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                    $allProgram->application_status_slug =  __($allProgram->application_status);
+                }
+            } else {
+                foreach($isSent as $key => $rd){
                 
+                    $rd->university_name =  GetuniversityByID($rd->university_id);
+                    $rd->program_name = GetProgramByID($rd->program_id);
+                
+                    $rd->application_status = __($rd->application_status);
+                    $rd->edit_request_translation = __($rd->edit_request);
+                    $rd->checked_translatino = __($rd->is_checked);
+                    $rd->acceptance_letter_url = GetMedia($rd->acceptance_letter);
+                    
+                }
             }
+
+            
         $data = array(
             'status' => 200,  
             'data' =>   $isSent
