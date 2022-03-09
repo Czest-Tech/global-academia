@@ -87,13 +87,8 @@
   }
   let logged_user_id = "{{ME id}}";
   function send_edit_request(id) {
-<<<<<<< HEAD
-       $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
-          console.log("SEND REQ RESPONSE", data)
-=======
        $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, user_id: logged_user_id}, function (data) {
           console.log(data.data)
->>>>>>> d76c1d928838864bed2f31d88be5b59be0e5ab2f
           closeModal()
        });
    }

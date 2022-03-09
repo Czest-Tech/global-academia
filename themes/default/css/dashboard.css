@@ -332,6 +332,7 @@
     border-radius: 5px;
     background-color: white;
     margin-top: 15px;
+    cursor: pointer;
 }
 .notification_text{
     margin: 5px 0;

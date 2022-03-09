@@ -135,7 +135,6 @@
 
     $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
-          console.log(data.data.account_type)
           render_profile_card(data)
         }
     }));

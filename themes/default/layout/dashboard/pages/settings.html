@@ -50,11 +50,15 @@ posts.forEach(element => {
                 <p class="settings_text_title font2 bold600">${element.name}</p>
                 <p class="settings_text_body font2">${element.body}</p>
             </div>
-            <div class="toggle_gear ${classer}">
+            <div class="toggle_gear ${classer}" onclick="toggle_gear(${element.name})">
                 <div class="toggle_knob"></div>
             </div>
         </div>
     
     `
-});
+  });
+  function toggle_gear(target){
+    console.log(target)
+  }
+
 </script>
