@@ -62,10 +62,10 @@
 	$.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {request_type:"sidebar"}, (data => {
 		if(data.status === 200){
 			if(data.user_data.account_type === "applicant" ) {
-				document.getElementById("nav_top_agent").style.display = "none"
+				document.getElementById("nav_top_student").style.display = "flex"
 				document.getElementById("user_name").innerHTML = `${data.user_data.first_name} ${data.user_data.last_name} `
 			}
-			else document.getElementById("nav_top_student").style.display = "none"
+			else document.getElementById("nav_top_agent").style.display = "flex"
         }
     }));
 
