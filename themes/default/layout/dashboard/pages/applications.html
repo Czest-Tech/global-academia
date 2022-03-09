@@ -86,8 +86,9 @@
   function closeModal(){
     document.getElementById("modal_container").style.display = "none"
   }
+  let logged_user_id = "{{ME id}}";
   function send_edit_request(id) {
-       $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
+       $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id, user_id: logged_user_id}, function (data) {
           console.log(data.data)
           closeModal()
        });
