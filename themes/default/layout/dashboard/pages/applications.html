@@ -27,7 +27,6 @@
   $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
           render_application(data.applied_to_universities)
-          console.log(data.applied_to_universities)
         }
   }));
   function render_application(data){
@@ -88,7 +87,7 @@
   }
   function send_edit_request(id) {
        $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
-          console.log(data.data)
+          console.log("SEND REQ RESPONSE", data)
           closeModal()
        });
    }

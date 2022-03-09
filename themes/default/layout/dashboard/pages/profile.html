@@ -2,13 +2,13 @@
     <div class="profile_card">
         <div class="profile_card_top">
             <label for="profile_pic" class="profile_pic_label">
-                <img src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
+                <img id="log_user_pp" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
                 <i class="fas fa-camera"></i>
             </label>
             <input type="file" name="profile_pic" id="profile_pic" hidden>
             <div class="dark_color">
-                <p class="font3 bold500">Paul Jere</p>
-                <p class="font2 bold400">Students Account</p>
+                <p class="font3 bold500" id="log_user_name">users name</p>
+                <p class="font2 bold400" id="log_user_ac_type">account type</p>
             </div>
         </div>
         <div class="profile_nav">
@@ -135,9 +135,15 @@
 
     $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
-          console.log(data)
+          console.log(data.data.account_type)
+          render_profile_card(data)
         }
     }));
+    function render_profile_card(data){
+        document.getElementById("log_user_ac_type").innerHTML = data.data.account_type === 'applicant' ? "Applicant Account" :  "Agent Account"
+        document.getElementById("log_user_name").innerHTML = `${data.data.first_name} ${data.data.last_name}`
+        document.getElementById("log_user_pp").src = data.data.avatar;
+    }
 
 
     profile_tab('information')

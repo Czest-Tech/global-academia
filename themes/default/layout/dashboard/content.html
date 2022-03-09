@@ -6,7 +6,7 @@
 		</div>
 		<div class="dashboard_top font7" id="nav_top_student">
 			<i class="fas fa-user-graduate "></i>
-			<p class="font2">Student</p>
+			<p class="font2" id="user_name">Student</p>
 		</div>
 		<div class="sidebar_navlinks">
 			<a href="{{LINK dashboard/dashboard/}}{{USER username}}" data-load="?link1=dashboard&page=dashboard&user={{USER username}}">
@@ -60,12 +60,16 @@
 
 <script>
 	$.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {request_type:"sidebar"}, (data => {
-		console.log(data)
-        if(data.status === 200){
+		if(data.status === 200){
+			if(data.user_data.account_type === "applicant" ) {
+				document.getElementById("nav_top_agent").style.display = "none"
+				document.getElementById("user_name").innerHTML = `${data.user_data.first_name} ${data.user_data.last_name} `
+			}
+			else document.getElementById("nav_top_student").style.display = "none"
         }
     }));
 
-	const user = Math.ceil(Math.random() * 2000)
-	if(user%2 === 0) document.getElementById("nav_top_agent").style.display = "none"
-	else document.getElementById("nav_top_student").style.display = "none"
+	// const user = Math.ceil(Math.random() * 2000)
+	// if(user%2 === 0) document.getElementById("nav_top_agent").style.display = "none"
+	// else document.getElementById("nav_top_student").style.display = "none"
 </script>
