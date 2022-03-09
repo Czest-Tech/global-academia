@@ -393,7 +393,7 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                           <div class="col-lg-2 col-md-2">
                               <span>Action</span>
                               <select class="form-control show-tick" id="action_type">
-                                  <option value="paid">Approve</option>
+                                  <option value="approve">Approve</option>
                                   <option value="decline">Decline</option>
                                   <option value="delete">Delete</option>
                               </select>
@@ -588,7 +588,7 @@ jQuery(document).ready(function($) {
       $('#SelectedDeleteModal').find('#exampleModal1Label').html(action_type+' request(s)');
       $('#SelectedDeleteModal').modal('show');
   });
-  function DeleteSelected() {
+    function DeleteSelected() {
       action_type = $('#action_type').val();
       data = new Array();
       $('td input:checked').parents('tr').each(function () {
@@ -596,7 +596,7 @@ jQuery(document).ready(function($) {
       });
       $('.delete-selected').attr('disabled', true);
       $('.delete-selected').text('Please wait..');
-      $.post("{{CONFIG ajax_url}}/ap/remove_multi_payment", {ids: data,type: action_type}, function () {
+      $.post("{{LINK aj/front_end_api/remove_agent_request}}?hash=<?php echo CreateMainSession(); ?>", {ids: data,type: action_type}, function () {
         if (action_type != 'delete') {
             location.reload();
         }
@@ -606,22 +606,27 @@ jQuery(document).ready(function($) {
           });
           $('.delete-selected').text('Delete Selected');
       });
-  }
+    }
     function ManageWRequests(id,action,type = 'show') {
+        let action_type;
+
         if (!id || (action != 1 && action != 2 && action != 3)) {
             return false;
         }
 
         else if (action == 1) {
+            action_type = "approve";
             if (type == 'hide') {
                 $('#DeleteModal2').find('.btn-primary').attr('onclick', "ManageWRequests('"+id+"','"+action+"')");
                 $('#DeleteModal2').modal('show');
                 return false;
             }
-            $("#list-"+id).find('td.request-status').html('<span class="alert-success">Paid</span>');
+            $("#list-"+id).find('td.request-status').html('<span class="alert-success">Approved</span>');
         } 
 
         else if (action == 2) {
+            action_type = "decline";
+
             if (type == 'hide') {
                 $('#DeleteModal').find('.btn-primary').attr('onclick', "ManageWRequests('"+id+"','"+action+"')");
                 $('#DeleteModal').modal('show');
@@ -631,6 +636,8 @@ jQuery(document).ready(function($) {
         }
 
         else if (action == 3) {
+            action_type = "delete";
+
             if (type == 'hide') {
                 $('#DeleteModal3').find('.btn-primary').attr('onclick', "ManageWRequests('"+id+"','"+action+"')");
                 $('#DeleteModal3').modal('show');
@@ -645,6 +652,6 @@ jQuery(document).ready(function($) {
             return false;
         }
 
-        $.post('{{CONFIG ajax_url}}/ap/withdrawal-requests', {a:action,id:id}, function(){ /* pass */ });
+        $.post('{{LINK aj/front_end_api/remove_single_agent_request}}?hash=<?php echo CreateMainSession(); ?>', {a:action,id:id}, function(){ /* pass */ });
     }
 </script>

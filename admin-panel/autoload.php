@@ -76,7 +76,7 @@ if ($page == 'dashboard') {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Daterangepicker -->
-    <link rel="stylesheet" href="<?php echo LoadAdminLink('/vendors/datepicker/daterangepicker.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo(LoadAdminLink('vendors/datepicker/daterangepicker.css')) ?>" type="text/css">
  
     <!-- DataTable -->
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/vendors/dataTable/datatables.min.css'); ?>" type="text/css">
@@ -87,7 +87,22 @@ if ($page == 'dashboard') {
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/assets/css/app.min.css'); ?>" type="text/css">
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/assets/css/custom.css'); ?>" type="text/css">
 
-  
+    <script src="<?php echo(LoadAdminLink('vendors/bundle.js')) ?>"></script>
+
+    <!-- Apex chart -->
+    <script src="<?php echo(LoadAdminLink('vendors/charts/apex/apexcharts.min.js')) ?>"></script>
+
+    <!-- Daterangepicker -->
+    <script src="<?php echo(LoadAdminLink('vendors/datepicker/daterangepicker.js')) ?>"></script>
+
+    <!-- DataTable -->
+    <script src="<?php echo(LoadAdminLink('vendors/dataTable/datatables.min.js')) ?>"></script>
+
+    <!-- Dashboard scripts -->
+    <script src="<?php echo(LoadAdminLink('assets/js/examples/pages/dashboard.js')) ?>"></script>
+    <script src="<?php echo LoadAdminLink('vendors/charts/chartjs/chart.min.js'); ?>"></script>
+    
+
 </head>
 <body class=" small-navigation">
 <!-- Preloader -->
@@ -473,7 +488,7 @@ if ($page == 'dashboard') {
 
             <!-- Footer -->
             <footer class="content-footer">
-                <div>© 2020 Bigg Ajans - <a href="http://biggajans.com" target="_blank">Big Ajans</a></div>
+                <div>© 2022 Czest Tech - <a href="http://czesttech.com" target="_blank">Czest Tech</a></div>
                 <div>
                     <nav class="nav">
                       
@@ -488,33 +503,13 @@ if ($page == 'dashboard') {
 </div>
 <!-- ./ Layout wrapper -->
  
-<!-- Main scripts -->
-    <script src="<?php echo $kd->config->theme_url; ?>/js/jquery-2.1.1.min.js"></script>
 
-    <script src="<?php echo LoadAdminLink('/vendors/bundle.js'); ?>"></script>
-    <script src="<?php echo LoadAdminLink('/vendors/jquery/jquery-ui.min.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo $kd->config->theme_url; ?>/js/jquery.form.min.js"></script>x
-    <script><?php echo LoadAdminPage('js/main'); ?></script>
-    <!-- Apex chart -->
-    <script src="<?php echo LoadAdminLink('/vendors/charts/apex/apexcharts.min.js'); ?>"></script>
-    <!-- Daterangepicker -->
-    <script src="<?php echo LoadAdminLink('/vendors/datepicker/daterangepicker.js'); ?>"></script>
-    <!-- DataTable -->
-    <script src="<?php echo LoadAdminLink('/vendors/dataTable/datatables.min.js'); ?>"></script>
-
-    <!-- Dashboard scripts -->
-    <script src="<?php echo LoadAdminLink('/assets/js/examples/pages/dashboard.js'); ?>"></script>
   
 
-<!-- App scripts -->
-<script src="<?php echo LoadAdminLink('/assets/js/app.min.js'); ?> "></script>
-
-
-   <script src="<?php echo LoadAdminLink('/assets/js/examples/sweet-alert.js'); ?>"></script>
-
-
-<!--- USer list -->
-    <script src="<?php echo LoadAdminLink('/assets/js/examples/pages/user-list.js'); ?>"></script>
+<script src="<?php echo LoadAdminLink('vendors/sweetalert/sweetalert.min.js'); ?>"></script>
+<script src="<?php echo(LoadAdminLink('vendors/select2/js/select2.min.js')) ?>"></script>
+    <script src="<?php echo(LoadAdminLink('assets/js/examples/select2.js')) ?>"></script>
+    <script src="<?php echo(LoadAdminLink('assets/js/app.min.js')) ?>"></script>
 </body>
 </html>
               

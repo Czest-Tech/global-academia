@@ -526,3 +526,109 @@ if($first === "delete_application"){
     }
 
 }
+
+if ($first == 'remove_agent_request') {
+    if (!empty($_POST['ids']) && !empty($_POST['type']) && in_array($_POST['type'], array('approve','decline','delete'))) {
+
+        
+        foreach ($_POST['ids'] as $key => $value) {
+            if (is_numeric($value) && $value > 0) {
+                $request_id = Secure($value);
+                if ($_POST['type'] == 'delete') {
+                    $db->where('id',$request_id)->delete(T_AGENT_REQUESTS);
+                }
+                elseif ($_POST['type'] == 'decline') {
+                   $db->where('id',$request_id)->update(T_AGENT_REQUESTS,array('status' => 2));
+                }
+                elseif ($_POST['type'] == 'approve') {
+                    $request_data = $db->where('id',$request_id)->getOne(T_AGENT_REQUESTS);
+                    if (!empty($request_data) && $request_data->status != 1) {
+                        $requiring = $db->where('id',$request_data->user_id)->getOne(T_USERS);
+                        if (!empty($requiring)) {
+                            $db->where('id',$request_data->user_id)->update(T_USERS,array(
+                                'active' => 1
+                            ));
+                            $update_data = array(
+                                'URL' => $kd->site_url,
+                                'NAME' =>  $requiring->first_name . ' '. $requiring->last_name,
+                             );
+                            $send_email_data = array(
+                                'from_email' => $kd->config->email,
+                                'from_name' => $kd->config->name,
+                                'to_email' => $requiring->email,
+                                'to_name' => $requiring->first_name . ' '. $requiring->last_name,
+                                'subject' => __('account_registration_approval'),
+                                'charSet' => 'UTF-8',
+                                'message_body' => LoadPage('email/account_registration_approved', $update_data),
+                                'is_html' => true
+                            );
+                            $send_message = SendMessage($send_email_data);
+
+                            var_dump($send_message);
+                        }
+                    }
+                    $db->where('id',$request_id)->update(T_AGENT_REQUESTS,array('status' => 1));
+                }
+            }
+        }
+        $data = array('status' => 200);
+       
+    } else {
+        $data = array(
+            'status' => 400,
+            'message' => 'error',
+        );
+    }
+}
+if ($first == 'remove_single_agent_request' && !empty($_POST['id']) && !empty($_POST['a'])) {
+    $request = (is_numeric($_POST['id']) && is_numeric($_POST['a']) && in_array($_POST['a'], array(1,2,3)));
+
+    if ($request === true) {
+        $request_id = Secure($_POST['id']);
+        if ($_POST['a'] == 1) {
+            $request_data = $db->where('id',$request_id)->getOne(T_AGENT_REQUESTS);
+            if (!empty($request_data) && $request_data->status != 1) {
+                $requiring = $db->where('id',$request_data->user_id)->getOne(T_USERS);
+                if (!empty($requiring)) {
+                    $db->where('id',$request_data->user_id)->update(T_USERS,array(
+                        'active' =>1
+                    ));
+
+                    $update_data = array(
+                        'URL' => $kd->config->site_url,
+                        'NAME' =>  $requiring->first_name . ' '. $requiring->last_name,
+                     );
+                    $send_email_data = array(
+                        'from_email' => $kd->config->email,
+                        'from_name' => $kd->config->name,
+                        'to_email' => $requiring->email,
+                        'to_name' => $requiring->first_name . ' '. $requiring->last_name,
+                        'subject' => __('account_registration_approval'),
+                        'charSet' => 'UTF-8',
+                        'message_body' => LoadPage('email/account_registration_approved', $update_data),
+                        'is_html' => true
+                    );
+                    $send_message = SendMessage($send_email_data);
+
+                }
+            }
+            $db->where('id',$request_id)->update(T_AGENT_REQUESTS,array('status' => 1));
+        }
+        else if ($_POST['a'] == 2) {
+            $db->where('id',$request_id)->update(T_AGENT_REQUESTS,array('status' => 2));
+        }
+        else if ($_POST['a'] == 3) {
+            $db->where('id',$request_id)->delete(T_AGENT_REQUESTS);
+        }
+        $data = array(
+            'status' => 200,
+            'message' => 'Success'
+           
+        );
+    } else {
+        $data = array(
+            'status' => 400,
+            'message' => 'error',
+        );
+    }
+}
