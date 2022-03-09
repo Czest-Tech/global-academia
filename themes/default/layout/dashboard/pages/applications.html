@@ -16,16 +16,8 @@
 
     <div class="modal_container" id="modal_container">
       <div class="modal_main">
-          <div class="modal_pad app_modal">
-            <div class="modal_body">
-              <p class="dark_color font2">{{LANG Edit request will be sent.}}</p>
-              <p class="dark_color font2">{{LANG Wait for Admin approval before you edit your application.}}</p>
-              <p class="dark_color font2">{{LANG Continue }}?</p>
-              <div class="modal_body_btn">
-                <button>Yes</button>
-                <button onclick="closeModal()">Cancel</button>
-              </div>
-            </div>
+          <div class="modal_pad app_modal" id="insert_modal">
+            <!-- Insert modal from JS -->
           </div>
       </div>
     </div>
@@ -35,10 +27,12 @@
   $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
           render_application(data.applied_to_universities)
+          console.log(data.applied_to_universities)
         }
   }));
   function render_application(data){
     data.forEach((element, index) => {
+      console.log(element.id)
       document.getElementById("ga_table-body").innerHTML += `
             <tr>
                 <td>${element.created_at.substr(0,10)}</td>
@@ -46,7 +40,7 @@
                 <td class="table_data">${element.program_id.toLowerCase()}</td>
                 <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
                 <td>
-                    <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}')">
+                    <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
                         <option value="SELECT">Select</option>
                         <option value="VIEW">View</option>
                         <option value="EDIT">Edit</option>
@@ -59,14 +53,29 @@
   }
 
 
-  function open_action(id){
+  function open_action(id, app_id){
     let action = document.getElementById("app_change"+id).value
     if(action === "VIEW"){
 
     }
     if(action === "EDIT"){
         document.getElementById("modal_container").style.display = "block"
+        document.getElementById("insert_modal").innerHTML = `
+            <div class="modal_body">
+              <p class="dark_color font2">{{LANG Edit request will be sent.}}</p>
+              <p class="dark_color font2">{{LANG Wait for Admin approval before you edit your application.}}</p>
+              <p class="dark_color font2">{{LANG Continue }}?</p>
+              <div class="modal_body_btn">
+                <button onclick="send_edit_request(${app_id})">Yes</button>
+                <button onclick="closeModal()">Cancel</button>
+              </div>
+            </div>
+        
+        `
         document.getElementById("app_change"+id).value = "SELECT"
+
+
+        
     }
     if(action === "UPLOAD"){
       
@@ -77,6 +86,12 @@
   function closeModal(){
     document.getElementById("modal_container").style.display = "none"
   }
+  function send_edit_request(id) {
+       $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
+          console.log(data.data)
+          closeModal()
+       });
+   }
 
 
 </script>
