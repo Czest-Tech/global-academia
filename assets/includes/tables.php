@@ -33,5 +33,7 @@ define('T_APPLICANT_CHAT', 'applicant_chat');
 define('T_AGENT_REQUESTS', 'agent_requests');
 define('T_APPLICANT_EDUCATION_INFO','applicant_education_info');
 define('T_USER_NOTIFACATIONS','user_notifications');
+define('T_ANNOUNCEMENTS', 'announcement');
+define('T_ANNOUNCEMENT_VIEWS', 'announcement_views');
 
 
