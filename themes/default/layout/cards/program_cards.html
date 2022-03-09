@@ -1,38 +1,35 @@
 <div class="programCard8">
     <div class="programCardLeft8">
       <div class="cardTop8">
-        <div class="cardTopLeftImg" style="background-image: url('{{univerisity_logo}}') !important; background-position: center !important;
-        background-size: cover !important;"></div>
+        <img class="program_card_image" src={{univerisity_logo}} alt="univerisity_logo">
         <div class="cardTopRight">
-          <span class="cardUniName">{{department}}</span>
-          <span class="cardProName"
-            >{{university}}</span
-          >
-          <span class="cardCityName">{{location}}</span>
+          <span class="cardUniName font4">{{department}}</span>
+          <span class="cardProName dark_color font2">{{university}}</span>
+          <span class="cardCityName dark_gray_color font2">{{location}}</span>
         </div>
       </div>
       <div class="cardBottom8">
         <div class="cardDetailcards">
-          <span class="DetHeader8">{{LANG Duration}}</span>
-          <span class="DetText8">{{duration}} {{LANG years}}</span>
+          <span class="font2 dark_gray_color">{{LANG Duration}}</span>
+          <span class="font3 bold600 dark_color">{{duration}} {{LANG years}}</span>
         </div>
         <div class="cardDetailcards">
-          <span class="DetHeader8">{{LANG Language}}</span>
-          <span class="DetText8">{{language}}</span>
+          <span class="font2 dark_gray_color">{{LANG Language}}</span>
+          <span class="font3 bold600 dark_color">{{language}}</span>
         </div>
         <div class="cardDetailcards">
-          <span class="DetHeader8">{{LANG Annual fee}}</span>
-          <span class="DetText8">{{tuition_fee}} / {{LANG year}}</span>
+          <span class="font2 dark_gray_color">{{LANG Annual fee}}</span>
+          <span class="font3 bold600 dark_color">{{tuition_fee}} / {{LANG year}}</span>
         </div>
         <div class="cardDetailcards">
-          <span class="DetHeader8">{{LANG Our fee}}</span>
-          <span class="DetText8">{{discounted_fee}} / {{LANG year}}</span>
+          <span class="font2 dark_gray_color">{{LANG Our fee}}</span>
+          <span class="font3 bold600 dark_color">{{discounted_fee}} / {{LANG year}}</span>
         </div>
       </div>
     </div>
-    <div class="programCardRight8">
-      <button class="blueBtn8" onclick="AddToList('{{id}}', '{{university}}', '{{department}}', '{{location}}','{{university_id}}');">{{LANG Add to Application List}}</button>
-      <a href="{{LINK apply}}/{{id}}/{{university_id}}/{{department_id}}"><button class="redBtn8">{{LANG Apply Now}}</button></a>
-      <a href="{{LINK program-details}}/{{id}}"><button class="whiteBtn8">{{LANG Details}}</button></a>
+    <div class="programCardRight8 font2">
+      <button class="blueBtn8 font2" onclick="AddToList('{{id}}', '{{university}}', '{{department}}', '{{location}}','{{university_id}}');">{{LANG Add to Application List}}</button>
+      <a href="{{LINK apply}}/{{id}}/{{university_id}}/{{department_id}}"><button class="redBtn8 font2">{{LANG Apply Now}}</button></a>
+      <a href="{{LINK program-details}}/{{id}}"><button class="whiteBtn8 font2">{{LANG Details}}</button></a>
     </div>
 </div>
