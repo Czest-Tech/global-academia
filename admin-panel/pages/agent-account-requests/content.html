@@ -323,16 +323,14 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                             </thead>
                             <tbody>
                                 <?php 
-                                    foreach ($withdrawal_requests as $key => $wal_requests) {
-                                        $music->status = $wal_requests->status;
-                                        $user_data = userData($wal_requests->user_id);
+                                    foreach ($register_requests as $key => $ag_requests) {
+                                       $ks->status = $wal_requests->status;
+                                        $user_data = userData($ag_requests->user_id);
                                         echo LoadAdminPage('agent-account-requests/list',array(
-                                            'ID' => $wal_requests->id,
+                                            'ID' => $ag_requests->id,
                                             'USERNAME' => $user_data->name,
-                                            'EMAIL' => $wal_requests->email,
-                                            'AMOUNT' => $wal_requests->amount,
-                                            'DATE' => date("Y-F-d",$wal_requests->requested),
-                                            'CURRENCY' => $wal_requests->currency,
+                                            'EMAIL' => $user_data->email,
+                                            'DATE' => date("Y-F-d",$ag_requests->created_at),
                                             'STATUS' => $wal_requests->status,
                                         ));
                                     }
