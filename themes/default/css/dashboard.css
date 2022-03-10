@@ -74,12 +74,7 @@
 .message_row_image{ width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin: 0 10px; }
 .left_bubble .bubble_text{ background-color: #fff; color: #4A4A4A; }
 .bubble_text_right{ background-color: var(--BLUE); color: #fff; display: flex; flex-direction: column; max-width: 70%; min-width: 30%; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; padding: 7px 7px 3px 7px; margin-right: 10px; }
-.bubble_text_right .bold300 {
-    margin: 7px 0 0 0;
-    width: 100%;
-    border-top: 1px solid #ffffff1f;
-    padding-top: 3px;
-}
+.bubble_text_right .bold300 { margin: 7px 0 0 0; width: 100%; border-top: 1px solid #ffffff1f; padding-top: 3px;}
 .dashboard{ padding: 15px 30px; min-height: 100%; background-color: #f9f9f9; }
 .dash_top_cards{ width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 40px; }
 .dash_card{ box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; max-width: 250px;    width: 23%; padding: 20px 25px; border-radius: 5px; color: white; margin-bottom: 10px; }
@@ -143,7 +138,26 @@
 .table_area_app{ width: 100%; }
 .profile_card_body form { width: 100%; }
 .left_bubble { width: 100%; }
+.message_file_house{
+    position: absolute;
+    bottom: calc(100% + 5px);
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #ececec;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    background-color: var(--GREEN);
+    color: white;
+}
+.message_file_house > *{
+    margin: 5px;
+}
+.message_file_house i{
+    margin-left: 10px;
+    cursor: pointer;
 
+}
 
 
 @media only screen and (max-width: 1120px) {

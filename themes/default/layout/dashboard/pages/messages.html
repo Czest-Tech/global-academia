@@ -24,7 +24,11 @@
     </div> -->
 
     <form method="post" class="reply_pad" id="send-message">
-      <input type="file" name="file" id="input-file" hidden>
+      <div class="message_file_house font2" id="message_file_house">
+        <p id="message_file_name">hsjdgfjhgdfjhdf.pdf</p>
+        <i class="fas fa-times" onclick="remove_input_file()"></i>
+      </div>
+      <input type="file" name="file" id="input-file" hidden onchange="file_input()">
       <input type="hidden" name="name" id="input-names" value="{{ME first_name}} {{ME last_name}}" />
       <input type="hidden" name="email" id="input-email" value="{{ME email}}" />
       <input type="hidden" name="user_id" value="{{ME id}}" />
@@ -39,17 +43,6 @@
           <i class="fas fa-paper-plane"></i>
         </button>
       </div>
-
-
-      <!-- <div class="reply_pad">
-          <label for="input-file">
-              <i class="fas fa-upload"></i>
-          </label>
-          <input placeholder="Send message to admin.." name="message" id="input-message" />
-          <button type="submit" id="send-message-btn">
-              Send
-          </button>
-      </div> -->
     </form>
   </div>
 </div>
@@ -69,7 +62,7 @@
       let date = d.toDateString();
       let time = element.created_at.substr(11, 5)
 
-      console.log(element)
+      console.log(element.file)
       const sender = `
         <div class="right_message message_row">
             <div class="bubble_text_right">
@@ -95,16 +88,10 @@
       const chat = Math.ceil(Math.random() * 2000)
       if (element.from === "admin") message += reciever
       else message += sender
-
-      
-      
     });
     document.getElementById("message_pad").innerHTML = message
-
     const container = document.getElementById("message_pad")
     container.scrollTop = container.scrollHeight
-
-
   }
 
   $(function () {
@@ -116,10 +103,23 @@
           render_messages(data.chats)
           document.getElementById("input-message").value = ""
           document.getElementById("input-file").value = ""
+          document.getElementById("message_file_house").style.opacity = 0
+          document.getElementById("input-file").value = ""
         }
       }
     });
   });
+
+  function remove_input_file(){
+    document.getElementById("message_file_house").style.opacity = 0
+    document.getElementById("input-file").value = ""
+  }
+  function file_input(){
+    document.getElementById("message_file_house").style.opacity = 1
+    let file = (document.getElementById("input-file").value).substr(12)
+    if(file.length > 35) file = file.substr(0, 20) + "..." + file.substr(file.length - 10)
+    document.getElementById("message_file_name").innerHTML = file
+  }
 
 
 
