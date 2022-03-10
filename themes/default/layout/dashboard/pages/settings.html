@@ -1,4 +1,14 @@
 <div class="settings" id="settings_xd">
+  <div class="settings_toggle">
+      <div class="settings_text">
+          <p class="settings_text_title font2 bold600">Temporarily disable Account</p>
+          <div id="deactivate_switch" class="toggle_gear ${classer}" onclick="deactivate()">
+            <div class="toggle_knob"></div>
+        </div>
+      </div>
+      <p class="settings_text_body font2 dark_gray_color">Account can still be access within 3 months but if now re-activated after 3 months, account will be permanently deleted</p>
+      
+  </div>
   <!-- loaded from JS -->
 </div>
 
@@ -12,7 +22,7 @@
       "name": "share_my_profile",
       "isActive": '{{USER share_my_profile}}',
       "title": "optio molestias id quia eum",
-      "body": "quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"
+      "body": "Quod sed accusamus veritatis error"
     },
     {
       "userId": 2,
@@ -28,7 +38,7 @@
       "name": "notification_on_application",
       "isActive": '{{USER notification_on_application}}',
       "title": "Notification on each application",
-      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
+      "body": "itaque nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
     },
     {
       "userId": 2,
@@ -36,7 +46,7 @@
       "name": "turn_on_email_notifications",
       "isActive": '{{USER turn_on_email_notifications}}',
       "title": "dolorum ut in voluptas mollitia et saepe quo animi",
-      "body": "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
+      "body": "aut dicta possimus sint mollitia voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
     }
 
   ]
@@ -48,17 +58,29 @@
         <div class="settings_toggle">
             <div class="settings_text">
                 <p class="settings_text_title font2 bold600">${element.name}</p>
-                <p class="settings_text_body font2">${element.body}</p>
-            </div>
-            <div class="toggle_gear ${classer}" onclick="toggle_gear(${element.name})">
+                <div class="toggle_gear ${classer}" onclick="toggle_gear(${element.name})">
                 <div class="toggle_knob"></div>
             </div>
+        </div>
+        <p class="settings_text_body font2 dark_gray_color">${element.body}</p>
+            
         </div>
     
     `
   });
   function toggle_gear(target) {
     console.log(target)
+  }
+
+  let deactivate_switch = false
+  function deactivate(){
+    if(deactivate_switch){
+      deactivate_switch = false
+      document.getElementById("deactivate_switch").classList.remove('toggle_gear_active')
+    }else{
+      deactivate_switch = true
+      document.getElementById("deactivate_switch").classList.add('toggle_gear_active')
+    }
   }
 
 </script>
