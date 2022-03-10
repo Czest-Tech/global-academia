@@ -50,7 +50,7 @@
               Send
           </button>
       </div> -->
-  </form>
+    </form>
   </div>
 </div>
 
@@ -61,13 +61,20 @@
       render_messages(data.chats)
     }
   }));
+
   function render_messages(data) {
+    let message = ""
     data.forEach(element => {
+      let d = new Date(element.created_at)
+      let date = d.toDateString();
+      let time = element.created_at.substr(11, 5)
+
+      console.log(element)
       const sender = `
         <div class="right_message message_row">
             <div class="bubble_text_right">
-                <p class="font2 bold300">${element.message}}</p>
-                <p class="font1 bold400 bubble_text_arrival">${element.created_at}</p>
+                <p class="font2 bold400">${element.message}</p>
+                <p class="font1 bold300 bubble_text_arrival">${date} - ${time}</p>
             </div>
         </div>
     
@@ -77,49 +84,42 @@
             <div class="left_bubble">
                 <img src="https://www.globalacademia.com/wp-content/uploads/2017/11/global-academia-logo.jpg" alt="message_row_image" class="message_row_image"/>
                 <div class="bubble_text">
-                    <p class="font2 bold600 dark_color">Global Academia</p>
-                    <p class="font2 bold300">${element.message}</p>
-                    <p class="font1 bold400 bubble_text_arrival">${element.created_at}</p>
+                    <p class="font2 bold600 blue_color">Global Academia</p>
+                    <p class="font2 bold400">${element.message}</p>
+                    <p class="font1 bold300 bubble_text_arrival">${date} - ${time}</p>
                 </div>
             </div>
         </div>
     `
-      let message = ""
+      
       const chat = Math.ceil(Math.random() * 2000)
-      if (element.from === "admin") message = reciever
-      else message = sender
+      if (element.from === "admin") message += reciever
+      else message += sender
 
-      document.getElementById("message_pad").innerHTML += message
-
-      const container = document.getElementById("message_pad")
-      container.scrollTop = container.scrollHeight
+      
+      
     });
+    document.getElementById("message_pad").innerHTML = message
 
-    $(function () { 
+    const container = document.getElementById("message_pad")
+    container.scrollTop = container.scrollHeight
 
-        form2.ajaxForm({
-            url: '{{LINK aj/front_end_api/send_applicant_message}}?hash=' + $('.main_session').val(),
-            dataType: 'json',
-            beforeSend: function () {
-                form2.find('button').text("{{LANG ....}}");
-            },
-            success: function (data) {
-                if (data.status == 200) {
-                    renderMessages(data.chats)
-                    document.getElementById("send-message-btn").innerHTML = "Send"
-                    document.getElementById("input-message").value = ""
-                    document.getElementById("input-file").value = ""
-                    document.getElementById("file-container").innerHTML = ""
-                }
-                else {
-                    $('.results').html(data.message);
-                    document.getElementById("send-message-btn").innerHTML = "Failed"
-                    setTimeout(function () { document.getElementById("send-message-btn").innerHTML = "Send" }, 3000);
-                }
-            }
-        });
-    });
+
   }
+
+  $(function () {
+    form2.ajaxForm({
+      url: '{{LINK aj/front_end_api/send_applicant_message}}?hash=' + $('.main_session').val(),
+      dataType: 'json',
+      success: function (data) {
+        if (data.status == 200) {
+          render_messages(data.chats)
+          document.getElementById("input-message").value = ""
+          document.getElementById("input-file").value = ""
+        }
+      }
+    });
+  });
 
 
 

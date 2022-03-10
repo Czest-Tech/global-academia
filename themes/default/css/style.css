@@ -167,6 +167,7 @@ a{
     display: flex;
     align-items: center;
     height:50px;
+    justify-content: space-between;
 }
 .navLink8Application{
     height: 100%;
@@ -178,7 +179,6 @@ a{
     display: flex;
     align-items: center;
     padding-left: 20px;
-    margin-right: 80px;
 }
 .logoSide8 img{
     height: 60%;
