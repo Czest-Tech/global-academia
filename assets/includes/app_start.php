@@ -64,6 +64,7 @@ $config['user_statics']   = stripslashes(htmlspecialchars_decode($config['user_s
 $config['job_listing_statics']   = stripslashes(htmlspecialchars_decode($config['job_listing_statics']));
 $config['theme_url']      = $site_url . '/themes/' . $config['theme'];
 $config['site_url']       = $site_url;
+$config['ajax_url']       = $site_url . '/aj';
 $config['script_version'] = $kd->script_version;
 $kd->extra_config = array();
 $config['hostname'] = '';

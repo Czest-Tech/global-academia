@@ -70,7 +70,7 @@ $(document).ready(function () {
         chartColors.fontColor = 'rgba(255, 255, 255, .4)';
     }
 
-    // Charts
+    /// Charts
 
     chart_demo_1();
 
@@ -99,10 +99,10 @@ $(document).ready(function () {
             new Chart(element, {
                 type: 'bar',
                 data: {
-                    labels: ["New Users"],
+                    labels: ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
                     datasets: [
                         {
-                            label: "Total jj",
+                            label: "Total Sales",
                             backgroundColor: colors.primary,
                             data: [133, 221, 783, 978, 214, 421, 211, 577]
                         }, {
@@ -716,7 +716,7 @@ $(document).ready(function () {
         });
     }
 
-    //////////////////////////////////////////
+    ////////////////////////////////////////////
 
     function bar_chart() {
         if ($('#chart-ticket-status').length > 0) {

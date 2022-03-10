@@ -31,13 +31,13 @@ $(function () {
     colors.danger = '#' + fullColorHex(colors.danger[0], colors.danger[1], colors.danger[2]);
     colors.warning = '#' + fullColorHex(colors.warning[0], colors.warning[1], colors.warning[2]);
 
-    $('#recent-orders').DataTable({
-        lengthMenu: [5, 10],
-        "columnDefs": [{
-            "targets": 5,
-            "orderable": false
-        }]
-    });
+    // $('#recent-orders').DataTable({
+    //     lengthMenu: [5, 10],
+    //     "columnDefs": [{
+    //         "targets": 5,
+    //         "orderable": false
+    //     }]
+    // });
 
     var start = moment().subtract(29, 'days');
     var end = moment();
@@ -226,76 +226,76 @@ $(function () {
 
     hotProducts();
 
-    function activityChart() {
-        if ($('#ecommerce-activity-chart').length) {
-            var options = {
-                chart: {
-                    type: 'bar',
-                    fontFamily: "Inter",
-                    height: 430,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                series: [{
-                    name: 'Comments',
-                    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-                }, {
-                    name: 'Product View',
-                    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-                }],
-                colors: [colors.secondary, colors.info],
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '50%',
-                        endingShape: 'rounded'
-                    },
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: true,
-                    width: 8,
-                    colors: ['transparent']
-                },
-                grid: {
-                    show: false,
-                    padding: {
-                        left: 0,
-                        right: 0
-                    }
-                },
-                xaxis: {
-                    labels: {
-                        show: false,
-                    },
-                    axisBorder: {
-                        show: false,
-                    }
-                    // categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                },
-                yaxis: {
-                    show: false,
-                },
-                fill: {
-                    opacity: 1
-                },
-                legend: {
-                    show: false
-                }
-            };
+    // function activityChart() {
+    //     if ($('#ecommerce-activity-chart').length) {
+    //         var options = {
+    //             chart: {
+    //                 type: 'bar',
+    //                 fontFamily: "Inter",
+    //                 height: 430,
+    //                 toolbar: {
+    //                     show: false
+    //                 }
+    //             },
+    //             series: [{
+    //                 name: 'Comments',
+    //                 data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+    //             }, {
+    //                 name: 'Product View',
+    //                 data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+    //             }],
+    //             colors: [colors.secondary, colors.info],
+    //             plotOptions: {
+    //                 bar: {
+    //                     horizontal: false,
+    //                     columnWidth: '50%',
+    //                     endingShape: 'rounded'
+    //                 },
+    //             },
+    //             dataLabels: {
+    //                 enabled: false
+    //             },
+    //             stroke: {
+    //                 show: true,
+    //                 width: 8,
+    //                 colors: ['transparent']
+    //             },
+    //             grid: {
+    //                 show: false,
+    //                 padding: {
+    //                     left: 0,
+    //                     right: 0
+    //                 }
+    //             },
+    //             xaxis: {
+    //                 labels: {
+    //                     show: false,
+    //                 },
+    //                 axisBorder: {
+    //                     show: false,
+    //                 }
+    //                 // categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    //             },
+    //             yaxis: {
+    //                 show: false,
+    //             },
+    //             fill: {
+    //                 opacity: 1
+    //             },
+    //             legend: {
+    //                 show: false
+    //             }
+    //         };
 
-            var chart = new ApexCharts(
-                document.querySelector("#ecommerce-activity-chart"),
-                options
-            );
+    //         var chart = new ApexCharts(
+    //             document.querySelector("#ecommerce-activity-chart"),
+    //             options
+    //         );
 
-            chart.render();
-        }
-    }
+    //         chart.render();
+    //     }
+    // }
 
-    activityChart();
+    // activityChart();
 
 });

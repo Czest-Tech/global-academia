@@ -552,32 +552,32 @@ function ChatExists($id) {
 function UpdateAdminDetails() {
     global $kd, $db;
 
-    $get_questions_count = $db->where('ask_user_id', '0')->where('ask_question_id', '0')->where('shared_user_id', '0')->where('shared_question_id', '0')->where('replay_user_id', '0')->where('replay_question_id', '0')->getValue(T_QUESTIONS, 'count(*)');
-    $update_questions_count = $db->where('name', 'total_questions')->update(T_CONFIG, array('value' => $get_questions_count));
+    $get_number_of_applicants = $db->getValue(T_APPLICATIONS, 'count(*)');
+    $update_questions_count = $db->where('name', 'get_number_of_applicants')->update(T_CONFIG, array('value' => $get_number_of_applicants));
 
-    $get_anon_questions_count = $db->where('is_anonymously', '1')->where('ask_user_id', '0')->where('ask_question_id', '0')->where('shared_user_id', '0')->where('shared_question_id', '0')->where('replay_user_id', '0')->where('replay_question_id', '0')->getValue(T_QUESTIONS, 'count(*)');
-    $update_anon_questions_count = $db->where('name', 'total_anon_questions')->update(T_CONFIG, array('value' => $get_anon_questions_count));
+    $reports_count = $db->getValue(T_REPORTS, 'count(*)');
+    $update_albums_count = $db->where('name', 'total_albums')->update(T_CONFIG, array('value' => $reports_count));
 
-    $get_non_anon_questions_count = $db->where('is_anonymously', '0')->where('ask_user_id', '0')->where('ask_question_id', '0')->where('shared_user_id', '0')->where('shared_question_id', '0')->where('replay_user_id', '0')->where('replay_question_id', '0')->getValue(T_QUESTIONS, 'count(*)');
-    $update_non_anon_questions_count = $db->where('name', 'total_non_anon_questions')->update(T_CONFIG, array('value' => $get_non_anon_questions_count));
+    $get_plays_count = $db->getValue(T_REPORTS, 'count(*)');
+    $update_albums_count = $db->where('name', 'total_plays')->update(T_CONFIG, array('value' => $get_plays_count));
 
-    $get_answers_count = $db->where('ask_user_id', '0' , '>')->where('ask_question_id', '0', '>')->where('shared_user_id', '0')->where('shared_question_id', '0')->where('replay_user_id', '0')->where('replay_question_id', '0')->getValue(T_QUESTIONS, 'count(*)');
-    $update_answers_count = $db->where('name', 'total_answers')->update(T_CONFIG, array('value' => $get_answers_count));
+    $get_sales_count = number_format($db->getValue(T_REPORTS, 'SUM(final_price)'), 2);
+    $update_sales_count = $db->where('name', 'total_sales')->update(T_CONFIG, array('value' => $get_sales_count));
 
-    $get_shares_count = $db->where('ask_user_id', '0')->where('ask_question_id', '0')->where('shared_user_id', '0' , '>')->where('shared_question_id', '0' , '>')->where('replay_user_id', '0')->where('replay_question_id', '0')->getValue(T_QUESTIONS, 'count(*)');
-    $update_shares_count = $db->where('name', 'total_shares')->update(T_CONFIG, array('value' => $get_shares_count));
+    $get_users_count = $db->getValue(T_USERS, 'count(*)');
+    $update_users_count = $db->where('name', 'total_users')->update(T_CONFIG, array('value' => $get_users_count));
 
-    $get_replys_count = $db->where('ask_user_id', '0')->where('ask_question_id', '0')->where('shared_user_id', '0')->where('shared_question_id', '0')->where('replay_user_id', '0' , '>')->where('replay_question_id', '0' , '>')->getValue(T_QUESTIONS, 'count(*)');
-    $update_replys_count = $db->where('name', 'total_replys')->update(T_CONFIG, array('value' => $get_replys_count));
+    $get_artists_count = $db->where('artist', '1')->getValue(T_USERS, 'count(*)');
+    $update_artists_count = $db->where('name', 'total_artists')->update(T_CONFIG, array('value' => $get_artists_count));
 
-    $get_subs_count = $db->where('active', '1')->getValue(T_USERS, 'count(*)');
-    $update_subs_count = $db->where('name', 'total_active_users')->update(T_CONFIG, array('value' => $get_subs_count));
+    $get_playlists_count = $db->getValue(T_REPORTS, 'count(*)');
+    $update_playlists_count = $db->where('name', 'total_playlists')->update(T_CONFIG, array('value' => $get_playlists_count));
 
-    $get_unsubs_count = $db->where('active', '0')->getValue(T_USERS, 'count(*)');
-    $update_unsubs_count = $db->where('name', 'total_unactive_users')->update(T_CONFIG, array('value' => $get_unsubs_count));
+    $get_unactive_users_count = $db->where('active', '0')->getValue(T_USERS, 'count(*)');
+    $update_unactive_users_count = $db->where('name', 'total_unactive_users')->update(T_CONFIG, array('value' => $get_unactive_users_count));
 
     $user_statics = array();
-    $question_statics = array();
+    $songs_statics = array();
 
     $months = array('1','2','3','4','5','6','7','8','9','10','11','12');
     $date = date('Y');
@@ -587,10 +587,10 @@ function UpdateAdminDetails() {
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
         $monthName = $dateObj->format('F');
         $user_statics[] = array('month' => $monthName, 'new_users' => $db->where('registered', "$date/$value")->getValue(T_USERS, 'count(*)'));
-        $question_statics[] = array('month' => $monthName, 'new_questions' => $db->where('YEAR(FROM_UNIXTIME(`time`))', "$date")->where('MONTH(FROM_UNIXTIME(`time`))', "$value")->getValue(T_QUESTIONS, 'count(*)'));
+        $songs_statics[] = array('month' => $monthName, 'new_songs' => $db->where('YEAR(FROM_UNIXTIME(`time`))', "$date")->where('MONTH(FROM_UNIXTIME(`time`))', "$value")->getValue(T_SONGS, 'count(*)'));
     }
-    $update_user_statics = $db->where('name', 'user_statics')->update(T_CONFIG, array('value' => Secure(json_encode($user_statics))));
-    $update_videos_statics = $db->where('name', 'questions_statics')->update(T_CONFIG, array('value' => Secure(json_encode($question_statics))));
+    $update_user_statics = $db->where('name', 'user_statics')->update(T_CONFIG, array('value' => json_encode($user_statics)));
+    $update_songs_statics = $db->where('name', 'songs_statics')->update(T_CONFIG, array('value' => json_encode($songs_statics)));
 
     $update_saved_count = $db->where('name', 'last_admin_collection')->update(T_CONFIG, array('value' => time()));
 }

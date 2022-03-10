@@ -226,19 +226,19 @@ Author URL:   https://themeforest.net/user/laborasyon/portfolio
       $('.sidebar-group .sidebar').getNiceScroll().remove();
     }
   });
-  // wind_.on('load', function () {
-  //   $('.preloader').fadeOut(300, function () {
-  //     toastr.options = {
-  //       timeOut: 2000,
-  //       progressBar: true,
-  //       showMethod: "slideDown",
-  //       hideMethod: "slideUp",
-  //       showDuration: 200,
-  //       hideDuration: 200
-  //     };
-  //     toastr.success('Welcome!');
-  //   });
-  // });
+  wind_.on('load', function () {
+    $('.preloader').fadeOut(300, function () {
+      toastr.options = {
+        timeOut: 2000,
+        progressBar: true,
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 200,
+        hideDuration: 200
+      };
+      toastr.success('Welcome!');
+    });
+  });
   wind_.on('load', function () {
     setTimeout(function () {
       $('.navigation .navigation-menu-body ul li a').each(function () {

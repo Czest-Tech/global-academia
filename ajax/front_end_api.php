@@ -433,7 +433,7 @@ if($first === "manage_applications"){
   
     foreach($bew_arrat as $vb){
         if(!empty($vb->user_id)){
-          $logged_user_data =  $db->where('user_id', $user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
+          $logged_user_data =  $db->where('user_id', $vb->user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
 
           if(!empty($logged_user_data)){
               $vb = $logged_user_data;
