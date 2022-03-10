@@ -40,6 +40,7 @@ $pages_array = [
     'messages',
     'settings',
     'applications',
+    'view_application',
     'notifications'
    
   
