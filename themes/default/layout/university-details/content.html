@@ -1,8 +1,6 @@
 <main class="mainAreaDetails8">
-    <div class="detailsTop"  style=" background-image: url('<?php echo (GetMedia($kd->university->main_image)) ? GetMedia($kd->university->main_image) : 'https://png.pngitem.com/pimgs/s/23-238941_duke-university-logo-transparent-hd-png-download.png' ?>');
-        background-position: center;
-        background-size: cover;
-        display: flex;">
+    <div class="uni_bg_image detailsTop"  
+        style=" background-image: url('<?php echo (GetMedia($kd->university->main_image)) ? GetMedia($kd->university->main_image) : 'https://png.pngitem.com/pimgs/s/23-238941_duke-university-logo-transparent-hd-png-download.png' ?>');">
         <div class="coverRow">
             <div class="coverRowDetails">
                 <div class="CoverUniLogo">
@@ -19,27 +17,22 @@
     <div class="mainDetialsContainer">
         <div class="leftMainDetails">
              <div class="leftMainDetailsRows">
-                 <h2>Description</h2>
-                 <h4><?php echo $kd->university->description; ?></h4>
+                 <p class="font4 blue_color bold600">Description</p>
+                 <p class="font3 dark_color"><?php echo $kd->university->description; ?></p>
              </div>
-             <hr>
             <div class="leftMainDetailsRows">
-                
-                 <h2>Departments</h2>
+                <p class="font4 blue_color bold600">Departments</p>
                  <?php if(!empty($departments_all)){
                    foreach($departments_all  as $dp){?>
                         <h5><?php echo $dp->department; ?></h5>
                     <?php } 
-                   } else{
-                    ?>
-                    <h5>No Departmetns Add yet</h5> <?php } ?>
+                   } else{ ?>
+                    <p class="font3 dark_color">No Departments added yet</p>
+                <?php } ?>
                  
              </div>
-             
-             <hr>
-             
             <div class="leftMainDetailsRows">
-                <p class="leftDetialsHeader">{{LANG Disciplines}}</p>
+                <p class="font4 blue_color bold600">{{LANG Disciplines}}</p>
                 <div class="displines8">
                     <p>{{LANG Medicine And Health}}</p>
                     <p>{{LANG Engineering}}</p>
@@ -78,22 +71,22 @@
                     {{LANG See Programs}}
                 </button>
             </a>
-            <p class="rightMainDetHeader">{{LANG University Overview}}</p>
+            <p class="font4 blue_color bold600">{{LANG University Overview}}</p>
             <p>
-                <span class="DetText8">{{LANG Location}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->location; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Location}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->location; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG University type}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->university_type; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG University type}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->university_type; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Foundation Year}}:</span>
-                <span class="DetHeader8"><?php echo $kd->university->foundation; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Foundation Year}}:</span>
+                <span class="dark_color font3"><?php echo $kd->university->foundation; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Languages}} :</span>
-                <span class="DetHeader8"> <?php 
+                <span class="dark_gray_color font3 bold600">{{LANG Languages}} :</span>
+                <span class="dark_color font3"> <?php 
                     if($kd->university->lang_edu_en == 1 && $kd->university->lang_edu_tk == 1) echo "English/Turkish"; 
                     else {
                         if($kd->university->lang_edu_en == 1) echo "English";
@@ -101,67 +94,67 @@
                       } ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Education}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->location; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Education}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->location; ?></span>
             </p>
 
             <p>
-                <span class="DetText8">{{LANG Sports Facilities}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->sp_facilitie; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Sports Facilities}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->sp_facilitie; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Student Associations}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->st_associations; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Student Associations}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->st_associations; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Laboratories}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->laboratories; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Laboratories}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->laboratories; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Study Mode}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->study_mode; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Study Mode}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->study_mode; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG International Students}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->international_students; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG International Students}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->international_students; ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Total Students}} :</span>
-                <span class="DetHeader8"><?php echo $kd->university->total_students; ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Total Students}} :</span>
+                <span class="dark_color font3"><?php echo $kd->university->total_students; ?></span>
             </p>
   
             <br/>
-            <p class="rightMainDetHeader">Programs Offered</p>
+            <p class="font4 blue_color bold600">Programs Offered</p>
             <p>
-                <span class="DetText8">{{LANG Associate Degree}} : </span>
-                <span class="DetHeader8"><span><?php echo ($kd->university->asso_degrees != '0') ? __('yes') : __('no') ?> </span></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Associate Degree}} : </span>
+                <span class="dark_color font3"><span><?php echo ($kd->university->asso_degrees != '0') ? __('yes') : __('no') ?> </span></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Undergraudate Program}} :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->undergraduate_program != '0') ? __('yes') : __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Undergraudate Program}} :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->undergraduate_program != '0') ? __('yes') : __('no') ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Graudate Program}}  :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->master_programs != '0') ? __('yes') : __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Graudate Program}}  :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->master_programs != '0') ? __('yes') : __('no') ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Phd Program}}  :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->ph_d_programs != '0') ? __('yes') : __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Phd Program}}  :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->ph_d_programs != '0') ? __('yes') : __('no') ?></span>
             </p>
            
             <br/>
-            <p class="rightMainDetHeader">{{LANG Accomodation}}</p>
+            <p class="font4 blue_color bold600">{{LANG Accomodation}}</p>
             <p>
-                <span class="DetText8">{{LANG Domitory}} :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->dormitory != '0') ? __('yes') : __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Domitory}} :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->dormitory != '0') ? __('yes') : __('no') ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Female Domitory}} :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->female != '0') ? __('yes'): __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Female Domitory}} :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->female != '0') ? __('yes'): __('no') ?></span>
             </p>
             <p>
-                <span class="DetText8">{{LANG Male Domitory}} :</span>
-                <span class="DetHeader8"><?php echo ($kd->university->male != '0') ? __('yes'): __('no') ?></span>
+                <span class="dark_gray_color font3 bold600">{{LANG Male Domitory}} :</span>
+                <span class="dark_color font3"><?php echo ($kd->university->male != '0') ? __('yes'): __('no') ?></span>
             </p>
    
             
