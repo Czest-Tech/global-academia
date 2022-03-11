@@ -1,4 +1,101 @@
-<p>vbiew appllication </p>
+<div class="view_appz">
+    <div class="view_app_cards">
+        <div class="app_top blue_color bold600 font4">
+            Application Details
+        </div>
+        <div class="app_body">
+            <div class="app_rows">
+                <p class="app_card_top">Application Date</p>
+                <p class="app_card_info" id="app_date">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Application ID</p>
+                <p class="app_card_info" id="app_id">#</p>
+            </div>
+            
+            <div class="app_rows">
+                <p class="app_card_top">University</p>
+                <p class="app_card_info" id="university">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Program</p>
+                <p class="app_card_info" id="program">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Application Status</p>
+                <p class="app_card_info" id="status">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Acceptance Letter</p>
+                <p class="app_card_info" id="letter"></p>
+            </div>
+        </div>
+    </div>
+    <div class="view_app_cards">
+        <div class="app_top blue_color bold600 font4">
+            Applicant Details
+        </div>
+        <div class="app_body">
+            <div class="app_rows">
+                <p class="app_card_top">First Names</p>
+                <p class="app_card_info" id="fname">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Last Names</p>
+                <p class="app_card_info" id="lname">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Email</p>
+                <p class="app_card_info" id="email" style="text-transform: lowercase;">#</p>
+            </div>
+            
+            <div class="app_rows">
+                <p class="app_card_top">Contact</p>
+                <p class="app_card_info" id="phone">24th March 2022</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Father</p>
+                <p class="app_card_info" id="father">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Mother</p>
+                <p class="app_card_info" id="mother">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Nationality</p>
+                <p class="app_card_info" id="nationality">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Residence</p>
+                <p class="app_card_info" id="residence">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Date of Birth</p>
+                <p class="app_card_info" id="dob">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Passpot Number</p>
+                <p class="app_card_info" id="passport">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">ID Photo</p>
+                <p class="app_card_info" id="id_photo">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Transcript File</p>
+                <p class="app_card_info" id="transcript">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Diploma File</p>
+                <p class="app_card_info" id="diploma">#</p>
+            </div>
+            <div class="app_rows">
+                <p class="app_card_top">Language Certificate</p>
+                <p class="app_card_info" id="certificate">#</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
@@ -9,8 +106,57 @@
 
     $.get('{{LINK aj}}' + "/user_dashboard/get_user_application?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id}, (data => {
         if(data.status === 200){
-            console.log(data)
-           
+            render_application_details(data.applicant_university[0])
+            render_applicant_details(data.applicant_info)
         }
     }));
+
+    function render_application_details(data){
+        let d = new Date(data.created_at)
+        let date = d.toDateString();
+        let error = "<p style='color:tomato;'>Missing</p>"
+
+        console.log(data)
+        document.getElementById("app_date").innerHTML = date || error
+        document.getElementById("app_id").innerHTML = data.uniqid || error
+        document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
+        document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
+        document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
+        document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
+
+        
+    }
+    function render_applicant_details(data){
+
+        let error = "<p style='color:tomato;'>Missing</p>"
+        let id_photo = data.education_info.id_photo
+        let transcript_file = data.education_info.transcript_file
+        let diploma_file = data.education_info.diploma_file
+        let language_certificate = data.education_info.language_certificate
+
+        let d = new Date(data.education_info.date_of_birth)
+        let date = d.toDateString();
+
+        document.getElementById("lname").innerHTML = data.last_name || error
+        document.getElementById("fname").innerHTML = data.first_name || error
+        document.getElementById("email").innerHTML = data.email || error
+        document.getElementById("phone").innerHTML = `${data.education_info.phone_number} &nbsp;  ${data.education_info.phone_number_2}` || error
+        document.getElementById("father").innerHTML = data.education_info.fathers_name || error
+        document.getElementById("mother").innerHTML = data.education_info.mothers_name || error
+        document.getElementById("nationality").innerHTML = data.education_info.nationality || error
+        document.getElementById("residence").innerHTML = data.education_info.country_of_residence || error 
+        document.getElementById("id_photo").innerHTML = id_photo ? `<button class="app_files" onclick="open_link('${id_photo}')">View</button>` : error 
+        document.getElementById("transcript").innerHTML = transcript_file ? `<button class="app_files" onclick="open_link('${transcript_file}')">View</button>` : error
+        document.getElementById("diploma").innerHTML = diploma_file ? `<button class="app_files" onclick="open_link('${diploma_file}')">View</button>` : error 
+        document.getElementById("certificate").innerHTML = language_certificate ? `<button class="app_files" onclick="open_link('${language_certificate}')">View</button>` : error  
+        document.getElementById("passport").innerHTML = data.education_info.passport_number || error 
+        document.getElementById("dob").innerHTML = date.substr(4) || error 
+
+
+        
+    }
+
+    function open_link(link){
+        window.open(link, '_blank')
+    }
 </script>

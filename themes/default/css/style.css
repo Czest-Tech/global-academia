@@ -1281,6 +1281,14 @@ a{
 
 }
 
+@media (max-width: 768px){
+    .midTopIcon span{
+        display: none;
+    }
+
+}
+
+
 .statusLeft8{
     flex:1;
 }
