@@ -43,7 +43,7 @@
                 <td>
                     <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
                         <option value="SELECT">Select</option>
-                        <option value="VIEW">View</option>
+                        <option value="VIEW"><a href="{{LINK dashboard/view_application}}/{{ME username}}?application_number=${element.reference_id}}}">View</a></option>
                         <option value="EDIT">Edit</option>
                         <option value="UPLOAD">upload</option>
                     </select>
@@ -57,7 +57,7 @@
   function open_action(id, app_id){
     let action = document.getElementById("app_change"+id).value
     if(action === "VIEW"){
-
+       window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
     }
     if(action === "EDIT"){
         document.getElementById("modal_container").style.display = "block"

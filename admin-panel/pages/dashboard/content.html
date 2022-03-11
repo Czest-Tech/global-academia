@@ -218,16 +218,16 @@ $u_array = implode(', ', $user_array);
         <div class="col-md-3">
           <div class="card">
               <div class="card-body">
-                  <h6 class="card-title">TOTAL SONGS</h6>
+                  <h6 class="card-title">TOTAL APPLICANTS</h6>
                   <div class="d-flex align-items-center mb-3">
                       <div>
                           <div class="avatar">
                               <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">music_note</i>
+                                  <i class="material-icons">application</i>
                               </span>
                           </div>
                       </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_songs}}</div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_number_of_applicants}}</div>
                   </div>
               </div>
           </div>
@@ -235,16 +235,16 @@ $u_array = implode(', ', $user_array);
         <div class="col-md-3">
           <div class="card">
               <div class="card-body">
-                  <h6 class="card-title">TOTAL ALBUMS</h6>
+                  <h6 class="card-title">TOTAL REPORTS</h6>
                   <div class="d-flex align-items-center mb-3">
                       <div>
                           <div class="avatar">
                               <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">album</i>
+                                  <i class="material-icons">alert</i>
                               </span>
                           </div>
                       </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_albums}}</div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG reports_count}}</div>
                   </div>
               </div>
           </div>
@@ -252,16 +252,16 @@ $u_array = implode(', ', $user_array);
         <div class="col-md-3">
           <div class="card">
               <div class="card-body">
-                  <h6 class="card-title">TOTAL PLAYS</h6>
+                  <h6 class="card-title">TOTAL UNIVERSITIES</h6>
                   <div class="d-flex align-items-center mb-3">
                       <div>
                           <div class="avatar">
                               <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">play_circle_outline</i>
+                                  <i class="material-icons">school</i>
                               </span>
                           </div>
                       </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_plays}}</div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_universities}}</div>
                   </div>
               </div>
           </div>
@@ -269,16 +269,16 @@ $u_array = implode(', ', $user_array);
         <div class="col-md-3">
           <div class="card">
               <div class="card-body">
-                  <h6 class="card-title">TOTAL REVENUE</h6>
+                  <h6 class="card-title">TOTAL ACTIVE USERS</h6>
                   <div class="d-flex align-items-center mb-3">
                       <div>
                           <div class="avatar">
                               <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">attach_money</i>
+                                  <i class="material-icons">person_outline</i>
                               </span>
                           </div>
                       </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_sales}}</div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_active_users}}</div>
                   </div>
               </div>
           </div>
@@ -286,7 +286,41 @@ $u_array = implode(', ', $user_array);
         <div class="col-md-3">
           <div class="card">
               <div class="card-body">
-                  <h6 class="card-title">TOTAL USERS</h6>
+                  <h6 class="card-title">TOTAL APPLICANTION TO UNIVERSITIES</h6>
+                  <div class="d-flex align-items-center mb-3">
+                      <div>
+                          <div class="avatar">
+                              <span class="avatar-title bg-info-bright text-info rounded-pill">
+                                  <i class="material-icons">work</i>
+                              </span>
+                          </div>
+                      </div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_application_to_universities}}</div>
+                  </div>
+              </div>
+          </div>
+       </div>
+        <div class="col-md-3">
+          <div class="card">
+              <div class="card-body">
+                  <h6 class="card-title">TOTAL STUDENTS WITH MISSING DOCUMENTS</h6>
+                  <div class="d-flex align-items-center mb-3">
+                      <div>
+                          <div class="avatar">
+                              <span class="avatar-title bg-info-bright text-info rounded-pill">
+                                  <i class="material-icons">empty_box</i>
+                              </span>
+                          </div>
+                      </div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_students_with_missing_documents}}</div>
+                  </div>
+              </div>
+          </div>
+       </div>
+        <div class="col-md-3">
+          <div class="card">
+              <div class="card-body">
+                  <h6 class="card-title">TOTAL AGENTS</h6>
                   <div class="d-flex align-items-center mb-3">
                       <div>
                           <div class="avatar">
@@ -295,41 +329,7 @@ $u_array = implode(', ', $user_array);
                               </span>
                           </div>
                       </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_users}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL ARTISTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">record_voice_over</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_artists}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL PLAYLISTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">library_music</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_playlists}}</div>
+                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_agents}}</div>
                   </div>
               </div>
           </div>
@@ -520,7 +520,7 @@ function users() {
                 enabled: false
             },
             series: [{
-        name: 'Added Songs',
+        name: 'Submited Applications',
         data: [<?php echo $t_array; ?>]
 
         },{

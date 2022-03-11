@@ -553,28 +553,32 @@ function UpdateAdminDetails() {
     global $kd, $db;
 
     $get_number_of_applicants = $db->getValue(T_APPLICATIONS, 'count(*)');
-    $update_questions_count = $db->where('name', 'get_number_of_applicants')->update(T_CONFIG, array('value' => $get_number_of_applicants));
+    $db->where('name', 'get_number_of_applicants')->update(T_CONFIG, array('value' => $get_number_of_applicants));
 
     $reports_count = $db->getValue(T_REPORTS, 'count(*)');
-    $update_albums_count = $db->where('name', 'total_albums')->update(T_CONFIG, array('value' => $reports_count));
+     $db->where('name', 'reports_count')->update(T_CONFIG, array('value' => $reports_count));
 
-    $get_plays_count = $db->getValue(T_REPORTS, 'count(*)');
-    $update_albums_count = $db->where('name', 'total_plays')->update(T_CONFIG, array('value' => $get_plays_count));
+    $get_total_universities = $db->getValue(T_UNIVERSITY, 'count(*)');
+     $db->where('name', 'get_total_universities')->update(T_CONFIG, array('value' => $get_total_universities));
+     $get_total_agents = $db->where('account_type', 'agent')->getValue(T_USERS, 'count(*)');
+    $db->where('name', 'get_total_agents')->update(T_CONFIG, array('value' => $get_total_agents));
 
-    $get_sales_count = number_format($db->getValue(T_REPORTS, 'SUM(final_price)'), 2);
-    $update_sales_count = $db->where('name', 'total_sales')->update(T_CONFIG, array('value' => $get_sales_count));
+    // $get_sales_count = number_format($db->getValue(T_REPORTS, 'SUM(final_price)'), 2);
+    // $update_sales_count = $db->where('name', 'total_sales')->update(T_CONFIG, array('value' => $get_sales_count));
 
     $get_users_count = $db->getValue(T_USERS, 'count(*)');
     $update_users_count = $db->where('name', 'total_users')->update(T_CONFIG, array('value' => $get_users_count));
 
-    $get_artists_count = $db->where('artist', '1')->getValue(T_USERS, 'count(*)');
-    $update_artists_count = $db->where('name', 'total_artists')->update(T_CONFIG, array('value' => $get_artists_count));
+    $get_active_users = $db->where('active', '1')->getValue(T_USERS, 'count(*)');
+    $db->where('name', 'get_active_users')->update(T_CONFIG, array('value' => $get_active_users));
 
-    $get_playlists_count = $db->getValue(T_REPORTS, 'count(*)');
-    $update_playlists_count = $db->where('name', 'total_playlists')->update(T_CONFIG, array('value' => $get_playlists_count));
+    $get_total_application_to_universities = $db->getValue(T_APPLICANT_UNIVERSITIES, 'count(*)');
+    $db->where('name', 'get_total_application_to_universities')->update(T_CONFIG, array('value' => $get_total_application_to_universities));
 
     $get_unactive_users_count = $db->where('active', '0')->getValue(T_USERS, 'count(*)');
-    $update_unactive_users_count = $db->where('name', 'total_unactive_users')->update(T_CONFIG, array('value' => $get_unactive_users_count));
+     $db->where('name', 'total_unactive_users')->update(T_CONFIG, array('value' => $get_unactive_users_count));
+    $get_students_with_missing_documents = $db->where('language_certificate', NULL)->orWhere('diploma_file', NULL)->orWhere('passport_file', NULL)->orWhere('transcript_file', NULL)->getValue(T_APPLICANT_EDUCATION_INFO, 'count(*)');
+    $db->where('name', 'get_students_with_missing_documents')->update(T_CONFIG, array('value' => $get_students_with_missing_documents));
 
     $user_statics = array();
     $songs_statics = array();
@@ -587,7 +591,7 @@ function UpdateAdminDetails() {
         $dateObj   = DateTime::createFromFormat('!m', $monthNum);
         $monthName = $dateObj->format('F');
         $user_statics[] = array('month' => $monthName, 'new_users' => $db->where('registered', "$date/$value")->getValue(T_USERS, 'count(*)'));
-        $songs_statics[] = array('month' => $monthName, 'new_songs' => $db->where('YEAR(FROM_UNIXTIME(`time`))', "$date")->where('MONTH(FROM_UNIXTIME(`time`))', "$value")->getValue(T_SONGS, 'count(*)'));
+        $songs_statics[] = array('month' => $monthName, 'new_songs' => $db->where('YEAR(FROM_UNIXTIME(`time`))', "$date")->where('MONTH(FROM_UNIXTIME(`time`))', "$value")->getValue(T_APPLICATIONS, 'count(*)'));
     }
     $update_user_statics = $db->where('name', 'user_statics')->update(T_CONFIG, array('value' => json_encode($user_statics)));
     $update_songs_statics = $db->where('name', 'songs_statics')->update(T_CONFIG, array('value' => json_encode($songs_statics)));
