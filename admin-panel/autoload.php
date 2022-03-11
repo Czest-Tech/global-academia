@@ -24,16 +24,25 @@ $pages = array(
     'manage-reports',
     'agent-account-requests',
     'manage-pages',
+    'manage_emails',
     'changelog',
     'ban-users',
+    'fake-users',
+    'manage-invitation-keys',
     'manage-universities',
     'manage-applications',
+    'create-new-sitemap',
     'edit-university',
     'edit-program',
     'add-department',
     'manage-programs',
     'backup',
+    'mass-notifications',
+    'send_email',
+    'manage-invitation',
     'fake-users',
+    'mailing-list',
+    'auto-friend',
     'view-application'
  
 );
@@ -128,7 +137,7 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 
 
 </head>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(function() {
         $(document).on('click', 'a[data-ajax]', function(e) {
             $(document).off('click', '.ranges ul li');
@@ -165,7 +174,7 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
             location.reload();
         });
     });
-</script>
+</script> -->
 
 <body <?php echo ($mode == 'night' ? 'class="dark"' : ''); ?>>
     <div class="barloading"></div>
@@ -456,16 +465,49 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a <?php echo ($page == 'manage-announcements' || $page == 'mass-notifications' || $page == 'manage-invitation-keys' || $page == 'ban-users' || $page == 'fake-users' || $page == 'create-new-sitemap' || $page == 'backup' || $page == 'auto-friend' || $page == 'manage_emails' || $page == 'manage-invitation' ) ? 'class="open"' : ''; ?> href="javascript:void(0);">
                             <span class="nav-link-icon">
-                                 <i data-feather="tool"></i>
+                                <i class="material-icons">build</i>
                             </span>
                             <span>Tools</span>
                         </a>
-                        <ul>
-                        
-                             <li><a href="<?php echo LoadAdminLinkSettings('backup'); ?>">Backup SQL & Files</a></li>
-                       
+                        <ul class="ml-menu">
+                            <li>
+                                <a <?php echo ($page == 'manage_emails') ? 'class="active"' : ''; ?> data-ajax="?path=manage_emails" href="<?php echo LoadAdminLinkSettings('manage_emails'); ?>">Manage Emails</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'manage-invitation') ? 'class="active"' : ''; ?> data-ajax="?path=manage-invitation" href="<?php echo LoadAdminLinkSettings('manage-invitation'); ?>">Users Invitation</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'manage-announcements') ? 'class="active"' : ''; ?> data-ajax="?path=manage-announcements" href="<?php echo LoadAdminLinkSettings('manage-announcements'); ?>">Manage Announcements</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'auto-friend') ? 'class="active"' : ''; ?> data-ajax="?path=auto-friend" href="<?php echo LoadAdminLinkSettings('auto-friend'); ?>">Auto Follow</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'mass-notifications') ? 'class="active"' : ''; ?> data-ajax="?path=mass-notifications" href="<?php echo LoadAdminLinkSettings('mass-notifications'); ?>">Mass Notifications</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'ban-users') ? 'class="active"' : ''; ?> data-ajax="?path=ban-users" href="<?php echo LoadAdminLinkSettings('ban-users'); ?>">Ban Users</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'fake-users') ? 'class="active"' : ''; ?> data-ajax="?path=fake-users" href="<?php echo LoadAdminLinkSettings('fake-users'); ?>">Fake User Generator</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'create-new-sitemap') ? 'class="active"' : ''; ?> data-ajax="?path=create-new-sitemap" href="<?php echo LoadAdminLinkSettings('create-new-sitemap'); ?>">Generate SiteMap</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'manage-invitation-keys') ? 'class="active"' : ''; ?> data-ajax="?path=manage-invitation-keys" href="<?php echo LoadAdminLinkSettings('manage-invitation-keys'); ?>">Invitation Codes</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'backup') ? 'class="active"' : ''; ?> data-ajax="?path=backup" href="<?php echo LoadAdminLinkSettings('backup'); ?>">Backup</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'send_email') ? 'class="active"' : ''; ?> data-ajax="?path=send_email" href="<?php echo LoadAdminLinkSettings('send_email'); ?>">Send E-mail</a>
+                            </li>
+                            <li>
+                                <a <?php echo ($page == 'mailing-list') ? 'class="active"' : ''; ?> data-ajax="?path=mailing-list" href="<?php echo LoadAdminLinkSettings('mailing-list'); ?>">Maling List</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

@@ -1,9 +1,20 @@
 <?php 
-UpdateSeenReports();
+
 $page           = (!empty($_GET['page-id']) && is_numeric($_GET['page-id'])) ? $_GET['page-id'] : 1;
 $filter_keyword = (!empty($_GET['query'])) ? Secure($_GET['query']) : '';
 $db->pageLimit  = 50;
 $link = '';
+
+if (!empty($filter_keyword)) {
+  $link .= '&query='.$filter_keyword;
+  $sql   = "(
+    `code`     LIKE '%$filter_keyword%'
+  )";
+
+  $db->where($sql);
+}
+
+
 if (!empty($_GET['range']) && in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
     if ($_GET['range'] == 'Today' || $_GET['range'] == 'Yesterday') {
         $this_start = strtotime(date('M')." ".date('d').", ".date('Y')." 12:00am");
@@ -57,10 +68,8 @@ $end = '';
 $first_code = '';
 $second_code = '';
 if (!empty($_GET['range']) && !in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
-    $_GET['range'] = str_replace('_', '/', $_GET['range']);
     $arr = explode('-', $_GET['range']);
     if (preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[0]) && preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[1])) {
-        
         $start = Secure($arr[0]);
         $end = Secure($arr[1]);
         $this_start = strtotime($start);
@@ -180,25 +189,25 @@ else{
     $db->orderBy('id', 'DESC');
 } 
 
-$reports = $db->objectbuilder()->paginate(T_REPORTS, $page);
+$codes = $db->objectbuilder()->paginate(T_INVITAION_LINKS, $page);
 if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
-  header("Location: " . LoadAdminLinkSettings('manage-reports'));
+  header("Location: " . LoadAdminLinkSettings('manage-invitation'));
   exit();
 }
-$db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','report')->update(T_NOTIFICATION,array('seen' => time()));
+
 ?>
 <div class="container-fluid">
     <div>
-        <h3>Manage Reports</h3>
+        <h3>Users Invitation</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="#">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Reports</a>
+                    <a href="#">Tools</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Manage Reports</li>
+                <li class="breadcrumb-item active" aria-current="page">Users Invitation</li>
             </ol>
         </nav>
     </div>
@@ -216,67 +225,75 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
                                 echo 'All';
                             } ?>
                         </div>
-                  <h6 class="card-title">Manage Reports</h6>
-                  <div class="row">
+                    <h6 class="card-title">Manage Users Invitation</h6>
+                     <div class="alert alert-info">This system is used to invite users to your site if the registration system is turned off.</div>
+                     <br>
+                     <div class="row">
+                      <div class="col-md-12">
+                         <div class="site-settings-alert"></div>
+                      </div>
                       <div class="col-md-9" style="margin-bottom:0;">
+                        <form method="get" action="<?php echo LoadAdminLinkSettings('manage-invitation'); ?>">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group form-float">
+                                  <div class="form-line">
+                                    <label class="form-label search-form">
+                                        Search for code
+                                      </label>
+                                      <input type="text" name="query" id="query" class="form-control" value="<?php echo($filter_keyword); ?>">
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-1">
+                              <label>&nbsp;</label>
+                               <button class="btn btn-info">Search</button>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                        </form>
                       </div>
                       <div class="col-md-3" style="margin-bottom:0;">
                         
                        </div>
                     </div>
                     <div class="clearfix"></div>
-                    <br>
                    <div class="table-responsive1">
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
-                                  <th><input type="checkbox" id="check-all" class="filled-in check-all" ><label for="check-all"></label></th>
-                                      <th>ID 
+                                    <th><input type="checkbox" id="check-all" class="filled-in check-all" ><label for="check-all"></label></th>
+                                   <th>ID 
                                   <?php if (!empty($_GET['sort']) && $_GET['sort'] == 'DESC_i') { ?>
-                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-reports?page-id=1').$sort_link."&sort=ASC_i") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-invitation?page-id=1').$sort_link."&sort=ASC_i") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
                                   <?php }else{ ?>
-                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-reports?page-id=1').$sort_link."&sort=DESC_i") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-invitation?page-id=1').$sort_link."&sort=DESC_i") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                   <?php } ?></th>
-					                  <th>Type</th>
-					                  <th>Reporter</th>
-					                  <th>Link</th>
-					                  <th>Time 
+                                   <th>Created 
                                   <?php if (!empty($_GET['sort']) && $_GET['sort'] == 'DESC_t') { ?>
-                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-reports?page-id=1').$sort_link."&sort=ASC_t") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-invitation?page-id=1').$sort_link."&sort=ASC_t") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up cursor-p"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
                                   <?php }else{ ?>
-                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-reports?page-id=1').$sort_link."&sort=DESC_t") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                                      <svg onclick="location.href = '<?php echo(LoadAdminLinkSettings('manage-invitation?page-id=1').$sort_link."&sort=DESC_t") ?>'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#000000" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down cursor-p"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                                   <?php } ?></th>
-					                  <th>Action</th>
+					               <th>Invitation Code</th>
+					               <th>Invited User</th>
+					               <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="manage-invitation-list">
                                 <?php 
-				                foreach ($reports as $key => $user) {
-                                    $user_data = UserData($user->user_id);
-                                    $url = '';
-                                    $type = 'Track';
-                                    $track = null;
-                                    if($user->track_id > 0 && $user->comment_id == 0){
-                                        $track = songData($user->track_id);
-                                        $url = $music->config->site_url . '/track/' . $track->audio_id;
+				                foreach ($codes as $value) {
+                                    $fetched_data = ToArray($value);
+                                    $fetched_data['user_name'] = '';
+                                    $fetched_data['user_url'] = '';
+                                    if (!empty($fetched_data['invited_id'])) {
+                                        $user_data = userData($fetched_data['invited_id']);
+                                        $fetched_data['user_name'] = $user_data->name;
+                                        $fetched_data['user_url'] = $user_data->url;
                                     }
-                                    if($user->track_id == 0 && $user->comment_id > 0){
-                                        $type = 'Comment';
-                                        $comment = getComment($user->comment_id);
-                                        $track = songData($comment->track_id);
-                                        $url = $music->config->site_url . '/track/' . $track->audio_id;
-                                    }
-                                    $user->link = $url;
-                                    $user->type = $type;
-                                    if($user->mode == 'blog'){
-                                        $articleData = $db->arrayBuilder()->where('id', $user->track_id)->getOne(T_BLOG);
-
-                                        $track['title'] = $articleData['title'];
-                                        $track['thumbnail'] = '';
-                                        $user->link = $music->config->site_url . '/article/' . $articleData['id'] . '_' . url_slug(html_entity_decode($articleData['title']));
-                                    }
-                                    echo LoadAdminPage('manage-reports/list', array('REPORT_DATA' => $user,'USER_DATA' => $user_data,'SONG_DATA' => $track));
-                                }
+                                    $music->invitation = $fetched_data;
+				                    echo LoadAdminPage('manage-invitation/list');
+				                }
 				                ?>
                             </tbody>
                         </table>
@@ -291,13 +308,13 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
                         <nav>
                           <ul class="pagination">
                             <li>
-                              <a href="<?php echo LoadAdminLinkSettings('manage-reports?page-id=1').$link; ?>" data-ajax="?path=manage-reports&page-id=1<?php echo($link); ?>" class="waves-effect" title='First Page'>
+                              <a href="<?php echo LoadAdminLinkSettings('manage-invitation?page-id=1').$link; ?>" data-ajax="?path=manage-invitation&page-id=1<?php echo($link); ?>" class="waves-effect" title='First Page'>
                                   <i class="material-icons">first_page</i>
                               </a>
                             </li>
                             <?php if ($page > 1) {  ?>
                               <li>
-                                  <a href="<?php echo LoadAdminLinkSettings('manage-reports?page-id=' . ($page - 1)).$link; ?>" data-ajax="?path=manage-reports&page-id=<?php echo($page - 1) ?><?php echo($link); ?>" class="waves-effect" title='Previous Page'>
+                                  <a href="<?php echo LoadAdminLinkSettings('manage-invitation?page-id=' . ($page - 1)).$link; ?>" data-ajax="?path=manage-invitation&page-id=<?php echo($page - 1) ?><?php echo($link); ?>" class="waves-effect" title='Previous Page'>
                                       <i class="material-icons">chevron_left</i>
                                   </a>
                               </li>
@@ -311,7 +328,7 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
                                 if ($nums < 20) {
                             ?>
                               <li class="<?php echo ($page == $i) ? 'active' : ''; ?>">
-                                <a href="<?php echo LoadAdminLinkSettings('manage-reports?page-id=' . ($i)).$link; ?>" data-ajax="?path=manage-reports&page-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
+                                <a href="<?php echo LoadAdminLinkSettings('manage-invitation?page-id=' . ($i)).$link; ?>" data-ajax="?path=manage-invitation&page-id=<?php echo($i) ?><?php echo($link); ?>" class="waves-effect">
                                   <?php echo $i ?>   
                                 </a>
                               </li>
@@ -320,13 +337,13 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
 
                             <?php if ($db->totalPages > $page) { ?>
                               <li>
-                                  <a href="<?php echo LoadAdminLinkSettings('manage-reports?page-id=' . ($page + 1)).$link; ?>" data-ajax="?path=manage-reports&page-id=<?php echo($page + 1) ?><?php echo($link); ?>" class="waves-effect" title="Next Page">
+                                  <a href="<?php echo LoadAdminLinkSettings('manage-invitation?page-id=' . ($page + 1)).$link; ?>" data-ajax="?path=manage-invitation&page-id=<?php echo($page + 1) ?><?php echo($link); ?>" class="waves-effect" title="Next Page">
                                       <i class="material-icons">chevron_right</i>
                                   </a>
                               </li>
                             <?php } ?>
                             <li>
-                              <a href="<?php echo LoadAdminLinkSettings('manage-reports?page-id=' . ($db->totalPages)).$link; ?>" data-ajax="?path=manage-reports&page-id=<?php echo($db->totalPages) ?><?php echo($link); ?>" class="waves-effect" title='Last Page'>
+                              <a href="<?php echo LoadAdminLinkSettings('manage-invitation?page-id=' . ($db->totalPages)).$link; ?>" data-ajax="?path=manage-invitation&page-id=<?php echo($db->totalPages) ?><?php echo($link); ?>" class="waves-effect" title='Last Page'>
                                   <i class="material-icons">last_page</i>
                               </a>
                             </li>
@@ -335,57 +352,34 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
                       </div>
                       <div class="clearfix"></div>
                         <div class="row">
-                          <div class="col-lg-2 col-md-2">
-                              <span>Action</span>
-                              <select class="form-control show-tick" id="action_type">
-                                  <option value="ignore">Ignore Report</option>
-                                  <option value="song">Delete Song</option>
-                                  <option value="delete">Delete Report</option>
-                              </select>
-                          </div>
-                          <div class="col-lg-3 col-md-3">
-                              <span>&nbsp;</span>
-                              <button type="button" class="btn btn-info waves-effect delete-selected d-block" disabled>Submit<span></span></button>
-                          </div>
-                      </div>
+                            <div class="col-lg-3 col-md-3">
+                                <span>&nbsp;</span>
+                                <button type="button" class="btn btn-info waves-effect delete-selected d-block" disabled>Delete Selected<span></span></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="clearfix"></div>
     </div>
-</div>
-<div class="modal fade" id="read_report" role="dialog">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> VIEW REPORT</h4>
-         </div>
-         <div class="modal-body">
-            <p class="report_text"></p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
-         </div>
-      </div>
-   </div>
-</div>
-
+    </div>
+    <!-- #END# Vertical Layout -->
 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModal1Label">Ignore Report?</h5>
+                <h5 class="modal-title" id="exampleModal1Label">Delete Invitation?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to ignore this Report?
+                Are you sure you want to delete this Invitation?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Ignore</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
             </div>
         </div>
     </div>
@@ -394,13 +388,13 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModal1Label">Delete Report?</h5>
+                <h5 class="modal-title" id="exampleModal1Label">Delete Invitation?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure that you want to remove the selected Report(s)?
+                Are you sure that you want to remove the selected Invitation?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -409,81 +403,7 @@ $db->where('recipient_id',0)->where('admin',1)->where('seen',0)->where('type','r
         </div>
     </div>
 </div>
-<div class="modal fade" id="DeleteModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModal1Label">Delete Report?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this report?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="DeleteModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModal1Label">Delete Song?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this song?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
-function IgnoreReport(id,type = 'show') {
-  if (type == 'hide') {
-    $('#DeleteModal').find('.btn-primary').attr('onclick', "IgnoreReport('"+id+"')");
-    $('#DeleteModal').modal('show');
-    return false;
-  }
-  $.get('{{CONFIG ajax_url}}/ap/ignore-report', {id: id}, function( data ) {
-      if(data.status == 200){
-          location.reload();
-      }
-  });
-}
-function DeleteReport(id,type = 'show') {
-  if (type == 'hide') {
-    $('#DeleteModal2').find('.btn-primary').attr('onclick', "DeleteReport('"+id+"')");
-    $('#DeleteModal2').modal('show');
-    return false;
-  }
-  $.post('{{CONFIG ajax_url}}/ap/delete-reports', {id: id}, function( data ) {
-      if(data.status == 200){
-          location.reload();
-      }
-  });
-}
-function DeleteSong(id,type = 'show') {
-  if (type == 'hide') {
-    $('#DeleteModal3').find('.btn-primary').attr('onclick', "DeleteSong('"+id+"')");
-    $('#DeleteModal3').modal('show');
-    return false;
-  }
-  $.get('{{CONFIG ajax_url}}/delete-song', {id: id}, function( data ) {
-      if(data.status == 200){
-          location.reload();
-      }
-  });
-}
 jQuery(document).ready(function($) {
         var range = { "All": [moment().startOf('year') , moment().endOf('year')],
                       "Today": [moment() , moment()], 
@@ -551,21 +471,19 @@ jQuery(document).ready(function($) {
             event.preventDefault();
             if ($(this).attr('data-range-key') != 'Custom Range') {
                 $(document).off('click', '.ranges ul li');
-                $('#redirect_link').attr('href', "<?php echo LoadAdminLinkSettings('manage-reports').$rang_link; ?>&range="+$(this).attr('data-range-key'));
-                $('#redirect_link').attr('data-ajax', "?path=manage-reports<?php echo('&'.$rang_link) ?>&range="+$(this).attr('data-range-key'));
+                $('#redirect_link').attr('href', "<?php echo LoadAdminLinkSettings('manage-invitation').$rang_link; ?>&range="+$(this).attr('data-range-key'));
+                $('#redirect_link').attr('data-ajax', "?path=manage-invitation<?php echo('&'.$rang_link) ?>&range="+$(this).attr('data-range-key'));
                 $('#redirect_link').click();
-                //location.href = "<?php echo LoadAdminLinkSettings('manage-reports').$rang_link; ?>&range="+$(this).attr('data-range-key');
+                //location.href = "<?php echo LoadAdminLinkSettings('manage-invitation').$rang_link; ?>&range="+$(this).attr('data-range-key');
             }
         });
         $(document).on('click', '.applyBtn', function(event) {
             event.preventDefault();
             $(document).off('click', '.applyBtn');
-            var text = $(this).parent('.drp-buttons').find('.drp-selected').html().toString();
-            text = text.replaceAll("/", "_");
-            $('#redirect_link').attr('href', "<?php echo LoadAdminLinkSettings('manage-reports').$rang_link; ?>&range="+text);
-            $('#redirect_link').attr('data-ajax', "?path=manage-reports<?php echo('&'.$rang_link) ?>&range="+text);
+            $('#redirect_link').attr('href', "<?php echo LoadAdminLinkSettings('manage-invitation').$rang_link; ?>&range="+$(this).parent('.drp-buttons').find('.drp-selected').html());
+            $('#redirect_link').attr('data-ajax', "?path=manage-invitation<?php echo('&'.$rang_link) ?>&range="+$(this).parent('.drp-buttons').find('.drp-selected').html());
             $('#redirect_link').click();
-            //location.href = "<?php echo LoadAdminLinkSettings('manage-reports').$rang_link; ?>&range="+$('.drp-selected').html();
+            //location.href = "<?php echo LoadAdminLinkSettings('manage-invitation').$rang_link; ?>&range="+$('.drp-selected').html();
         });
 });
 $('.check-all').on('click', function(event) {
@@ -575,34 +493,34 @@ $('.delete-checkbox, .check-all').change(function(event) {
     $('.delete-selected').attr('disabled', false);
     $('.delete-selected').find('span').text(' (' + $('.delete-checkbox:checked').length + ')');
 });
+
 $('.delete-selected').on('click', function(event) {
     event.preventDefault();
-    action_type = $('#action_type').val();
-    if (action_type == 'ignore') {
-      $('#SelectedDeleteModal').find('.modal-body').html('Are you sure you want to ignore the selected reports?');
-      $('#SelectedDeleteModal').find('#exampleModal1Label').html('ignore reports?');
-    }
-    else if(action_type == 'song'){
-      $('#SelectedDeleteModal').find('.modal-body').html('Are you sure you want to delete the selected songs?');
-      $('#SelectedDeleteModal').find('#exampleModal1Label').html('delete songs?');
-    }
-    else{
-      $('#SelectedDeleteModal').find('.modal-body').html('Are you sure that you want to '+action_type+' the selected Report(s)?');
-      $('#SelectedDeleteModal').find('#exampleModal1Label').html(action_type+' Report(s)');
-    }
     $('#SelectedDeleteModal').modal('show');
 });
 function DeleteSelected() {
-    action_type = $('#action_type').val();
     data = new Array();
     $('td input:checked').parents('tr').each(function () {
         data.push($(this).attr('data_selected'));
     });
     $('.delete-selected').attr('disabled', true);
     $('.delete-selected').text('Please wait..');
-    $.post('{{CONFIG ajax_url}}/ap/delete_multi_report', {ids: data,type: action_type}, function () {
-        location.reload();
-        $('.delete-selected').text('Submit');
+    $.post("{{CONFIG ajax_url}}/ap/remove_multi_invitation", {ids: data}, function () {
+        $.each( data, function( index, value ){
+            $("tr[data-invitation='"+value+"']").remove();
+        });
+        $('.delete-selected').text('Delete Selected');
     });
+}
+function Wo_DeleteCode(id,type = 'show') {
+  if (type == 'hide') {
+      $('#DeleteModal').find('.btn-primary').attr('onclick', "Wo_DeleteCode('"+id+"')");
+      $('#DeleteModal').modal('show');
+      return false;
+    }
+  $("tr[data-invitation='"+id+"']").fadeOut(300, function() {
+    $(this).remove();
+  });
+  $.get("{{CONFIG ajax_url}}/ap/rm-user-invitation", {id: id}, function(data, textStatus, xhr) {});
 }
 </script>

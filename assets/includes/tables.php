@@ -27,5 +27,9 @@ define('T_APPLICANT_EDUCATION_INFO','applicant_education_info');
 define('T_USER_NOTIFACATIONS','user_notifications');
 define('T_ANNOUNCEMENTS', 'announcement');
 define('T_ANNOUNCEMENT_VIEWS', 'announcement_views');
+define('T_HTML_EMAILS', 'html_emails');
+define('T_INVITAION_LINKS', 'invitation_links');
+define('T_INVITATIONS', 'admin_invitations');
+
 
 

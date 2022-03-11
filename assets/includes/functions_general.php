@@ -1168,3 +1168,28 @@ function RunInBackground($data = array()) {
         fastcgi_finish_request();
     }
 }
+function GetHtmlEmails() {
+    global $kd, $db,$sqlConnect;
+    $data  = array();
+    $query = mysqli_query($sqlConnect, "SELECT * FROM " . T_HTML_EMAILS);
+    if (mysqli_num_rows($query)) {
+        while ($fetched_data = mysqli_fetch_assoc($query)) {
+            $data[$fetched_data['name']] = $fetched_data['value'];
+        }
+    }
+    return $data;
+}
+function GetAdminInvitation() {
+    global $sqlConnect, $kd;
+    if ($kd->loggedin == false || !IsAdmin()) {
+        return false;
+    }
+    $query = mysqli_query($sqlConnect, "SELECT * FROM " . T_INVITATIONS . " ORDER BY `id` DESC ");
+    $data  = array();
+    $site  = $kd->config->site_url . '/?invite=';
+    while ($fetched_data = mysqli_fetch_assoc($query)) {
+        $fetched_data['url'] = $site . $fetched_data['code'];
+        $data[]              = $fetched_data;
+    }
+    return $data;
+}
