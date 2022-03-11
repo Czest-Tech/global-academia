@@ -235,3 +235,30 @@ if($first === "get_user_messages"){
 //     );
      
 // }
+
+if($first === "get_user_application"){
+
+    if(!empty($_GET['user_id']) && !empty($_GET['id']) ){
+        $get_univiversities = $db->where("id", Secure($_GET['id']))->get(T_APPLICANT_UNIVERSITIES);
+        
+        foreach($get_univiversities as $allProgram){
+            $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+            $allProgram->program_id = GetProgramByID($allProgram->program_id);
+            $allProgram->application_status_slug =  __($allProgram->application_status);
+        }
+
+
+        $data = array(
+            'status' => 200,
+            'applicant_university' => $get_univiversities,
+            'applicant_info' => $kd->user
+        );
+    } else  {
+         
+        $data = array(
+            'status' => 400,
+            'message' => "ERROR",
+        
+        );
+    }
+}
