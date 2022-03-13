@@ -21,7 +21,7 @@
 					<p>{{LANG Messages}}</p>
 				</div>
 			</a>
-			<?php if($kd->user->type === "agent") {?>
+			<?php if($kd->user->account_type === "agent") {?>
 			<a href="{{LINK dashboard/students/}}{{USER username}}" data-load="?link1=dashboard&page=students&user={{USER username}}">
 				<div class="nav_link">
 					<i class="fas fa-user-graduate "></i>
