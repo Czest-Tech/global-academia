@@ -72,13 +72,13 @@ foreach($university_filter as $key => $uf){
 foreach($university_data as $ud){
         $university_html .= LoadPage('cards/university_cards',array(
             'id' => $ud->id,
-            'university' => $ud->university,
-            'foundation' => $ud->foundation,
+            'university' => strtolower($ud->university),
+            'foundation' => strtolower($ud->foundation),
             'university_logo' => (GetMedia($ud->university_logo))?  GetMedia($ud->university_logo): "https://www.usnews.com/dims4/USNEWS/e836bb8/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fb0%2F5a49fe7ceb6d77f5ad2824c373a297%2Fucf_47862357.jpg",
             'main_image' => (GetMedia($ud->main_image))?  GetMedia($ud->main_image): "https://www.usnews.com/dims4/USNEWS/e836bb8/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fb0%2F5a49fe7ceb6d77f5ad2824c373a297%2Fucf_47862357.jpg",
-            'location' => $ud->location,
+            'location' => strtolower($ud->location),
             'total_students' => $ud->total_students,
-            'university_type' => $ud->university_type,
+            'university_type' => strtolower($ud->university_type),
             'total_programs' => TotalPrograms($ud->id),
            
         ));
