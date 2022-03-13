@@ -1,53 +1,14 @@
-<div class="view_appz">
-    <div class="view_app_card m-10">
+<div class="applications">
+    <div class="view_app_card">
         <div class="view_app_card_top">
             <img src="https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/pa-consulting-modern-student-istock-1152767923_0.jpg?itok=G6Ny_tin" alt="student">
             <div>
                 <p class="font4 bold600 dark_color" id="appname">Undefined</p>
                 <p class="font3 dark_color mb-3" id="email2">Undefined</p>
-                <p class="font2 blue_color bold600" id="app_id2">Undefined</p>
+                <p class="font2 blue_color bold600" ><span id="app_num">#</span> Applications</p>
             </div>
         </div>
-        <div class="view_app_body pt-10">
-            <p class="font4 bold600 blue_color mt-5">Application Details</p>
-            <div class="sentence">
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">University</p><p id="university" >Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Program</p><p id="program">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Application ID</p><p id="app_id">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Date Applied</p><p id="app_date">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Status</p><p id="status">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Acceptance Letter</p><p id="letter">Undefined</p>
-                </div>
-            </div>
-        </div>
-        <div class="view_app_body pt-10">
-            <p class="font4 bold600 blue_color mt-10">Documents</p>
-            <div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">ID Photo</p><p id="id_photo" >Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Transcript</p><p id="transcript">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Diploma</p><p id="diploma">Undefined</p>
-                </div>
-                <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Lang. Certificate</p><p id="certificate">Undefined</p>
-                </div>
-            </div>
-        </div>
+        
         <div class="view_app_body">
             <p class="font4 bold600 blue_color mt-10">Personal Details</p>
             <div class="sentence">
@@ -83,7 +44,42 @@
                 </div>
             </div>
         </div>
+        <div class="view_app_body pt-10">
+            <p class="font4 bold600 blue_color mt-10">Documents</p>
+            <div>
+                <div class="view_app_rows font2 dark_color">
+                    <p class="bold600 font3">ID Photo</p><p id="id_photo" >Undefined</p>
+                </div>
+                <div class="view_app_rows font2 dark_color">
+                    <p class="bold600 font3">Transcript</p><p id="transcript">Undefined</p>
+                </div>
+                <div class="view_app_rows font2 dark_color">
+                    <p class="bold600 font3">Diploma</p><p id="diploma">Undefined</p>
+                </div>
+                <div class="view_app_rows font2 dark_color">
+                    <p class="bold600 font3">Lang. Certificate</p><p id="certificate">Undefined</p>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="table_area_app">
+        <table class="ga_table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>University</th>
+                    <th>Programme</th>
+                    <th>Status</th>
+                    <th>Acc. Letter</th>
+                </tr>
+            </thead>
+            <tbody id="ga_table-body">
+                
+            </tbody>
+          </table>
+          <p id="no_apps"></p>
+      </div>
+
 </div>
 
 
@@ -94,7 +90,7 @@
 
     $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
         if(data.status === 200){
-            // render_application_details(data)
+            render_application_details(data.applicant_university)
             render_applicant(data.applicant_info)
         }
     }));
@@ -102,29 +98,28 @@
     function render_application_details(data){
         // let d = new Date(+data.created_at)
         // let date = d.toDateString();
-        // let error = "<p style='color:tomato;'>Missing</p>"
-
-        console.log(data)
-        // document.getElementById("app_date").innerHTML = date || error
-        // document.getElementById("app_id").innerHTML = data.application_no || error
-        // document.getElementById("app_id2").innerHTML = data.application_no || error
-        // document.getElementById("id_photo").innerHTML = data.id_photo || error
-        // document.getElementById("transcript").innerHTML = data.transcript_file || error
-        // document.getElementById("diploma").innerHTML = data.diploma_file || error
-        // document.getElementById("certificate").innerHTML = data.language_certificate || error
-        // document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
-        // document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
-        // document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
-        // document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
-
+        document.getElementById("app_num").innerHTML = data.length
+        let error = "<p style='color:tomato;'>Missing</p>"
         
+        let rows = ""
+        data.forEach(element => {
+            let letter = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
+            console.log(element)
+            rows += `
+                <tr>
+                    <td>${element.created_at.substr(0,10)}</td>
+                    <td>${element.university_id}</td>
+                    <td>${element.program_id.toLowerCase()}</td>
+                    <td>${element.application_status_slug}</td>
+                    <td>${letter}</td>
+                </tr>
+            `
+        });
+        document.getElementById("ga_table-body").innerHTML = rows
+
     }
     function render_applicant(data){
-        // let d = new Date(+data.created_at)
-        // let date = d.toDateString();
         let error = "<p style='color:tomato;'>Missing</p>"
-
-        console.log(data.email)
         document.getElementById("appname").innerHTML = data.first_name + " " +data.last_name
         document.getElementById("lname").innerHTML = data.last_name || error
         document.getElementById("fname").innerHTML = data.first_name || error
@@ -137,16 +132,10 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        // document.getElementById("id_photo").innerHTML = data.id_photo || error
-        // document.getElementById("transcript").innerHTML = data.transcript_file || error
-        // document.getElementById("diploma").innerHTML = data.diploma_file || error
-        // document.getElementById("certificate").innerHTML = data.language_certificate || error
-        // document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
-        // document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
-        // document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
-        // document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
-
-        
+        document.getElementById("id_photo").innerHTML = data.id_photo || error
+        document.getElementById("transcript").innerHTML = data.transcript_file || error
+        document.getElementById("diploma").innerHTML = data.diploma_file || error
+        document.getElementById("certificate").innerHTML = data.language_certificate || error
     }
     function open_link(link){
         window.open(link, '_blank')
