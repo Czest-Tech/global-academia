@@ -229,8 +229,9 @@
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.24);
     background-color: white;
     padding: 10px;
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    margin-bottom: 20px;
+    /* max-width: 600px; */
 }
 .view_app_card_top{
     display: flex;
@@ -252,12 +253,11 @@
 .view_app_body > div{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 5px;
 }
 .view_app_rows{
-    min-width: 200px;
-    flex: 1;
+    min-width: 220px;
     display: flex;
     flex-direction: column;
     padding: 10px 0;
