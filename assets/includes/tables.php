@@ -30,6 +30,8 @@ define('T_ANNOUNCEMENT_VIEWS', 'announcement_views');
 define('T_HTML_EMAILS', 'html_emails');
 define('T_INVITAION_LINKS', 'invitation_links');
 define('T_INVITATIONS', 'admin_invitations');
+define('T_AGENT_STUDENTS', 'agent_students');
+
 
 
 
