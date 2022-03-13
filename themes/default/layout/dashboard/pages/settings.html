@@ -58,7 +58,7 @@
         <div class="settings_toggle">
             <div class="settings_text">
                 <p class="settings_text_title font2 bold600">${element.name}</p>
-                <div class="toggle_gear ${classer}" onclick="toggle_gear(${element.name})">
+                <div class="toggle_gear ${classer}" onclick="deactivate(${element.name})">
                 <div class="toggle_knob"></div>
             </div>
         </div>
@@ -73,12 +73,30 @@
   }
 
   let deactivate_switch = false
-  function deactivate(){
+  function deactivate(name){
     if(deactivate_switch){
-      deactivate_switch = false
+
+      deactivate_switch = false;
+      let obj = {
+        [name]:0
+      }
+      $.post('{{LINK aj}}' + "/user_dashboard/save-settings?hash=" + $('.main_session').val(),obj, (data => {
+          if(data.status === 200){
+            console.log(data)
+          }
+      }));
+     
       document.getElementById("deactivate_switch").classList.remove('toggle_gear_active')
     }else{
+      let obj = {
+        [name]:1
+      }
       deactivate_switch = true
+      $.post('{{LINK aj}}' + "/user_dashboard/save-settings?hash=" + $('.main_session').val(), obj ,(data => {
+          if(data.status === 200){
+            console.log(data)
+          }
+      }));
       document.getElementById("deactivate_switch").classList.add('toggle_gear_active')
     }
   }

@@ -420,3 +420,34 @@ if($first  === "add_agent_student"){
     }
     
 }
+
+if ($first == 'save-settings') {
+    $submit_data = array();
+    foreach ($_POST as $key => $settings_to_save) {
+        if ($key != 'ffmpeg_binary_file') {
+            $submit_data[$key] = $settings_to_save;
+        }
+        else{
+            if (empty($settings_to_save)) {
+                $submit_data[$key] = $settings_to_save;
+            }
+            if (file_exists($settings_to_save)) {
+                $submit_data[$key] = $settings_to_save;
+            }
+        }
+    }
+    $update = false;
+    if (!empty($submit_data)) {
+        foreach ($submit_data as $key => $value) {
+          
+            
+                $update = $db->where('id', $kd->user->id)->update(T_USERS, array($key  => $value));
+            }
+        
+
+        
+    }
+    if ($update) {
+        $data = array('status' => 200);
+    }
+}
