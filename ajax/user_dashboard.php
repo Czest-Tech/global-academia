@@ -311,3 +311,23 @@ if($first === "get_user_application"){
         );
     }
 }
+
+if($first === "get_agent_students"){
+
+    $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+    
+    if($agent_students){
+        $data = array(
+            'status' => 200,
+            'data' => $agent_students,
+            
+        );
+    } else {
+        $data = array(
+            'status' => 301,
+            'data' => [],
+            'message' => 'no records'
+            
+        );
+    } 
+}
