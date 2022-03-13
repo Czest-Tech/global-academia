@@ -1,116 +1,66 @@
 <div class="settings" id="settings_xd">
-  <div class="settings_toggle">
-      <div class="settings_text">
-          <p class="settings_text_title font2 bold600">Temporarily disable Account</p>
-          <div id="deactivate_switch" class="toggle_gear ${classer}" onclick="deactivate()">
-            <div class="toggle_knob"></div>
-        </div>
-      </div>
-      <p class="settings_text_body font2 dark_gray_color">Account can still be access within 3 months but if now re-activated after 3 months, account will be permanently deleted</p>
-      
-  </div>
-  <div class="settings_toggle">
-    <div class="settings_text">
-        <p class="settings_text_title font2 bold600">Share my Profile</p>
-        <div id="deactivate_switch" class="toggle_gear ${classer}" onclick="deactivate('notification_on_visit_profile')">
-          <div class="toggle_knob"></div>
-      </div>
-    </div>
-    <p class="settings_text_body font2 dark_gray_color">Account can still be access within 3 months but if now re-activated after 3 months, account will be permanently deleted</p>
-    
-</div>
-  <!-- loaded from JS -->
-  {{USER share_my_profile}}
 </div>
 
 
 <script>
-  const posts = [
+  const settings = [
 
     {
-      "userId": 1,
-      "id": 10,
+      "title": "Share my Profile",
       "name": "share_my_profile",
       "isActive": '{{USER share_my_profile}}',
-      "title": "optio molestias id quia eum",
-      "body": "Quod sed accusamus veritatis error"
+      "body": "Share your profile"
     },
     {
-      "userId": 2,
-      "id": 11,
+      "title": "Notification on visit Profile",
       "name": "notification_on_visit_profile",
       "isActive": '{{USER notification_on_visit_profile}}',
-      "title": "Notify me on Profile Visit",
-      "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
+      "body": "Get notified when your profile is visted."
     },
     {
-      "userId": 2,
-      "id": 12,
+      "title": "Notification on Application",
       "name": "notification_on_application",
       "isActive": '{{USER notification_on_application}}',
-      "title": "Notification on each application",
-      "body": "itaque nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
+      "body": "Get notified when when your appliaction status changes"
     },
     {
-      "userId": 2,
-      "id": 13,
+      "title": "Turn on Email Notifications",
       "name": "turn_on_email_notifications",
       "isActive": '{{USER turn_on_email_notifications}}',
-      "title": "dolorum ut in voluptas mollitia et saepe quo animi",
-      "body": "aut dicta possimus sint mollitia voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
+      "body": "Get Notifications on you email too"
     }
 
   ]
 
-  posts.forEach(element => {
-    console.log(element)
-    let classer = ""
-    if (element.isActive === '1') classer = "toggle_gear_active"
-    document.getElementById("settings_xd").innerHTML += `
-        <div class="settings_toggle">
+
+  
+  render_settings()
+  function render_settings(){
+    let row = ""
+    settings.forEach(element => {
+      let classer = ""
+      if (element.isActive === '1') classer = "toggle_gear_active"
+      row += `
+          <div class="settings_toggle">
             <div class="settings_text">
-                <p class="settings_text_title font2 bold600">${element.name}</p>
-                <div class="toggle_gear ${classer}" onclick="deactivate(${element.name})">
+              <p class="settings_text_title font2 bold600">${element.title}</p>
+              <div id="deactivate_switch" class="toggle_gear ${classer}" onclick="deactivate('${element.name}', '${element.isActive}')">
                 <div class="toggle_knob"></div>
+              </div>
             </div>
-        </div>
-        <p class="settings_text_body font2 dark_gray_color">${element.body}</p>
-            
-        </div>
-    
-    `
-  });
-  function toggle_gear(target) {
-    console.log(target)
+            <p class="settings_text_body font2 dark_gray_color">${element.body}</p>
+          </div>
+      `
+    });
+    document.getElementById("settings_xd").innerHTML = row
   }
 
-  let deactivate_switch = false
-  function deactivate(name){
-    if(deactivate_switch){
-
-      deactivate_switch = false;
-      let obj = {
-        notification_on_visit_profile:0
-      }
-      $.post('{{LINK aj}}' + "/user_dashboard/save-settings?hash=" + $('.main_session').val(),obj, (data => {
-          if(data.status === 200){
-            console.log(data)
-          }
-      }));
-     
-      document.getElementById("deactivate_switch").classList.remove('toggle_gear_active')
-    }else{
-      let obj = {
-        notification_on_visit_profile:1
-      }
-      deactivate_switch = true
-      $.post('{{LINK aj}}' + "/user_dashboard/save-settings?hash=" + $('.main_session').val(), obj ,(data => {
-          if(data.status === 200){
-            console.log(data)
-          }
-      }));
-      document.getElementById("deactivate_switch").classList.add('toggle_gear_active')
-    }
+  function deactivate(name, id) {
+    let num = +id === 1 ? 0 : 1
+    let obj = {[name]: num}
+    $.post('{{LINK aj}}' + "/user_dashboard/save-settings?hash=" + $('.main_session').val(), obj, (data => {
+      if (data.status === 200) { location.reload()}
+    }));
   }
 
 </script>

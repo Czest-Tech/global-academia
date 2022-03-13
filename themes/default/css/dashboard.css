@@ -100,7 +100,7 @@
 .applications .ga_table{ border-radius: 5px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; }
 .ga_table_thumb{ width: 45px; height: 40px; border-radius: 5px; object-fit: cover; }
 .ga_table_select{ border: none; outline: none; background: none; cursor: pointer; }
-.settings{ padding: 15px 30px; display: flex; flex-wrap: wrap; justify-content: space-between; background-color: #f9f9f9; }
+.settings{ padding: 15px 30px; display: flex; flex-wrap: wrap; justify-content: space-between; }
 .settings_toggle{ flex-direction: column; display: flex;  padding: 15px; margin-bottom: 15px; border-radius: 5px; width: 49%; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; background-color: white; }
 .toggle_gear{ width: 35px; min-width: 35px; height: 20px; overflow: hidden; background-color: #dedede; margin-left: 20px; border-radius: 10px; display: flex; cursor: pointer; align-items: center; }
 .toggle_gear_active{ background-color: var(--BLUE) !important; justify-content: flex-end !important; }
