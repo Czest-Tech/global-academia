@@ -35,7 +35,6 @@
     }));
     function render_application(data){
       data.forEach((element, index) => {
-          console.log(element)
         let date = new Date(+element.created_at)
         document.getElementById("ga_table-body").innerHTML += `
               <tr>

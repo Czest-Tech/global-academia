@@ -3,8 +3,8 @@
         <div class="view_app_card_top">
             <img src="https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/pa-consulting-modern-student-istock-1152767923_0.jpg?itok=G6Ny_tin" alt="student">
             <div>
-                <p class="font4 bold600 dark_color">Undefined</p>
-                <p class="font3 dark_color mb-3">Undefined</p>
+                <p class="font4 bold600 dark_color" id="appname">Undefined</p>
+                <p class="font3 dark_color mb-3" id="email2">Undefined</p>
                 <p class="font2 blue_color bold600" id="app_id2">Undefined</p>
             </div>
         </div>
@@ -61,12 +61,14 @@
                     <p class="bold600 font3">Date of Birth</p><p id="dob">Undefined</p>
                 </div>
                 <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Email</p><p id="app_date">Undefined</p>
+                    <p class="bold600 font3">Email</p><p id="email">Undefined</p>
                 </div>
                 <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Contact</p><p id="phone">Undefined</p>
+                    <p class="bold600 font3">Line</p><p id="phone">Undefined</p>
                 </div>
-
+                <div class="view_app_rows font2 dark_color">
+                    <p class="bold600 font3">Line 2</p><p id="phone2">Undefined</p>
+                </div>
                 <div class="view_app_rows font2 dark_color">
                     <p class="bold600 font3">Father</p><p id="father">Undefined</p>
                 </div>
@@ -89,61 +91,63 @@
 
     let link_id = "<?php echo $_GET['application_number']; ?>";
     let user__id = "{{ME id}}"
-    console.log(link_id, "link id", user__id, "user id");
 
     $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
         if(data.status === 200){
-            render_application_details(data.applicant_university[0])
-            render_applicant_details(data.applicant_info)
+            // render_application_details(data)
+            render_applicant(data.applicant_info)
         }
     }));
 
     function render_application_details(data){
-        let d = new Date(data.created_at)
-        let date = d.toDateString();
-        let error = "<p style='color:tomato;'>Missing</p>"
+        // let d = new Date(+data.created_at)
+        // let date = d.toDateString();
+        // let error = "<p style='color:tomato;'>Missing</p>"
 
         console.log(data)
-        document.getElementById("app_date").innerHTML = date || error
-        document.getElementById("app_id").innerHTML = data.uniqid || error
-        document.getElementById("app_id2").innerHTML = data.uniqid || error
-        document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
-        document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
-        document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
-        document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
+        // document.getElementById("app_date").innerHTML = date || error
+        // document.getElementById("app_id").innerHTML = data.application_no || error
+        // document.getElementById("app_id2").innerHTML = data.application_no || error
+        // document.getElementById("id_photo").innerHTML = data.id_photo || error
+        // document.getElementById("transcript").innerHTML = data.transcript_file || error
+        // document.getElementById("diploma").innerHTML = data.diploma_file || error
+        // document.getElementById("certificate").innerHTML = data.language_certificate || error
+        // document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
+        // document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
+        // document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
+        // document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
 
         
     }
-    function render_applicant_details(data){
-
+    function render_applicant(data){
+        // let d = new Date(+data.created_at)
+        // let date = d.toDateString();
         let error = "<p style='color:tomato;'>Missing</p>"
-        let id_photo = data['education_info']['id_photo']
-        let transcript_file = data.education_info.transcript_file
-        let diploma_file = data.education_info.diploma_file
-        let language_certificate = data.education_info.language_certificate
 
-        let d = new Date(data.education_info.date_of_birth)
-        let date = d.toDateString();
-
+        console.log(data.email)
+        document.getElementById("appname").innerHTML = data.first_name + " " +data.last_name
         document.getElementById("lname").innerHTML = data.last_name || error
         document.getElementById("fname").innerHTML = data.first_name || error
+        document.getElementById("dob").innerHTML = data.date_of_birth || error
         document.getElementById("email").innerHTML = data.email || error
-        document.getElementById("phone").innerHTML = `${data.education_info.phone_number} &nbsp;  ${data.education_info.phone_number_2}` || error
-        document.getElementById("father").innerHTML = data.education_info.fathers_name || error
-        document.getElementById("mother").innerHTML = data.education_info.mothers_name || error
-        document.getElementById("nationality").innerHTML = data.education_info.nationality || error
-        document.getElementById("residence").innerHTML = data.education_info.country_of_residence || error 
-        document.getElementById("id_photo").innerHTML = id_photo ? `<button class="app_files" onclick="open_link('${id_photo}')">View</button>` : error 
-        document.getElementById("transcript").innerHTML = transcript_file ? `<button class="app_files" onclick="open_link('${transcript_file}')">View</button>` : error
-        document.getElementById("diploma").innerHTML = diploma_file ? `<button class="app_files" onclick="open_link('${diploma_file}')">View</button>` : error 
-        document.getElementById("certificate").innerHTML = language_certificate ? `<button class="app_files" onclick="open_link('${language_certificate}')">View</button>` : error  
-        document.getElementById("passport").innerHTML = data.education_info.passport_number || error 
-        document.getElementById("dob").innerHTML = date.substr(4) || error 
-
+        document.getElementById("email2").innerHTML = data.email || error
+        document.getElementById("phone").innerHTML = data.phone_number
+        document.getElementById("phone2").innerHTML = data.phone_number_2
+        document.getElementById("father").innerHTML = data.fathers_name || error
+        document.getElementById("mother").innerHTML = data.mothers_name || error
+        document.getElementById("residence").innerHTML = data.country_of_residence || error
+        document.getElementById("nationality").innerHTML = data.nationality || error
+        // document.getElementById("id_photo").innerHTML = data.id_photo || error
+        // document.getElementById("transcript").innerHTML = data.transcript_file || error
+        // document.getElementById("diploma").innerHTML = data.diploma_file || error
+        // document.getElementById("certificate").innerHTML = data.language_certificate || error
+        // document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
+        // document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
+        // document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
+        // document.getElementById("letter").innerHTML = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
 
         
     }
-
     function open_link(link){
         window.open(link, '_blank')
     }
