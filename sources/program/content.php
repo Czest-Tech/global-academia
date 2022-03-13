@@ -57,17 +57,17 @@ foreach($university_filter as $key => $uf){
 foreach($program_data as $pd){
         $program_html .= LoadPage('cards/program_cards',array(
             'id' => $pd->id,
-            'university' => $pd->university,
+            'university' => strtolower($pd->university),
             'university_id' => $pd->university_id,
             'department_id' => $pd->id,
             'tuition_fee' => $pd->tuition_fees,
             'discounted_fee' => $pd->discounted_fees,
-            'duration' => $pd->duration,
-            'location' => $pd->location,
-            'type' => $pd->degree,
+            'duration' => strtolower($pd->duration),
+            'location' => strtolower($pd->location),
+            'type' => strtolower($pd->degree),
             'univerisity_logo' => GetUniversityLogo($pd->university_id),
-            'department' => $pd->department,
-            'language' => $pd->language
+            'department' => strtolower($pd->department),
+            'language' => strtolower($pd->language)
         ));
 }
 
