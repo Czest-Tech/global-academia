@@ -124,7 +124,7 @@
         // let date = d.toDateString();
         let error = "<p style='color:tomato;'>Missing</p>"
 
-        console.log(data.email)
+        console.log(data)
         document.getElementById("appname").innerHTML = data.first_name + " " +data.last_name
         document.getElementById("lname").innerHTML = data.last_name || error
         document.getElementById("fname").innerHTML = data.first_name || error
@@ -137,10 +137,10 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        // document.getElementById("id_photo").innerHTML = data.id_photo || error
-        // document.getElementById("transcript").innerHTML = data.transcript_file || error
-        // document.getElementById("diploma").innerHTML = data.diploma_file || error
-        // document.getElementById("certificate").innerHTML = data.language_certificate || error
+        document.getElementById("id_photo").innerHTML = data.id_photo || error
+        document.getElementById("transcript").innerHTML = data.transcript_file || error
+        document.getElementById("diploma").innerHTML = data.diploma_file || error
+        document.getElementById("certificate").innerHTML = data.language_certificate || error
         // document.getElementById("university").innerHTML = data.university_id.toLowerCase() || error
         // document.getElementById("program").innerHTML = data.program_id.toLowerCase() || error
         // document.getElementById("status").innerHTML = data.application_status_slug.toLowerCase() || error
