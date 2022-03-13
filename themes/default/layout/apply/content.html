@@ -169,7 +169,20 @@
             <input type="hidden" name="user_id"   value="{{ME id}}">
             <input type="hidden" name="university_id" value="<?php echo $kd->apply_university; ?>">
             <input type="hidden" name="program_id" value="<?php echo $kd->apply_program; ?>">
+            
+            <div class="agent_applicant_list">
+                <select name="applicants[]" id="applicant_list" multiple="multiple">
+                    <option value="cheese">Cheese</option>
+                    <option value="tomatoes">Tomatoes</option>
+                    <option value="mozarella">Mozzarella</option>
+                    <option value="mushrooms">Mushrooms</option>
+                    <option value="pepperoni">Pepperoni</option>
+                    <option value="onions">Onions</option>
+                </select>
+            </div>
+              
 
+            
             <div class="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
               <button type="submit">{{LANG Confirm}}</button>
@@ -178,6 +191,9 @@
     </div>
 </main>
 <script>
+    $(document).ready(function() {
+        $('#applicant_list').multiselect();
+    });
     $('#click_id_photo').click(function() {
         $('#id_photo').click();
     });
