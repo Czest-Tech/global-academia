@@ -224,6 +224,48 @@
     border: none;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.20);
 }
+.view_app_card{
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.24);
+    background-color: white;
+    padding: 10px;
+    width: 90%;
+    max-width: 600px;
+}
+.view_app_card_top{
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    
+}
+.view_app_card_top img{
+    width: 80px;
+    object-fit: cover;
+    height: 70px;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+.view_app_body{
+    border-top: 1px solid #f5f5f5;
+    margin-bottom: 10px;
+}
+.view_app_body > div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.view_app_rows{
+    min-width: 280px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+.view_app_rows >p:nth-child(1){
+    min-width: 130px;
+
+}
 
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }
