@@ -28,9 +28,9 @@
   </div>
   
   <script>
-    $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
+    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
           if(data.status === 200){
-            render_application(data.applied_to_universities)
+            console.log(data)
           }
     }));
     function render_application(data){
