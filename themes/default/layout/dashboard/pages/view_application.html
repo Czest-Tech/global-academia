@@ -91,7 +91,7 @@
     let user__id = "{{ME id}}"
     console.log(link_id, "link id", user__id, "user id");
 
-    $.get('{{LINK aj}}' + "/user_dashboard/get_user_application?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id}, (data => {
+    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
         if(data.status === 200){
             render_application_details(data.applicant_university[0])
             render_applicant_details(data.applicant_info)
