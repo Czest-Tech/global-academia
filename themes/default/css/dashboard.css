@@ -219,8 +219,7 @@
 .agent_add_student{
     background-color: var(--GREEN);
     color: white;
-    border-radius: 5px;
-    padding: 7px 15px;
+    border-radius: 5px;    padding: 7px 15px;
     margin-bottom: 5px;
     border: none;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.20);

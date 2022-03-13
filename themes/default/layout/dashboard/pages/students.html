@@ -5,8 +5,8 @@
           <thead>
               <tr>
                   <th>Date</th>
-                  <th>University</th>
-                  <th>Programme</th>
+                  <th>Names</th>
+                  <th>Email</th>
                   <th>Status</th>
                   <th>Action</th>
               </tr>
@@ -30,16 +30,18 @@
   <script>
     $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
           if(data.status === 200){
-            console.log(data)
+            render_application(data.data)
           }
     }));
     function render_application(data){
       data.forEach((element, index) => {
+          console.log(element)
+        let date = new Date(+element.created_at)
         document.getElementById("ga_table-body").innerHTML += `
               <tr>
-                  <td>#</td>
-                  <td class="table_data">#</td>
-                  <td class="table_data">#</td>
+                  <td>${date.toString().substr(4,11)}</td>
+                  <td class="table_data">${element.first_name} ${element.last_name}</td>
+                  <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
                   <td class="table_data">#</td>
                   <td>
                       <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
