@@ -30,11 +30,11 @@
   <script>
     $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
           if(data.status === 200){
-            render_application(data)
+            render_application(data.applicant_info)
           }
     }));
     function render_application(data){
-      console.log(data)
+
       data.forEach((element, index) => {
         let date = new Date(+element.created_at)
         document.getElementById("ga_table-body").innerHTML += `

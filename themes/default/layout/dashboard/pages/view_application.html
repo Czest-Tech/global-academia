@@ -104,7 +104,7 @@
         let rows = ""
         data.forEach(element => {
             let letter = data.acceptance_letter ? `<button class="app_files" onclick="open_link('${data.acceptance_letter}')">View</button>` : error
-            console.log(element)
+
             rows += `
                 <tr>
                     <td>${element.created_at.substr(0,10)}</td>
