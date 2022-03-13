@@ -216,6 +216,15 @@
     border: none;
     border-radius: 3px;
 }
+.agent_add_student{
+    background-color: var(--GREEN);
+    color: white;
+    border-radius: 5px;
+    padding: 7px 15px;
+    margin-bottom: 5px;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.20);
+}
 
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }

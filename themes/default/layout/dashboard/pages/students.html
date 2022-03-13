@@ -1,0 +1,103 @@
+<div class="applications">
+    <button class="agent_add_student">Add Student</button>
+    <div class="table_area_app">
+      <table class="ga_table">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>University</th>
+                  <th>Programme</th>
+                  <th>Status</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody id="ga_table-body">
+              
+          </tbody>
+        </table>
+        <p id="no_apps"></p>
+    </div>
+  
+      <div class="modal_container" id="modal_container">
+        <div class="modal_main">
+            <div class="modal_pad app_modal" id="insert_modal">
+              <!-- Insert modal from JS -->
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  <script>
+    $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
+          if(data.status === 200){
+            render_application(data.applied_to_universities)
+          }
+    }));
+    function render_application(data){
+      data.forEach((element, index) => {
+        console.log(element.id)
+        document.getElementById("ga_table-body").innerHTML += `
+              <tr>
+                  <td>${element.created_at.substr(0,10)}</td>
+                  <td class="table_data">${element.university_id.toLowerCase()}</td>
+                  <td class="table_data">${element.program_id.toLowerCase()}</td>
+                  <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
+                  <td>
+                      <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
+                          <option value="SELECT">Select</option>
+                          <option value="VIEW">View</option>
+                          <option value="EDIT">Edit</option>
+                          <option value="UPLOAD">upload</option>
+                      </select>
+                  </td>
+              </tr>
+          `
+      })
+      if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
+      else document.getElementById("no_apps").innerHTML = ""
+    }
+  
+  
+    function open_action(id, app_id){
+      let action = document.getElementById("app_change"+id).value
+      if(action === "VIEW"){
+         window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
+      }
+      if(action === "EDIT"){
+          document.getElementById("modal_container").style.display = "block"
+          document.getElementById("insert_modal").innerHTML = `
+              <div class="modal_body">
+                <p class="dark_color font2">{{LANG Edit request will be sent.}}</p>
+                <p class="dark_color font2">{{LANG Wait for Admin approval before you edit your application.}}</p>
+                <p class="dark_color font2">{{LANG Continue }}?</p>
+                <div class="modal_body_btn">
+                  <button onclick="send_edit_request(${app_id})">Yes</button>
+                  <button onclick="closeModal()">Cancel</button>
+                </div>
+              </div>
+          
+          `
+          document.getElementById("app_change"+id).value = "SELECT"
+  
+  
+          
+      }
+      if(action === "UPLOAD"){
+        
+      }
+      console.log(action)
+    }
+  
+    function closeModal(){
+      document.getElementById("modal_container").style.display = "none"
+    }
+    let logged_user_id = "{{ME id}}";
+    function send_edit_request(id) {
+         $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
+            console.log("SEND REQ RESPONSE", data)
+            closeModal()
+         });
+     }
+  
+  
+  </script>

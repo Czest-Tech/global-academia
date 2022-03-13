@@ -13,7 +13,8 @@
         <tbody id="ga_table-body">
             
         </tbody>
-    </table>
+      </table>
+      <p id="no_apps"></p>
   </div>
 
     <div class="modal_container" id="modal_container">
@@ -51,6 +52,8 @@
             </tr>
         `
     })
+    if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
+    else document.getElementById("no_apps").innerHTML = ""
   }
 
 
