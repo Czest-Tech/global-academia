@@ -9,7 +9,18 @@
       <p class="settings_text_body font2 dark_gray_color">Account can still be access within 3 months but if now re-activated after 3 months, account will be permanently deleted</p>
       
   </div>
+  <div class="settings_toggle">
+    <div class="settings_text">
+        <p class="settings_text_title font2 bold600">Share my Profile</p>
+        <div id="deactivate_switch" class="toggle_gear ${classer}" onclick="deactivate('notification_on_visit_profile')">
+          <div class="toggle_knob"></div>
+      </div>
+    </div>
+    <p class="settings_text_body font2 dark_gray_color">Account can still be access within 3 months but if now re-activated after 3 months, account will be permanently deleted</p>
+    
+</div>
   <!-- loaded from JS -->
+  {{USER share_my_profile}}
 </div>
 
 
@@ -52,6 +63,7 @@
   ]
 
   posts.forEach(element => {
+    console.log(element)
     let classer = ""
     if (element.isActive === '1') classer = "toggle_gear_active"
     document.getElementById("settings_xd").innerHTML += `
