@@ -2,7 +2,7 @@
 	<nav class="dashoard_sidebar">
 		<div class="dashboard_top font7" id="nav_top_agent">
 			<i class="fas fa-user-alt"></i>
-			<p class="font2">Agent</p>
+			<p class="font2" id="user_name2">Agent</p>
 		</div>
 		<div class="dashboard_top font7" id="nav_top_student">
 			<i class="fas fa-user-graduate "></i>
@@ -71,7 +71,10 @@
 				document.getElementById("nav_top_student").style.display = "flex"
 				document.getElementById("user_name").innerHTML = `${data.user_data.first_name} ${data.user_data.last_name} `
 			}
-			else document.getElementById("nav_top_agent").style.display = "flex"
+			else {
+				document.getElementById("nav_top_agent").style.display = "flex"
+				document.getElementById("user_name2").innerHTML = `${data.user_data.first_name} ${data.user_data.last_name} `
+			}
         }
     }));
 
