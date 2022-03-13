@@ -314,33 +314,68 @@ if($first === "get_user_application"){
 
 if($first === "get_agent_students"){
     $get_univiversities;
-    if($_GET['api_type'] === 'single'  && !empty(Secure($_GET['id']))) {
+    if($kd->user->type === "agent"){
+        if($_GET['api_type'] === 'single'  && !empty(Secure($_GET['id']))) {
        $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
        $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
-        
+       $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
+       $agent_students->id_photo = GetMedia($agent_students->id_photo);
+       $agent_students->language_certificate = GetMedia($agent_students->language_certificate);
+       $agent_students->passport_file = GetMedia($agent_students->passport_file);
+       $agent_students->passport_file = GetMedia($agent_students->passport_file);
        foreach($get_univiversities as $allProgram){
            $allProgram->university_id = GetuniversityByID($allProgram->university_id);
            $allProgram->program_id = GetProgramByID($allProgram->program_id);
            $allProgram->application_status_slug =  __($allProgram->application_status);
        }
+        } else {
+        $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+        }
+
+        if($agent_students){
+            $data = array(
+                'status' => 200,
+                'applicant_info' => $agent_students,
+                'applicant_university' => $get_univiversities,
+                
+            );
+        } else {
+            $data = array(
+                'status' => 301,
+                'data' => [],
+                'message' => 'no records'
+                
+            );
+        } 
     } else {
-       $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
-    }
-    if($agent_students){
+        $get_univiversities = $db->where("id", Secure($_GET['id']))->get(T_APPLICANT_UNIVERSITIES);
+        
+        foreach($get_univiversities as $allProgram){
+            $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+            $allProgram->program_id = GetProgramByID($allProgram->program_id);
+            $allProgram->application_status_slug =  __($allProgram->application_status);
+        }
+       
+        $get_student_info  = $db->where('user_id', $kd->user->id)->getOne(T_APPLICANT_EDUCATION_INFO);
+        $get_student_info->first_name = $kd->user->first_name;
+        $get_student_info->last_name =  $kd->user->last_name;
+        $get_student_info->email = $kd->user->email;
+        $get_student_info->transcript_file = GetMedia($get_student_info->transcript_file);
+        $get_student_info->id_photo = GetMedia($get_student_info->id_photo);
+        $get_student_info->language_certificate = GetMedia($get_student_info->language_certificate);
+        $get_student_info->passport_file = GetMedia($get_student_info->passport_file);
+        $get_student_info->passport_file = GetMedia($get_student_info->passport_file);
+
+     
+
         $data = array(
             'status' => 200,
-            'applicant_info' => $agent_students,
             'applicant_university' => $get_univiversities,
-            
+            'applicant_info' => $get_student_info
         );
-    } else {
-        $data = array(
-            'status' => 301,
-            'data' => [],
-            'message' => 'no records'
-            
-        );
-    } 
+    }
+    
+  
 }
 if($first  === "add_agent_student"){
     $update_education = new stdClass();
