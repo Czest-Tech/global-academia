@@ -1,7 +1,7 @@
 <div class="applications">
     <div class="view_app_card">
         <div class="view_app_card_top">
-            <img src="https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/pa-consulting-modern-student-istock-1152767923_0.jpg?itok=G6Ny_tin" alt="student">
+            <img id="log_user_pp" src="https://static.vecteezy.com/system/resources/thumbnails/000/512/866/small/57_Student.jpg" alt="student">
             <div>
                 <p class="font4 bold600 dark_color" id="appname">Undefined</p>
                 <p class="font3 dark_color mb-3" id="email2">Undefined</p>
@@ -136,6 +136,8 @@
         document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : error
         document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : error
         document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : error
+
+        document.getElementById("log_user_pp").src = data.id_photo ? data.id_photo : "https://static.vecteezy.com/system/resources/thumbnails/000/512/866/small/57_Student.jpg"
     }
     function open_link(link){
         window.open(link, '_blank')
