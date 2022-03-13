@@ -35,13 +35,12 @@
     }));
     function render_application(data){
       data.forEach((element, index) => {
-        console.log(element.id)
         document.getElementById("ga_table-body").innerHTML += `
               <tr>
-                  <td>${element.created_at.substr(0,10)}</td>
-                  <td class="table_data">${element.university_id.toLowerCase()}</td>
-                  <td class="table_data">${element.program_id.toLowerCase()}</td>
-                  <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
+                  <td>#</td>
+                  <td class="table_data">#</td>
+                  <td class="table_data">#</td>
+                  <td class="table_data">#</td>
                   <td>
                       <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
                           <option value="SELECT">Select</option>
@@ -78,9 +77,6 @@
           
           `
           document.getElementById("app_change"+id).value = "SELECT"
-  
-  
-          
       }
       if(action === "UPLOAD"){
         
