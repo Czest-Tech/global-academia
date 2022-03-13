@@ -39,7 +39,7 @@ $pages_array = [
     'profile',
     'messages',
     'settings',
-    'students',ß
+    'students',
     'applications',
     'view_application',
     'notifications'
