@@ -15,7 +15,7 @@
                     <input type="text" name="username" id="username" placeholder="{{LANG username}}">
                     <label>{{LANG Password}}</label>
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
-                    <button class="whiteBtn8" type="submit">{{LANG Login}}</button> 
+                    <button class="whiteBtn8" type="submit" id="login_btn">{{LANG Login}}</button> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth()">Dont have an Account?</button>
           </span>
@@ -23,11 +23,6 @@
             <p>{{LANG Register}}</p>
             <form id="register-form" class="loginForm" method="post" role="form">
                 <div class="register-alert"></div> 
-                <!-- <label>{{LANG Account Types}}</label>
-                <input type="radio" id="agent" name="account_type" value="agent">
-                <label for="agent">{{LANG Agent}}</label><br>
-                <input type="radio" id="agent" name="account_type" value="applicant">
-                <label for="applicant">{{LANG Applicant}}</label><br> -->
                 <label>{{LANG Account Type}}</label>
                 <select name="account_type" id="">
                     <option value="applicant">Student</option>
@@ -113,18 +108,13 @@
                         window.location = '{{LINK session_login}}?sid='+data.session_id;
                         return false;
                     }
-                    $('.login-alert').html($('<div>',{
-                        class: "alert alert-success",
-                        html: data.message
-                    }));
-                    $('.alert-success').fadeIn(300);
+                    document.getElementById('login_btn').innerHTML = data.message
                 }
                 else {
-                    $('.err-msg').html($('<div>',{
-                        class: "alert alert-danger",
-                        html: data.message
-                    }));
-                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG login}}"+'</button>');
+                    document.getElementById('login_btn').innerHTML = data.message
+                    setTimeout(() => {
+                        document.getElementById('login_btn').innerHTML = 'Login'
+                    }, 4000);
                 }
             }
         });

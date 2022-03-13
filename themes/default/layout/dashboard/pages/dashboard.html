@@ -40,12 +40,14 @@
                     </tr>
                 </thead>
                 <tbody id="app_table_rows">
+                    
                     <!-- table rows rendered from JS -->
                 </tbody>
             </table>
+            <p id="no_apps"></p>
         </div>
         <div class="dash_notifications " id="system_notifications">
-            <p>System Notifications</p>
+            <p >System Notifications</p>
             <!-- Notifications Rendered here from javascript -->
         </div>
     </div>
@@ -80,8 +82,8 @@
                 </tr>
             `
         });
-
-        // 
+        if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
+        else document.getElementById("no_apps").innerHTML = ""
     }
     function render_dashboard_notification(data){
         data.forEach(element => {
