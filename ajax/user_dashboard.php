@@ -313,15 +313,24 @@ if($first === "get_user_application"){
 }
 
 if($first === "get_agent_students"){
+    $get_univiversities;
     if($_GET['api_type'] === 'single'  && !empty(Secure($_GET['id']))) {
        $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
+       $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
+        
+       foreach($get_univiversities as $allProgram){
+           $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+           $allProgram->program_id = GetProgramByID($allProgram->program_id);
+           $allProgram->application_status_slug =  __($allProgram->application_status);
+       }
     } else {
        $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
     }
     if($agent_students){
         $data = array(
             'status' => 200,
-            'data' => $agent_students,
+            'applicant_info' => $agent_students,
+            'applicant_university' => $get_univiversities,
             
         );
     } else {
