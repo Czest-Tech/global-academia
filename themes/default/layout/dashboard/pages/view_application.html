@@ -1,11 +1,11 @@
 <div class="applications">
     <div class="view_app_card">
         <div class="view_app_card_top">
-            <img src="https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/pa-consulting-modern-student-istock-1152767923_0.jpg?itok=G6Ny_tin" alt="student">
+            <img id="log_user_pp" src="https://static.vecteezy.com/system/resources/thumbnails/000/512/866/small/57_Student.jpg" alt="student">
             <div>
                 <p class="font4 bold600 dark_color" id="appname">Undefined</p>
                 <p class="font3 dark_color mb-3" id="email2">Undefined</p>
-                <p class="font2 blue_color bold600" ><span id="app_num">#</span> Applications</p>
+                <p class="font2 blue_color bold600" ><span id="app_num">#</span> Application(s)</p>
             </div>
         </div>
         
@@ -57,7 +57,7 @@
                     <p class="bold600 font3">Diploma</p><p id="diploma">Undefined</p>
                 </div>
                 <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">Lang. Certificate</p><p id="certificate">Undefined</p>
+                    <p class="bold600 font3">Language Certificate</p><p id="certificate">Undefined</p>
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@
                 <tr>
                     <td>${element.created_at.substr(0,10)}</td>
                     <td>${element.university_id}</td>
-                    <td>${element.program_id.toLowerCase()}</td>
+                    <td class="sentence">${element.program_id.toLowerCase()}</td>
                     <td>${element.application_status_slug}</td>
                     <td>${letter}</td>
                 </tr>
@@ -132,10 +132,12 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        document.getElementById("id_photo").innerHTML = data.id_photo || error
-        document.getElementById("transcript").innerHTML = data.transcript_file || error
-        document.getElementById("diploma").innerHTML = data.diploma_file || error
-        document.getElementById("certificate").innerHTML = data.language_certificate || error
+        document.getElementById("id_photo").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : error
+        document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : error
+        document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : error
+        document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : error
+
+        document.getElementById("log_user_pp").src = data.id_photo ? data.id_photo : "https://static.vecteezy.com/system/resources/thumbnails/000/512/866/small/57_Student.jpg"
     }
     function open_link(link){
         window.open(link, '_blank')
