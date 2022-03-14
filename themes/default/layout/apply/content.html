@@ -237,60 +237,66 @@
         }
     }
     
- $(function() {
-   let form1 = $('form.final_Send');
-   $(".id_photo").change(function(){
-        var $this = $(this), $clone = $this.clone();
-        $this.after($clone).appendTo(form1);
-        document.getElementById("id_photo_name").innerHTML = $this[0].files[0].name
-    });
-    $(".diploma_file").change(function(){
-        var $this = $(this), $clone1 = $this.clone();
-        $this.after($clone1).appendTo(form1);
-        document.getElementById("diploma_name").innerHTML = $this[0].files[0].name
-    });
-    $(".transcript_file").change(function(){
-        var $this = $(this), $clone2 = $this.clone();
-        $this.after($clone2).appendTo(form1);
-        document.getElementById("transcript_name").innerHTML = $this[0].files[0].name
-    });
-    $(".passport_file").change(function(){
-        var $this = $(this), $clone3 = $this.clone();
-        $this.after($clone3).appendTo(form1);
-        document.getElementById("passport_name").innerHTML = $this[0].files[0].name
-    });
-    $(".language_certificate").change(function(){
-        var $this = $(this), $clone3 = $this.clone();
-        $this.after($clone3).appendTo(form1);
-        document.getElementById("certificate_name").innerHTML = $this[0].files[0].name
-    });
-   form1.ajaxForm({
-        url: '{{LINK aj/application/single}}?hash=' + $('.main_session').val(),
-        dataTyep:'json',
-        beforeSend: function() {
-            form1.find('button').text("{{LANG please_wait}}");
-        },
-            success: function(data) {
-                if (data.status == 200) { 
-                    $('.submission_message').hide(); 
-
-                    $('.submit-alert').html($('<div>',{
-                        class: "alert alert-success",
-                        html: data.message
-                    }));
-                    $('.alert-success').fadeIn(300);
-                    window.location = data.url
-                }
-                else {
-                    $('.submit-alert').html($('<div>',{
-                        class: "alert alert-danger",
-                        html: data.message
-                    }));
-                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
-                }
-            }
+    $(function() {
+        let selected_applicant_list = create_applicant_list()
+        let form1 = $('form.final_Send');
+        $(".id_photo").change(function(){
+            var $this = $(this), $clone = $this.clone();
+            $this.after($clone).appendTo(form1);
+            document.getElementById("id_photo_name").innerHTML = $this[0].files[0].name
         });
-    });
+
+        $(".diploma_file").change(function(){
+            var $this = $(this), $clone1 = $this.clone();
+            $this.after($clone1).appendTo(form1);
+            document.getElementById("diploma_name").innerHTML = $this[0].files[0].name
+        });
+        $(".transcript_file").change(function(){
+            var $this = $(this), $clone2 = $this.clone();
+            $this.after($clone2).appendTo(form1);
+            document.getElementById("transcript_name").innerHTML = $this[0].files[0].name
+        });
+        $(".passport_file").change(function(){
+            var $this = $(this), $clone3 = $this.clone();
+            $this.after($clone3).appendTo(form1);
+            document.getElementById("passport_name").innerHTML = $this[0].files[0].name
+        });
+        $(".language_certificate").change(function(){
+            var $this = $(this), $clone3 = $this.clone();
+            $this.after($clone3).appendTo(form1);
+            document.getElementById("certificate_name").innerHTML = $this[0].files[0].name
+        });
+        localStorage.setItem("XXX", JSON.stringify(selected_applicant_list))
+        // console.log("XXX", selected_applicant_list)
+
+        // form1.ajaxForm({
+        //     url: '{{LINK aj/application/single}}?hash=' + $('.main_session').val(),
+        //     dataTyep:'json',
+        //     beforeSend: function() {
+        //         form1.find('button').text("{{LANG please_wait}}");
+        //     },
+        //     success: function(data) {
+        //         if (data.status == 200) { 
+        //             $('.submission_message').hide(); 
+
+        //             $('.submit-alert').html($('<div>',{
+        //                 class: "alert alert-success",
+        //                 html: data.message
+        //             }));
+        //             $('.alert-success').fadeIn(300);
+        //             window.location = data.url
+        //         }
+        //         else {
+        //             $('.submit-alert').html($('<div>',{
+        //                 class: "alert alert-danger",
+        //                 html: data.message
+        //             }));
+        //             form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+        //         }
+        //     }
+        // });
+        
+    })
     
     function renderApply(){
         if(isLogged != '1'){
@@ -1945,6 +1951,14 @@
     function on_blur_search(){
         setTimeout(() => {
             document.getElementById("possible_applicants").style.display = "none"
-        }, 170);
+        }, 200);
+    }
+    function create_applicant_list(){
+        let new_array = []
+        selected_student_names.forEach(element => {
+            new_array.push(element.id)
+            
+        })
+        return new_array
     }
 </script>
