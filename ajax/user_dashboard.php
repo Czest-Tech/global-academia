@@ -314,7 +314,7 @@ if($first === "get_user_application"){
 
 if($first === "get_agent_students"){
     $get_univiversities;
-    if($kd->user->type === "agent"){
+    if($kd->user->account_type === "agent"){
         if($_GET['api_type'] === 'single'  && !empty(Secure($_GET['id']))) {
        $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
        $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
