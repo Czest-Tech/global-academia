@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 13, 2022 at 08:44 AM
+-- Generation Time: Mar 14, 2022 at 12:50 PM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -108,6 +108,13 @@ CREATE TABLE `agent_students` (
   `applicant_type` varchar(100) NOT NULL DEFAULT 'agent_applicant',
   `time` int(20) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `agent_students`
+--
+
+INSERT INTO `agent_students` (`id`, `agent_id`, `username`, `first_name`, `last_name`, `date_of_birth`, `phone_number`, `phone_number_2`, `email`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `application_no`, `status`, `note`, `signed_by`, `is_notified`, `isClosed`, `mark_university`, `ischecked`, `acceptance_letter`, `type`, `request_update`, `created_at`, `commision`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`, `applicant_type`, `time`) VALUES
+(1, 10, 'leah__134_nanks', 'Leah', 'Nankongolo', '10/02/1996', '4565846566', '7989595988', 'mehmed@biggajans.com', 'Ktoos', 'Preyyu', 'ZV23232', 'Zambia', 'Zambia', NULL, NULL, NULL, NULL, NULL, NULL, '23231', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1647163860', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 0);
 
 -- --------------------------------------------------------
 
@@ -2842,7 +2849,7 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (25, 'smtp_encryption', 'tls'),
 (26, 'smtp_port', '587'),
 (27, 'delete_account', 'on'),
-(36, 'last_admin_collection', '1647154196'),
+(36, 'last_admin_collection', '1647167859'),
 (45, 'user_registration', 'on'),
 (54, 'job_listing_statics', '[{&quot;month&quot;:&quot;January&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;February&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;March&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;April&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;May&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;June&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;July&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;August&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;September&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;October&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;November&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;December&quot;,&quot;new_job&quot;:16}]'),
 (58, 'google', ''),
@@ -4154,7 +4161,8 @@ INSERT INTO `langs` (`id`, `lang_key`, `english`, `arabic`, `dutch`, `french`, `
 (680, 'you_now_have_access_right_to_the_agent_account', 'You now have access right to the Agent account', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (681, 'login_to_the_platform', 'Login to the Platform', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (682, 'account_registration_approval', 'Account Registration Approval', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(683, 'manage_students', 'Manage Students', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(683, 'manage_students', 'Manage Students', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(684, 'add_to_cart', 'Add to Cart', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4683,7 +4691,8 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (204, '053f4afc9e991b7ec45de3a506cf04ad50354b2c16469206876865ee77bb60909563c02795ce41a45d', 11, 'web', 1646920687),
 (205, '857e41152a21448c5385ed01ea7d4232c8d15d521646951317f678a7ad0195ecc58144629be788df43', 2, 'web', 1646951317),
 (209, 'dbf5487d183a8669f32d5b6f26791dc1f06806cb16469989388c2d02cfc1ef3ddd4191e8065849ee9f', 11, 'web', 1646998938),
-(210, '4055bf605893e45ea01d1c9ae2aad035b637f76716471544838b18188d1568bcf3644de26094b02c2f', 10, 'web', 1647154483);
+(215, 'd3f03a0253ab110e8b4c6001416e12e494b12ee1164721655409d21a7660d8a1b7e65c38a3a5947b0f', 10, 'web', 1647216554),
+(216, 'cda5ff4468ffd5195a89e8393d5e5849adf19cba1647216576f7b579d74c73088588b9fda98eea9a76', 10, 'web', 1647216576);
 
 -- --------------------------------------------------------
 
@@ -4920,7 +4929,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first
 (8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$m3omZlxKp6dHCkVsT9ku.eOgUnkf7w.EpHFknzL.gl5MWbXtmljZK', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
+(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -5233,7 +5242,7 @@ ALTER TABLE `agent_requests`
 -- AUTO_INCREMENT for table `agent_students`
 --
 ALTER TABLE `agent_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `announcement`
@@ -5329,7 +5338,7 @@ ALTER TABLE `invitation_links`
 -- AUTO_INCREMENT for table `langs`
 --
 ALTER TABLE `langs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=684;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=685;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -5371,7 +5380,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `terms`
