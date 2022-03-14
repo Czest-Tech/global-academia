@@ -451,3 +451,30 @@ if ($first == 'save-settings') {
         $data = array('status' => 200);
     }
 }
+if($first === "get_agent_applicant_list"){
+
+    if($kd->user->account_type === "agent"){
+        $get_user = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+
+        if($get_user){
+            $data = array(
+                'status' => 200,
+                'students' => $get_user
+                
+            );
+        } else {
+            $data = array(
+                'status' => 301,
+                'data' => [],
+                'message' => 'no records'
+                
+            );
+        } 
+    }else {
+        $data = array(
+            'status' => 401,
+            'message' => 'access denied'
+            
+        );
+    } 
+}

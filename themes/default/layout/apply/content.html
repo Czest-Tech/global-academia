@@ -199,9 +199,7 @@
     </div>
 </main>
 <script>
-    $(document).ready(function() {
-        $('#applicant_list').multiselect();
-    });
+ 
     $('#click_id_photo').click(function() {
         $('#id_photo').click();
     });
@@ -241,6 +239,11 @@
     
  $(function() {
     
+    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_applicant_list?hash=" + $('.main_session').val(), {}, (data => {
+        if(data.status === 200){
+          console.log(data)
+        }
+  }));
  
    let form1 = $('form.final_Send');
    $(".id_photo").change(function(){
