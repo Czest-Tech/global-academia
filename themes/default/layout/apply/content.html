@@ -238,13 +238,6 @@
     }
     
  $(function() {
-    
-    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_applicant_list?hash=" + $('.main_session').val(), {}, (data => {
-        if(data.status === 200){
-          console.log(data)
-        }
-  }));
- 
    let form1 = $('form.final_Send');
    $(".id_photo").change(function(){
         var $this = $(this), $clone = $this.clone();
@@ -1879,61 +1872,35 @@
 
 
 
-
-    let student_names = [
-        {
-            name:"Paul",
-            id:1,
-        },
-        {
-            name:"Boniface",
-            id:2,
-        },
-        {
-            name:"Atiba",
-            id:3,
-        },
-        {
-            name:"james",
-            id:4,
-        },
-        {
-            name:"Mehmed",
-            id:5,
-        },
-        {
-            name:"Gerald",
-            id:6,
-        },
-        {
-            name:"Kate",
-            id:7,
-        },
-        {
-            name:"Liz",
-            id:8,
-        },
-    ]
+    
+    let student_names = []
+    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_applicant_list?hash=" + $('.main_session').val(), {}, (data => {
+            if(data.status === 200){
+                student_names = data.students
+            }
+    }));
     let selected_student_names = []
     let filter_string = ""
     
     function populate_students(){
         let student_rows = ""
         student_names.forEach(element => {
+            let names = element.first_name + " " + element.last_name
             let found = false
             selected_student_names.forEach(student => {
                 if(element.id === student.id) found = true
             })
-            if(!element.name.toLowerCase().includes(filter_string.toLowerCase())) found = true
+            if(!names.includes(filter_string.toLowerCase())) found = true
             if(!found){
                 student_rows += `
-                    <p class="font3 bold500 dark_color" onclick="add_app_student('${element.id}')">${element.name}</p>
+                    <p class="font3 bold500 dark_color" onclick="add_app_student('${element.id}')">${names}</p>
                 `
             }
         })
         document.getElementById("possible_applicants").innerHTML = student_rows
     }
-    populate_students()
+
+    
 
     function add_app_student(id){
         student_names.forEach(element => {
@@ -1950,9 +1917,10 @@
     function populate_selected_students(){
         let student_rows = ""
         selected_student_names.forEach(element => {
+            let names = element.first_name + " " + element.last_name
             student_rows += `
                 <div class="added_stud" onclick=remove_selected_student('${element.id}')>
-                    <p class="font2 bold400">${element.name}</p>
+                    <p class="font2 bold400">${names}</p>
                     <i class="fas fa-times font2 pointer"></i>
                 </div>
             `
@@ -1971,6 +1939,7 @@
         populate_students()
     }
     function on_focus_search(){
+        populate_students()
         document.getElementById("possible_applicants").style.display = "block"
     }
     function on_blur_search(){
