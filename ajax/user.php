@@ -373,6 +373,31 @@ if ($first == 'avatar') {
 if ($first == 'mention') {
     $data = GetFollowingSug(5, $_GET['term']);
 }
+if ($first == 'update-profile-picture') {
+	if (!empty($_FILES)) {
+		if (!empty($_FILES['avatar']['tmp_name'])) {
+            $file_info = array(
+                'file' => $_FILES['avatar']['tmp_name'],
+                'size' => $_FILES['avatar']['size'],
+                'name' => $_FILES['avatar']['name'],
+                'type' => $_FILES['avatar']['type'],
+                'crop' => array('width' => 400, 'height' => 400),
+                'allowed' => 'jpg,png,jpeg,gif'
+            );
+            $file_upload = ShareFile($file_info);
+            if (!empty($file_upload['filename'])) {
+                $getUserData = UserData($kd->user->id);
+                $update_data['avatar'] = $file_upload['filename'];
+                $upload_image =   $db->where('id', $kd->user->id)->update(T_USERS, $update_data);
+                $data['status'] = 200;
+             
+                $data['img'] = GetMedia($file_upload['filename']);
+          
+            
+            }
+        }
+	}
+}
 
 if ($first == 'save_user_location' && isset($_POST['lat']) && isset($_POST['lng'])) {
     $lat          = Secure($_POST['lat']);

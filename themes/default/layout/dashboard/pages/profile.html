@@ -1,15 +1,17 @@
 <div class="profile_xd">
     <div class="profile_card">
         <div class="profile_card_top">
-            <label for="profile_pic" class="profile_pic_label">
-                <img id="log_user_pp" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
-                <i class="fas fa-camera"></i>
-            </label>
-            <input type="file" name="profile_pic" id="profile_pic" hidden>
-            <div class="dark_color">
-                <p class="font3 bold500" id="log_user_name">users name</p>
-                <p class="font2 bold400" id="log_user_ac_type">account type</p>
-            </div>
+            <form id="user-change-avatar-form"  method="post">
+                <label for="profile_pic" class="profile_pic_label">
+                    <img class="avatar" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" name="avatar" id="profile_pic" class="user-avatar" accept="image/x-png, image/jpeg" hidden>
+                <div class="dark_color">
+                    <p class="font3 bold500">{{ME name}}</p>
+                    <p class="font2 bold400">Students Account</p>
+                </div>
+            </form>
         </div>
         <div class="profile_nav">
             <button id="btn_information" onclick="profile_tab('information')">Information</button>
@@ -33,43 +35,41 @@
         <div class="profile_card_body" id="details">
             <form class="save_info" method="post">
                 <div class="save_info_alert"></div>
-                <div class="profile_detail_container">
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Fathers Name}}</p>
-                        <input type="text" name="fathers_name" value="<?php echo $kd->user->education_info->fathers_name; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Mothers Name}}</p>
-                        <input type="text" name="mothers_name"  value="<?php echo $kd->user->education_info->mothers_name; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Phone Number 1}}</p>
-                        <input type="text" name="phone" value="<?php echo $kd->user->education_info->phone_number; ?>" >
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Phone Number 2}}  ( {{LANG Optional}} )</p>
-                        <input type="text" name="phone_2" value="<?php echo $kd->user->education_info->phone_number_2; ?>"/>
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Email}}</p>
-                        <input type="text" name="email" value="{{USER email}}">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Passport}}</p>
-                        <input type="text" value="<?php echo $kd->user->education_info->passport_number; ?>" name="passport">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Country of Residence}}</p>
-                        <input type="text" value="<?php echo $kd->user->education_info->country_of_residence; ?>" name="country_of_residence">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Nationality}}</p>
-                        <input type="text" name="nationality" value="<?php echo $kd->user->education_info->nationality; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Date of Birth}}</p>
-                        <input type="date" name="date_of_birth" value="<?php echo $kd->user->education_info->date_of_birth; ?>">
-                    </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Fathers Name}}</p>
+                    <input type="text" name="fathers_name" value="<?php echo $kd->user->education_info->fathers_name; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Mothers Name}}</p>
+                    <input type="text" name="mothers_name"  value="<?php echo $kd->user->education_info->mothers_name; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Phone Number 1}}</p>
+                    <input type="text" name="phone" value="<?php echo $kd->user->education_info->phone_number; ?>" >
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Phone Number 2}}  ( {{LANG Optional}} )</p>
+                    <input type="text" name="phone_2" value="<?php echo $kd->user->education_info->phone_number_2; ?>"/>
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Email}}</p>
+                    <input type="text" name="email" value="{{USER email}}">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Passport}}</p>
+                    <input type="text" value="<?php echo $kd->user->education_info->passport_number; ?>" name="passport">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Country of Residence}}</p>
+                    <input type="text" value="<?php echo $kd->user->education_info->country_of_residence; ?>" name="country_of_residence">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Nationality}}</p>
+                    <input type="text" name="nationality" value="<?php echo $kd->user->education_info->nationality; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Date of Birth}}</p>
+                    <input type="date" name="date_of_birth" value="<?php echo $kd->user->education_info->date_of_birth; ?>">
                 </div>
                 <button class="profile_save_btn">{{LANG Save Changes}}</button>
             </form>
@@ -78,27 +78,25 @@
         <div class="profile_card_body" id="documents">
             <form class="save_documents" method="post"> 
                 <div class="save_documents_info_alert"></div>
-                <div class="profile_detail_container">
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Diploma}}</p>
-                        <input type="file" name="diploma" value="<?php echo $kd->user->education_info->diploma; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Transcript}}</p>
-                        <input type="file" name="transcript_file" value="<?php echo $kd->user->education_info->transcript_file; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Certificate}}</p>
-                        <input type="file" name="certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Passport}}</p>
-                        <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG ID Photo}}</p>
-                        <input type="file" value="<?php echo $kd->user->education_info->id_photo; ?>" name="id_photo">
-                    </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Diploma}}</p>
+                    <input type="file" name="diploma" value="<?php echo $kd->user->education_info->diploma; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Transcript}}</p>
+                    <input type="file" name="transcript_file" value="<?php echo $kd->user->education_info->transcript_file; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Certificate}}</p>
+                    <input type="file" name="certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Passport}}</p>
+                    <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG ID Photo}}</p>
+                    <input type="file" value="<?php echo $kd->user->education_info->id_photo; ?>" name="id_photo">
                 </div>
                 <button class="profile_save_btn">{{LANG Save Changes}}</button>
             </form>
@@ -106,20 +104,19 @@
         <div class="profile_card_body" id="security">
             <form class="save_change_password" method="post">
                 <div class="save_pass_alert"></div>
-                <div class="profile_detail_container">
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Old Password}}</p>
-                        <input type="password" name="current_password">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG New Password}}</p>
-                        <input type="password" name="new_password">
-                    </div>
-                    <div class="profile_card_inputs">
-                        <p class="font2">{{LANG Confirm Password}}</p>
-                        <input type="password" name="confirm_new_password">
-                    </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Old Password}}</p>
+                    <input type="password" name="current_password">
                 </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG New Password}}</p>
+                    <input type="password" name="new_password">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Confirm Password}}</p>
+                    <input type="password" name="confirm_new_password">
+                </div>
+                
                 <input type="hidden" name="user_id" value="{{ME id}}">
                 <button class="profile_save_btn">{{LANG Save Changes}}</button>
             </form>
@@ -129,20 +126,38 @@
 </div>
 
 <script>
+   $(document).on('change', '.user-avatar', (event) => {
+	$("#user-change-avatar-form").submit();
+});
+  
+        $(document).ready(() =>{
+     
+                 $('#user-change-avatar-form').change().ajaxForm({
+                    url: "{{CONFIG aj/user/update-profile-picture}}?hash=" + $('.main_session').val(),
+                    beforeSubmit:  function () {
+                    
+                    },
+                    success: function (data) {
+                        if (data.status == 200) {
+                            $('#avatar').attr('src', data.img);
+                        }
+                    
+                    }
+                });
+      
+           
+        });
+    
+    
     let save_documents = $(".save_documents");
     let save_info = $(".save_info");
     let change_password = $('.save_change_password');
 
     $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
-          render_profile_card(data)
+          console.log(data)
         }
     }));
-    function render_profile_card(data){
-        document.getElementById("log_user_ac_type").innerHTML = data.data.account_type === 'applicant' ? "Applicant Account" :  "Agent Account"
-        document.getElementById("log_user_name").innerHTML = `${data.data.first_name} ${data.data.last_name}`
-        document.getElementById("log_user_pp").src = data.data.avatar;
-    }
 
 
     profile_tab('information')
@@ -248,3 +263,7 @@
     
 
 </script>
+
+
+1/yac0s/0v
+1/yac0s/0v
