@@ -589,3 +589,116 @@ if($first === "get_agent_applicant_list"){
         );
     } 
 }
+if($first == "upload_missing"){
+    $errors = [];
+    $application_data = new stdClass();
+    $redirectlink = "status";
+
+    if (!empty($_FILES['id_photo']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['id_photo']['tmp_name'],
+            'size' => $_FILES['id_photo']['size'],
+            'name' => $_FILES['id_photo']['name'],
+            'type' => $_FILES['id_photo']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'id_photo'
+        );
+        $application_data->id_photo_name = $_FILES['id_photo']['name'];
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->id_photo = $file_upload['filename'];
+            
+        }
+    }
+   
+    if (!empty($_FILES['passport_file']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['passport_file']['tmp_name'],
+            'size' => $_FILES['passport_file']['size'],
+            'name' => $_FILES['passport_file']['name'],
+            'type' => $_FILES['passport_file']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'passport_file'
+        );
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->passport_file = $file_upload['filename'];
+            $application_data->passport_name = $_FILES['passport_file']['name'];
+        }
+    }
+    if (!empty($_FILES['diploma_file']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['diploma_file']['tmp_name'],
+            'size' => $_FILES['diploma_file']['size'],
+            'name' => $_FILES['diploma_file']['name'],
+            'type' => $_FILES['diploma_file']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'diploma_file'
+        );
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->diploma_file = $file_upload['filename'];
+            $application_data->diploma_name = $_FILES['diploma_file']['name'];
+        }
+    }
+    if (!empty($_FILES['transcript_file']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['transcript_file']['tmp_name'],
+            'size' => $_FILES['transcript_file']['size'],
+            'name' => $_FILES['transcript_file']['name'],
+            'type' => $_FILES['transcript_file']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'transcript_file'
+        );
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->transcript_file = $file_upload['filename'];
+            $application_data->transcript_name = $_FILES['transcript_file']['name'];
+        }
+    }
+    if (!empty($_FILES['language_certificate']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['language_certificate']['tmp_name'],
+            'size' => $_FILES['language_certificate']['size'],
+            'name' => $_FILES['language_certificate']['name'],
+            'type' => $_FILES['language_certificate']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'language_certificate'
+        );
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->language_certificate = $file_upload['filename'];
+            $application_data->language_certificate_name = $_FILES['language_certificate']['name'];
+        }
+    }
+    if (!empty($_FILES['other_files']['tmp_name'])) {
+        $file_info = array(
+            'file' => $_FILES['other_files']['tmp_name'],
+            'size' => $_FILES['other_files']['size'],
+            'name' => $_FILES['other_files']['name'],
+            'type' => $_FILES['other_files']['type'],
+            'crop' => array('width' => 400, 'height' => 400),
+            'mode' => 'other_files'
+        );
+        $file_upload = ShareFile($file_info);
+        if (!empty($file_upload['filename'])) {
+            $application_data->other_files = $file_upload['filename'];
+        }
+    }
+ 
+    $upload_missing_filest = $db->where('id',Secure($_POST['id']))->update(T_AGENT_STUDENTS,ToArray($application_data)); 
+    if($upload_missing_filest){
+        $data = array(
+            'status' => 200,
+            'message' => __('updated'),
+            
+        );
+    } else {
+        $data = array(
+            'status' => 400,
+            'error' => 'not updated',
+            
+        );
+    }   
+
+}
