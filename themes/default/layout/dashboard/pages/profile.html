@@ -15,8 +15,8 @@
         </div>
         <div class="profile_nav">
             <button id="btn_information" onclick="profile_tab('information')">Information</button>
-            <button id="btn_details" onclick="profile_tab('details')">Details</button>
-            <button id="btn_documents" onclick="profile_tab('documents')">Documents</button>
+           <?php if($kd->user->account_type == 'applicant'){ ?> <button id="btn_details" onclick="profile_tab('details')">Details</button>
+            <button id="btn_documents" onclick="profile_tab('documents')">Documents</button> <?php } ?>
             <button id="btn_security" onclick="profile_tab('security')">Security</button>
         </div>
         <div class="profile_card_body profile_info" id="information">

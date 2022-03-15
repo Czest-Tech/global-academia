@@ -431,16 +431,11 @@ if($first  === "update_agent_student"){
     
         $firstname       = Secure($_POST['first_name']);
         $lastname       = Secure($_POST['last_name']);
-        $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
     
         
-    $firstname       = Secure($_POST['first_name']);
-    $lastname       = Secure($_POST['last_name']);
-    $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
+
 
     $update_education->type = "multiple";
-    $update_education->username = $username;
-    $update_education->created_at = time();
     $update_education->first_name = $firstname;
     $update_education->last_name = $lastname;
     $update_education->date_of_birth = Secure($_POST['date_of_birth']);
@@ -449,13 +444,13 @@ if($first  === "update_agent_student"){
     $update_education->phone_number_2 = Secure($_POST['phone_number_2']);
     $update_education->agent_id = $kd->user->id;
     $update_education->fathers_name = Secure($_POST['fathers_name']);
-    $update_education->time = time();
     $update_education->mothers_name = Secure($_POST['mothers_name']);
     $update_education->passport_number = Secure($_POST['passport_number']);
     $update_education->nationality = Secure($_POST['nationality']);
-    $update_education->country_of_residence = Secure($_POST['country_of_residence']);        
+    $update_education->country_of_residence = Secure($_POST['country_of_residence']);     
+    $update_educationa_data = $db->where('id', Secure($_POST['id']))->update(T_AGENT_STUDENTS, ToArray($update_education));
+   
         if($update_educationa_data){
-    
             $get_data = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
     
             $data = array(
@@ -468,7 +463,6 @@ if($first  === "update_agent_student"){
             $data = array(
                 'status' => 401,
                 'message' => __('error'),
-                'url' => UrlLink($redirectlink)
              );
         }
         
@@ -476,7 +470,6 @@ if($first  === "update_agent_student"){
         $data = array(
             'status' => 400,
             'message' => __('error'),
-            'url' => UrlLink($redirectlink)
          );
     }
    
