@@ -22,108 +22,7 @@
     <div class="modal_main">
       <div class="modal_pad app_modal" id="insert_modal">
         <!-- Insert modal from JS -->
-        <form class="edit_student_xd" method="post">
-          <div class="add_student_xd_top">
-            <p class="blue_color bold600">Edit Student (3/<span id="add_student_progress">1</span>)</p>
-            <i class="fas fa-times blue_color" onclick="closeModal()"></i>
-          </div>
-          <div class="add_student_xd_body">
-            <input type="text" name="id" id="id" hidden>
-
-            <div class="add_student_switch" id="add_stud_info">
-              <div>
-                <div class="add_student_rows">
-                  <p class="font2">First Name <span id="fname_a"></span></p>
-                  <input type="text" name="first_name" id="Applicant_fname">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Last Name <span id="lname_a"></span></p>
-                  <input type="text" name="last_name" id="Applicant_lname">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Father's Names <span id="father_a"></span></p>
-                  <input type="text" name="fathers_name" id="father_name">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Mother's Name <span id="mother_a"></span></p>
-                  <input type="text" name="mothers_name" id="mother_name">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Date of Birth <span id="dob_a"></span></p>
-                  <input type="date" name="date_of_birth" id="d_o_b">
-                </div>
-              </div>
-
-              <div class="add_student_footer">
-                <p onclick="add_student_switch('add_stud_det')">Next</p>
-              </div>
-            </div>
-
-            <div class="add_student_switch" id="add_stud_det">
-              <div>
-                <div class="add_student_rows">
-
-                  <p class="font2">Line 1<span id="phone1_a"></span></p>
-                  <input type="text" name="phone_number" id="phone1">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Line 2 (optional)</p>
-                  <input type="text" name="phone_number_2" id="phone2">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Email<span id="email_a"></span></p>
-                  <input type="text" name="email" id="email">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Passport Number<span id="passport_a"></span></p>
-                  <input type="text" name="passport_number" id="passport">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Nationality<span id="country_a"></span></p>
-                  <input type="text" name="nationality" id="country">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Country of Residence<span id="residence_a"></span></p>
-                  <input type="text" name="country_of_residence" id="residence">
-                </div>
-              </div>
-              <div class="add_student_footer">
-                <p onclick="add_student_switch('add_stud_info')">Back</p>
-                <p onclick="add_student_switch('add_stud_docs')">Next</p>
-              </div>
-            </div>
-
-            <div class="add_student_switch" id="add_stud_docs">
-              <div>
-                <div class="add_student_rows">
-                  <p class="font2">Diploma File</p>
-                  <input type="file" name="diploma_file" id="diploma">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Transcript File</p>
-                  <input type="file" name="transcript_file" id="transcript">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Language Certificate</p>
-                  <input type="file" name="certificate" id="certificate">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">Passport</p>
-                  <input type="file" name="passport_file" id="passport_file">
-                </div>
-                <div class="add_student_rows">
-                  <p class="font2">ID Photo</p>
-                  <input type="file" name="id_photo" id="id_photo">
-                </div>
-              </div>
-              <div class="add_student_footer">
-                <p onclick="add_student_switch('add_stud_det')">Back</p>
-                <button type="submit">Save </button>
-              </div>
-            </div>
-
-          </div>
-        </form>
+        
       </div>
     </div>
   </div>
@@ -145,9 +44,8 @@
       request.onreadystatechange = function() {
         if (request.readyState === 4) {
           let new_data = JSON.parse(request.response);
-          MY_STUDENTS = new_data.data.applicant_info
-          render_application(new_data.data.applicant_info);
-
+          MY_STUDENTS = new_data.data
+          render_application(new_data.data)
           closeModal();
         }
       }
@@ -156,36 +54,43 @@
 
     
     }
- 
 
-  $(function () {
-
-   
-    
-
-    let edit_form = $('.edit_student_xd');
-    edit_form.ajaxForm({
-      url: '{{LINK aj/user_dashboard/update_agent_student}}?hash=' + $('.main_session').val(),
-      dataType: 'json',
-      success: function (data) {
-        if (data.status == 200) {
-          console.log(data)
-          closeModal()
-        }else{
-          console.log(data)
+    function update_student(){
+      let form1 = document.querySelector('.edit_student_xd');
+      var formData = new FormData(form1);
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          let new_data = JSON.parse(request.response);
+          MY_STUDENTS = new_data.data
+          render_application(new_data.data)
+          closeModal();
         }
       }
-    });
-
-
-
-  });
-
+      request.open("POST", `{{LINK aj/user_dashboard/update_agent_student}}?hash=${$('.main_session').val()}`);
+      request.send(formData);
+    }
+    function erase_student(){
+      let form1 = document.querySelector('.delete_stud');
+      var formData = new FormData(form1);
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          let new_data = JSON.parse(request.response);
+          MY_STUDENTS = new_data.data
+          render_application(new_data.data)
+          closeModal();
+        }
+      }
+      request.open("POST", `{{LINK aj/user_dashboard/delete_agent_student}}?hash=${$('.main_session').val()}`);
+      request.send(formData);
+    }
+ 
   function render_application(data) {
-
+    let rows = ""
     data.forEach((element, index) => {
       let date = new Date(+element.created_at)
-      document.getElementById("ga_table-body").innerHTML += `
+      rows += `
               <tr>
                   <td>${date.toString().substr(4, 11)}</td>
                   <td class="table_data">${element.first_name} ${element.last_name}</td>
@@ -195,12 +100,13 @@
                       <div class="table_actions">
                         <i class="fas fa-eye table_eye" onclick="open_action('VIEW', '${element.id}')"></i>
                         <i class="fas fa-edit table_edit" onclick="open_action('EDIT', '${element.id}')"></i>
-                        <i class="fas fa-trash table_trash"></i>
+                        <i class="fas fa-trash table_trash" onclick="open_action('DELETE', '${element.id}')"></i>
                       </div>
                   </td>
               </tr>
           `
     })
+    document.getElementById("ga_table-body").innerHTML = rows
     if (data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
     else document.getElementById("no_apps").innerHTML = ""
   }
@@ -211,14 +117,36 @@
     }
     if (action === "EDIT") {
       MY_STUDENTS.forEach(element => {
-        if (element.id == app_id) edit_student(element, app_id)
+        if (element.id == app_id) {
+          edit_student(element, app_id)
+        }
       });
       document.getElementById("modal_container").style.display = "block"
     }
-    if (action === "UPLOAD") {
-
+    if (action === "DELETE") {
+      MY_STUDENTS.forEach(element => {
+        if (element.id == app_id) {
+          student_eraser(app_id)
+        }
+      });
+      document.getElementById("modal_container").style.display = "block"
     }
 
+  }
+  function student_eraser(app_id){
+    document.getElementById("insert_modal").innerHTML = `
+    <form class="delete_stud" method="post">
+          <input type="text" id="id" name="id" hidden>
+          <p>Are you sure you want to Delete?</p>
+          <br/>
+          <div class="add_student_footer mt-5">
+            <p onclick="erase_student()">Delete</p>
+            <p onclick="closeModal()">Cancel</p>
+          </div>
+        </form>
+    
+    `
+    document.getElementById("id").value = app_id
   }
 
   function closeModal() {
@@ -340,12 +268,118 @@
   }
 
   function edit_student(element, id) {
-    let d = element.date_of_birth
+    document.getElementById("modal_container").style.display = "block"
+    document.getElementById("insert_modal").innerHTML = `
+    <form class="edit_student_xd" method="post">
+          <div class="add_student_xd_top">
+            <p class="blue_color bold600">Edit Student (23/<span id="add_student_progress">1</span>)</p>
+            <i class="fas fa-times blue_color" onclick="closeModal()"></i>
+          </div>
+          <div class="add_student_xd_body">
+            <input type="text" name="id" id="id" hidden>
+
+            <div class="add_student_switch" id="add_stud_info">
+              <div>
+                <div class="add_student_rows">
+                  <p class="font2">First Name <span id="fname_a"></span></p>
+                  <input type="text" name="first_name" id="Applicant_fname">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Last Name <span id="lname_a"></span></p>
+                  <input type="text" name="last_name" id="Applicant_lname">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Father's Names <span id="father_a"></span></p>
+                  <input type="text" name="fathers_name" id="father_name">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Mother's Name <span id="mother_a"></span></p>
+                  <input type="text" name="mothers_name" id="mother_name">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Date of Birth <span id="dob_a"></span></p>
+                  <input type="date" name="date_of_birth" id="d_o_b">
+                </div>
+              </div>
+
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_det')">Next</p>
+              </div>
+            </div>
+
+            <div class="add_student_switch" id="add_stud_det">
+              <div>
+                <div class="add_student_rows">
+
+                  <p class="font2">Line 1<span id="phone1_a"></span></p>
+                  <input type="text" name="phone_number" id="phone1">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Line 2 (optional)</p>
+                  <input type="text" name="phone_number_2" id="phone2">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Email<span id="email_a"></span></p>
+                  <input type="text" name="email" id="email">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Passport Number<span id="passport_a"></span></p>
+                  <input type="text" name="passport_number" id="passport">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Nationality<span id="country_a"></span></p>
+                  <input type="text" name="nationality" id="country">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Country of Residence<span id="residence_a"></span></p>
+                  <input type="text" name="country_of_residence" id="residence">
+                </div>
+              </div>
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_info')">Back</p>
+                <p onclick="add_student_switch('add_stud_docs')">Next</p>
+              </div>
+            </div>
+
+            <div class="add_student_switch" id="add_stud_docs">
+              <div>
+                <div class="add_student_rows">
+                  <p class="font2">Diploma File</p>
+                  <input type="file" name="diploma_file" id="diploma">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Transcript File</p>
+                  <input type="file" name="transcript_file" id="transcript">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Language Certificate</p>
+                  <input type="file" name="certificate" id="certificate">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Passport</p>
+                  <input type="file" name="passport_file" id="passport_file">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">ID Photo</p>
+                  <input type="file" name="id_photo" id="id_photo">
+                </div>
+              </div>
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_det')">Back</p>
+                <button type="submit" onclick=(update_student())>Save </button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+    `
+
+
     document.getElementById("Applicant_fname").value = element.first_name
     document.getElementById("Applicant_lname").value = element.last_name
     document.getElementById("father_name").value = element.fathers_name
     document.getElementById("mother_name").value = element.mothers_name
-    document.getElementById("d_o_b").value = `${d.substr(6)}-${d.substr(3, 2)}-${d.substr(0, 2)}`
+    document.getElementById("d_o_b").value = element.date_of_birth
 
     document.getElementById("phone1").value = element.phone_number
     document.getElementById("phone2").value = element.phone_number_2

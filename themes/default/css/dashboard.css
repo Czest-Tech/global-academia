@@ -77,11 +77,12 @@
 .bubble_text_right .bold300 { margin: 7px 0 0 0; width: 100%; border-top: 1px solid #ffffff1f; padding-top: 3px;}
 .dashboard{ padding: 15px 30px; min-height: 100%; background-color: #f9f9f9; }
 .dash_top_cards{ width: 100%; margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 10px; }
-.dash_card{ box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; max-width: 250px;    width: 23.5%; padding: 20px 25px; border-radius: 5px; color: white; margin-bottom: 10px; }
+.dash_card{ box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; max-width: 200px;    width: 23.5%; padding: 20px 25px; border-radius: 5px; color: white; margin-bottom: 10px; }
 .dash_top_cards > .dash_card:nth-child(1){ background: linear-gradient(45deg, #24A1AD , #41B3C2) }
 .dash_top_cards > .dash_card:nth-child(2){ background: linear-gradient(45deg, #F26C1F , #FC9D20) }
 .dash_top_cards > .dash_card:nth-child(3){ background: linear-gradient(45deg, #2D8B68 , #4FA454) }
 .dash_top_cards > .dash_card:nth-child(4){ background: linear-gradient(45deg, #E12B33 , #DF3B37) }
+.dash_top_cards > .dash_card:nth-child(5){ background: linear-gradient(45deg, #845C2D , #D2B364) }
 .card_dets{ display: flex; width:100%; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 30px; }
 .dash_mid{ display: flex; justify-content: space-between; align-items: flex-start; }
 .dash_mid > *{ width: 49%; border-radius: 5px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; }
