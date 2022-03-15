@@ -207,7 +207,7 @@
 
   function open_action(action, app_id) {
     if (action === "VIEW") {
-      window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
+      window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?student_number=${app_id}`;
     }
     if (action === "EDIT") {
       MY_STUDENTS.forEach(element => {
