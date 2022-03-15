@@ -126,15 +126,15 @@
 .profile_nav > button:hover{ background-color: var(--BLUE); color: white; }
 .profile_nav_active{ background-color: var(--BLUE) !important; color: white !important; }
 .profile_detail_container{ width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; }
-.modal_container{ position: absolute; top: 0; min-height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.74); left: 0; display: none; }
+.modal_container{ position: absolute; top: 0; min-height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.74); left: 0; display: block; }
 .modal_main{ position: sticky; position: -webkit-sticky; top: 0; width: 100%; display: flex; justify-content: center; min-height: 100vh; align-items: center; }
-.modal_pad{ background-color: white; padding: 10px; border-radius: 10px; }
+.modal_pad{ background-color: white; padding: 10px; border-radius: 10px; width: 100%;}
 .modal_body{ display: flex; flex-direction: column; align-items: center; }
 .modal_body_btn{ width: 100%; align-items: center; justify-content: center; margin-top: 10px; }
 .modal_body_btn > *{ margin: 5px 10px; padding: 6px 50px; border: none; background:none; color: white; border-radius: 5px; }
 .modal_body_btn > *:nth-child(1){ background:var(--GREEN); }
 .modal_body_btn > *:nth-child(2){ background:tomato; }
-.app_modal{ max-width: 400px; text-align: center; padding: 20px 15px 10px 15px; }
+.app_modal{ max-width: 450px; text-align: center; padding: 20px 15px 10px 15px; }
 .table_area_app{ width: 100%; }
 .profile_card_body form { width: 100%; }
 .left_bubble { width: 100%; }
@@ -265,6 +265,71 @@
 .view_app_rows >p:nth-child(1){
     min-width: 130px;
 
+}
+.add_student_xd{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.add_student_xd_top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 7px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--BLUE);
+}
+.add_student_xd_top i{
+    cursor: pointer;
+}
+.add_student_footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+.add_student_footer > *{
+    margin: 0 5px;
+    min-width: 100px;
+    padding: 5px;
+    background-color: var(--BLUE);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+}
+.add_student_switch > div:nth-child(1){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.add_student_rows{
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+.add_student_rows > p{
+    color: var(--BLUE);
+    font-weight: 500;
+}
+.add_student_rows > input{
+    width: 100%;
+    margin-top: 5px;
+    padding: 7px 10px;
+    border: 1px solid var(--BLUE);
+    border-radius: 5px;
+    outline: none;
+    color: var(--BLUE);
+}
+#add_stud_det{
+    display: none;
+}
+#add_stud_docs{
+    display: none;
 }
 
 @media only screen and (max-width: 1120px) {
