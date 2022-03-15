@@ -202,7 +202,7 @@
  
  let student_names = []
  let selected_student_names = []
-    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_applicant_list?hash=" + $('.main_session').val(), {}, (data => {
+    $.get('{{LINK aj/user_dashboard/get_agent_applicant_list}}?hash=' + $('.main_session').val(), {}, (data => {
             if(data.status === 200){
                 student_names = data.students
             }
