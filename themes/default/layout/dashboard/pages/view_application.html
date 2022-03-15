@@ -87,13 +87,24 @@
 
     let link_id = "<?php echo $_GET['application_number']; ?>";
     let user__id = "{{ME id}}"
+    let applicant_info_req = "<?php echo $_GET['student_number']; ?>"
 
-    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
-        if(data.status === 200){
-            render_application_details(data.applicant_university)
-            render_applicant(data.applicant_info)
-        }
-    }));
+    if(link_id){
+        $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
+            if(data.status === 200){
+                render_application_details(data.applicant_university)
+                render_applicant(data.applicant_info)
+            }
+        }));
+    } else if(applicant_info_req) {
+        $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:applicant_info_req, user_id:user__id, api_type: "get_student"}, (data => {
+            if(data.status === 200){
+                render_application_details(data.applicant_university)
+                render_applicant(data.applicant_info)
+            }
+        }));
+    }
+
 
     function render_application_details(data){
         // let d = new Date(+data.created_at)

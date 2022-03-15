@@ -315,22 +315,47 @@ if($first === "get_user_application"){
 if($first === "get_agent_students"){
     $get_univiversities = array();
     if($kd->user->account_type === "agent"){
-        if(isset($_GET['api_type']) === 'single'  && !empty(Secure($_GET['id']))) {
-       $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
-       $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
-       $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
-       $agent_students->id_photo = GetMedia($agent_students->id_photo);
-       $agent_students->language_certificate = GetMedia($agent_students->language_certificate);
-       $agent_students->passport_file = GetMedia($agent_students->passport_file);
-       $agent_students->passport_file = GetMedia($agent_students->passport_file);
-       foreach($get_univiversities as $allProgram){
-           $allProgram->university_id = GetuniversityByID($allProgram->university_id);
-           $allProgram->program_id = GetProgramByID($allProgram->program_id);
-           $allProgram->application_status_slug =  __($allProgram->application_status);
-       }
-        } else {
-        $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+       
+        if(isset($_GET['api_type']) && Secure($_GET['api_type']) === 'single'  && !empty(Secure($_GET['id']))) {
+
+
+            $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
+            $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
+            $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
+            $agent_students->id_photo = GetMedia($agent_students->id_photo);
+            $agent_students->language_certificate = GetMedia($agent_students->language_certificate);
+            $agent_students->passport_file = GetMedia($agent_students->passport_file);
+            $agent_students->passport_file = GetMedia($agent_students->passport_file);
+            foreach($get_univiversities as $allProgram){
+                $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                $allProgram->application_status_slug =  __($allProgram->application_status);
+            }
         }
+        else if(isset($_GET['api_type'])  && Secure($_GET['api_type']) === 'get_student'  && !empty(Secure($_GET['id']))){
+       
+            $agent_students = $db->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
+            if($agent_students){
+                $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
+                if($get_univiversities){
+                    $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
+                    $agent_students->id_photo = GetMedia($agent_students->id_photo);
+                    $agent_students->language_certificate = GetMedia($agent_students->language_certificate);
+                    $agent_students->passport_file = GetMedia($agent_students->passport_file);
+                    $agent_students->passport_file = GetMedia($agent_students->passport_file);
+                    foreach($get_univiversities as $allProgram){
+                        $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                        $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                        $allProgram->application_status_slug =  __($allProgram->application_status);
+                    }
+                }
+            }
+            
+        } 
+        else {
+            $agent_students = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+        }
+        
 
         if($agent_students){
             $data = array(
@@ -389,6 +414,7 @@ if($first  === "add_agent_student"){
     $update_education->type = "multiple";
     $update_education->username = $username;
     $update_education->created_at = time();
+    $update_education->time = time();
     $update_education->first_name = $firstname;
     $update_education->last_name = $lastname;
     $update_education->date_of_birth = Secure($_POST['date_of_birth']);
