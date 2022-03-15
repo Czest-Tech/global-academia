@@ -313,9 +313,9 @@ if($first === "get_user_application"){
 }
 
 if($first === "get_agent_students"){
-    $get_univiversities;
+    $get_univiversities = array();
     if($kd->user->account_type === "agent"){
-        if($_GET['api_type'] === 'single'  && !empty(Secure($_GET['id']))) {
+        if(isset($_GET['api_type']) === 'single'  && !empty(Secure($_GET['id']))) {
        $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
        $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
        $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
@@ -390,13 +390,13 @@ if($first  === "add_agent_student"){
     $update_education->username = $username;
     $update_education->created_at = time();
     $update_education->date_of_birth = Secure($_POST['date_of_birth']);
-    $update_education->phone_number = Secure($_POST['phone']);
-    $update_education->phone_number_2 = Secure($_POST['phone_2']);
+    $update_education->phone_number = Secure($_POST['phone_number']);
+    $update_education->phone_number_2 = Secure($_POST['phone_number_2']);
     $update_education->agent_id = $kd->user->id;
     $update_education->fathers_name = Secure($_POST['fathers_name']);
     $update_education->time = time();
     $update_education->mothers_name = Secure($_POST['mothers_name']);
-    $update_education->passport_number = Secure($_POST['passport']);
+    $update_education->passport_number = Secure($_POST['passport_number']);
     $update_education->nationality = Secure($_POST['nationality']);
     $update_education->country_of_residence = Secure($_POST['country_of_residence']);
     $update_educationa_data = $db->insert(T_AGENT_STUDENTS, ToArray($update_education));

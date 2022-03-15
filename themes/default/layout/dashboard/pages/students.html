@@ -22,7 +22,7 @@
         <div class="modal_main">
             <div class="modal_pad app_modal" id="insert_modal">
               <!-- Insert modal from JS -->
-              <form class="add_student_xd">
+              <form class="add_student_xd" method="post">
                 <div class="add_student_xd_top">
                   <p class="blue_color bold600">Add Student (3/<span id="add_student_progress">1</span>)</p>
                   <i class="fas fa-times blue_color" onclick="closeModal()"></i>
@@ -137,6 +137,37 @@
             render_application(data.applicant_info)
           }
     }));
+
+   $(function(){
+     let form1 = $('.add_student_xd');
+    form1.ajaxForm({
+            url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                form1.find('button').text("{{LANG please_wait}}");
+            },
+            success: function(data) {
+                if (data.status == 200) { 
+                    $('.submission_message').hide(); 
+
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-success",
+                        html: data.message
+                    }));
+                    $('.alert-success').fadeIn(300);
+                    window.location = data.url
+                }
+                else {
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-danger",
+                        html: data.message
+                    }));
+                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                }
+            }
+        });
+   });
+
     function render_application(data){
 
       data.forEach((element, index) => {
