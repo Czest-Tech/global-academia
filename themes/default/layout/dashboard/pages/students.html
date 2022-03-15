@@ -137,29 +137,31 @@
       render_application(data.applicant_info)
     }
   }));
+  function submitStudent(){
 
+      let form1 = $('.add_student_xd');
+
+      form1.submit();
+ 
+      form1.ajaxForm({
+        url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.status == 200) {
+            console.log(data)
+            closeModal()
+          }else{
+            console.log(data)
+          }
+        }
+      });
+    }
  
 
   $(function () {
 
    
-    let form1 = $('.add_student_xd');
-
-    $(document).on('click', '.send_form', function(event){
-      let form1 = $('.add_student_xd').submit();
-    });
-    form1.ajaxForm({
-      url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
-      dataType: 'json',
-      success: function (data) {
-        if (data.status == 200) {
-          console.log(data)
-          closeModal()
-        }else{
-          console.log(data)
-        }
-      }
-    });
+    
 
     let edit_form = $('.edit_student_xd');
     edit_form.ajaxForm({
@@ -334,7 +336,7 @@
                     </div>
                     <div class="add_student_footer">
                       <p onclick="add_student_switch('add_stud_det')">Back</p>
-                      <button class="send_form">Save </button>
+                      <p onclick="submitStudent()">Save </p>
                     </div>
                   </div>
 

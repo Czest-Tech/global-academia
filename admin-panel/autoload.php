@@ -547,7 +547,8 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 
                         </ul>
                     </li>
-                    <li>
+                   <?php if($kd->user->access_level === 1) {?>
+                       <li>
                         <a href="#">
                             <span class="nav-link-icon">
                                  <i data-feather="globe"></i>
@@ -567,11 +568,12 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                             </span><span>Settings</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#"  <?php echo ($page == 'manage-users') ? 'class="active"' : ''; ?>>
-                    <span class="nav-link-icon">
-                        <i data-feather="users"></i>
-                    </span><span>Users</span>
+                        <span class="nav-link-icon">
+                            <i data-feather="users"></i>
+                        </span><span>Users</span>
                         </a>
                         <ul>
                             <li>
@@ -590,7 +592,9 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                             
                             
                         </ul>
-                    </li>         
+                    </li> 
+                   <?php } ?> 
+                            
                    
                 </ul>
             </div>

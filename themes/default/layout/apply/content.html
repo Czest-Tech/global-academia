@@ -269,32 +269,32 @@
         localStorage.setItem("XXX", JSON.stringify(selected_applicant_list))
         // console.log("XXX", selected_applicant_list)
 
-        // form1.ajaxForm({
-        //     url: '{{LINK aj/application/single}}?hash=' + $('.main_session').val(),
-        //     dataTyep:'json',
-        //     beforeSend: function() {
-        //         form1.find('button').text("{{LANG please_wait}}");
-        //     },
-        //     success: function(data) {
-        //         if (data.status == 200) { 
-        //             $('.submission_message').hide(); 
+        form1.ajaxForm({
+            url: '{{LINK aj/application/single}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                form1.find('button').text("{{LANG please_wait}}");
+            },
+            success: function(data) {
+                if (data.status == 200) { 
+                    $('.submission_message').hide(); 
 
-        //             $('.submit-alert').html($('<div>',{
-        //                 class: "alert alert-success",
-        //                 html: data.message
-        //             }));
-        //             $('.alert-success').fadeIn(300);
-        //             window.location = data.url
-        //         }
-        //         else {
-        //             $('.submit-alert').html($('<div>',{
-        //                 class: "alert alert-danger",
-        //                 html: data.message
-        //             }));
-        //             form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
-        //         }
-        //     }
-        // });
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-success",
+                        html: data.message
+                    }));
+                    $('.alert-success').fadeIn(300);
+                    window.location = data.url
+                }
+                else {
+                    $('.submit-alert').html($('<div>',{
+                        class: "alert alert-danger",
+                        html: data.message
+                    }));
+                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                }
+            }
+        });
         
     })
     
@@ -1885,8 +1885,7 @@
                 student_names = data.students
             }
     }));
-    let selected_student_names = []
-    let filter_string = ""
+  
     
     function populate_students(){
         let student_rows = ""
