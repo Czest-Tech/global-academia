@@ -138,11 +138,19 @@
     }
   }));
 
+ 
+
   $(function () {
+
+   
     let form1 = $('.add_student_xd');
+
+    $(document).on('click', '.send_form', function(event){
+      let form1 = $('.add_student_xd').submit();
+    });
     form1.ajaxForm({
       url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
-      dataTyep: 'json',
+      dataType: 'json',
       success: function (data) {
         if (data.status == 200) {
           console.log(data)
@@ -156,7 +164,7 @@
     let edit_form = $('.edit_student_xd');
     edit_form.ajaxForm({
       url: '{{LINK aj/user_dashboard/update_agent_student}}?hash=' + $('.main_session').val(),
-      dataTyep: 'json',
+      dataType: 'json',
       success: function (data) {
         if (data.status == 200) {
           console.log(data)
@@ -326,7 +334,7 @@
                     </div>
                     <div class="add_student_footer">
                       <p onclick="add_student_switch('add_stud_det')">Back</p>
-                      <button type="submit">Save </button>
+                      <button class="send_form">Save </button>
                     </div>
                   </div>
 
