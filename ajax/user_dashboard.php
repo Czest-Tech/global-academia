@@ -389,7 +389,10 @@ if($first  === "add_agent_student"){
     $update_education->type = "multiple";
     $update_education->username = $username;
     $update_education->created_at = time();
+    $update_education->first_name = $firstname;
+    $update_education->last_name = $lastname;
     $update_education->date_of_birth = Secure($_POST['date_of_birth']);
+    $update_education->email = Secure($_POST['email']);
     $update_education->phone_number = Secure($_POST['phone_number']);
     $update_education->phone_number_2 = Secure($_POST['phone_number_2']);
     $update_education->agent_id = $kd->user->id;
@@ -420,7 +423,96 @@ if($first  === "add_agent_student"){
     }
     
 }
+if($first  === "update_agent_student"){
+    if(isset($_POST['id']) && !empty($_POST['id'])){
+        $update_education = new stdClass();
+        $isSent = '';
+        $randon_divider = random_str(4);
+    
+        $firstname       = Secure($_POST['first_name']);
+        $lastname       = Secure($_POST['last_name']);
+        $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
+    
+        
+    $firstname       = Secure($_POST['first_name']);
+    $lastname       = Secure($_POST['last_name']);
+    $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
 
+    $update_education->type = "multiple";
+    $update_education->username = $username;
+    $update_education->created_at = time();
+    $update_education->first_name = $firstname;
+    $update_education->last_name = $lastname;
+    $update_education->date_of_birth = Secure($_POST['date_of_birth']);
+    $update_education->email = Secure($_POST['email']);
+    $update_education->phone_number = Secure($_POST['phone_number']);
+    $update_education->phone_number_2 = Secure($_POST['phone_number_2']);
+    $update_education->agent_id = $kd->user->id;
+    $update_education->fathers_name = Secure($_POST['fathers_name']);
+    $update_education->time = time();
+    $update_education->mothers_name = Secure($_POST['mothers_name']);
+    $update_education->passport_number = Secure($_POST['passport_number']);
+    $update_education->nationality = Secure($_POST['nationality']);
+    $update_education->country_of_residence = Secure($_POST['country_of_residence']);        
+        if($update_educationa_data){
+    
+            $get_data = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+    
+            $data = array(
+                'status' => 200,
+                'data' => $get_data,
+                'message' => __('success')
+               
+             );
+        } else {
+            $data = array(
+                'status' => 401,
+                'message' => __('error'),
+                'url' => UrlLink($redirectlink)
+             );
+        }
+        
+    }else {
+        $data = array(
+            'status' => 400,
+            'message' => __('error'),
+            'url' => UrlLink($redirectlink)
+         );
+    }
+   
+}
+if($first  === "delete_agent_student"){
+    if(isset($_POST['id']) && !empty($_POST['id'])){
+        
+        $delet_educationa_data = $db->where('id', Secure($_POST['id']))->delete(T_AGENT_STUDENTS);
+        
+        if($delet_educationa_data){
+    
+            $get_data = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+    
+            $data = array(
+                'status' => 200,
+                'data' => $get_data,
+                'message' => __('success')
+               
+             );
+        } else {
+            $data = array(
+                'status' => 401,
+                'message' => __('error'),
+                'url' => UrlLink($redirectlink)
+             );
+        }
+        
+    }else {
+        $data = array(
+            'status' => 400,
+            'message' => __('error'),
+            'url' => UrlLink($redirectlink)
+         );
+    }
+   
+}
 if ($first == 'save-settings') {
     $submit_data = array();
     foreach ($_POST as $key => $settings_to_save) {
