@@ -1,28 +1,236 @@
 <div class="applications">
-    <button class="agent_add_student" onclick="add_student()">Add Student</button>
-    <div class="table_area_app">
-      <table class="ga_table">
-          <thead>
-              <tr>
-                  <th>Date</th>
-                  <th>Names</th>
-                  <th>Email</th>
-                  <th>Status</th>
-                  <th>Action</th>
-              </tr>
-          </thead>
-          <tbody id="ga_table-body">
-              
-          </tbody>
-        </table>
-        <p id="no_apps"></p>
+  <button class="agent_add_student" onclick="add_student()">Add Student</button>
+  <div class="table_area_app">
+    <table class="ga_table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Names</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="ga_table-body">
+
+      </tbody>
+    </table>
+    <p id="no_apps"></p>
+  </div>
+
+  <div class="modal_container" id="modal_container">
+    <div class="modal_main">
+      <div class="modal_pad app_modal" id="insert_modal">
+        <!-- Insert modal from JS -->
+        <form class="edit_student_xd" method="post">
+          <div class="add_student_xd_top">
+            <p class="blue_color bold600">Edit Student (3/<span id="add_student_progress">1</span>)</p>
+            <i class="fas fa-times blue_color" onclick="closeModal()"></i>
+          </div>
+          <div class="add_student_xd_body">
+            <input type="text" name="id" id="id" hidden>
+
+            <div class="add_student_switch" id="add_stud_info">
+              <div>
+                <div class="add_student_rows">
+                  <p class="font2">First Name <span id="fname_a"></span></p>
+                  <input type="text" name="first_name" id="Applicant_fname">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Last Name <span id="lname_a"></span></p>
+                  <input type="text" name="last_name" id="Applicant_lname">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Father's Names <span id="father_a"></span></p>
+                  <input type="text" name="fathers_name" id="father_name">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Mother's Name <span id="mother_a"></span></p>
+                  <input type="text" name="mothers_name" id="mother_name">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Date of Birth <span id="dob_a"></span></p>
+                  <input type="date" name="date_of_birth" id="d_o_b">
+                </div>
+              </div>
+
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_det')">Next</p>
+              </div>
+            </div>
+
+            <div class="add_student_switch" id="add_stud_det">
+              <div>
+                <div class="add_student_rows">
+
+                  <p class="font2">Line 1<span id="phone1_a"></span></p>
+                  <input type="text" name="phone_number" id="phone1">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Line 2 (optional)</p>
+                  <input type="text" name="phone_number_2" id="phone2">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Email<span id="email_a"></span></p>
+                  <input type="text" name="email" id="email">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Passport Number<span id="passport_a"></span></p>
+                  <input type="text" name="passport_number" id="passport">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Nationality<span id="country_a"></span></p>
+                  <input type="text" name="nationality" id="country">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Country of Residence<span id="residence_a"></span></p>
+                  <input type="text" name="country_of_residence" id="residence">
+                </div>
+              </div>
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_info')">Back</p>
+                <p onclick="add_student_switch('add_stud_docs')">Next</p>
+              </div>
+            </div>
+
+            <div class="add_student_switch" id="add_stud_docs">
+              <div>
+                <div class="add_student_rows">
+                  <p class="font2">Diploma File</p>
+                  <input type="file" name="diploma_file" id="diploma">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Transcript File</p>
+                  <input type="file" name="transcript_file" id="transcript">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Language Certificate</p>
+                  <input type="file" name="certificate" id="certificate">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">Passport</p>
+                  <input type="file" name="passport_file" id="passport_file">
+                </div>
+                <div class="add_student_rows">
+                  <p class="font2">ID Photo</p>
+                  <input type="file" name="id_photo" id="id_photo">
+                </div>
+              </div>
+              <div class="add_student_footer">
+                <p onclick="add_student_switch('add_stud_det')">Back</p>
+                <button type="submit">Save </button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
     </div>
-  
-      <div class="modal_container" id="modal_container">
-        <div class="modal_main">
-            <div class="modal_pad app_modal" id="insert_modal">
-              <!-- Insert modal from JS -->
-              <form class="add_student_xd" method="post">
+  </div>
+</div>
+
+<script>
+  let MY_STUDENTS = []
+  $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
+    if (data.status === 200) {
+      MY_STUDENTS = data.applicant_info
+      render_application(data.applicant_info)
+    }
+  }));
+
+  $(function () {
+    let form1 = $('.add_student_xd');
+    form1.ajaxForm({
+      url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
+      dataTyep: 'json',
+      success: function (data) {
+        if (data.status == 200) {
+        }else{
+          console.log(data)
+        }
+      }
+    });
+
+    let edit_form = $('.edit_student_xd');
+    edit_form.ajaxForm({
+      url: '{{LINK aj/user_dashboard/update_agent_student}}?hash=' + $('.main_session').val(),
+      dataTyep: 'json',
+      success: function (data) {
+        if (data.status == 200) {
+          console.log(data)
+          closeModal()
+        }else{
+          console.log(data)
+        }
+      }
+    });
+
+
+
+  });
+
+  function render_application(data) {
+
+    data.forEach((element, index) => {
+      let date = new Date(+element.created_at)
+      document.getElementById("ga_table-body").innerHTML += `
+              <tr>
+                  <td>${date.toString().substr(4, 11)}</td>
+                  <td class="table_data">${element.first_name} ${element.last_name}</td>
+                  <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
+                  <td class="table_data">On-going</td>
+                  <td>
+                      <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
+                          <option value="SELECT">Select</option>
+                          <option value="VIEW">View</option>
+                          <option value="EDIT">Edit</option>
+                          <option value="UPLOAD">upload</option>
+                      </select>
+                  </td>
+              </tr>
+          `
+    })
+    if (data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
+    else document.getElementById("no_apps").innerHTML = ""
+  }
+
+
+  function open_action(id, app_id) {
+    let action = document.getElementById("app_change" + id).value
+    if (action === "VIEW") {
+      window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
+    }
+    if (action === "EDIT") {
+      MY_STUDENTS.forEach(element => {
+        if (element.id == app_id) {
+          edit_student(element, app_id)
+
+        }
+
+      });
+      document.getElementById("modal_container").style.display = "block"
+    }
+    if (action === "UPLOAD") {
+
+    }
+
+  }
+
+  function closeModal() {
+    document.getElementById("modal_container").style.display = "none"
+  }
+  let logged_user_id = "{{ME id}}";
+  function send_edit_request(id) {
+    $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id }, function (data) {
+      console.log("SEND REQ RESPONSE", data)
+      closeModal()
+    });
+  }
+
+  function add_student() {
+    document.getElementById("modal_container").style.display = "block"
+    document.getElementById("insert_modal").innerHTML = `
+        <form class="add_student_xd" method="post">
                 <div class="add_student_xd_top">
                   <p class="blue_color bold600">Add Student (3/<span id="add_student_progress">1</span>)</p>
                   <i class="fas fa-times blue_color" onclick="closeModal()"></i>
@@ -103,7 +311,7 @@
                       </div>
                       <div class="add_student_rows">
                         <p class="font2">Language Certificate</p>
-                        <input type="file" name="certificate" name="certificate">
+                        <input type="file" name="certificate" id="certificate">
                       </div>
                       <div class="add_student_rows">
                         <p class="font2">Passport</p>
@@ -111,7 +319,7 @@
                       </div>
                       <div class="add_student_rows">
                         <p class="font2">ID Photo</p>
-                        <input type="file" name="id_photo" name="id_photo">
+                        <input type="file" name="id_photo" id="id_photo">
                       </div>
                     </div>
                     <div class="add_student_footer">
@@ -122,189 +330,79 @@
 
                 </div>
               </form>
-            </div>
-        </div>
-      </div>
-  </div>
-  
-  <script>
-    $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
-          if(data.status === 200){
-            render_application(data.applicant_info)
-          }
-    }));
-
-   $(function(){
-     let form1 = $('.add_student_xd');
-    form1.ajaxForm({
-            url: '{{LINK aj/user_dashboard/add_agent_student}}?hash=' + $('.main_session').val(),
-            dataTyep:'json',
-            beforeSend: function() {
-                form1.find('button').text("{{LANG please_wait}}");
-            },
-            success: function(data) {
-                if (data.status == 200) { 
-                    $('.submission_message').hide(); 
-
-                    $('.submit-alert').html($('<div>',{
-                        class: "alert alert-success",
-                        html: data.message
-                    }));
-                    $('.alert-success').fadeIn(300);
-                    window.location = data.url
-                }
-                else {
-                    $('.submit-alert').html($('<div>',{
-                        class: "alert alert-danger",
-                        html: data.message
-                    }));
-                    form1.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
-                }
-            }
-        });
-   });
-
-    function render_application(data){
-
-      data.forEach((element, index) => {
-        let date = new Date(+element.created_at)
-        document.getElementById("ga_table-body").innerHTML += `
-              <tr>
-                  <td>${date.toString().substr(4,11)}</td>
-                  <td class="table_data">${element.first_name} ${element.last_name}</td>
-                  <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
-                  <td class="table_data">On-going</td>
-                  <td>
-                      <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
-                          <option value="SELECT">Select</option>
-                          <option value="VIEW">View</option>
-                          <option value="EDIT">Edit</option>
-                          <option value="UPLOAD">upload</option>
-                      </select>
-                  </td>
-              </tr>
-          `
-      })
-      if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
-      else document.getElementById("no_apps").innerHTML = ""
-    }
-  
-  
-    function open_action(id, app_id){
-      let action = document.getElementById("app_change"+id).value
-      if(action === "VIEW"){
-         window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
-      }
-      if(action === "EDIT"){
-          document.getElementById("modal_container").style.display = "block"
-          document.getElementById("insert_modal").innerHTML = `
-              <div class="modal_body">
-                <p class="dark_color font2">{{LANG Edit request will be sent.}}</p>
-                <p class="dark_color font2">{{LANG Wait for Admin approval before you edit your application.}}</p>
-                <p class="dark_color font2">{{LANG Continue }}?</p>
-                <div class="modal_body_btn">
-                  <button onclick="send_edit_request(${app_id})">Yes</button>
-                  <button onclick="closeModal()">Cancel</button>
-                </div>
-              </div>
           
           `
-          document.getElementById("app_change"+id).value = "SELECT"
-      }
-      if(action === "UPLOAD"){
-        
-      }
-      console.log(action)
+  }
+
+  function edit_student(element, id) {
+    let d = element.date_of_birth
+    document.getElementById("Applicant_fname").value = element.first_name
+    document.getElementById("Applicant_lname").value = element.last_name
+    document.getElementById("father_name").value = element.fathers_name
+    document.getElementById("mother_name").value = element.mothers_name
+    document.getElementById("d_o_b").value = `${d.substr(6)}-${d.substr(3, 2)}-${d.substr(0, 2)}`
+
+    document.getElementById("phone1").value = element.phone_number
+    document.getElementById("phone2").value = element.phone_number_2
+    document.getElementById("email").value = element.email
+    document.getElementById("passport").value = element.passport_number
+    document.getElementById("country").value = element.country_of_residence
+    document.getElementById("residence").value = element.nationality
+
+    console.log(element.language_certificate || "HEY")
+    document.getElementById("diploma").value = element.diploma_file || ""
+    document.getElementById("transcript").value = element.transcript_file || ""
+    document.getElementById("certificate").value = element.language_certificate || ""
+    document.getElementById("passport_file").value = element.passport_file || ""
+    document.getElementById("id_photo").value = element.id_photo || ""
+
+    document.getElementById("id").value = id
+  }
+  function add_student_switch(step) {
+    if (error_check(step)) {
+      if (step === "add_stud_info") document.getElementById("add_student_progress").innerHTML = 1
+      if (step === "add_stud_det") document.getElementById("add_student_progress").innerHTML = 2
+      if (step === "add_stud_docs") document.getElementById("add_student_progress").innerHTML = 3
+      document.getElementById("add_stud_info").style.display = "none"
+      document.getElementById("add_stud_det").style.display = "none"
+      document.getElementById("add_stud_docs").style.display = "none"
+      document.getElementById(step).style.display = "block"
     }
-  
-    function closeModal(){
-      document.getElementById("modal_container").style.display = "none"
+  }
+  function error_check(step) {
+    if (step === "add_stud_det") {
+      let fname = document.getElementById("Applicant_fname").value
+      let lname = document.getElementById("Applicant_lname").value
+      let father = document.getElementById("father_name").value
+      let mother = document.getElementById("mother_name").value
+      let dob = document.getElementById("d_o_b").value
+
+      document.getElementById("fname_a").innerHTML = fname ? "" : "*"
+      document.getElementById("lname_a").innerHTML = lname ? "" : "*"
+      document.getElementById("father_a").innerHTML = father ? "" : "*"
+      document.getElementById("mother_a").innerHTML = mother ? "" : "*"
+      document.getElementById("dob_a").innerHTML = dob ? "" : "*"
+
+      if (fname && lname && father && mother && dob) return true
+      return false
     }
-    let logged_user_id = "{{ME id}}";
-    function send_edit_request(id) {
-        $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id}, function (data) {
-          console.log("SEND REQ RESPONSE", data)
-          closeModal()
-        });
+    if (step === "add_stud_docs") {
+      let phone = document.getElementById("phone1").value
+      let email = document.getElementById("email").value
+      let passport = document.getElementById("passport").value
+      let country = document.getElementById("country").value
+      let residence = document.getElementById("residence").value
+
+      document.getElementById("phone1_a").innerHTML = phone ? "" : "*"
+      document.getElementById("email_a").innerHTML = email ? "" : "*"
+      document.getElementById("passport_a").innerHTML = passport ? "" : "*"
+      document.getElementById("country_a").innerHTML = country ? "" : "*"
+      document.getElementById("residence_a").innerHTML = residence ? "" : "*"
+
+      if (phone && email && passport && country && residence) return true
+      return false
     }
+    return true
+  }
 
-    function add_student(){
-      document.getElementById("modal_container").style.display = "block"
-    }
-
-
-    function add_student_switch(step){
-      if(error_check(step)){
-        if(step === "add_stud_info") document.getElementById("add_student_progress").innerHTML = 1
-        if(step === "add_stud_det") document.getElementById("add_student_progress").innerHTML = 2
-        if(step === "add_stud_docs") document.getElementById("add_student_progress").innerHTML = 3
-        document.getElementById("add_stud_info").style.display = "none"
-        document.getElementById("add_stud_det").style.display = "none"
-        document.getElementById("add_stud_docs").style.display = "none"
-        document.getElementById(step).style.display = "block"
-      }
-    }
-    function error_check(step){
-      if(step === "add_stud_det"){
-        let fname = document.getElementById("Applicant_fname").value
-        let lname = document.getElementById("Applicant_lname").value
-        let father = document.getElementById("father_name").value
-        let mother = document.getElementById("mother_name").value
-        let dob = document.getElementById("d_o_b").value
-
-        document.getElementById("fname_a").innerHTML = fname ? "" : "*"
-        document.getElementById("lname_a").innerHTML = lname ? "" : "*"
-        document.getElementById("father_a").innerHTML = father ? "" : "*"
-        document.getElementById("mother_a").innerHTML = mother ? "" : "*"
-        document.getElementById("dob_a").innerHTML = dob ? "" : "*"
-
-        if(fname && lname && father && mother && dob) return true
-        return false
-      }
-      if(step === "add_stud_docs"){
-        let phone = document.getElementById("phone1").value
-        let email = document.getElementById("email").value
-        let passport = document.getElementById("passport").value
-        let country = document.getElementById("country").value
-        let residence = document.getElementById("residence").value
-
-        document.getElementById("phone1_a").innerHTML = phone ? "" : "*"
-        document.getElementById("email_a").innerHTML = email ? "" : "*"
-        document.getElementById("passport_a").innerHTML = passport ? "" : "*"
-        document.getElementById("country_a").innerHTML = country ? "" : "*"
-        document.getElementById("residence_a").innerHTML = residence ? "" : "*"
-
-        if(phone && email && passport && country && residence) return true
-        return false
-      }
-      return true
-    }
-
-
-    // <div >
-    //   <div class="add_student_rows">
-    //     <p class="font2">Line 1</p>
-    //     <input type="text" name="phone_number"    id="phone1">
-    //   </div>
-    //   <div class="add_student_rows">
-    //     <p class="font2">Line 2 (optional)</p>
-    //     <input type="text" name="phone_number_2"  id="phone2">
-    //   </div>
-    //   <div class="add_student_rows">
-    //     <p class="font2">Email</p>
-    //     <input type="text" name="email"           id="email">
-    //   </div> 
-    //   <div class="add_student_rows">
-    //     <p class="font2">Passport Number</p>
-    //     <input type="text" name="passport_number" id="passport">
-    //   </div>
-    //   <div class="add_student_rows">
-    //     <p class="font2">Nationality</p>
-    //     <input type="text" name="nationality"     id="country">
-    //   </div>
-    //   <div class="add_student_rows">
-    //     <p class="font2">Country of Residence</p>
-    //     <input type="text" name="country_of_residence" id="residence">
-    //   </div>
-    // </div>
-  </script>
+</script>
