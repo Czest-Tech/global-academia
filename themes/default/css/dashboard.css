@@ -334,6 +334,26 @@
 .add_student_rows span{
     color: tomato !important;
 }
+.table_actions{
+    display: flex;
+    justify-content: space-evenly;
+}
+.table_actions > *{
+    margin: 0 3px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.table_eye{
+    color: var(--GREEN);
+}
+.table_edit{
+    color: orange;
+}
+.table_trash{
+    color: tomato;
+}
+
+
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }
     .dash_mid { flex-direction: column; }

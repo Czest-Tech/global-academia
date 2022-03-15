@@ -192,12 +192,11 @@
                   <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
                   <td class="table_data">On-going</td>
                   <td>
-                      <select class="ga_table_select" id="app_change${index}" onchange="open_action('${index}', '${element.id}')">
-                          <option value="SELECT">Select</option>
-                          <option value="VIEW">View</option>
-                          <option value="EDIT">Edit</option>
-                          <option value="UPLOAD">upload</option>
-                      </select>
+                      <div class="table_actions">
+                        <i class="fas fa-eye table_eye" onclick="open_action('VIEW', '${element.id}')"></i>
+                        <i class="fas fa-edit table_edit" onclick="open_action('EDIT', '${element.id}')"></i>
+                        <i class="fas fa-trash table_trash"></i>
+                      </div>
                   </td>
               </tr>
           `
@@ -206,19 +205,13 @@
     else document.getElementById("no_apps").innerHTML = ""
   }
 
-
-  function open_action(id, app_id) {
-    let action = document.getElementById("app_change" + id).value
+  function open_action(action, app_id) {
     if (action === "VIEW") {
       window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
     }
     if (action === "EDIT") {
       MY_STUDENTS.forEach(element => {
-        if (element.id == app_id) {
-          edit_student(element, app_id)
-
-        }
-
+        if (element.id == app_id) edit_student(element, app_id)
       });
       document.getElementById("modal_container").style.display = "block"
     }
