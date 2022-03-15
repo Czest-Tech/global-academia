@@ -145,6 +145,8 @@
       dataTyep: 'json',
       success: function (data) {
         if (data.status == 200) {
+          console.log(data)
+          closeModal()
         }else{
           console.log(data)
         }
