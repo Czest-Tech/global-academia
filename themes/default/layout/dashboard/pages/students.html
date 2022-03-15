@@ -31,32 +31,27 @@
                   <div class="add_student_switch" id="add_stud_info">
                     <div >
                       <div class="add_student_rows">
-                        <p class="font2">First Name</p>
-                        <input type="text" name="first_name"      id="Applicant_fname">
+                        <p class="font2">First Name <span id="fname_a"></span></p>
+                        <input type="text" name="first_name" id="Applicant_fname">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Last Name</p>
-                        <input type="text" name="last_name"       id="Applicant_lname">
+                        <p class="font2">Last Name <span id="lname_a"></span></p>
+                        <input type="text" name="last_name" id="Applicant_lname">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Father's Names</p>
-                        <input type="text" name="fathers_name"    id="father_name">
+                        <p class="font2">Father's Names <span id="father_a"></span></p>
+                        <input type="text" name="fathers_name" id="father_name">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Mother's Name</p>
-                        <input type="text" name="mothers_name"    id="mother_name">
+                        <p class="font2">Mother's Name <span id="mother_a"></span></p>
+                        <input type="text" name="mothers_name" id="mother_name">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Date of Birth</p>
-                        <input type="date" name="date_of_birth"   id="d_o_b">
+                        <p class="font2">Date of Birth <span id="dob_a"></span></p>
+                        <input type="date" name="date_of_birth" id="d_o_b">
                       </div>
                     </div>
-
-
             
-                   
-
-
                     <div class="add_student_footer">
                       <p onclick="add_student_switch('add_stud_det')">Next</p>
                     </div>
@@ -65,27 +60,28 @@
                   <div class="add_student_switch" id="add_stud_det">
                     <div >
                       <div class="add_student_rows">
-                        <p class="font2">Line 1</p>
-                        <input type="text" name="phone_number"    id="phone1">
+                        
+                        <p class="font2">Line 1<span id="phone1_a"></span></p>
+                        <input type="text" name="phone_number" id="phone1">
                       </div>
                       <div class="add_student_rows">
                         <p class="font2">Line 2 (optional)</p>
                         <input type="text" name="phone_number_2"  id="phone2">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Email</p>
-                        <input type="text" name="email"           id="email">
+                        <p class="font2">Email<span id="email_a"></span></p>
+                        <input type="text" name="email" id="email">
                       </div> 
                       <div class="add_student_rows">
-                        <p class="font2">Passport Number</p>
+                        <p class="font2">Passport Number<span id="passport_a"></span></p>
                         <input type="text" name="passport_number" id="passport">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Nationality</p>
-                        <input type="text" name="nationality"     id="country">
+                        <p class="font2">Nationality<span id="country_a"></span></p>
+                        <input type="text" name="nationality" id="country">
                       </div>
                       <div class="add_student_rows">
-                        <p class="font2">Country of Residence</p>
+                        <p class="font2">Country of Residence<span id="residence_a"></span></p>
                         <input type="text" name="country_of_residence" id="residence">
                       </div>
                     </div>
@@ -236,15 +232,79 @@
       document.getElementById("modal_container").style.display = "block"
     }
 
+
     function add_student_switch(step){
-      if(step === "add_stud_info") document.getElementById("add_student_progress").innerHTML = 1
-      if(step === "add_stud_det") document.getElementById("add_student_progress").innerHTML = 2
-      if(step === "add_stud_docs") document.getElementById("add_student_progress").innerHTML = 3
-      document.getElementById("add_stud_info").style.display = "none"
-      document.getElementById("add_stud_det").style.display = "none"
-      document.getElementById("add_stud_docs").style.display = "none"
-      document.getElementById(step).style.display = "block"
+      if(error_check(step)){
+        if(step === "add_stud_info") document.getElementById("add_student_progress").innerHTML = 1
+        if(step === "add_stud_det") document.getElementById("add_student_progress").innerHTML = 2
+        if(step === "add_stud_docs") document.getElementById("add_student_progress").innerHTML = 3
+        document.getElementById("add_stud_info").style.display = "none"
+        document.getElementById("add_stud_det").style.display = "none"
+        document.getElementById("add_stud_docs").style.display = "none"
+        document.getElementById(step).style.display = "block"
+      }
     }
-  
-  
+    function error_check(step){
+      if(step === "add_stud_det"){
+        let fname = document.getElementById("Applicant_fname").value
+        let lname = document.getElementById("Applicant_lname").value
+        let father = document.getElementById("father_name").value
+        let mother = document.getElementById("mother_name").value
+        let dob = document.getElementById("d_o_b").value
+
+        document.getElementById("fname_a").innerHTML = fname ? "" : "*"
+        document.getElementById("lname_a").innerHTML = lname ? "" : "*"
+        document.getElementById("father_a").innerHTML = father ? "" : "*"
+        document.getElementById("mother_a").innerHTML = mother ? "" : "*"
+        document.getElementById("dob_a").innerHTML = dob ? "" : "*"
+
+        if(fname && lname && father && mother && dob) return true
+        return false
+      }
+      if(step === "add_stud_docs"){
+        let phone = document.getElementById("phone1").value
+        let email = document.getElementById("email").value
+        let passport = document.getElementById("passport").value
+        let country = document.getElementById("country").value
+        let residence = document.getElementById("residence").value
+
+        document.getElementById("phone1_a").innerHTML = phone ? "" : "*"
+        document.getElementById("email_a").innerHTML = email ? "" : "*"
+        document.getElementById("passport_a").innerHTML = passport ? "" : "*"
+        document.getElementById("country_a").innerHTML = country ? "" : "*"
+        document.getElementById("residence_a").innerHTML = residence ? "" : "*"
+
+        if(phone && email && passport && country && residence) return true
+        return false
+      }
+      return true
+    }
+
+
+    // <div >
+    //   <div class="add_student_rows">
+    //     <p class="font2">Line 1</p>
+    //     <input type="text" name="phone_number"    id="phone1">
+    //   </div>
+    //   <div class="add_student_rows">
+    //     <p class="font2">Line 2 (optional)</p>
+    //     <input type="text" name="phone_number_2"  id="phone2">
+    //   </div>
+    //   <div class="add_student_rows">
+    //     <p class="font2">Email</p>
+    //     <input type="text" name="email"           id="email">
+    //   </div> 
+    //   <div class="add_student_rows">
+    //     <p class="font2">Passport Number</p>
+    //     <input type="text" name="passport_number" id="passport">
+    //   </div>
+    //   <div class="add_student_rows">
+    //     <p class="font2">Nationality</p>
+    //     <input type="text" name="nationality"     id="country">
+    //   </div>
+    //   <div class="add_student_rows">
+    //     <p class="font2">Country of Residence</p>
+    //     <input type="text" name="country_of_residence" id="residence">
+    //   </div>
+    // </div>
   </script>
