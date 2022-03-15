@@ -472,6 +472,38 @@ if($first  === "update_agent_student"){
     }
    
 }
+if($first  === "delete_agent_student"){
+    if(isset($_POST['id']) && !empty($_POST['id'])){
+        
+        $delet_educationa_data = $db->where('id', Secure($_POST['id']))->delete(T_AGENT_STUDENTS);
+        
+        if($delet_educationa_data){
+    
+            $get_data = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
+    
+            $data = array(
+                'status' => 200,
+                'data' => $get_data,
+                'message' => __('success')
+               
+             );
+        } else {
+            $data = array(
+                'status' => 401,
+                'message' => __('error'),
+                'url' => UrlLink($redirectlink)
+             );
+        }
+        
+    }else {
+        $data = array(
+            'status' => 400,
+            'message' => __('error'),
+            'url' => UrlLink($redirectlink)
+         );
+    }
+   
+}
 if ($first == 'save-settings') {
     $submit_data = array();
     foreach ($_POST as $key => $settings_to_save) {
