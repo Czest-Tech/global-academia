@@ -131,12 +131,12 @@
         document.getElementById("ga_table-body").innerHTML = rows
 
     }
-    function file_error_templete(id){
+    function file_error_templete(id, file_name){
         let file_error = `
             <form class="immediate_form" id="id_photo_form">
-                <label for="id_photo" class="immediate_label font1">Upload</label>
+                <label style="background-color:tomato;" for="missing_photo" class="app_files">Upload</label>
                 <input type="text" value="${id}" name="id" hidden />
-                <input type="file" name="id_photo" id="id_photo" hidden onchange="upload_file()">
+                <input type="file" name='${file_name}' id="missing_photo" hidden onchange="upload_file()">
             </form>
         `
         return file_error
@@ -157,10 +157,10 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        document.getElementById("id_photo_file").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : file_error_templete(data.id)
-        document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : error
-        document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : error
-        document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : error
+        document.getElementById("id_photo_file").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : file_error_templete(data.id, 'id_photo')
+        document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : file_error_templete(data.id, 'transcript')
+        document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : file_error_templete(data.id, 'certificate')
+        document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : file_error_templete(data.id, 'diploma')
 
         document.getElementById("log_user_pp").src = data.id_photo ? data.id_photo : "https://static.vecteezy.com/system/resources/thumbnails/000/512/866/small/57_Student.jpg"
     }
@@ -168,22 +168,19 @@
         window.open(link, '_blank')
     }
 
-
-    function checker(){
-        console.log("chekeres")
-    }
-
     function upload_file(){
-    //   let form1 = document.getElementById('id_photo_form')
-    //   var formData = new FormData(form1);
-    //   var request = new XMLHttpRequest();
-    //   request.onreadystatechange = function() {
-    //     if (request.readyState === 4) {
-    //       let new_data = JSON.parse(request.response);
-    //       console.log("HERE", new_data)
-    //     }
-    //   }
-    //   request.open("POST", `{{LINK aj/user_dashboard/upload_missing}}?hash=${$('.main_session').val()}`);
-    //   request.send(formData);
+      let form1 = document.getElementById('id_photo_form')
+      var formData = new FormData(form1);
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+            let data = JSON.parse(request.response);
+        //   console.log("HERE", new_data)
+            render_application_details(data.applicant_university)
+            render_applicant(data.applicant_info)
+        }
+      }
+      request.open("POST", `{{LINK aj/user_dashboard/upload_missing}}?hash=${$('.main_session').val()}`);
+      request.send(formData);
     }
 </script>
