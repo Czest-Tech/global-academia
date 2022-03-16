@@ -132,10 +132,12 @@
 
     }
     function render_applicant(data){
+        console.log(data)
         let error = "<p style='color:tomato;'>Missing</p>"
         let file_error = `
             <form class="immediate_form" id="id_photo_form">
                 <label for="id_photo" class="immediate_label font1">Upload</label>
+                <input type="text" value="${data.id}" name="id" hidden />
                 <input type="file" name="id_photo" id="id_photo" hidden onchange="upload_file()">
             </form>
         `
