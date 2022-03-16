@@ -195,13 +195,13 @@
             
             <div class="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
-              <button type="submit">{{LANG Confirm}}</button>
+              <button onclick="SendApplication()">{{LANG Confirm}}</button>
            </div>
         </form> 
     </div>
 </main>
 <script>
- 
+      let form1 = $('form.final_Send');
  let student_names = []
  let selected_student_names = []
     $.get('{{LINK aj/user_dashboard/get_agent_applicant_list}}?hash=' + $('.main_session').val(), {}, (data => {
@@ -258,11 +258,8 @@
     });
     
     $(function() {
-        console.log(selected_student_names)
-        // let selected_applicant_list = create_applicant_list();
-        // console.log(selected_applicant_list);
-        // document.getElementById("multiple_applicants").value = JSON.stringify(selected_applicant_list);
-        let form1 = $('form.final_Send');
+       
+   
         $(".id_photo").change(function(){
             var $this = $(this), $clone = $this.clone();
             $this.after($clone).appendTo(form1);
@@ -504,5 +501,11 @@
             
         })
         return new_array
+    }
+
+    function SendApplication(){
+         let selected_applicant_list = [] = create_applicant_list();
+        document.getElementById("multiple_applicants").value = selected_applicant_list;
+        form1.submit();
     }
 </script>
