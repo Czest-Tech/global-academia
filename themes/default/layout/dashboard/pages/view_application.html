@@ -87,7 +87,7 @@
 
 <script>
 
-    let link_id = "<?php echo $_GET['application_number']; ?>";
+    let link_id = "<?php echo isset($_GET['application_number'])? $_GET['application_number'] : '' ; ?>";
     let user__id = "{{ME id}}"
     let applicant_info_req = "<?php echo $_GET['student_number']; ?>"
 
