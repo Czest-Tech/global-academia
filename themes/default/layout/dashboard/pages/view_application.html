@@ -131,16 +131,20 @@
         document.getElementById("ga_table-body").innerHTML = rows
 
     }
-    function render_applicant(data){
-        console.log(data)
-        let error = "<p style='color:tomato;'>Missing</p>"
+    function file_error_templete(id){
         let file_error = `
             <form class="immediate_form" id="id_photo_form">
                 <label for="id_photo" class="immediate_label font1">Upload</label>
-                <input type="text" value="${data.id}" name="id" hidden />
+                <input type="text" value="${id}" name="id" hidden />
                 <input type="file" name="id_photo" id="id_photo" hidden onchange="upload_file()">
             </form>
         `
+        return file_error
+    }
+    function render_applicant(data){
+        console.log(data)
+        let error = "<p style='color:tomato;'>Missing</p>"
+        
         document.getElementById("appname").innerHTML = data.first_name + " " +data.last_name
         document.getElementById("lname").innerHTML = data.last_name || error
         document.getElementById("fname").innerHTML = data.first_name || error
@@ -153,7 +157,7 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        document.getElementById("id_photo_file").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : file_error
+        document.getElementById("id_photo_file").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : file_error_templete(data.id)
         document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : error
         document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : error
         document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : error
@@ -170,16 +174,16 @@
     }
 
     function upload_file(){
-      let form1 = document.getElementById('id_photo_form')
-      var formData = new FormData(form1);
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          let new_data = JSON.parse(request.response);
-          console.log("HERE", new_data)
-        }
-      }
-      request.open("POST", `{{LINK aj/user_dashboard/upload_missing}}?hash=${$('.main_session').val()}`);
-      request.send(formData);
+    //   let form1 = document.getElementById('id_photo_form')
+    //   var formData = new FormData(form1);
+    //   var request = new XMLHttpRequest();
+    //   request.onreadystatechange = function() {
+    //     if (request.readyState === 4) {
+    //       let new_data = JSON.parse(request.response);
+    //       console.log("HERE", new_data)
+    //     }
+    //   }
+    //   request.open("POST", `{{LINK aj/user_dashboard/upload_missing}}?hash=${$('.main_session').val()}`);
+    //   request.send(formData);
     }
 </script>
