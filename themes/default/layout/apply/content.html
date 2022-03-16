@@ -195,7 +195,7 @@
             
             <div class="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
-              <button onclick="SendApplication()">{{LANG Confirm}}</button>
+              <div onclick="SendApplication()">{{LANG Confirm}}</div>
            </div>
         </form> 
     </div>
@@ -504,8 +504,9 @@
     }
 
     function SendApplication(){
-         let selected_applicant_list = [] = create_applicant_list();
+         let selected_applicant_list = create_applicant_list();
         document.getElementById("multiple_applicants").value = selected_applicant_list;
+        console.log("XXX", selected_applicant_list)
         form1.submit();
     }
 </script>
