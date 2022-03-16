@@ -258,9 +258,10 @@
     });
     
     $(function() {
-        let selected_applicant_list = create_applicant_list();
-        console.log(selected_applicant_list);
-        document.getElementById("multiple_applicants").value = JSON.stringify(selected_applicant_list);
+        console.log(selected_student_names)
+        // let selected_applicant_list = create_applicant_list();
+        // console.log(selected_applicant_list);
+        // document.getElementById("multiple_applicants").value = JSON.stringify(selected_applicant_list);
         let form1 = $('form.final_Send');
         $(".id_photo").change(function(){
             var $this = $(this), $clone = $this.clone();
@@ -288,7 +289,7 @@
             $this.after($clone3).appendTo(form1);
             document.getElementById("certificate_name").innerHTML = $this[0].files[0].name
         });
-        localStorage.setItem("XXX", JSON.stringify(selected_applicant_list))
+        // localStorage.setItem("XXX", JSON.stringify(selected_applicant_list))
         // console.log("XXX", selected_applicant_list)
          
         form1.ajaxForm({
