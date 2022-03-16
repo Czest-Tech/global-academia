@@ -336,13 +336,14 @@ if($first === "get_agent_students"){
        
             $agent_students = $db->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
             if($agent_students){
-                $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
-                if($get_univiversities){
                     $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
                     $agent_students->id_photo = GetMedia($agent_students->id_photo);
                     $agent_students->language_certificate = GetMedia($agent_students->language_certificate);
                     $agent_students->passport_file = GetMedia($agent_students->passport_file);
                     $agent_students->passport_file = GetMedia($agent_students->passport_file);
+                $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
+                if($get_univiversities){
+                    
                     foreach($get_univiversities as $allProgram){
                         $allProgram->university_id = GetuniversityByID($allProgram->university_id);
                         $allProgram->program_id = GetProgramByID($allProgram->program_id);
