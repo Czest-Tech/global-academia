@@ -690,7 +690,7 @@ if($first == "upload_missing"){
     
     if($upload_missing_filest){
 
-        $agent_students = $db->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
+        $agent_students = $db->where('id',Secure($_POST['id']))->getOne(T_AGENT_STUDENTS);
         if($agent_students){
             $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
             if($get_univiversities){
