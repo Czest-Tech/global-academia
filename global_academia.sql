@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 16, 2022 at 06:20 AM
+-- Generation Time: Mar 16, 2022 at 11:18 AM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -4880,7 +4880,7 @@ INSERT INTO `university` (`id`, `main_image`, `university_logo`, `description`, 
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(250) NOT NULL DEFAULT '',
+  `username` varchar(150) NOT NULL DEFAULT '',
   `email` varchar(50) NOT NULL DEFAULT '',
   `ip_address` varchar(150) NOT NULL DEFAULT '',
   `password` varchar(150) NOT NULL DEFAULT '',
