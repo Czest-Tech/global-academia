@@ -227,6 +227,7 @@
         }
     } else {
         document.getElementById("applicant_type").value = "guest";
+        account_type = "guest";
 
     }
     function appModal(){
@@ -290,7 +291,7 @@
         // console.log("XXX", selected_applicant_list)
          
         form1.ajaxForm({
-            url: '{{LINK aj/application/single}}?hash=' + $('.main_session').val(),
+            url: `{{LINK aj/single_application/single_${account_type}}}?hash=${$('.main_session').val()}`,
             dataTyep:'json',
             beforeSend: function() {
                 form1.find('button').text("{{LANG please_wait}}");
@@ -503,9 +504,10 @@
         return new_array
     }
 
-    function SendApplication(){
-         let selected_applicant_list = create_applicant_list();
-        document.getElementById("multiple_applicants").value = selected_applicant_list;
+    function SendApplication() {
+         let selected_applicant_list = [] = JSON.stringify(create_applicant_list());
+     
+         $("#multiple_applicants").val(selected_applicant_list);
         console.log("XXX", selected_applicant_list)
         form1.submit();
     }
