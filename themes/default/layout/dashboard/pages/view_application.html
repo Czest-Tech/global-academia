@@ -134,7 +134,7 @@
     function file_error_templete(id, file_name){
         let file_error = `
             <form class="immediate_form" id="id_photo_form">
-                <label for="missing_photo" class="immediate_label font1">Upload</label>
+                <label style="background-color:tomato;" for="missing_photo" class="app_files">Upload</label>
                 <input type="text" value="${id}" name="id" hidden />
                 <input type="file" name='${file_name}' id="missing_photo" hidden onchange="upload_file()">
             </form>

@@ -216,6 +216,11 @@
     padding: 3px 20px;
     border: none;
     border-radius: 3px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.immediate_form{
+    margin-top: 5px;
 }
 .agent_add_student{
     background-color: var(--GREEN);
@@ -360,8 +365,7 @@
     padding: 5px 10px;
     cursor: pointer;
 }
-.immediate_form{
-}
+
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }
     .dash_mid { flex-direction: column; }
