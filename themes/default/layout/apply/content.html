@@ -291,7 +291,7 @@
         // console.log("XXX", selected_applicant_list)
          
         form1.ajaxForm({
-            url: `{{LINK aj/application/${account_type}}}?hash=${$('.main_session').val()}`,
+            url: `{{LINK aj/single_application/single_${account_type}}}?hash=${$('.main_session').val()}`,
             dataTyep:'json',
             beforeSend: function() {
                 form1.find('button').text("{{LANG please_wait}}");
