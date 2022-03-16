@@ -17,6 +17,7 @@
                 </div>
                 <div class="view_app_rows font2 dark_color">
                     <p class="bold600 font3">Last Name</p><p id="lname">Undefined</p>
+                    
                 </div>
                 <div class="view_app_rows font2 dark_color">
                     <p class="bold600 font3">Date of Birth</p><p id="dob">Undefined</p>
@@ -48,7 +49,7 @@
             <p class="font4 bold600 blue_color mt-10">Documents</p>
             <div>
                 <div class="view_app_rows font2 dark_color">
-                    <p class="bold600 font3">ID Photo</p><p id="id_photo" >Undefined</p>
+                    <p class="bold600 font3">ID Photo</p><p id="id_photo_file" >Undefined</p>
                 </div>
                 <div class="view_app_rows font2 dark_color">
                     <p class="bold600 font3">Transcript</p><p id="transcript">Undefined</p>
@@ -77,6 +78,7 @@
                 
             </tbody>
           </table>
+          
           <p id="no_apps"></p>
       </div>
 
@@ -131,6 +133,12 @@
     }
     function render_applicant(data){
         let error = "<p style='color:tomato;'>Missing</p>"
+        let file_error = `
+            <form class="immediate_form" id="id_photo_form">
+                <label for="id_photo" class="immediate_label font1">Upload</label>
+                <input type="file" name="id_photo" id="id_photo" hidden onchange="upload_file()">
+            </form>
+        `
         document.getElementById("appname").innerHTML = data.first_name + " " +data.last_name
         document.getElementById("lname").innerHTML = data.last_name || error
         document.getElementById("fname").innerHTML = data.first_name || error
@@ -143,7 +151,7 @@
         document.getElementById("mother").innerHTML = data.mothers_name || error
         document.getElementById("residence").innerHTML = data.country_of_residence || error
         document.getElementById("nationality").innerHTML = data.nationality || error
-        document.getElementById("id_photo").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : error
+        document.getElementById("id_photo_file").innerHTML = data.id_photo ?`<button class="app_files" onclick="open_link('${data.id_photo}')">View</button>` : file_error
         document.getElementById("transcript").innerHTML = data.transcript_file ?  `<button class="app_files" onclick="open_link('${data.transcript_file}')">View</button>` : error
         document.getElementById("certificate").innerHTML = data.language_certificate ? `<button class="app_files" onclick="open_link('${data.language_certificate}')">View</button>` : error
         document.getElementById("diploma").innerHTML = data.diploma_file ? `<button class="app_files" onclick="open_link('${data.diploma_file}')">View</button>` : error
@@ -152,5 +160,24 @@
     }
     function open_link(link){
         window.open(link, '_blank')
+    }
+
+
+    function checker(){
+        console.log("chekeres")
+    }
+
+    function upload_file(){
+      let form1 = document.getElementById('id_photo_form')
+      var formData = new FormData(form1);
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+          let new_data = JSON.parse(request.response);
+          console.log("HERE", new_data)
+        }
+      }
+      request.open("POST", `{{LINK aj/user_dashboard/upload_missing}}?hash=${$('.main_session').val()}`);
+      request.send(formData);
     }
 </script>

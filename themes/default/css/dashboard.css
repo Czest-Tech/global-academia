@@ -353,8 +353,15 @@
 .table_trash{
     color: tomato;
 }
-
-
+.immediate_label{
+    background-color: tomato;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.immediate_form{
+}
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }
     .dash_mid { flex-direction: column; }
@@ -400,7 +407,5 @@
     .left_message{ padding-left: 10px; }
     .dash_card { width: 100%;}
     .dashboard { padding: 15px 5px;}
-    .settings {
-        padding: 15px 5px;
-    }
+    .settings { padding: 15px 5px; }
 }
