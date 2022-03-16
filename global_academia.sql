@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 14, 2022 at 12:50 PM
+-- Generation Time: Mar 16, 2022 at 06:20 AM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -114,7 +114,16 @@ CREATE TABLE `agent_students` (
 --
 
 INSERT INTO `agent_students` (`id`, `agent_id`, `username`, `first_name`, `last_name`, `date_of_birth`, `phone_number`, `phone_number_2`, `email`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `application_no`, `status`, `note`, `signed_by`, `is_notified`, `isClosed`, `mark_university`, `ischecked`, `acceptance_letter`, `type`, `request_update`, `created_at`, `commision`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`, `applicant_type`, `time`) VALUES
-(1, 10, 'leah__134_nanks', 'Leah', 'Nankongolo', '10/02/1996', '4565846566', '7989595988', 'mehmed@biggajans.com', 'Ktoos', 'Preyyu', 'ZV23232', 'Zambia', 'Zambia', NULL, NULL, NULL, NULL, NULL, NULL, '23231', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1647163860', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 0);
+(1, 10, 'Lea_yr6I_Nan', 'Hule', 'Nankongolo', '1996-02-10', '4565846566', '7989595988', 'mehmed@biggajans.com', 'Ktoos', 'Preyyu', 'ZV23232', 'Zambia', 'Zambia', NULL, NULL, NULL, NULL, NULL, NULL, '23231', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647312183', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647312183),
+(6, 10, 'IMM_VmR4_OMO', 'IMMACULATE', 'OMOSA', '2022-03-03', '+905523257568', '', NULL, 'HAGGAI', 'ELIZABERTH', 'cn3232', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647308056', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647308056),
+(7, 10, 'sgf_Un0d_asd', 'sgfsdf', 'asdfsasd', '2232-03-23', '+23423434', '', 'sdfgsdf@gmail.com', 'sdfgsdf', 'gsdfgsd', 'cn3232', 'fasdfasddd', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647375941', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647375941),
+(8, 10, 'Tes_PSLN_tes', 'Testless', 'tester', '2022-03-03', '+34343', '', 'testtlessterst@gmcim.com', 'humaa', 'hemma', 'a433', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647376353', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647376353),
+(9, 10, 'THu_3rTz_aaa', 'THuiswoe', 'aaasdfawer', '2022-03-04', '+56745674', '', 'ghjgfhj@gmail.com', 'rtyurty', 'ftyutr', 'i45667', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647376421', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647376421),
+(10, 10, 'tye_NuQg_wrt', 'tyeew', 'wrtwer', '2022-03-17', '+905523257568', '', 'we4w@yahoo.com', '34343', '34werw', 'cn32321', 'fasdfasddd', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647376657', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647376657),
+(11, 10, 'not_whmJ_dsf', 'notww', 'dsfgsdfg', '2022-03-02', '+345343433', '', 'asdfasd@gmail.com', 'easdfa', 'asfdasda', '343434', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647377001', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647377001),
+(12, 10, 'fgn_LV20_cvb', 'fgncvbc', 'cvbncb', '2022-03-10', '456345634', '', 'savsdr@gsdf.uty', 'cvbvndfgh', 'dgydtgbs', '7845667', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647377091', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647377091),
+(13, 10, 'tes_vRaM_asd', 'tess', 'asdfa', '2022-03-05', '345223452', '', 'asdf@yahoo.com', 'fgjhf', 'sdgfsdg', '34523452', 'Zambia', 'United States', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647377217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647377217),
+(14, 10, 'Owe_LwFJ_Hay', 'Owens', 'Hays', '2022-03-11', '2342123432', '', 'sfgsg@asdf.com', 'Jackson', 'Mia', '324234', 'Zambia', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1647377359', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent_applicant', 1647377359);
 
 -- --------------------------------------------------------
 
@@ -255,7 +264,7 @@ INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id
 (6, 5, 'mehmed@biggajans.com', 1, 'awaiting_approval', 'queued', NULL, '4407', 'none', 0, '2021-11-23 14:59:22.483671', '-4407'),
 (7, 5, 'mehmed@biggajans.com', 2, 'awaiting_approval', 'queued', NULL, '4407', 'none', 1, '2021-11-23 14:59:22.489219', '-4407'),
 (8, 0, '123123', 0, 'awaiting_approval', 'queued', NULL, '', 'none', 0, '2021-11-23 15:12:52.566444', '2-0511'),
-(9, 5, '123123', 2, 'awaiting_approval', 'queued', NULL, '0511', 'none', 1, '2021-11-23 15:12:52.567645', '2-0511'),
+(9, 5, '123123', 2, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/h2MLjjTs7gy5hhKpvGZT_15_6c8518367a2eed22758b0bb9d9a46668_image.png', '0511', 'none', 1, '2021-11-23 15:12:52.567645', '2-0511'),
 (10, 5, '123123', 3, 'awaiting_approval', 'queued', NULL, '0511', 'none', 2, '2021-11-23 15:12:52.570375', '2-0511'),
 (11, 7, 'mehmederkekli@gmail.com', 13, 'awaiting_approval', 'queued', NULL, '', 'approved', 0, '2021-11-23 15:51:01.657046', '3-0060'),
 (12, 5, 'mehmederkekli@gmail.com', 2, 'awaiting_approval', 'queued', NULL, '0060', 'approved', 1, '2021-11-23 15:51:01.659431', '3-0060'),
@@ -267,7 +276,8 @@ INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id
 (18, 5, 'telo@masda.com', 4, 'awaiting_approval', 'accepted', NULL, '6492', 'none', 0, '2022-03-07 12:35:28.424380', NULL),
 (19, 7, 'telo@masda.com', 9, 'awaiting_approval', 'rejected', NULL, '6544', 'requested', 0, '2022-03-07 20:27:20.119003', NULL),
 (20, 7, 'telo@masda.com', 12, 'awaiting_approval', 'queued', NULL, '7396', 'none', 0, '2022-03-07 20:27:44.146395', NULL),
-(21, 7, 'telo@masda.com', 17, 'awaiting_approval', 'queued', NULL, '3814', 'none', 0, '2022-03-07 20:28:21.815297', NULL);
+(21, 7, 'telo@masda.com', 17, 'awaiting_approval', 'queued', NULL, '3814', 'none', 0, '2022-03-07 20:28:21.815297', NULL),
+(22, 5, 'komisyoncu@km.com', 1, 'awaiting_approval', 'queued', NULL, '1699', 'none', 0, '2022-03-14 22:03:30.672021', NULL);
 
 -- --------------------------------------------------------
 
@@ -331,7 +341,8 @@ INSERT INTO `applications` (`id`, `university_id`, `program_id`, `first_name`, `
 (3, '5', '1', 'dasas', 'asasd', '1111-11-11', '1121121', '', 'mehmederkekli@gmail.com', 'asdasd', 'asdad', '1221323', 'Austria', 'Azerbaijan', NULL, NULL, NULL, NULL, NULL, '', '0060', 'awaiting_approval', NULL, '4', 1, 0, 'no', 'applied', NULL, 'multiple', 0, '1637682661', '1234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0),
 (4, '7', '8', 'Asad', 'Mohmd', '1998-02-05', '+905523257568', '', 'asdasd@gmail.com', 'Katenga', 'Mutale', 'zn45342', 'AmericanSamoa', 'Turkey', 'upload/photos/2022/03/PztJLFWNuAcO2B8UKlzU_03_992b7198e07e6478bb608a6a907b81e8_image.png', 'upload/photos/2022/03/Vb4ZtGsG8lh4razPKj55_03_992b7198e07e6478bb608a6a907b81e8_image.png', 'upload/photos/2022/03/rZ7ORTNJFAXbGG198h86_03_992b7198e07e6478bb608a6a907b81e8_image.png', 'upload/photos/2022/03/UFG32XSlsIGvu1jSPl8j_03_992b7198e07e6478bb608a6a907b81e8_image.png', NULL, '', '0037', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'multiple', 0, '1646291678', NULL, 'upload/photos/2022/03/52NPoavvRMCGjBDTIkvm_03_992b7198e07e6478bb608a6a907b81e8_image.png', NULL, NULL, 'Screenshot 2022-02-16 at 06.56.49.png', 'Screenshot 2022-02-28 at 10.51.16.png', 'Screenshot 2022-02-15 at 20.48.04.png', 'Screenshot 2022-02-16 at 06.56.19 (2).png', 'image001.png', 9, 'guest', 0),
 (5, '5', '4', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '7556', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1646646882', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0),
-(6, '5', '4', '', '', '', '', '', 'telo@masda.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '6492', 'awaiting_approval', NULL, '8', 1, 0, 'no', 'applied', NULL, 'single', 0, '1646656528', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 'guest', 0);
+(6, '5', '4', '', '', '', '', '', 'telo@masda.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '6492', 'awaiting_approval', NULL, '8', 1, 0, 'no', 'applied', NULL, 'single', 0, '1646656528', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 'guest', 0),
+(7, '5', '1', '', '', '', '', '', 'komisyoncu@km.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '1699', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1647295410', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'registered_user', 0);
 
 -- --------------------------------------------------------
 
@@ -2849,7 +2860,7 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (25, 'smtp_encryption', 'tls'),
 (26, 'smtp_port', '587'),
 (27, 'delete_account', 'on'),
-(36, 'last_admin_collection', '1647167859'),
+(36, 'last_admin_collection', '1647378987'),
 (45, 'user_registration', 'on'),
 (54, 'job_listing_statics', '[{&quot;month&quot;:&quot;January&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;February&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;March&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;April&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;May&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;June&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;July&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;August&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;September&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;October&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;November&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;December&quot;,&quot;new_job&quot;:16}]'),
 (58, 'google', ''),
@@ -2964,11 +2975,11 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (246, 'total_job_share', '0'),
 (247, 'total_reports', '1'),
 (248, 'weekly_user_vist', '0'),
-(249, 'get_number_of_applicants', '5'),
+(249, 'get_number_of_applicants', '6'),
 (250, 'reports_count', '0'),
 (251, 'get_total_universities', '58'),
 (252, 'get_active_users', '9'),
-(253, 'get_total_application_to_universities', '21'),
+(253, 'get_total_application_to_universities', '22'),
 (254, 'get_students_with_missing_documents', '0'),
 (255, 'get_total_agents', '1');
 
@@ -4692,7 +4703,9 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (205, '857e41152a21448c5385ed01ea7d4232c8d15d521646951317f678a7ad0195ecc58144629be788df43', 2, 'web', 1646951317),
 (209, 'dbf5487d183a8669f32d5b6f26791dc1f06806cb16469989388c2d02cfc1ef3ddd4191e8065849ee9f', 11, 'web', 1646998938),
 (215, 'd3f03a0253ab110e8b4c6001416e12e494b12ee1164721655409d21a7660d8a1b7e65c38a3a5947b0f', 10, 'web', 1647216554),
-(216, 'cda5ff4468ffd5195a89e8393d5e5849adf19cba1647216576f7b579d74c73088588b9fda98eea9a76', 10, 'web', 1647216576);
+(217, '387652ab9c2ec6ae465c26e272291643f00e5a5e1647309100074b8efb0f0d14b1b73fd95445e78bcb', 2, 'web', 1647309100),
+(219, '6074a83bb9bec5d58016f4252ff3abba6468e56c1647309129bab1733b323ed9dccf1bf95ac8a1c4fe', 2, 'web', 1647309129),
+(228, 'eb8c178e26e25c3bb4149e3259ba0a67420fcec416473789878e423db255bac0263974e9e9f8eaf61e', 2, 'web', 1647378987);
 
 -- --------------------------------------------------------
 
@@ -4888,7 +4901,7 @@ CREATE TABLE `users` (
   `instagram` varchar(100) DEFAULT '',
   `active` int(11) NOT NULL DEFAULT '0',
   `admin` int(11) NOT NULL DEFAULT '0',
-  `access_level` int(11) NOT NULL,
+  `access_level` int(11) NOT NULL DEFAULT '4',
   `verified` int(11) NOT NULL DEFAULT '0',
   `last_active` int(11) NOT NULL DEFAULT '0',
   `last_follow_id` int(10) UNSIGNED DEFAULT '0',
@@ -4926,10 +4939,10 @@ INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first
 (5, 'musa_mwanza426', 'asdaf@yahoo.com', '::1', '$2y$10$BI0sFJDqothtRSWBjmy/SuqLoSbKP/Aqd/rWDWODrn2vko9WMDrwe', 'Musa', 'Mwanza', 'male', '6d616ca916b6d759ae1c7697862a9262eb22b34b', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1636174137, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (6, 'mehmet_durmaz752', 'mehmed@gmail.com', '::1', '$2y$10$5TD.cjAZyDM9CHPAxemXPO5WmaeZtXasSbhaF.oH0ym/NPlshbM46', 'Mehmet', 'Durmaz', 'male', '39c7d17ba3bbe8f549340a432c20ee4cb69bbb3d', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1636284445, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (7, 'debagge_test966', 'debtest@gmail.com', '::1', '$2y$10$0eKjaNmt2qIZPMxrdWagX.efg4N7adCyZAuXmzcmemM4YVmH/EMMi', 'Debagge', 'TEst', 'male', '2645361158a9f04673456bdc2f7c055079be04df', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636446549, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$m3omZlxKp6dHCkVsT9ku.eOgUnkf7w.EpHFknzL.gl5MWbXtmljZK', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
+(8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
+(9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
+(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
+(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -5242,7 +5255,7 @@ ALTER TABLE `agent_requests`
 -- AUTO_INCREMENT for table `agent_students`
 --
 ALTER TABLE `agent_students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `announcement`
@@ -5272,13 +5285,13 @@ ALTER TABLE `applicant_education_info`
 -- AUTO_INCREMENT for table `applican_universities`
 --
 ALTER TABLE `applican_universities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `apps_sessions`
@@ -5380,7 +5393,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT for table `terms`
