@@ -936,8 +936,10 @@ a{
 }
 .mainDetialsContainer{
     width: 100%;
+    max-width: 1080px;
     display: flex;
     margin-top: 10px;
+    margin: 20px auto;
 }
 .leftMainDetails{
     flex: 1;
@@ -968,7 +970,7 @@ a{
     color: #0128a1;
 }
 .rightMainDetails button{
-    width:90%;
+    width:100%;
     padding: 7px;
     margin: 10px auto;
     border-radius: 5px;
