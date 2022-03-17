@@ -1,10 +1,58 @@
 <?php
-
-
   $jobs = $db->get(T_PROGRAM);
-
-
 ?>
+<style>
+    .table_container{
+        margin-top: 10px;
+    }
+    .table_container td{
+        padding: 0 0 0 10px !important;
+
+    }
+    .table_container th{
+        color: #5166E1 !important;
+        text-align: start;
+    }
+    #export_excel_form{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+    }
+    .import_export_forms{
+        display: flex;
+    }
+    .file_handle_title{
+        margin-bottom: 0 !important;
+        font-weight: 600;
+        font-weight: 18px;
+        color: #333;
+    }
+    .handle_files_div{
+        border: 1px solid #5166E1;
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+    }
+    
+    .handle_files_div select{
+        width: 100px;
+        padding: 9px 5px !important;
+        border: none;
+        cursor: pointer;
+    }
+    .handle_files_div input[type=file]{
+        padding: 5px !important;
+        border: none;
+        cursor: pointer;
+    }
+    .handle_files_div input[type=submit]{
+        color: white;
+        background-color: #5166E1;
+        border: none;
+        margin-left: 3px;
+        padding: 0 15px;
+    }
+</style>
 <div class="page-header d-md-flex justify-content-between">
     <div>
         <h3>Manage Programs</h3>
@@ -28,37 +76,37 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="post" id="export_excel_form">
-                          <div class="row">
-                                <div class="col-md-6">Export Data</div>
-                                <div class="col-md-4">
-                                  <select name="file_type" class="form-control input-sm">
-                                    <option value="Xls">Xls</option>
-                                    <option value="Csv">Csv</option>
-                                  </select>
-                                </div>
-                                <div class="col-md-2">
-                                  <input type="submit" id="export" name="export" class="btn btn-primary btn-sm" value="Export" />
-                                  <input type="hidden" name="hash" value="<?php echo CreateMainSession(); ?>"/>
-
-                                </div>
-                          </div>
-                    </form>
-                    <form method="post" id="import_excel_form" enctype="multipart/form-data">   
-                        <span>Select Excel File</span>
-                        <span><input type="file" name="import_excel" /></span>
-                         <input type="hidden" name="hash_id" value="<?php echo CreateSession()?>">
-                        <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
-                        <input type="hidden" name="hash" value="<?php echo CreateMainSession(); ?>"/>
-
-                        <span><input type="submit" name="import" id="import" class="btn btn-primary" value="Import" /></span>
-                    </form>
+                    <div class="import_export_forms">
+                        <form method="post" id="export_excel_form">
+                            <p class="file_handle_title">Export Data</p>
+                            <div class="handle_files_div">
+                                <select name="file_type" class="">
+                                    <option value="Xls">EXCEL</option>
+                                    <option value="Csv">CSV</option>
+                                </select>
+                                <input type="submit" id="export" name="export" class="export_btn" value="Export" />
+                                <input type="hidden" name="hash" value="<?php echo CreateMainSession(); ?>"/>
+                            </div>
+                        </form>
+                        <form method="post" id="import_excel_form" enctype="multipart/form-data">   
+                            <p class="file_handle_title">Import Excel File</p>
+                            <div class="handle_files_div">
+                                <input type="file" name="import_excel" />
+                                <input type="hidden" name="hash_id" value="<?php echo CreateSession()?>">
+                                <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
+                                <input type="hidden" name="hash" value="<?php echo CreateMainSession(); ?>"/>
+                                <input type="submit" name="import" id="import" class="" value="Import" />
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
                     <div class="pull-right">
                         <a href="<?php echo LoadAdminLinkSettings('add-program'); ?>" ><button class="btn btn-primary"> Add Program</button></a>
                     </div>
                   
                     <div class="clearfix"></div>
-                    <div class="table-responsive">
+                    <div class="table-responsive table_container">
                         <table id="job-manage" class="table table-lg">
                             <thead>
                                 <tr>
@@ -67,7 +115,7 @@
                                     <th>Department</th>
                                     <th>Degree</th>
                                     <th>Duration</th>
-                                    <th class="text-right">Action</th>
+                                    <th >Action</th>
                                 </tr>
                             </thead>
                             <tbody>

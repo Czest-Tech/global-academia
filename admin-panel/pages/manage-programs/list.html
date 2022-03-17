@@ -1,3 +1,8 @@
+<style>
+    .table_edit{ color: orange; margin: 0 3px; cursor: pointer; }
+    .table_trash{ color: tomato; margin: 0 3px; cursor: pointer; }
+</style>
+
 <tr id="list-{{JOB id}}">
   <td>{{JOB id}}</td>
   <td>{{JOB university}}</td>
@@ -5,8 +10,10 @@
    <td>{{JOB degree}}</td>
   <td>{{JOB duration}}</td>
   
-  <td class="text-right">
-      <div class="dropdown">
+  <td>
+    <i style="color: orange; margin-left: 20px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
+    <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i>
+      <!-- <div class="dropdown">
           <a href="#" data-toggle="dropdown"
              class="btn btn-floating"
              aria-haspopup="true" aria-expanded="false">
@@ -16,6 +23,6 @@
               <a  class="dropdown-item" href="<?php echo LoadAdminLinkSettings('edit-program?id='.$data['JOB_DATA']->id); ?>" target="_blank">EDIT</a>
               <button class="dropdown-item text-danger delete-content"  data-id="{{JOB id}}">DELETE</button>
           </div>
-      </div>
+      </div> -->
   </td>
 </tr>

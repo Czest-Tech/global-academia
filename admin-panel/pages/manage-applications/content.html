@@ -93,6 +93,9 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
         cursor: pointer;
         color: white !important;
     }
+    .table_eye{ color: teal; margin: 0 3px; cursor: pointer; }
+    .table_edit{ color: orange; margin: 0 3px; cursor: pointer; }
+    .table_trash{ color: tomato; margin: 0 3px; cursor: pointer; }
     
 </style>
 <div class="page-header d-md-flex justify-content-between">
@@ -325,22 +328,25 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                         <td>${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()}</td>         
                         <td>${element.nationality}</td>
                         <td>
-                            <select style="border:none" onchange="handleAction(${element.id})" id="table-actions${element.id}">
-                                <option value="Select">Select</option>
-                                <option value="view">View</option>
-                                <option value="edit">Edit</option>
-                                ${ (delete_permission == 1 )? '<option value="delete">Delete</option>' : ''}
-                            </select>
+                            <i class="fas fa-eye table_eye" onclick="handleAction('view', '${element.id}')"></i>
+                            <i class="fas fa-edit table_edit"  onclick="handleAction('edit', '${element.id}'"></i>
+                            <i class="fas fa-trash table_trash" onclick="handleAction('delete', '${element.id}'""></i>
                         </td>
                     </tr>
                 `
                 color = "white"
         });
+        // <select style="border:none" onchange="handleAction(${element.id})" id="table-actions${element.id}">
+        //                         <option value="Select">Select</option>
+        //                         <option value="view">View</option>
+        //                         <option value="edit">Edit</option>
+        //                         ${ (delete_permission == 1 )? '<option value="delete">Delete</option>' : ''}
+        //                     </select>
         document.getElementById("all_applications").innerHTML = tableRows
     }
-    function handleAction(id) {
+    function handleAction(action, id) {
 
-        let action = document.getElementById(`table-actions${id}`).value
+        // let action = document.getElementById(`table-actions${id}`).value
         console.log(id, action)
         if (action === "view")
             window.open(`${application_view_url}?id=${id}`)
