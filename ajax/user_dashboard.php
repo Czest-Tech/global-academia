@@ -438,7 +438,7 @@ if($first  === "add_agent_student"){
         $data = array(
             'status' => 200,
             'data' => $get_data,
-            'message' => __('success')
+            'message' => "user added"
            
          );
     } else {
