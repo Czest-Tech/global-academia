@@ -972,7 +972,12 @@ function  GetUniversityImage($id){
     
     $data = $db->where('id', Secure($id))->getOne(T_UNIVERSITY);
     if($data->main_image){
-        return GetMedia($data->main_image);
+        if(!empty(GetMedia($data->main_image))){
+            return GetMedia($data->main_image);
+        } else {
+            return "https://www.usnews.com/dims4/USNEWS/e836bb8/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fb0%2F5a49fe7ceb6d77f5ad2824c373a297%2Fucf_47862357.jpg"; 
+
+        }
     } 
      
     return "https://www.usnews.com/dims4/USNEWS/e836bb8/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fb0%2F5a49fe7ceb6d77f5ad2824c373a297%2Fucf_47862357.jpg"; 

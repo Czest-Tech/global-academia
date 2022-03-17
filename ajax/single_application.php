@@ -23,42 +23,158 @@ if($first == "single_agent" ){
             foreach($student_id as $sid){
                 $get_applicant_info = $db->where('id', $sid)->getOne(T_AGENT_STUDENTS);
 
-                var_dump($get_applicant_info);
+                $application_data->applicant_type = Secure($_POST['applicant_type']);
+
+                if (!empty($_FILES['id_photo']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['id_photo']['tmp_name'],
+                        'size' => $_FILES['id_photo']['size'],
+                        'name' => $_FILES['id_photo']['name'],
+                        'type' => $_FILES['id_photo']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'id_photo'
+                    );
+                    $application_data->id_photo_name = $_FILES['id_photo']['name'];
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->id_photo = $file_upload['filename'];
+                        
+                    }
+                }
+                
+                if (!empty($_FILES['passport_file']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['passport_file']['tmp_name'],
+                        'size' => $_FILES['passport_file']['size'],
+                        'name' => $_FILES['passport_file']['name'],
+                        'type' => $_FILES['passport_file']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'passport_file'
+                    );
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->passport_file = $file_upload['filename'];
+                        $application_data->passport_name = $_FILES['passport_file']['name'];
+                    }
+                }
+                if (!empty($_FILES['diploma_file']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['diploma_file']['tmp_name'],
+                        'size' => $_FILES['diploma_file']['size'],
+                        'name' => $_FILES['diploma_file']['name'],
+                        'type' => $_FILES['diploma_file']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'diploma_file'
+                    );
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->diploma_file = $file_upload['filename'];
+                        $application_data->diploma_name = $_FILES['diploma_file']['name'];
+                    }
+                }
+                if (!empty($_FILES['transcript_file']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['transcript_file']['tmp_name'],
+                        'size' => $_FILES['transcript_file']['size'],
+                        'name' => $_FILES['transcript_file']['name'],
+                        'type' => $_FILES['transcript_file']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'transcript_file'
+                    );
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->transcript_file = $file_upload['filename'];
+                        $application_data->transcript_name = $_FILES['transcript_file']['name'];
+                    }
+                }
+                if (!empty($_FILES['language_certificate']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['language_certificate']['tmp_name'],
+                        'size' => $_FILES['language_certificate']['size'],
+                        'name' => $_FILES['language_certificate']['name'],
+                        'type' => $_FILES['language_certificate']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'language_certificate'
+                    );
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->language_certificate = $file_upload['filename'];
+                        $application_data->language_certificate_name = $_FILES['language_certificate']['name'];
+                    }
+                }
+                if (!empty($_FILES['other_files']['tmp_name'])) {
+                    $file_info = array(
+                        'file' => $_FILES['other_files']['tmp_name'],
+                        'size' => $_FILES['other_files']['size'],
+                        'name' => $_FILES['other_files']['name'],
+                        'type' => $_FILES['other_files']['type'],
+                        'crop' => array('width' => 400, 'height' => 400),
+                        'mode' => 'other_files'
+                    );
+                    $file_upload = ShareFile($file_info);
+                    if (!empty($file_upload['filename'])) {
+                        $application_data->other_files = $file_upload['filename'];
+                    }
+                }
+            
+                $application_data->university_id = Secure($_POST['university_id']);
+                $application_data->program_id = Secure($_POST['program_id']);
+                $application_data->first_name = Secure($_POST['first_name']);
+                $application_data->created_at = time();
+                $application_data->last_name = Secure($_POST['last_name']);
+                $application_data->date_of_birth = Secure($_POST['date_of_birth']);
+                $application_data->phone_number = Secure($_POST['phone_number']);
+                $application_data->phone_number_2 = Secure($_POST['phone_number_2']);
+                $application_data->email = $email;
+                $application_data->fathers_name = Secure($_POST['fathers_name']);
+                $application_data->mothers_name = Secure($_POST['mothers_name']);
+                $application_data->passport_number = Secure($_POST['passport_number']);
+                $application_data->nationality = Secure($_POST['nationality']);
+                $application_data->country_of_residence = Secure($_POST['country_of_residence']);
+                $application_data->middle_name = Secure($_POST['middle_name']);
+                
+                $application_data->application_no =random_str(4, '12345634608974');
+
+
+                $application_sent = false;
+                $check_email_exists = $db->where('email', $email)->getOne(T_APPLICATIONS);
+
+                if($check_email_exists){
+                    $grouped_applications->uniqid =  random_str(4, '12345634608974');
+                    $grouped_applications->email = $email;
+                    $grouped_applications->university_id = Secure($_POST['university_id']);
+                    $grouped_applications->program_id = Secure($_POST['program_id']);
+                    $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
+                    $referencetrack = $check_email_exists->application_no;
+                    if($push_application_data){
+                        $application_sent = true;
+                    }
+                  
+                } else {
+                   $isSent = $db->insert(T_APPLICATIONS, ToArray($application_data));
+                   if($isSent){
+                        $referencetrack = $uniqid;
+                        $grouped_applications->email = $email;
+                        $grouped_applications->university_id = Secure($_POST['university_id']);
+                        $grouped_applications->program_id = Secure($_POST['program_id']);
+                        $grouped_applications->uniqid = $uniqid;
+                        $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
+                        if($push_application_data){
+                            $application_sent = true;
+                        }
+                    } 
+                }
+
+
+                
             }
         }
     }
      
     
-    $application_data->application_no = $uniqid;
 
 
-    $application_sent = false;
-    $check_email_exists = $db->where('email', $email)->getOne(T_APPLICATIONS);
-    // if($check_email_exists){
-    //     $grouped_applications->uniqid = $uniqid;
-    //     $grouped_applications->email = $email;
-    //     $grouped_applications->university_id = Secure($_POST['university_id']);
-    //     $grouped_applications->program_id = Secure($_POST['program_id']);
-    //     $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
-    //     $referencetrack = $check_email_exists->application_no;
-    //     if($push_application_data){
-    //         $application_sent = true;
-    //     }
-      
-    // } else {
-    //    $isSent = $db->insert(T_APPLICATIONS, ToArray($application_data));
-    //    if($isSent){
-    //         $referencetrack = $uniqid;
-    //         $grouped_applications->email = $email;
-    //         $grouped_applications->university_id = Secure($_POST['university_id']);
-    //         $grouped_applications->program_id = Secure($_POST['program_id']);
-    //         $grouped_applications->uniqid = $uniqid;
-    //         $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
-    //         if($push_application_data){
-    //             $application_sent = true;
-    //         }
-    //     } 
-    // }
+   
 
     // if($application_sent){
        

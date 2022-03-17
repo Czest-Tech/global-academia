@@ -24,7 +24,7 @@ if(!empty($program_details_page)){
     
     $kd->title       =  $gp->university. '| '.$gp->department  .'  | Apply in Turkey | Scholarships'.  $kd->config->title;
     $kd->program_detailts->id = ($program_details_page)? $program_details_page : 0;
-    $kd->program_detailts->image = !empty($gp->university_id)? GetUniversityImage($gp->university_id) : '';
+    $kd->program_detailts->image = GetUniversityImage($gp->university_id);
     $kd->program_detailts->logo = GetUniversityLogo($gp->university_id);
     $kd->program_detailts->university =  ($gp->university) ? $gp->university : ''; 
     $kd->program_detailts->tuition_fee = ($gp->tuition_fees) ? $gp->tuition_fees : '';
