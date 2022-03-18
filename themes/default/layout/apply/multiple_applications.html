@@ -215,6 +215,7 @@ let form1 = $('form.final_Send');
     let appModalOut = false
     let isLogged = '<?php echo IsLogged(); ?>';
     var account_type;
+    var application_url = 'application/multiple';
     if(isLogged == '1'){
         account_type = '{{ME account_type}}';
        
@@ -226,6 +227,11 @@ let form1 = $('form.final_Send');
         if(account_type == 'applicant'){
             document.querySelector('.agent_applicant_list').style.display = "none";
         }
+        if(account_type == 'applicant'){
+            application_url = 'multiple_application/multiple';
+        }
+
+        
     } else {
         document.getElementById("applicant_type").value = "guest";
         account_type = "guest";
@@ -315,7 +321,7 @@ let form1 = $('form.final_Send');
         document.getElementById("certificate_name").innerHTML = $this[0].files[0].name
     });
    form1.ajaxForm({
-        url: '{{LINK aj/application/multiple}}?hash=' + $('.main_session').val(),
+        url: `{{LINK aj/${application_url}}}?hash=${$('.main_session').val()}`,
         dataTyep:'json',
         beforeSend: function() {
             form1.find('button').text("{{LANG please_wait}}");
