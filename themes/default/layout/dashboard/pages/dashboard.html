@@ -28,13 +28,15 @@
                 <p id="rejected_apps">0</p>
             </div>
         </div>
-        <div class="dash_card">
-            <p class="card_title font2">Total Commission</p>
-            <div class="card_dets">
-                <i class="fas fa-wallet"></i>
-                <p id="rejected_apps">$1,280</p>
+        <?php if($kd->user->account_type == "agent"){?> }
+            <div class="dash_card">
+                <p class="card_title font2">Total Commission</p>
+                <div class="card_dets">
+                    <i class="fas fa-wallet"></i>
+                    <p id="rejected_apps">$1,280</p>
+                </div>
             </div>
-        </div>
+        <?php }?>
     </div>
     <div class="dash_mid">
         <div class="dash_universities">

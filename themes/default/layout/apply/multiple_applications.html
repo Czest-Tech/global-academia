@@ -164,21 +164,73 @@
             <input type="hidden" name="email"           id="email8">
             <input type="hidden" name="passport_number" id="passport8">
             <input type="hidden" name="nationality"     id="country8">
+            <input type="hidden" name="user_id"   value="{{ME id}}">
+
+            <input type="hidden" name="multiple_applicants"  id="multiple_applicants">
+            <input type="hidden" name="applicant_type"  id="applicant_type">   
             <input type="hidden" name="country_of_residence" id="residence8">
             <!-- <input type="hidden" name="diploma_file" class="diploma"   id="diploma">
             <input type="hidden" name="transcript_file" class="transcript8" id="transcript8">
             <input type="hidden" name="passport_file" class="passport_file8"   id="passport_file8"> -->
             <!-- <input type="hidden" name="id_photo"   class="photo8"     id="photo8"> -->
             <div class="appndd_list" id="appndd_list"></div>
+            <div class="agent_applicant_list">
+                <div class="added_studs" id="added_stud">
+                    <!-- Selected students rendered here -->
+                </div>
+                <div class="multi_search_area">
+                    <input type="search" 
+                        placeholder="Search for a Student..." 
+                        id="search_added_studs" 
+                        class="search_added_studs" 
+                        oninput="search_student_input()"
+                        onblur="on_blur_search()"
+                        onfocus="on_focus_search()"
+                        >
+                    <div id="possible_applicants">
+                        <!-- Agent's students rendered here -->
+                    </div>
+                </div>
+            </div>
             <div class="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
-              <button type="submit">{{LANG Confirm}}</button>
+                <div onclick="SendApplication()">{{LANG Confirm}}</div>
               
            </div>
         </form> 
     </div>
 </main>
 <script>
+
+let form1 = $('form.final_Send');
+ let student_names = []
+ let selected_student_names = []
+    $.get('{{LINK aj/user_dashboard/get_agent_applicant_list}}?hash=' + $('.main_session').val(), {}, (data => {
+            if(data.status === 200){
+                student_names = data.students
+            }
+    }));
+  
+    
+    let appModalOut = false
+    let isLogged = '<?php echo IsLogged(); ?>';
+    var account_type;
+    if(isLogged == '1'){
+        account_type = '{{ME account_type}}';
+       
+        document.getElementById("appModal").style.display = "flex";
+        document.getElementById("applicant_type").value = account_type;
+            appModalOut = true
+            renderApply()
+
+        if(account_type == 'applicant'){
+            document.querySelector('.agent_applicant_list').style.display = "none";
+        }
+    } else {
+        document.getElementById("applicant_type").value = "guest";
+        account_type = "guest";
+
+    }
 
     var selectedUniversities = [];
     let html = '';
@@ -221,7 +273,7 @@
     });
     
     
-    let appModalOut = false
+   
     function appModal(){
         if(appModalOut){
             document.getElementById("appModal").style.display = "none"
@@ -392,4 +444,86 @@
     })
     document.getElementById("nationality").innerHTML = countryList
     document.getElementById("country_of_residence").innerHTML = countryList
+
+    function populate_students(){
+        let student_rows = ""
+        student_names.forEach(element => {
+            let names = element.first_name + " " + element.last_name
+            let found = false
+            selected_student_names.forEach(student => {
+                if(element.id === student.id) found = true
+            })
+            if(!names.includes(filter_string.toLowerCase())) found = true
+            if(!found){
+                student_rows += `
+                    <p class="font3 bold500 dark_color" onclick="add_app_student('${element.id}')">${names}</p>
+                `
+            }
+        })
+        document.getElementById("possible_applicants").innerHTML = student_rows
+    }
+
+    
+    let filter_string = ""
+    function add_app_student(id){
+        student_names.forEach(element => {
+            if(element.id == id){
+                document.getElementById("search_added_studs").value = ""
+                filter_string = ""
+                selected_student_names.push(element)
+                populate_students()
+                populate_selected_students()
+            }
+        })
+        
+    }
+    function populate_selected_students(){
+        let student_rows = ""
+        selected_student_names.forEach(element => {
+            let names = element.first_name + " " + element.last_name
+            student_rows += `
+                <div class="added_stud" onclick=remove_selected_student('${element.id}')>
+                    <p class="font2 bold400">${names}</p>
+                    <i class="fas fa-times font2 pointer"></i>
+                </div>
+            `
+        })
+        document.getElementById("added_stud").innerHTML = student_rows
+    }
+    function remove_selected_student(id){
+        selected_student_names = selected_student_names.filter(element => {
+            return +id !== +element.id
+        })
+        populate_students()
+        populate_selected_students()
+    }
+    function search_student_input(){
+        filter_string = document.getElementById("search_added_studs").value
+        populate_students()
+    }
+    function on_focus_search(){
+        populate_students()
+        document.getElementById("possible_applicants").style.display = "block"
+    }
+    function on_blur_search(){
+        setTimeout(() => {
+            document.getElementById("possible_applicants").style.display = "none"
+        }, 200);
+    }
+    function create_applicant_list(){
+        let new_array = []
+        selected_student_names.forEach(element => {
+            new_array.push(element.id)
+            
+        })
+        return new_array
+    }
+
+    function SendApplication() {
+         let selected_applicant_list = [] = JSON.stringify(create_applicant_list());
+     
+         $("#multiple_applicants").val(selected_applicant_list);
+        console.log("XXX", selected_applicant_list)
+        form1.submit();
+    }
 </script>

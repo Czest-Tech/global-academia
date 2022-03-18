@@ -7,7 +7,8 @@
                 <th>University</th>
                 <th>Programme</th>
                 <th>Status</th>
-                <th>Commission</th>
+
+               <?php if($kd->user->account_type == "agent"){?> }  <th>Commission</th> <?php } ?>
                 <th>Action</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
 </div>
 
 <script>
+  let isAgent = '{{ME account_type}}';
   $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
           render_application(data.applied_to_universities)
@@ -42,7 +44,7 @@
                 <td class="table_data">${element.university_id.toLowerCase()}</td>
                 <td class="table_data">${element.program_id.toLowerCase()}</td>
                 <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
-                <td class="table_data">$120</td>
+               ${isAgent == 'agent' ? '<td class="table_data">$120</td>' : ''} 
                 <td>
                     <div class="table_actions">
                       <i class="fas fa-eye table_eye" onclick="open_action('VIEW', '${element.id}')"></i>
