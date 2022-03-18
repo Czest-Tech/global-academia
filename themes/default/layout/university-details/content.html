@@ -18,11 +18,11 @@
     <div class="mainDetialsContainer">
         <div class="leftMainDetails">
              <div class="leftMainDetailsRows">
-                 <p class="font4 blue_color bold600">Description</p>
+                 <p class="font5 blue_color bold600">Description</p>
                  <p class="font3 dark_color"><?php echo $kd->university->description; ?></p>
              </div>
             <div class="leftMainDetailsRows">
-                <p class="font4 blue_color bold600">Departments</p>
+                <p class="font5 blue_color bold600">Departments</p>
                  <?php if(!empty($departments_all)){
                    foreach($departments_all  as $dp){?>
                         <h5><?php echo $dp->department; ?></h5>
@@ -33,8 +33,8 @@
                  
              </div>
             <div class="leftMainDetailsRows">
-                <p class="font4 blue_color bold600">{{LANG Disciplines}}</p>
-                <div class="displines8 font2 dark_color">
+                <p class="font5 blue_color bold600">{{LANG Disciplines}}</p>
+                <div class="displines8 font3 dark_color">
                     <p>{{LANG Medicine And Health}}</p>
                     <p>{{LANG Engineering}}</p>
                     <p>Computer Science And IT</p>
@@ -45,7 +45,7 @@
                 </div>
             </div>
                 <div class="leftMainDetailsRows">
-                <p class="font4 blue_color bold600">Overview</p>
+                <p class="font5 blue_color bold600">Overview</p>
                 <div class="overViewIcons">
                     <span class="overViewIcon <?php if($kd->university->library != "0") {echo "activeOverview"; }?>"><i class="fas fa-book-open pr-3"></i>{{LANG Library}}</span>
                     <span class="overViewIcon <?php if($kd->university->wifi != "0") {echo "activeOverview"; }?>"><i class="fas fa-wifi pr-3"></i>{{LANG Wifi}}</span>

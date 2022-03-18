@@ -1,3 +1,8 @@
+<style>
+    .table_edit{ color: orange; margin: 0 3px; cursor: pointer; }
+    .table_trash{ color: tomato; margin: 0 3px; cursor: pointer; }
+</style>
+
 <tr id="list-{{JOB id}}">
     <td>{{JOB id}}</td>
     <td>{{JOB university}}</td>
@@ -5,7 +10,9 @@
      <td>{{JOB foundation}}</td>
     <td>{{JOB total_students}}</td>
     
-    <td class="text-right">
+    <td>
+        <!-- <i style="color: orange; margin-left: 10px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
+        <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i> -->
         <div class="dropdown">
             <a href="#" data-toggle="dropdown"
                class="btn btn-floating"
