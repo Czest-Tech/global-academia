@@ -1028,6 +1028,7 @@ if($first == "multiple" ){
 
         $application_data = new stdClass();
         $grouped_applications = new stdClass();
+        $application_data->applicant_type = Secure($_POST['applicant_type']);
 
         // if(empty($_POST['university_id'])){
         //     exit("Ooop! We dont work like crooocks !");
@@ -1123,7 +1124,9 @@ if($first == "multiple" ){
                 $application_data->other_files = $file_upload['filename'];
             }
         }
-        $email = Secure($_POST['email']);
+        $applicant_type = Secure($_POST['applicant_type']);
+
+        $email = ($applicant_type == "guest")? Secure($_POST['email']) : $kd->user->email;
         $isSent = '';
         $uniqid =  random_str(4, '120340567890');
         $application_data->first_name = Secure($_POST['first_name']);
@@ -1155,7 +1158,10 @@ if($first == "multiple" ){
             $applican_exists = true;
             $referencetrack = $check_email_exists->application_no;
             $grouped_applications->uniqid = $uniqid;
-            $grouped_applications->email = Secure($_POST['email']);
+            $grouped_applications->email = $email;
+            $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
+            $grouped_applications->applied_by = $kd->user->id;
+            $grouped_applications->student_id = Secure($_POST['user_id']);  
             $grouped_applications->university_id = Secure($kp->university_id);
             $grouped_applications->program_id = Secure($kp->id);
             $grouped_applications->priority = $counts;
@@ -1169,7 +1175,10 @@ if($first == "multiple" ){
         } else {
         $isSent = $db->insert(T_APPLICATIONS, ToArray($application_data));
         $referencetrack = $uniqid;
-        $grouped_applications->email = Secure($_POST['email']);
+        $grouped_applications->email = $email;
+        $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
+        $grouped_applications->applied_by = $kd->user->id;
+        $grouped_applications->student_id = Secure($_POST['user_id']);  
         $grouped_applications->university_id = Secure($_POST['university_id']);
         $grouped_applications->program_id = Secure($_POST['program_id']);
         $grouped_applications->priority = $counts;
@@ -1211,12 +1220,12 @@ if($first == "multiple" ){
         // SendSMSMessage($application_data->phone_number, $message);
         
         $notif_data = array(
-            'notifier_id' => 0,
-            'recipient_id' => 2,
-            'job_id' => '0',
-            'type' => 'job_applied',
-            'text' => ' Applied at <b>'.GetuniversityByID($application_data->university_id). '</b> in'.GetProgramByID($application_data->program_id).'</b>', 
-            'url' => ('/admin-cp/view-application?id='.$uniqid),
+            'notifier_id' => (IS_LOGGED)? $kd->user->id : 0,
+            'recipient_id' => 0,
+            'application_id' => '0',
+            'type' => 'new_application',
+            'text' => ' Applied at <b>' . GetuniversityByID($application_data->university_id) . '</b> in' . GetProgramByID($application_data->program_id) . '</b>',
+            'url' => ('/admin-cp/view-application?id=' . $uniqid),
             'time' => time(),
             'target' => 'all',
         );
@@ -1253,15 +1262,14 @@ if($first == "multiple" ){
         // SendSMSMessage($application_data->phone_number, $message);
         
         $notif_data = array(
-            'notifier_id' => 0,
-            'recipient_id' => 2,
-            'job_id' => '0',
-            'type' => 'job_applied',
-            'text' => ' Applied at <b>'.GetuniversityByID($application_data->university_id). '</b> in'.GetProgramByID($application_data->program_id).'</b>', 
-            'url' => UrlLink('/admin-cp/view-application?id='.$uniqid),
+            'notifier_id' => (IS_LOGGED)? $kd->user->id : 0,
+            'recipient_id' => 0,
+            'application_id' => '0',
+            'type' => 'new_application',
+            'text' => ' Applied at <b>' . GetuniversityByID($application_data->university_id) . '</b> in' . GetProgramByID($application_data->program_id) . '</b>',
+            'url' => ('/admin-cp/view-application?id=' . $uniqid),
             'time' => time(),
-            'target' => 'all',
-        );
+            'target' => 'all');
         Notify($notif_data);
         $data = array(
            'status' => 200,

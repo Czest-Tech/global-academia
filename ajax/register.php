@@ -78,7 +78,7 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             'ip_address' => get_ip_address(),
             'active' => $active,
             'email_code' => $email_code,
-            'last_active' => time(),
+            'last_active' => time(),  
             'registered' => date('Y') . '/' . intval(date('m'))
         );
         
@@ -108,7 +108,6 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 
             }
             $init_db_user_dashboard = $db->insert(T_APPLICANT_EDUCATION_INFO, array('user_id' => $user_id));
-            var_dump($init_db_user_dashboard);
             $insert      = $db->insert(T_SESSIONS, $insert_data);
             $data        = array(
                 'status' => 200,
