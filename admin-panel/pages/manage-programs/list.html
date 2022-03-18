@@ -10,8 +10,11 @@
    <td>{{JOB degree}}</td>
   <td>{{JOB duration}}</td>
   
-  <td>
-    <i style="color: orange; margin-left: 20px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
+  <td style="display: flex; align-items: center;">
+    <a href="<?php echo LoadAdminLinkSettings('edit-program?id='.$data['JOB_DATA']->id); ?>" target="_blank">
+      <i style="color: orange;  cursor: pointer;" class="fas fa-edit table_edit"  ></i>
+    </a>
+    
     <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i>
       <!-- <div class="dropdown">
           <a href="#" data-toggle="dropdown"
@@ -20,7 +23,7 @@
               <i class="ti-more-alt"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-              <a  class="dropdown-item" href="<?php echo LoadAdminLinkSettings('edit-program?id='.$data['JOB_DATA']->id); ?>" target="_blank">EDIT</a>
+              
               <button class="dropdown-item text-danger delete-content"  data-id="{{JOB id}}">DELETE</button>
           </div>
       </div> -->

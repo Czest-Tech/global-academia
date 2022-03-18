@@ -10,10 +10,12 @@
      <td>{{JOB foundation}}</td>
     <td>{{JOB total_students}}</td>
     
-    <td>
-        <!-- <i style="color: orange; margin-left: 10px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
-        <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i> -->
-        <div class="dropdown">
+    <td style="display: flex; align-items: center;">
+        <a href="<?php echo LoadAdminLinkSettings('edit-university?id='.$data['JOB_DATA']->id); ?>" target="_blank">
+            <i style="color: orange; margin-left: 10px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
+        </a>
+        <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i>
+        <!-- <div class="dropdown">
             <a href="#" data-toggle="dropdown"
                class="btn btn-floating"
                aria-haspopup="true" aria-expanded="false">
@@ -23,6 +25,6 @@
                 <a  class="dropdown-item" href="<?php echo LoadAdminLinkSettings('edit-university?id='.$data['JOB_DATA']->id); ?>" target="_blank">EDIT</a>
                 <button class="dropdown-item text-danger delete-content"  data-id="{{JOB id}}">DELETE</button>
             </div>
-        </div>
+        </div> -->
     </td>
 </tr>
