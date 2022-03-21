@@ -297,6 +297,7 @@ $university  = $db->where('id',$id)->getOne(T_UNIVERSITY);
                     <label for="">Female Dormitory</label>
                 </div>
             </div>
+
             <hr class="w-100" />
             <p class="section_title">Compus Facilities</p>
             <div class="input_checks">
@@ -387,7 +388,7 @@ $university  = $db->where('id',$id)->getOne(T_UNIVERSITY);
                     <label for="">Certificate</label>
                 </div>
                 <div class="input_checks_rows">
-                    <input type="checkbox" name="associate_degree" id="associate_degree" <?php if(!$university->associate_degree ==  "0") echo "checked"; ?>
+                    <input type="checkbox" name="associate_degree" id="associate_degree" <?php if(!$university->associate_degree ==  "0") echo "checked"; ?>>
                     <label for="">Associate Degree</label>
                 </div>
             </div>
