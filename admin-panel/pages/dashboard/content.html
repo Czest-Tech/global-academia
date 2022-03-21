@@ -201,6 +201,43 @@ foreach ($user as $key => $value) {
 $t_array = implode(', ', $track_array);
 $u_array = implode(', ', $user_array);
 ?>
+<style>
+    .card-title{
+        margin-bottom: 0;
+    }
+    
+    .dash_card_cards{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    .dash_card{
+        background-color: white;
+        padding: 25px 15px;
+        flex: 0 0 24%;
+        border-radius: 2px;
+        margin: 5px;
+    }
+    .dash_card > div{
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .icon_container{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #CBEBFE;
+        margin-right: 10px;
+    }
+
+</style>
 <div class="container-fluid">
     <div>
         <h3>DASHBOARD<small>    The data is updated every 30 mins.</small></h3>
@@ -209,150 +246,92 @@ $u_array = implode(', ', $user_array);
                 <li class="breadcrumb-item">
                     <a href="#">Home</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">DASHBOARD</li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
         </nav>
     </div>
     <!-- Widgets -->
-    <div class="row clearfix">
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL APPLICANTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">application</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_number_of_applicants}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL REPORTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">alert</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG reports_count}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL UNIVERSITIES</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">school</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_universities}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL ACTIVE USERS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">person_outline</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_active_users}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL APPLICANTION TO UNIVERSITIES</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">work</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_application_to_universities}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL STUDENTS WITH MISSING DOCUMENTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">empty_box</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_students_with_missing_documents}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL AGENTS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">people</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_agents}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
-        <div class="col-md-3">
-          <div class="card">
-              <div class="card-body">
-                  <h6 class="card-title">TOTAL UNACTIVE USERS</h6>
-                  <div class="d-flex align-items-center mb-3">
-                      <div>
-                          <div class="avatar">
-                              <span class="avatar-title bg-info-bright text-info rounded-pill">
-                                  <i class="material-icons">person_outline</i>
-                              </span>
-                          </div>
-                      </div>
-                      <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_unactive_users}}</div>
-                  </div>
-              </div>
-          </div>
-       </div>
+    <div class="dash_card_cards ">
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Applicants</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">people</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_number_of_applicants}}</div>
+            </div>
+        </div>
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Reports</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">school</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG reports_count}}</div>
+            </div>
+        </div>
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Universities</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">school</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_universities}}</div>
+            </div>
+        </div>
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Active Users</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">person_outline</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_active_users}}</div>
+            </div>
+        </div>
+
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Applications</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">work</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_application_to_universities}}</div>
+            </div>
+        </div>
+
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Students missing Docs</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons"></i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_students_with_missing_documents}}</div>
+            </div>
+        </div>
+
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Agents</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">people</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_agents}}</div>
+            </div>
+        </div>
+
+        <div class="dash_card col-md-3">
+            <h5 class="card-title">Total Unactive Users</h5>
+            <div>
+                <div class="icon_container">
+                    <i class="material-icons">person_outline</i>
+                </div>
+                <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG total_unactive_users}}</div>
+            </div>
+        </div>
+
     </div>
     <!-- #END# Widgets -->
+
     <div class="row clearfix">
         <!-- Bar Chart -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
