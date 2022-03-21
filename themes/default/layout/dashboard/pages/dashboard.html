@@ -27,15 +27,15 @@
                 <i class="fas fa-file-excel"></i>
                 <p id="rejected_apps">0</p>
             </div>
-        </div>
-        <?php if($kd->user->account_type == "agent"){?> }
-            <div class="dash_card">
+        </a>
+        <?php if($kd->user->account_type === "agent"){ ?> 
+            <a href="{{LINK dashboard/commission/}}{{ME username}}" class="dash_card">
                 <p class="card_title font2">Total Commission</p>
                 <div class="card_dets">
                     <i class="fas fa-wallet"></i>
                     <p id="rejected_apps">$1,280</p>
                 </div>
-            </div>
+            </a>
         <?php }?>
     </div>
     <div class="dash_mid">
