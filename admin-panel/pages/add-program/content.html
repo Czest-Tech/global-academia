@@ -6,6 +6,120 @@ $uni = $db->get(T_UNIVERSITY);
 
 
 ?>
+<style>
+    p {
+        margin-bottom: 0;
+    }
+
+    .change_images {
+        display: flex;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .change_images img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .change_image_row {
+        display: flex;
+        align-items: center;
+        margin-right: 50px;
+        margin-bottom: 10px;
+    }
+
+    .image_details_side {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .image_details_side>p {
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .image_details_side>label {
+        background-color: orange;
+        padding: 0;
+        color: white;
+        font-size: 13px;
+        padding: 4px;
+        border-radius: 4px;
+        width: 80px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .input_fields {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .input_fields_rows {
+        width: 31%;
+        margin: 10px 0;
+        margin-right: 20px;
+    }
+
+    .input_fields_rows>label {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .select_field_rows {
+        display: flex;
+        flex-direction: column;
+        margin-right: 30px;
+    }
+
+    .select_field_rows>label {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .section_title {
+        margin: 0;
+        padding: 0;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .input_checks {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .input_checks_rows {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        margin-right: 10px;
+        min-width: 250px;
+    }
+
+    .input_checks_rows>* {
+        padding: 0;
+        margin: 0;
+        margin-right: 7px;
+    }
+</style>
 <div class="page-header d-md-flex justify-content-between">
     <div>
         <h3>Add Program</h3>
@@ -22,206 +136,138 @@ $uni = $db->get(T_UNIVERSITY);
         </nav>
     </div>     
 </div>
-<div class="row">
-	
-	<div class="col-lg-12">
-        <div class="card" id="kt_page_sticky_card">
-            <form class="add_sub" id="kt_form" method="post">
-            
-         
-                <div class="card-header d-flex" style="justify-content:space-between;">
-                    <div class="card-title">
-                        <h3 class="card-label">Course Information
-                        <i class="mr-2"></i></h3>
-                    </div>
-                 
-                    <div class="card-toolbar">
-                        <a href="<?php echo LoadAdminLinkSettings('manage-programs'); ?>" class="btn btn-light-primary font-weight-bolder mr-2">
-                        <i class="ki ki-long-arrow-back icon-xs"></i>Back</a>
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-primary font-weight-bolder">
-                            <i class="ki ki-check icon-xs"></i>Save Form</button>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <!--begin::Form-->
-                
-                      
-                        <div class="row">
-                            <div class="col-xl-2"></div>
-                            <div class="col-xl-8">
-                                <div class="my-5">
-                                    <h3 class="text-dark font-weight-bold mb-10">Customer Info:</h3>
-                                    <div class="form-group row">
-                                        <label class="col-3">Main image</label>
-                                        <div class="col-9">
-                                            <input type="file" name="image" id="main_image" class="form-control" onchange="readURL(this)">
-                                        </div>
-                                        <div class="w-100 text-center">
-                                          <img  id="preview" style="width:300px; height:100px;"/>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">University</label>
-                                          
-                                           
-                                           
-                                         <div class="col-9">
-                                                 <select class="form-select" name="university_id" aria-label="Default select example">
-                                                    <option selected disabled>Select Univerity</option>
-                                                    <?php  foreach($uni as $dat) { ?>
-                                                        <option value="<?php echo $dat->id; ?>"><?php echo $dat->university; ?></option>
-                                                  
-                                               <?php  } ?>
-                                                
-                                                </select>
-                                            </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">Department</label>
-                                        <div class="col-9">
-                                            <input class="form-control" type="text" name="department" placeholder="Department" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">Language</label>
-                                        <div class="col-9">
-                                            <select class="form-control" name="language">
-                                                <option>Select Language...</option>
-                                                <option value="id">Bahasa Indonesia - Indonesian</option>
-                                                <option value="msa">Bahasa Melayu - Malay</option>
-                                                <option value="ca">Català - Catalan</option>
-                                                <option value="cs">Čeština - Czech</option>
-                                                <option value="da">Dansk - Danish</option>
-                                                <option value="de">Deutsch - German</option>
-                                                <option value="en" selected="selected">English</option>
-                                                <option value="en-gb">English UK - British English</option>
-                                                <option value="es">Español - Spanish</option>
-                                                <option value="eu">Euskara - Basque (beta)</option>
-                                                <option value="fil">Filipino</option>
-                                                <option value="fr">Français - French</option>
-                                                <option value="ga">Gaeilge - Irish (beta)</option>
-                                                <option value="gl">Galego - Galician (beta)</option>
-                                                <option value="hr">Hrvatski - Croatian</option>
-                                                <option value="it">Italiano - Italian</option>
-                                                <option value="hu">Magyar - Hungarian</option>
-                                                <option value="nl">Nederlands - Dutch</option>
-                                                <option value="no">Norsk - Norwegian</option>
-                                                <option value="pl">Polski - Polish</option>
-                                                <option value="pt">Português - Portuguese</option>
-                                                <option value="ro">Română - Romanian</option>
-                                                <option value="sk">Slovenčina - Slovak</option>
-                                                <option value="fi">Suomi - Finnish</option>
-                                                <option value="sv">Svenska - Swedish</option>
-                                                <option value="vi">Tiếng Việt - Vietnamese</option>
-                                                <option value="tr">Türkçe - Turkish</option>
-                                                <option value="el">Ελληνικά - Greek</option>
-                                                <option value="bg">Български език - Bulgarian</option>
-                                                <option value="ru">Русский - Russian</option>
-                                                <option value="sr">Српски - Serbian</option>
-                                                <option value="uk">Українська мова - Ukrainian</option>
-                                                <option value="he">עִבְרִית - Hebrew</option>
-                                                <option value="ur">اردو - Urdu (beta)</option>
-                                                <option value="ar">العربية - Arabic</option>
-                                                <option value="fa">فارسی - Persian</option>
-                                                <option value="mr">मराठी - Marathi</option>
-                                                <option value="hi">हिन्दी - Hindi</option>
-                                                <option value="bn">বাংলা - Bangla</option>
-                                                <option value="gu">ગુજરાતી - Gujarati</option>
-                                                <option value="ta">தமிழ் - Tamil</option>
-                                                <option value="kn">ಕನ್ನಡ - Kannada</option>
-                                                <option value="th">ภาษาไทย - Thai</option>
-                                                <option value="ko">한국어 - Korean</option>
-                                                <option value="ja">日本語 - Japanese</option>
-                                                <option value="zh-cn">简体中文 - Simplified Chinese</option>
-                                                <option value="zh-tw">繁體中文 - Traditional Chinese</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">Degree</label>
-                                        <div class="col-9">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="degree" placeholder="degree" />
-                                            </div>
-                                            <!-- <span class="form-text text-muted">We'll never share your email with anyone else.</span> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">Duration</label>
-                                        <div class="col-9">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="duration" placeholder="Duration" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-3">Tuition Fees</label>
-                                        <div class="col-9">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="tuition_fees" placeholder="Tuition Fees" />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">$</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-3">Our discounted fees</label>
-                                        <div class="col-9">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="discounted_fees" placeholder="Our discounted fees" />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">$</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="form-group row">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Description</label>
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                             <div class="summernote" id="description" ></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Requirement</label>
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                             <div class="summernote" id="requirement" ></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Discipline</label>
-                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                             <div class="summernote" id="discipline" ></div>
-                                        </div>
-                                    </div> -->
-                                    
-                                    <div class="form-group row">
-                                        <label class="col-3">location</label>
-                                        <div class="col-9">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="discipline"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="separator separator-dashed my-10"></div>
-                                
-                            </div>
-                            
+
+<div class="edit_container">
+    <div>
+            <form class="add_sub" id="kt_form" method="post">
+                <div class="create-job-alert"></div>
+                <hr class="w-100" />
+                <div class="change_images">
+                    <div class="change_image_row">
+                        <img id="preview"/>
+                        <div class="image_details_side">
+                            <p>Program Image</p>
+                            <label for="main_image">Change</label>
+                            <input type="file" name="image" id="main_image" class="form-control" onchange="readURL(this)" hidden>
                         </div>
-                    <!--end::Form-->
+                    </div>
                 </div>
-            </form>
-        </div>
-	</div>
+                <!-- ********************** -->
+
+                <div class="input_fields">
+                    <div class="input_fields_rows">
+                        <label for="title">University</label>
+                        <select class="form-control" name="university_id" aria-label="Default select example">
+                            <option selected disabled>Select Univerity</option>
+                            <?php  foreach($uni as $dat) { ?>
+                                <option value="<?php echo $dat->id; ?>"><?php echo $dat->university; ?></option>
+                            <?php  } ?>
+                        </select>
+                    </div>
     
+                    <div class="input_fields_rows">
+                        <label for="title">Department</label>
+                        <input class="form-control" type="text" name="department" placeholder="Department" />
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label for="title">Language</label>
+                        <select class="form-control" name="language">
+                            <option>Select Language...</option>
+                            <option value="id">Bahasa Indonesia - Indonesian</option>
+                            <option value="msa">Bahasa Melayu - Malay</option>
+                            <option value="ca">Català - Catalan</option>
+                            <option value="cs">Čeština - Czech</option>
+                            <option value="da">Dansk - Danish</option>
+                            <option value="de">Deutsch - German</option>
+                            <option value="en" selected="selected">English</option>
+                            <option value="en-gb">English UK - British English</option>
+                            <option value="es">Español - Spanish</option>
+                            <option value="eu">Euskara - Basque (beta)</option>
+                            <option value="fil">Filipino</option>
+                            <option value="fr">Français - French</option>
+                            <option value="ga">Gaeilge - Irish (beta)</option>
+                            <option value="gl">Galego - Galician (beta)</option>
+                            <option value="hr">Hrvatski - Croatian</option>
+                            <option value="it">Italiano - Italian</option>
+                            <option value="hu">Magyar - Hungarian</option>
+                            <option value="nl">Nederlands - Dutch</option>
+                            <option value="no">Norsk - Norwegian</option>
+                            <option value="pl">Polski - Polish</option>
+                            <option value="pt">Português - Portuguese</option>
+                            <option value="ro">Română - Romanian</option>
+                            <option value="sk">Slovenčina - Slovak</option>
+                            <option value="fi">Suomi - Finnish</option>
+                            <option value="sv">Svenska - Swedish</option>
+                            <option value="vi">Tiếng Việt - Vietnamese</option>
+                            <option value="tr">Türkçe - Turkish</option>
+                            <option value="el">Ελληνικά - Greek</option>
+                            <option value="bg">Български език - Bulgarian</option>
+                            <option value="ru">Русский - Russian</option>
+                            <option value="sr">Српски - Serbian</option>
+                            <option value="uk">Українська мова - Ukrainian</option>
+                            <option value="he">עִבְרִית - Hebrew</option>
+                            <option value="ur">اردو - Urdu (beta)</option>
+                            <option value="ar">العربية - Arabic</option>
+                            <option value="fa">فارسی - Persian</option>
+                            <option value="mr">मराठी - Marathi</option>
+                            <option value="hi">हिन्दी - Hindi</option>
+                            <option value="bn">বাংলা - Bangla</option>
+                            <option value="gu">ગુજરાતી - Gujarati</option>
+                            <option value="ta">தமிழ் - Tamil</option>
+                            <option value="kn">ಕನ್ನಡ - Kannada</option>
+                            <option value="th">ภาษาไทย - Thai</option>
+                            <option value="ko">한국어 - Korean</option>
+                            <option value="ja">日本語 - Japanese</option>
+                            <option value="zh-cn">简体中文 - Simplified Chinese</option>
+                            <option value="zh-tw">繁體中文 - Traditional Chinese</option>
+                        </select>
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label class="">Degree</label>
+                        <input type="text" class="form-control" name="degree" placeholder="degree" />
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label class="">Duration</label>
+                        <input type="text" class="form-control" name="duration" placeholder="Duration" />
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label class="">Tuition Fees ($)</label>
+                        <input type="text" class="form-control" name="tuition_fees" placeholder="Tuition Fees" />
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label class="">Our discounted fees ($)</label>
+                        <input type="text" class="form-control" name="discounted_fees" placeholder="Our discounted fees" />
+                    </div>
+
+                    <div class="input_fields_rows">
+                        <label class="">Location</label>
+                        <input type="text" class="form-control" name="discipline"/>
+                    </div>
+                    
+                </div>
+                <br>
+                <div class="card-toolbar">
+                    <!-- <a href="<?php echo LoadAdminLinkSettings('manage-programs'); ?>" class="btn btn-light-primary font-weight-bolder mr-2">
+                    <i class="ki ki-long-arrow-back icon-xs"></i>Back</a> -->
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary font-weight-bolder">
+                        <i class="ki ki-check icon-xs"></i>Save Form</button>
+                    </div>
+                </div>
+
+
+
+
+                <!-- ************************** -->
+            
+            </form>
+	</div>
 </div>
    
 
