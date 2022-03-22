@@ -31,22 +31,16 @@ if ($first == 'test_sms_message') {
 }
 if ($first == 'search_in_pages') {
     $keyword = Secure($_POST['keyword']);
-    $html    = '';
-    
-    $files             = scandir('./admin-panel/pages');
-    $not_allowed_files = array(
-        'edit-custom-page',
-        'edit-lang',
-        'edit-article',
-        'edit-profile-field',
-        'edit-video-ad'
-    );
+    $html = '';
+
+    $files = scandir('./admin-panel/pages');
+    $not_allowed_files = array('edit-custom-page','edit-lang','edit-movie','edit-profile-field','edit-terms-pages');
     foreach ($files as $key => $file) {
-        if (file_exists('./admin-panel/pages/' . $file . '/content.html') && !in_array($file, $not_allowed_files)) {
-            
-            $string = file_get_contents('./admin-panel/pages/' . $file . '/content.html');
+        if (file_exists('./admin-panel/pages/'.$file.'/content.html') && !in_array($file, $not_allowed_files)) {
+
+            $string = file_get_contents('./admin-panel/pages/'.$file.'/content.html');
             preg_match_all("@(?s)<h2([^<]*)>([^<]*)<\/h2>@", $string, $matches1);
-            
+
             if (!empty($matches1) && !empty($matches1[2])) {
                 foreach ($matches1[2] as $key => $title) {
                     if (strpos(strtolower($title), strtolower($keyword)) !== false) {
@@ -58,12 +52,12 @@ if ($first == 'search_in_pages') {
                                 break;
                             }
                         }
-                        $html .= '<a href="' . LoadAdminLinkSettings($file) . '?highlight=' . $keyword . '"><div  style="padding: 5px 2px;">' . $page_title . '</div><div><small style="color: #333;">' . $title . '</small></div></a>';
+                        $html .= '<a href="'.LoadAdminLinkSettings($file).'?highlight='.$keyword.'"><div  style="padding: 5px 2px;">'.$page_title.'</div><div><small style="color: #333;">'.$title.'</small></div></a>';
                         break;
                     }
                 }
             }
-            
+
             preg_match_all("@(?s)<label([^<]*)>([^<]*)<\/label>@", $string, $matches2);
             if (!empty($matches2) && !empty($matches2[2])) {
                 foreach ($matches2[2] as $key => $lable) {
@@ -76,8 +70,8 @@ if ($first == 'search_in_pages') {
                                 break;
                             }
                         }
-                        
-                        $html .= '<a href="' . LoadAdminLinkSettings($file) . '?highlight=' . $keyword . '"><div  style="padding: 5px 2px;">' . $page_title . '</div><div><small style="color: #333;">' . $lable . '</small></div></a>';
+
+                        $html .= '<a href="'.LoadAdminLinkSettings($file).'?highlight='.$keyword.'"><div  style="padding: 5px 2px;">'.$page_title.'</div><div><small style="color: #333;">'.$lable.'</small></div></a>';
                         break;
                     }
                 }
@@ -85,9 +79,12 @@ if ($first == 'search_in_pages') {
         }
     }
     $data = array(
-        'status' => 200,
-        'html' => $html
-    );
+                'status' => 200,
+                'html'   => $html
+            );
+    header("Content-type: application/json");
+    echo json_encode($data);
+    exit();
 }
 
 
@@ -2231,7 +2228,7 @@ if ($first == "export_univesity") {
     
     $universities_data = $db->get(T_UNIVERSITY);
     
-    if (DBToExcel($universities_data)) {
+    if (DBToExcel($universities_data, 'xlxs')) {
         
         $data = array(
             'status' => 200,
