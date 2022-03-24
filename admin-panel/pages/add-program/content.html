@@ -256,8 +256,8 @@ $uni = $db->get(T_UNIVERSITY);
                     <!-- <a href="<?php echo LoadAdminLinkSettings('manage-programs'); ?>" class="btn btn-light-primary font-weight-bolder mr-2">
                     <i class="ki ki-long-arrow-back icon-xs"></i>Back</a> -->
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-primary font-weight-bolder">
-                        <i class="ki ki-check icon-xs"></i>Save Form</button>
+                        <div onclick="addNewProgram()" class="btn btn-primary font-weight-bolder">
+                        <i class="ki ki-check icon-xs"></i>Save Form</div>
                     </div>
                 </div>
 
@@ -309,68 +309,33 @@ $uni = $db->get(T_UNIVERSITY);
                     jQuery(this).addClass('on');
                 });
 
-                $(function() {
-                    "use strict";
-                    
-                    var form_university = $('form.add_sub');
-                    form_university.ajaxForm({
-                        url: '{{LINK aj/application/add_program}}?hash=<?php echo CreateMainSession(); ?>',
-                        beforeSend: function() {
-                            $('.sett_btn').text('PLEASE WAIT..');
-                        },
-                        success: function(data) {
+                function addNewProgram(){
+                    let form1 = document.querySelector('.add_sub');
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
                             if (data.status == 200) {
 
                            
-                                  toastr.options = {
-                                        timeOut: 2000,
-                                        progressBar: true,
-                                        showMethod: "slideDown",
-                                        hideMethod: "slideUp",
-                                        showDuration: 200,
-                                        hideDuration: 200 
-                                      };
-                                  toastr.success('Program Edited');
-                                
-                              
+                                toastr.options = {
+                                    timeOut: 2000,
+                                    progressBar: true,
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    showDuration: 200,
+                                    hideDuration: 200 
+                                    };
+                                toastr.success('Program Edited');
                             }
                         }
-                    });
-                });
+                    }
+                    request.open("POST", `{{LINK aj/application/add_program}}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+                }
+
+               
     </script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#jb_respd' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            });
-        ClassicEditor
-            .create( document.querySelector( '#jb_quald' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            });
-        ClassicEditor
-            .create( document.querySelector( '#jb_descd' ), {
-                toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
-                    ]
-                }
-            });
-    </script>
+  
 

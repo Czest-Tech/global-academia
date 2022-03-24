@@ -98,8 +98,8 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
     <!-- DataTable -->
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/vendors/dataTable/datatables.min.css'); ?>" type="text/css">
    <link rel="stylesheet" href="<?php echo LoadAdminLink('/vendors/charts/morsis/morris.css'); ?>" type="text/css">
+   
    <!-- Jquery init -->
-    <script src="<?php echo LoadAdminLink('vendors/jquery/jquery.min.js'); ?>"></script>
 <!-- App css -->
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/assets/css/app.min.css'); ?>" type="text/css">
     <link rel="stylesheet" href="<?php echo LoadAdminLink('/assets/css/custom.css'); ?>" type="text/css">
@@ -128,6 +128,7 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 <?php //if ($page == 'create-article' || $page == 'edit-article' || $page == 'manage-announcements' || $page == 'newsletters') { ?>
 <script src="<?php echo LoadAdminLink('vendors/tinymce/js/tinymce/tinymce.min.js'); ?>"></script>
+
 <script src="<?php echo LoadAdminLink('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.js'); ?>"></script>
 <link href="<?php echo LoadAdminLink('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.css'); ?>" rel="stylesheet" />
 <?php //} ?>
@@ -631,8 +632,8 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 
 <script src="<?php echo LoadAdminLink('vendors/sweetalert/sweetalert.min.js'); ?>"></script>
 <script src="<?php echo(LoadAdminLink('vendors/select2/js/select2.min.js')) ?>"></script>
-    <script src="<?php echo(LoadAdminLink('assets/js/examples/select2.js')) ?>"></script>
-    <script src="<?php echo(LoadAdminLink('assets/js/app.min.js')) ?>"></script>
+<script src="<?php echo(LoadAdminLink('assets/js/examples/select2.js')) ?>"></script>
+<script src="<?php echo(LoadAdminLink('assets/js/app.min.js')) ?>"></script>
 
     <script type="text/javascript">
         function ChangeMode(mode) {

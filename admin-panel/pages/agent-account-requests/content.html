@@ -588,7 +588,7 @@ jQuery(document).ready(function($) {
       $('#SelectedDeleteModal').find('#exampleModal1Label').html(action_type+' request(s)');
       $('#SelectedDeleteModal').modal('show');
   });
-    function DeleteSelected() {
+function DeleteSelected() {
       action_type = $('#action_type').val();
       data = new Array();
       $('td input:checked').parents('tr').each(function () {
