@@ -96,7 +96,44 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
     .table_eye{ color: teal; margin: 0 3px; cursor: pointer; }
     .table_edit{ color: orange; margin: 0 3px; cursor: pointer; }
     .table_trash{ color: tomato; margin: 0 3px; cursor: pointer; }
-    
+
+    .filter_inputs p{
+        margin-bottom: 0;
+}
+    .filter_inputs{
+        display: flex;
+        margin-bottom: 15px;
+    }
+    .filter_inputs .column{
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid rgb(240, 240, 240);
+        padding: 0 15px;
+    }
+    .filter_inputs .column:nth-child(1){
+        border-left: none;
+        padding-left: 0;
+    }
+    .date_column{
+        display: flex;
+        align-items: center;
+    }
+    .date_column input{
+        width: 140px;
+        font-size: 13px !important;
+    }
+    .column p{
+        font-weight: 600;
+        color: #333;
+        font-size: 15px;
+    }
+    .column input,select{
+        border: 1px solid #777;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 13px !important;
+        height: 30px;
+    }
 </style>
 <div class="page-header d-md-flex justify-content-between">
     <div>
@@ -120,10 +157,42 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
 
 <!-- Vertical Layout -->
 <div class="row">
-
+    
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
+                <div class="filter_inputs">
+                    <div class="column">
+                        <p>Search</p>
+                        <input type="text" placeholder="Search anything..." id="filter_search" oninput="filter_search()">
+                    </div>
+                    <div class="column">
+                        <p>Date</p>
+                        <div class="date_column">
+                            <input type="date" id="date_start" onchange="filter_date()">
+                            &nbsp;<p>-</p>&nbsp;
+                            <input type="date" id="date_end" onchange="filter_date()">
+                        </div>
+                    </div>
+                    <div class="column">
+                        <p>Status</p>
+                        <select name="" id="status_drop" onchange="filter_status()">
+                            <!-- Render in JS -->
+                        </select>
+                    </div>
+                    <div class="column">
+                        <p>Signed By</p>
+                        <select  id="signed_by_drop" onchange="filter_filter_signed_by()">
+                            <!-- Render in JS -->
+                        </select>
+                    </div>
+                    <div class="column">
+                        <p>Country</p>
+                        <select id="country_drop" onchange="country_drop()">
+                            <!-- Render in JS -->
+                        </select>
+                    </div>
+                </div>
                 <table class="admin-table">
                     <thead>
                         <!-- <th>Select</th> -->
@@ -217,9 +286,13 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
         console.log(selectedObj)
 
     }
+    let app_data = []
+    let app_color = []
     $(document).ready(function () {
         $.get('{{LINK aj/front_end_api/manage_applications}}?' + "hash=<?php echo CreateMainSession() ?>", function (data) {
             if (data.status == 200) {
+                app_data = data.data
+                app_color = data.color_id
                 renderApplications(data.data, data.color_id)
             }
         });
@@ -301,14 +374,24 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
 
     }
 
+    //filter values
+    let search_string = ""
+    let date_start = "2000-01-01"
+    let date_end = "4000-12-12"
+    let status_string = "ANY"
+    let signed_by_string = "ANY"
+    let country_string = "ANY"
+
     function renderApplications(data, user_id) {
-        
         
         let tableRows = ""
         let user_color_obj = []
         for (let index = 0; index < user_id.length; index++) {
             user_color_obj.push({id:user_id[index],color:signedByColors[index]})
         }
+        let signed_by_drop = []
+        let status_drop = []
+        let country_drop = []
         data.forEach(element => {
             let sec = 1628618888939
             let time = new Date(sec).toLocaleString('en-US',{timeZone:'UTC'})
@@ -319,12 +402,24 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                     color = item.color
                 }
             })
-            tableRows += `
+            let data_string = (`${date.toString().substr(4,11)} ${element.status} ${element.signed_by_name} ${element.first_name} ${element.last_name} ${element.nationality}`).toLowerCase()
+            let search_found = data_string.includes(search_string.toLowerCase())
+
+            let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
+
+            let signed_by_name = (typeof element.signed_by_name) === "string" ? element.signed_by_name.toLowerCase() : "N/A"
+            signed_by_drop.push(signed_by_name)
+            let signed_by_found = signed_by_string === "ANY" ? true : signed_by_name.replaceAll(" ",'').includes(signed_by_string)
+            status_drop.push(element.status)
+            let status_found = status_string === "ANY" ? true : element.status.replaceAll(" ",'').includes(status_string)
+            country_drop.push(element.nationality)
+            let country_found = country_string === "ANY" ? true : element.nationality.replaceAll(" ",'').includes(country_string)
+            let row = `
                     <tr>
                         <td>${date.toString().substr(4,11)}</td>
                         <td>${element.status}</td>
                         <td>${element.active_applications}</td>
-                        <td style="background:${color}; color:${element.sign_id === null ? 'black':'white'}">${typeof element.signed_by_name === "string" ? element.signed_by_name.toLowerCase() : "N/A"}</td>
+                        <td style="background:${color}; color:${typeof element.sign_id === 'string' ? 'white':'black'}">${signed_by_name}</td>
                         <td>${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()}</td>         
                         <td>${element.nationality}</td>
                         <td>
@@ -335,15 +430,65 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                     </tr>
                 `
                 color = "white"
+            if(search_found && date_found && signed_by_found && status_found && country_found) {
+                tableRows += row
+            }
         });
-        // <select style="border:none" onchange="handleAction(${element.id})" id="table-actions${element.id}">
-        //                         <option value="Select">Select</option>
-        //                         <option value="view">View</option>
-        //                         <option value="edit">Edit</option>
-        //                         ${ (delete_permission == 1 )? '<option value="delete">Delete</option>' : ''}
-        //                     </select>
+        let status_list = ""
+        if(signed_by_string === "ANY"){
+            document.getElementById("signed_by_drop").innerHTML = "<option value='ANY'>Any</option>"
+            get_unique(signed_by_drop).forEach(element => {
+                document.getElementById("signed_by_drop").innerHTML += `<option value=${element.replaceAll(" ",'')}>${element}</option>`
+            })
+        }
+        if(status_string === "ANY"){
+            document.getElementById("status_drop").innerHTML = "<option value='ANY'>Any</option>"
+            get_unique(status_drop).forEach(element => {
+                document.getElementById("status_drop").innerHTML += `<option value=${element.replaceAll(" ",'')}>${element}</option>`
+            })
+        }
+        if(country_string === "ANY"){
+            document.getElementById("country_drop").innerHTML = "<option value='ANY'>Any</option>"
+            get_unique(country_drop).forEach(element => {
+                document.getElementById("country_drop").innerHTML += `<option value=${element.replaceAll(" ",'')}>${element}</option>`
+            })
+        }
         document.getElementById("all_applications").innerHTML = tableRows
     }
+    function get_unique(data){
+        let new_data = []
+        data.forEach(element => {
+            let found = false
+            new_data.forEach(item => {
+                if(item === element) found = true
+            })
+            if(!found) new_data.push(element)
+        })
+        return(new_data)
+    }
+    
+    function filter_search(){
+        search_string = document.getElementById("filter_search").value
+        renderApplications(app_data, app_color)
+    }
+    function filter_date(){
+        date_start = document.getElementById("date_start").value || "2000-01-01"
+        date_end = document.getElementById("date_end").value || "4000-12-12"
+        renderApplications(app_data, app_color)
+    }
+    function filter_filter_signed_by(){
+        signed_by_string = document.getElementById("signed_by_drop").value
+        renderApplications(app_data, app_color)
+    }
+    function filter_status(){
+        status_string = document.getElementById("status_drop").value
+        renderApplications(app_data, app_color)
+    }
+    function country_drop(){
+        country_string = document.getElementById("country_drop").value
+        renderApplications(app_data, app_color)
+    }
+
     function handleAction(action, id) {
 
         // let action = document.getElementById(`table-actions${id}`).value

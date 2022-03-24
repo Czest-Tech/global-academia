@@ -1,4 +1,63 @@
+<style>
+.filter_inputs p{
+  margin-bottom: 0;
+}
+.filter_inputs{
+  display: flex;
+  margin-bottom: 15px;
+}
+.filter_inputs .column{
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid rgb(240, 240, 240);
+  padding: 0 15px;
+}
+.filter_inputs .column:nth-child(1){
+  border-left: none;
+  padding-left: 0;
+}
+.date_column{
+  display: flex;
+  align-items: center;
+}
+.date_column input{
+  width: 140px;
+  font-size: 13px !important;
+}
+.column p{
+  font-weight: 600;
+  color: #054EA1;
+  font-size: 15px;
+}
+.column input,select{
+  border: 1px solid #777;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 13px !important;
+  height: 30px;
+}
+</style>
 <div class="applications">
+  <div class="filter_inputs">
+    <div class="column">
+        <p>Search</p>
+        <input type="text" placeholder="Search anything..." id="filter_search" oninput="filter_search()">
+    </div>
+    <div class="column">
+        <p>Date</p>
+        <div class="date_column">
+            <input type="date" id="date_start" onchange="filter_date()">
+            &nbsp;<p>-</p>&nbsp;
+            <input type="date" id="date_end" onchange="filter_date()">
+        </div>
+    </div>
+    <div class="column">
+        <p>Status</p>
+        <select name="" id="status_drop" onchange="filter_status()">
+            <!-- Render in JS -->
+        </select>
+    </div>
+</div>
   <div class="table_area_app">
     <table class="ga_table">
         <thead>
@@ -30,15 +89,25 @@
 
 <script>
   let isAgent = '{{ME account_type}}';
+  let universities = []
   $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
+          universities = data.applied_to_universities
           render_application(data.applied_to_universities)
         }
   }));
+
+  let search_string = ""
+  let date_start = "2000-01-01"
+  let date_end = "4000-12-12"
+  let status_string = "ANY"
+
   function render_application(data){
+    let tableRows = ""
     data.forEach((element, index) => {
-      console.log(element.id)
-      document.getElementById("ga_table-body").innerHTML += `
+      let data_string = (`${element.created_at.substr(0,10)} ${element.university_id} ${element.program_id} ${element.application_status_slug}`).toLowerCase()
+      let search_found = data_string.includes(search_string.toLowerCase())
+      let rows = `
             <tr>
                 <td>${element.created_at.substr(0,10)}</td>
                 <td class="table_data">${element.university_id.toLowerCase()}</td>
@@ -54,11 +123,43 @@
                 </td>
             </tr>
         `
+        if(search_found) {
+            tableRows += rows
+        }
     })
+
+    document.getElementById("ga_table-body").innerHTML = tableRows
     if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
     else document.getElementById("no_apps").innerHTML = ""
   }
 
+  function get_unique(data){
+        let new_data = []
+        data.forEach(element => {
+            let found = false
+            new_data.forEach(item => {
+                if(item === element) found = true
+            })
+            if(!found) new_data.push(element)
+        })
+        return(new_data)
+    }
+    
+    function filter_search(){
+        search_string = document.getElementById("filter_search").value
+        render_application(universities)
+    }
+    function filter_date(){
+        date_start = document.getElementById("date_start").value || "2000-01-01"
+        date_end = document.getElementById("date_end").value || "4000-12-12"
+        render_application(universities)
+    }
+ 
+    function filter_status(){
+        status_string = document.getElementById("status_drop").value
+        render_application(universities)
+    }
+   
 
   function open_action(id, app_id){
     let action = document.getElementById("app_change"+id).value

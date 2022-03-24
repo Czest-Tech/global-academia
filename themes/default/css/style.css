@@ -157,6 +157,7 @@ a{
     z-index: 5;
     left: 0;
     width: 100%;
+    min-width: 90px;
     padding: 7px;
     border-radius: 0 0 5px 5px;
 }
