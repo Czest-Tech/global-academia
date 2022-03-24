@@ -1,27 +1,27 @@
 <div class="dashboard">
     <div class="dash_top_cards">
-        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card">
+        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card" onclick="to_application('AwaitingApproval')">
             <p class="card_title font2">All Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-alt"></i>
                 <p id="total_apps">0</p>
             </div>
         </a>
-        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card">
+        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card" onclick="to_application('AwaitingApproval')">
             <p class="card_title font2">Pending Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file"></i>
                 <p id="pending_apps">0</p>
             </div>
         </a>
-        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card">
+        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card" onclick="to_application('AwaitingApproval')">
             <p class="card_title font2">Accepted Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-contract"></i>
                 <p id="accepted_apps">0</p>
             </div>
         </a>
-        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card">
+        <a href="{{LINK dashboard/applications/}}{{ME username}}" class="dash_card" onclick="to_application('AwaitingApproval')">
             <p class="card_title font2">Rejected Applications</p>
             <div class="card_dets">
                 <i class="fas fa-file-excel"></i>
@@ -119,4 +119,9 @@
     function open_link_to_new_table(link){
         window.open(link, '_blank')
     }
+    function to_application(name){
+        localStorage.setItem("GAAPPS_STATUS", name)
+    }
+
+    
 </script>

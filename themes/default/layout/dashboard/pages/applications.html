@@ -54,7 +54,8 @@
     <div class="column">
         <p>Status</p>
         <select name="" id="status_drop" onchange="filter_status()">
-            <!-- Render in JS -->
+            <option value='ANY'>Any</option>
+            <option value='AwaitingApproval'>Awaiting Approval</option>
         </select>
     </div>
 </div>
@@ -100,16 +101,24 @@
   let search_string = ""
   let date_start = "2000-01-01"
   let date_end = "4000-12-12"
-  let status_string = "ANY"
+  let status_string = localStorage.getItem("GAAPPS_STATUS") ? localStorage.getItem("GAAPPS_STATUS") : "ANY"
+  document.getElementById("status_drop").value = status_string
+  localStorage.removeItem("GAAPPS_STATUS")
 
   function render_application(data){
     let tableRows = ""
+    let status_drop = []
     data.forEach((element, index) => {
-      let data_string = (`${element.created_at.substr(0,10)} ${element.university_id} ${element.program_id} ${element.application_status_slug}`).toLowerCase()
+      var date = new Date(element.created_at)
+      let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
+      let data_string = (`${date.toDateString()} ${element.university_id} ${element.program_id} ${element.application_status_slug}`).toLowerCase()
       let search_found = data_string.includes(search_string.toLowerCase())
+      status_drop.push(element.application_status_slug)
+      let status_found = status_string === "ANY" ? true : element.application_status_slug.replaceAll(" ",'').includes(status_string)
+
       let rows = `
             <tr>
-                <td>${element.created_at.substr(0,10)}</td>
+                <td>${date.toDateString().substr(4)}</td>
                 <td class="table_data">${element.university_id.toLowerCase()}</td>
                 <td class="table_data">${element.program_id.toLowerCase()}</td>
                 <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
@@ -123,10 +132,17 @@
                 </td>
             </tr>
         `
-        if(search_found) {
+        if(search_found && status_found && date_found) {
             tableRows += rows
         }
     })
+
+    // if(status_string === "ANY"){
+    //     document.getElementById("status_drop").innerHTML = "<option value='ANY'>Any</option>"
+    //     get_unique(status_drop).forEach(element => {
+    //         document.getElementById("status_drop").innerHTML += `<option value=${element.replaceAll(" ",'')}>${element}</option>`
+    //     })
+    // }
 
     document.getElementById("ga_table-body").innerHTML = tableRows
     if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
