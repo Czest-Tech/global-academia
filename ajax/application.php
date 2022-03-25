@@ -1887,8 +1887,7 @@ if ($first == 'university_edit' && !empty($_POST['university_id'])) {
     
     $update = $db->where('id', $_POST['university_id'])->update(T_UNIVERSITY, ToArray($universities));
     
-    
-    header("Content-type: application/json");
+
     if ($update) {
         $data = array(
             'status' => 200
@@ -1901,5 +1900,5 @@ if ($first == 'university_edit' && !empty($_POST['university_id'])) {
         );
         
     }
-    exit();
+   
 }

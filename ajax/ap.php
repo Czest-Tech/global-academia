@@ -2023,7 +2023,7 @@ if ($first == 'university_add') {
     $universities->applied_science     = ($_POST['applied_science'] = "on") ? "1" : "0";
     
     $update = $db->insert(T_UNIVERSITY, ToArray($universities));
-    var_dump($update);
+  
     
     
     if ($update) {
@@ -2032,6 +2032,7 @@ if ($first == 'university_add') {
             'status' => 200
         );
         echo json_encode($data);
+        exit();
     } else {
         
         $send_errors_data = array(
@@ -2039,8 +2040,9 @@ if ($first == 'university_add') {
             'message' => "ERROR"
         );
         echo json_encode($send_errors_data);
+        exit();
     }
-    exit();
+  
 }
 if ($first == 'university_department') {
     

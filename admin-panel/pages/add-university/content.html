@@ -134,8 +134,8 @@
 <div class="edit_container">
     <div class="col-lg-2"></div>
     <div>
-		<form class="form_container" method="post" id="create-job">
-			<div id="create-job-alert"></div>
+		<form class="create_university" method="post" id="create-university">
+			<div id="create-university-alert"></div>
             <hr class="w-100" />
             <p class="section_title">Univerity Information</p>
             <div class="change_images">
@@ -185,8 +185,8 @@
             </div>
             <div class="select_field_rows">
                 <label for="description">University description</label>
-                <textarea type="text" name="description" class="form-control"
-                    id="title"></textarea>
+                <textarea type="text" name="description" class="form-control description"
+                    id="description"></textarea>
             </div>
 
             <hr class="w-100" />
@@ -451,7 +451,7 @@
             <div class="form-group">
                     <input type="hidden" name="hash_id" value="<?php echo CreateSession()?>">
                     <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
-                    <button type="submit" class="btn btn-primary sett_btn"> Add Univerisity</button>
+                    <div onclick="addNewUniversity()" class="btn btn-primary sett_btn"> Add Univerisity</div>
             </div>
              
 		</form>
@@ -497,20 +497,19 @@
                 });
                 
 
-                $(function() {
-                    "use strict";
-                    
-                    var form_university = $('form.job_box');
-                    form_university.ajaxForm({
-                        url: '{{LINK aj/ap/university_add}}',
-                        beforeSend: function() {
-                            $('.sett_btn').text('PLEASE WAIT..');
-                        },
-                        success: function(data) {
+              
+
+                function addNewUniversity(){
+                    let form1 = document.querySelector('.create_university');
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
                             if (data.status == 200) {
 
-                                $('.btn-save').text('SAVE CHANGES');
-                              
+                           
+                             
                                 toastr.options = {
                                         timeOut: 2000,
                                         progressBar: true,
@@ -520,22 +519,16 @@
                                         hideDuration: 200
                                       };
                                   toastr.success('University Saved!');
-                              
-                                 $('.create-job-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
-                                $('.alert-success').fadeIn('fast', function() {
-                                    $(this).delay(2000).slideUp(500, function() {
-                                        $(this).remove();
-                                        
-                                    });
-                                 });
                             }
                         }
-                    });
-                });
+                    }
+                    request.open("POST", `{{LINK aj/manage_universities/university_add}}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+                }
     </script>
     <script>
         ClassicEditor
-            .create( document.querySelector( '#jb_respd' ), {
+            .create( document.querySelector( '.description' ), {
                 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
                 heading: {
                     options: [

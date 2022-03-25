@@ -31,7 +31,7 @@ $option_list = '';
 	<div class="col-lg-2"></div>
 	<div class="col-lg-8 card">
         <div>
-		<form class="job_box mb-3" method="post" id="create-job">
+		<form class="add_department mb-3" method="post" id="create-job">
 			<div id="create-job-alert"></div>
 			<div class="row" style="padding-top: 30px;">
                 <br>
@@ -69,9 +69,8 @@ $option_list = '';
               
             </div>
             <div class="form-group text-center">
-                    <input type="hidden" name="hash" value="<?php echo CreateSession()?>">
                     <input type="hidden" name="user_id" value="<?php echo $kd->user->id?>">
-                    <button type="submit" class="btn btn-primary sett_btn"> Save Department</button>
+                    <div onclick="addNewDepartment()" class="btn btn-primary sett_btn"> Save Department</div>
             </div>
              
 		</form>
@@ -82,25 +81,21 @@ $option_list = '';
 </div>
  </div>   
 </div>
-    <script src="<?php echo LoadAdminLink('/vendors/ckeditor5/ckeditor.js'); ?>"></script>
+
     <script>
          
 
-                $(function() {
-                    "use strict";
-                    
-                    var form_university = $('form.job_box');
-                    form_university.ajaxForm({
-                        url: '{{LINK aj/application/university_department}}',
-                        beforeSend: function() {
-                            $('.sett_btn').text('PLEASE WAIT..');
-                        },
-                        success: function(data) {
-                         
+                function addNewDepartment(){
+                    let form1 = document.querySelector('.add_department');
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
+                            if (data.status == 200) {
 
-                                $('.sett_btn').text('SAVE CHANGES');
-                                $('#department').val('');
-                              
+                           
+                             
                                 toastr.options = {
                                         timeOut: 2000,
                                         progressBar: true,
@@ -110,18 +105,12 @@ $option_list = '';
                                         hideDuration: 200
                                       };
                                   toastr.success('Department Saved!');
-                              
-                                 $('.create-job-alert').html('<div class="alert alert-success"><i class="fa fa-check"></i> Settings updated successfully</div>');
-                                $('.alert-success').fadeIn('fast', function() {
-                                    $(this).delay(2000).slideUp(500, function() {
-                                        $(this).remove();
-                                        
-                                    });
-                                 });
-                            
+                            }
                         }
-                    });
-                });
+                    }
+                    request.open("POST", `{{LINK aj/application/university_department}}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+                }
     </script>
    
 
