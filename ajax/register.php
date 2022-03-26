@@ -42,10 +42,10 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     //     $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
 
     // }
-    if (strlen($firstname) <= 4 || strlen($firstname) > 32) {
+    if (strlen($firstname) <= 2 || strlen($firstname) > 32) {
         $errors[] = __('firstname_characters_length');
     }
-    if (strlen($lastname) <= 4 || strlen($lastname) > 32) {
+    if (strlen($lastname) <= 2 || strlen($lastname) > 32) {
         $errors[] = __('lastname_characters_length');
     }
     if (!preg_match('/^[\w]+$/', $firstname)) {
@@ -112,6 +112,8 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $data        = array(
                 'status' => 200,
                 'mode' => 'done',
+                'account_type' => $account_type,
+                'post_register_action' => ($account_type == 'agent') ? __('your_account_await_approval') : __('successfully_joined_desc'),
                 'message' => $success_icon . __('successfully_joined_desc'),
                 'session_id' => $session_id
             );
@@ -122,5 +124,6 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $errors_text .= $error_icon . $value . "<br>";
         }
         $data['message'] = $errors_text;
+        $data['status'] = 400;
     }
 }

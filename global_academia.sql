@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Mar 17, 2022 at 10:23 AM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- Host: localhost:3306
+-- Generation Time: Mar 26, 2022 at 06:46 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.3.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,7 +54,10 @@ CREATE TABLE `agent_requests` (
 --
 
 INSERT INTO `agent_requests` (`id`, `user_id`, `approved`, `created_at`, `seen`, `status`) VALUES
-(1, '10', 0, '1646294386', 0, 1);
+(1, '10', 0, '1646294386', 0, 1),
+(2, '12', 0, '1648314041', 0, 0),
+(3, '13', 0, '1648314146', 0, 0),
+(4, '14', 0, '1648315045', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -196,6 +199,16 @@ CREATE TABLE `applicant_education_info` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `applicant_education_info`
+--
+
+INSERT INTO `applicant_education_info` (`id`, `date_of_birth`, `phone_number`, `phone_number_2`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `note`, `type`, `created_at`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12),
+(2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
+(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14),
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -289,8 +302,8 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `university_id`, `program_id`, `first_name`, `last_name`, `date_of_birth`, `phone_number`, `phone_number_2`, `email`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `application_no`, `status`, `note`, `signed_by`, `is_notified`, `isClosed`, `mark_university`, `ischecked`, `acceptance_letter`, `type`, `request_update`, `created_at`, `commision`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`, `applicant_type`, `time`, `applied_by`) VALUES
-(1, '7', '9', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '3304', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1647483211', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10),
-(2, '7', '9', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '4465', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'single', 0, '1647483281', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10);
+(1, '7', '9', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '3304', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483211', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10),
+(2, '7', '9', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '4465', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483281', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10);
 
 -- --------------------------------------------------------
 
@@ -390,7 +403,7 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (25, 'smtp_encryption', 'tls'),
 (26, 'smtp_port', '587'),
 (27, 'delete_account', 'on'),
-(36, 'last_admin_collection', '1647378987'),
+(36, 'last_admin_collection', '1648157376'),
 (45, 'user_registration', 'on'),
 (54, 'job_listing_statics', '[{&quot;month&quot;:&quot;January&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;February&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;March&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;April&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;May&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;June&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;July&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;August&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;September&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;October&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;November&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;December&quot;,&quot;new_job&quot;:16}]'),
 (58, 'google', ''),
@@ -505,11 +518,11 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (246, 'total_job_share', '0'),
 (247, 'total_reports', '1'),
 (248, 'weekly_user_vist', '0'),
-(249, 'get_number_of_applicants', '6'),
+(249, 'get_number_of_applicants', '2'),
 (250, 'reports_count', '0'),
 (251, 'get_total_universities', '58'),
 (252, 'get_active_users', '9'),
-(253, 'get_total_application_to_universities', '22'),
+(253, 'get_total_application_to_universities', '4'),
 (254, 'get_students_with_missing_documents', '0'),
 (255, 'get_total_agents', '1');
 
@@ -567,7 +580,7 @@ CREATE TABLE `course` (
 INSERT INTO `course` (`id`, `main_image`, `university`, `department`, `language`, `degree`, `duration`, `tuition_fees`, `discounted_fees`, `description`, `requirement`, `discipline`, `location`, `remember_token`, `created_at`, `updated_at`, `university_id`) VALUES
 (1, '1625732696.jpg', 'Acibadem University', 'Architecture', 'en', 'Associate', 4, '$6250', 4000, 'Description', 'Requirement', 'This, that, thisthat', 'Istanbul', NULL, '2021-05-16 09:47:47', '2021-07-08 08:24:56', 5),
 (2, '1624639772.jpg', 'Acibadem University', 'Architecture', 'English', 'Bachelor', 4, '$6200', 4000, NULL, NULL, NULL, NULL, NULL, '2021-05-16 09:47:47', '2021-06-25 16:49:32', 5),
-(3, NULL, 'Acibadem University', 'AVIATION MANAGEMENT', 'Turkish', 'Master', 4, '$5.50 ', 2000, NULL, NULL, NULL, NULL, NULL, '2021-05-16 09:47:47', '2021-05-16 09:47:47', 5),
+(3, NULL, 'Acibadem University', 'AVIATION MANAGEMENT', 'en', 'Master', 4, '$5.50', 2000, NULL, NULL, 'Engineering', NULL, NULL, '2021-05-16 09:47:47', '2021-05-16 09:47:47', 5),
 (4, NULL, 'Acibadem University', 'AUDIOLOGY', 'en', 'PhD', 4, '$85232', 2009, NULL, NULL, '', NULL, NULL, '2021-05-16 09:47:47', '2021-05-16 09:47:47', 5),
 (5, NULL, 'Acibadem University', 'BANKING AND INSURANCE', 'Turkish', 'Associate', 4, '$5.50 ', 2000, NULL, NULL, 'Arts', NULL, NULL, '2021-05-16 09:47:47', '2021-05-16 09:47:47', 5),
 (6, NULL, 'Acibadem University', 'BIOMEDICAL ENGINEERING (ENGLISH)', 'English', 'Bachelor', 4, '$6.25', 0, NULL, NULL, NULL, NULL, NULL, '2021-05-16 09:47:47', '2021-06-14 21:57:47', 5),
@@ -886,7 +899,8 @@ INSERT INTO `course` (`id`, `main_image`, `university`, `department`, `language`
 (337, NULL, 'Istanbul Galata University', 'NURSING (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (338, NULL, 'Istanbul Galata University', 'PHYSIOTHERAPY AND REHABILITATION (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (339, NULL, 'Istanbul Galata University', 'NUTRITION AND DIETETICS (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(340, NULL, 'Istanbul Memz University', 'JOURNALISM', 'Turkish', 'Undergraduate', 4, NULL, 4000, '2000', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(340, NULL, 'Istanbul Memz University', 'JOURNALISM', 'Turkish', 'Undergraduate', 4, NULL, 4000, '2000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(341, 'upload/photos/2022/03/VAvOKZkSmoNNwgsHdH8a_24_8667043422ca6c3db35a35a2aeaedb32_image.png', 'Chawama university', 'Whichraft', 'en', 'degree', 4, '4000', 2000, NULL, NULL, 'Lusaka', NULL, NULL, NULL, NULL, 111);
 
 -- --------------------------------------------------------
 
@@ -901,6 +915,13 @@ CREATE TABLE `departments` (
   `department_slag` varchar(250) NOT NULL,
   `department` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `departments`
+--
+
+INSERT INTO `departments` (`id`, `program_id`, `university_id`, `department_slag`, `department`) VALUES
+(1, NULL, '111', 'whichraft', 'Whichraft');
 
 -- --------------------------------------------------------
 
@@ -1652,7 +1673,8 @@ INSERT INTO `langs` (`id`, `lang_key`, `english`, `arabic`, `dutch`, `french`, `
 (686, 'students', 'Students', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (687, 'total', 'Total', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (688, 'programs', 'Programs', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(689, 'program_details_page', 'Program details page', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(689, 'program_details_page', 'Program details page', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(690, 'your_account_await_approval', 'Registration successful, Your Account is Awaiting Approval. This process might take a few hours or days, Kindly keep track of your email inbox for the approval email', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1916,7 +1938,10 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (215, 'd3f03a0253ab110e8b4c6001416e12e494b12ee1164721655409d21a7660d8a1b7e65c38a3a5947b0f', 10, 'web', 1647216554),
 (217, '387652ab9c2ec6ae465c26e272291643f00e5a5e1647309100074b8efb0f0d14b1b73fd95445e78bcb', 2, 'web', 1647309100),
 (219, '6074a83bb9bec5d58016f4252ff3abba6468e56c1647309129bab1733b323ed9dccf1bf95ac8a1c4fe', 2, 'web', 1647309129),
-(229, 'fa02386487d26d2a462e6c025728e59c43bb0ea31647456224eafc1c0f37d804fe55bf428f0e56731a', 10, 'web', 1647456224);
+(229, 'fa02386487d26d2a462e6c025728e59c43bb0ea31647456224eafc1c0f37d804fe55bf428f0e56731a', 10, 'web', 1647456224),
+(231, '5ce38e2db247b6e9c78da699a68591eb6961c29916483140412ddd07a2959bc43954ace30fcab64103', 12, 'web', 1648314041),
+(232, 'd8a80bfcf761d2c73fc77e4ef7bf79ac5e3993fc16483141464b6419079e6d54b7ffc0e3010993703d', 13, 'web', 1648314146),
+(233, '6a9136b19d3c0969ec32f4d476264b88fac10c8116483150454b52ef2fecc897f32580d2bb0b61b572', 14, 'web', 1648315045);
 
 -- --------------------------------------------------------
 
@@ -2024,7 +2049,7 @@ CREATE TABLE `university` (
 --
 
 INSERT INTO `university` (`id`, `main_image`, `university_logo`, `description`, `title`, `university`, `location`, `university_type`, `foundation`, `lang_edu_en`, `lang_edu_tk`, `sp_facilitie`, `sp_teams`, `st_associations`, `laboratories`, `asso_degrees`, `undergraduate_program`, `mater_programs`, `ph_d_programs`, `international_students`, `total_students`, `study_mode`, `dormitory`, `female`, `male`, `library`, `wifi`, `gym`, `cafeteria`, `copy_center`, `hairdresser`, `atm`, `car_park`, `bank`, `security`, `vertural_court`, `walking_track`, `barrier_free`, `tennis_court`, `dining_hall`, `auditorium`, `medial_center`, `hospital`, `bachelor`, `master_programs`, `master`, `certificate`, `phd`, `associate_degree`, `medicine_health`, `pharmacy`, `dentisy`, `engineering`, `computer_science`, `agriculture`, `art_design`, `business_management`, `education_traning`, `engineering1`, `sports`, `journalism`, `law`, `medicine_health1`, `natural_science`, `social_science`, `medicine`, `applied_science`, `remember_token`, `created_at`, `updated_at`, `university_name_slug`) VALUES
-(5, 'upload/photos/2021/07/rwWJt1c7CE3trm2VN5i6_20_3d3224cd85ac32578e1b987bbc1823a1_image.jpeg', 'upload/photos/2021/08/TGm5RqRKQyHjOztRgu9e_06_36eca81af96f7edba67a3caf8e5826cd_image.jpg', 'Lorem test Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It h', 'Acibadem University', 'Acibadem University', 'Istanbul', 'Istanbul', 2007, '1', '1', '5', '6', '41', '51', '52', '34', NULL, '10', '100', '4315', 'Full-Time', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 33, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, NULL, '2021-05-16 09:44:29', '2021-06-29 11:12:19', NULL),
+(5, 'upload/photos/2021/07/rwWJt1c7CE3trm2VN5i6_20_3d3224cd85ac32578e1b987bbc1823a1_image.jpeg', 'upload/photos/2021/08/TGm5RqRKQyHjOztRgu9e_06_36eca81af96f7edba67a3caf8e5826cd_image.jpg', 'hety test edit', 'Acibadem University', 'Acibadem University', 'Istanbul', 'Istanbul', 2012, '1', '1', '5', '6', '41', '51', '52', '34', NULL, '10', '100', '4315', 'Full-Time', 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 33, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, NULL, '2021-05-16 09:44:29', '2021-06-29 11:12:19', 'acibadem_university'),
 (6, NULL, NULL, NULL, NULL, 'Alanya HEP University', 'Antalya', 'Private', 2011, '0', '1', '0', '0', '12', '6', '0', '16', NULL, '0', '64', '394', 'Full-Time', 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, NULL, 0, 0, 1, NULL, 1, 1, 0, 0, NULL, '2021-05-16 09:44:29', '2021-05-16 09:44:29', NULL),
 (7, 'upload/photos/2021/07/8c3EnCy7UMTdZLCt1eKr_20_52772059e3bd4d1146befa6fc9d91523_image.jpeg', 'upload/photos/2021/07/BpOGs99Z2Cag5jqGXF6O_20_52772059e3bd4d1146befa6fc9d91523_image.gif', '', '', 'Altinbas University', 'Istanbul', 'Istanbul', 2008, '0', '1', '0', '4', '68', '84', '24', '58', NULL, '10', '3762', '10337', 'Full-Time', 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 30, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, NULL, '2021-05-16 09:44:29', '2021-06-24 22:04:33', NULL),
 (8, NULL, NULL, NULL, NULL, 'Ankara Science University', 'Ankara', 'Private', 2020, '0', '1', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', NULL, 'N/A', 'N/A', 'N/A', 'Full-Time', 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, NULL, 1, 1, 1, NULL, 1, 1, 1, 0, NULL, '2021-05-16 09:44:29', '2021-05-16 09:44:29', NULL),
@@ -2081,7 +2106,9 @@ INSERT INTO `university` (`id`, `main_image`, `university_logo`, `description`, 
 (98, NULL, NULL, NULL, NULL, 'Izmir University of Economics', '?zmir', 'Private', 2001, '1', '0', '5', '6', '49', '49', '65', '93', NULL, '9', '263', '9441', 'Full-Time', 1, 1, 1, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, 1, 1, NULL, 1, 1, 1, 1, 1, 1, 61, 1, NULL, 1, 1, NULL, NULL, NULL, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, NULL, 1, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
 (99, NULL, NULL, NULL, NULL, 'Izmir Tinaztepe University', '?zmir', 'Private', 2018, '1', '0', '0', '0', '13', '8', '10', '9', NULL, '0', '0', '0', 'Full-Time', NULL, NULL, NULL, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, 1, 1, 5, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, 1, NULL, 1, 1, NULL, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
 (108, NULL, NULL, NULL, NULL, 'Near East University', 'N. Cyprus', 'Private', NULL, '1', '0', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', NULL, 'N/A', 'N/A', 'N/A', 'Full-Time', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, 1, 1, 1, 1, 1, NULL, 1, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, 1, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
-(109, NULL, NULL, NULL, NULL, 'Nisantasi University', 'Istanbul', 'Private', 2009, '1', '0', '6', '17', '58', '186', '182', '118', NULL, '1', '1443', '20011', 'Full-Time', NULL, NULL, NULL, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, NULL, 1, 12, 1, NULL, 1, 1, NULL, 1, 1, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, 1, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL);
+(109, NULL, NULL, NULL, NULL, 'Nisantasi University', 'Istanbul', 'Private', 2009, '1', '0', '6', '17', '58', '186', '182', '118', NULL, '1', '1443', '20011', 'Full-Time', NULL, NULL, NULL, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, NULL, 1, 12, 1, NULL, 1, 1, NULL, 1, 1, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, 1, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
+(110, 'upload/photos/2022/03/9cmSlTOgkYdfc6SdZWMs_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', 'upload/photos/2022/03/ccIHbsmYvNJKzmKXQDzG_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', '', 'Chibolya university', 'Chibolya university', 'Lusaka', 'State', 1997, 'english', 'turkish', '15', '54', '15', '9', '48', '8', NULL, '6', '56', '10', '56', 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 68, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 'chibolya_university'),
+(111, 'upload/photos/2022/03/xDM9JmJoDdevr3d9vz1E_24_76955ef11166bbd84355243350fe6fb9_image.jpg', 'upload/photos/2022/03/wMpWMHyhPKwA7Sxm25eI_24_76955ef11166bbd84355243350fe6fb9_image.jpg', '', 'Chawama university', 'Chawama university', 'Lusaka', 'State', 1997, 'english', 'turkish', '15', '54', '15', '9', '48', '8', NULL, '6', '56', '10', '56', 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 68, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, NULL, NULL, NULL, 'chawama_university');
 
 -- --------------------------------------------------------
 
@@ -2153,7 +2180,11 @@ INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first
 (8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
 (10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
+(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
+(12, 'Cos_1cDo_Age', 'comsicagency@gmail.com', '::1', '$2y$10$cjR/dfGvaWGNwpJanBl/Ju8KZcHlOt3mhhpeOt7fRMs.fmXLNRNw2', 'Cosmic', 'Agency', 'male', '98add4a26365b475797845ecbfb8427eb7bdf081', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314041, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
+(13, 'Cos_QqbM_Age', 'comsicagenc@gmail.com', '::1', '$2y$10$mxedI4ZJ0V.9lg.DEeontehKbVAJlozf34L55oMcfdw32mJYYQULy', 'Cosmi', 'Agenc', 'male', '31deed68434d434b62ca969e2cfe44bac3d89538', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314146, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
+(14, 'Luc_EXp7_Stu', 'lucrativestudy@gmail.com', '::1', '$2y$10$Jnv6CndbWvzfVDd08UPch.IAz79OgT1rC0HEjnyn1IxoW5ki7ptxa', 'Lucrative', 'Study', 'male', 'e4a00ded0de8ee2b5b31e396898e18ef428b4d0c', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648315045, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
+(15, 'Jon_9rIu_Dee', 'jonnydeep@gmail.com', '::1', '$2y$10$FaS7VaW3U2QpWtDHIo1VL.n4LgGbbwST46ZI2rtZnQBgVEao.qZXa', 'Jonny', 'Deep', 'male', 'fd429c4759f3d23fe6215d55390c5eeabda39d52', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1648315437, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2422,7 +2453,7 @@ ALTER TABLE `admin_invitations`
 -- AUTO_INCREMENT for table `agent_requests`
 --
 ALTER TABLE `agent_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `agent_students`
@@ -2452,7 +2483,7 @@ ALTER TABLE `applicant_chat`
 -- AUTO_INCREMENT for table `applicant_education_info`
 --
 ALTER TABLE `applicant_education_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `applican_universities`
@@ -2494,13 +2525,13 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hashtags`
@@ -2524,7 +2555,7 @@ ALTER TABLE `invitation_links`
 -- AUTO_INCREMENT for table `langs`
 --
 ALTER TABLE `langs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=690;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=691;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -2554,7 +2585,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- AUTO_INCREMENT for table `terms`
@@ -2566,13 +2597,13 @@ ALTER TABLE `terms`
 -- AUTO_INCREMENT for table `university`
 --
 ALTER TABLE `university`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_notifications`
