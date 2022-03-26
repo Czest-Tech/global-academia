@@ -14,6 +14,7 @@ $pages = array(
     'chat',
     'manage-users',
     'settings',
+    'manage-workers',
     'manage-languages',
     'add-language',
     'manage-announcements',
@@ -577,6 +578,9 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                         </span><span>Users</span>
                         </a>
                         <ul>
+                            <li>
+                                <a  href="<?php echo LoadAdminLinkSettings('manage-workers'); ?>">Manage Staff</a>
+                            </li>
                             <li>
                                 <a  href="<?php echo LoadAdminLinkSettings('manage-users'); ?>">Manage Users</a>
                             </li>

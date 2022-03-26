@@ -14,7 +14,7 @@
         <a href="<?php echo LoadAdminLinkSettings('edit-university?id='.$data['JOB_DATA']->id); ?>" target="_blank">
             <i style="color: orange; margin-left: 10px; cursor: pointer;" class="fas fa-edit table_edit"  ></i>
         </a>
-        <i style="color: tomato; margin-left: 10px; cursor: pointer;" class="fas fa-trash table_trash" ></i>
+        <i style="color: tomato; margin-left: 10px; cursor: pointer;"  onclick="DeleteProgram('{{JOB id}}')" class="fas fa-trash table_trash" ></i>
         <!-- <div class="dropdown">
             <a href="#" data-toggle="dropdown"
                class="btn btn-floating"

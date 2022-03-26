@@ -239,7 +239,7 @@ if ($first == "single_applicant") {
     $student_id = Secure($_POST['user_id']);
 
     if ($applicant_type === "applicant") {
-
+         $sid = $kd->user->id;
 
         if (!empty($student_id)) {
 

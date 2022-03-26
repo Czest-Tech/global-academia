@@ -569,6 +569,11 @@ function UpdateAdminDetails() {
     $get_users_count = $db->getValue(T_USERS, 'count(*)');
     $update_users_count = $db->where('name', 'total_users')->update(T_CONFIG, array('value' => $get_users_count));
 
+    $get_total_agent_request_count = $db->where('status', '0')->getValue(T_AGENT_REQUESTS, 'count(*)');
+   
+    $update_users_agent_requestcount = $db->where('name', 'get_total_agent_request')->update(T_CONFIG, array('value' => $get_total_agent_request_count));
+
+    
     $get_active_users = $db->where('active', '1')->getValue(T_USERS, 'count(*)');
     $db->where('name', 'get_active_users')->update(T_CONFIG, array('value' => $get_active_users));
 
@@ -790,64 +795,25 @@ function QuestionData(&$question, $api = false){
 
     return $question;
 }
-function GetQuestionType($question){
-    global $kd;
-    $type = array();
-    if($question->is_anonymously === 1){
-        $type['anonymous'] = 'anonymous';
-    }else{
-        $type['normal'] = 'normal';
-    }
-    if(isset($question->photo)) {
-        if ($question->photo !== NULL && !empty($question->photo)) {
-            $type['photo_poll'] = 'photo_poll';
-        }
-    }
-    if(isset($question->ask_user_id)) {
-        if($question->ask_user_id > 0 && $question->ask_question_id > 0 ){
-            $type['answer'] = 'answer';
-        }
-    }
-    if(isset($question->ask_user_id)) {
-        if($question->ask_user_id > 0 && $question->ask_question_id == 0 ){
-            $type['asked'] = 'asked';
-        }
-    }
-    if(isset($question->replay_user_id)) {
-        if ($question->replay_user_id > 0 && $question->replay_question_id > 0) {
-            $type['reply'] = 'reply';
-        }
-    }
-    if(isset($question->shared_user_id)) {
-        if ($question->shared_user_id > 0 && $question->shared_question_id > 0) {
-            $type['share'] = 'share';
-        }
-    }
 
-    if (IS_LOGGED == true) {
-        if(isset($question->ask_user_id)) {
-            if ($question->ask_user_id == 0 && $question->ask_question_id == 0 && $kd->user->id == $question->user_id) {
-                $type['owner'] = 'owner';
-            }
-        }
-        if(isset($question->ask_user_id)) {
-            if ($question->ask_user_id > 0 && $question->ask_question_id > 0 && $kd->user->id == $question->user_id) {
-                $type['owner'] = 'owner';
-            }
-        }
-        if(isset($question->shared_user_id)) {
-            if ($question->shared_user_id > 0 && $question->shared_question_id > 0 && $kd->user->id == $question->user_id) {
-                $type['owner'] = 'owner';
-            }
-        }
-        if(isset($question->replay_user_id)) {
-            if ($question->replay_user_id > 0 && $question->replay_question_id > 0 && $kd->user->id == $question->user_id) {
-                $type['owner'] = 'owner';
-            }
-        }
+function GetAccountType($type){
+    $account_type = '';
+    switch ($type) {
+        case '1':
+            $account_type  = 'super_admin';
+            break;
+        case '2':
+            $account_type  = 'admin';
+            break;
+        case '3':
+            $account_type  = 'worker';
+            break;         
+        default:
+            $account_type  = 'normal_user';
+            break;
     }
-
-    return $type;
+    return $account_type;
+    
 }
 function PostMarkup($text, $link = true, $hashtag = true, $mention = true) {
     if ($link == true) {

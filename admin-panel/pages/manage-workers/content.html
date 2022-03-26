@@ -2,28 +2,200 @@
 $page = (!empty($_GET['page-id'])) ? $_GET['page-id'] : 1;
 $filter_keyword = (!empty($_GET['query'])) ? Secure($_GET['query']) : '';
 $filter_type    = '';
+$link = '';
 $db->pageLimit  = 50;
 
 if (!empty($filter_keyword)) {
-    $sql   = " {$filter_type} (username LIKE '%$filter_keyword%' OR email LIKE '%$filter_keyword%' OR id = '$filter_keyword' OR first_name LIKE '%$filter_keyword%' OR last_name LIKE '%$filter_keyword%') ";
-    $users = $db->where($sql)->orderBy('id', 'DESC')->objectbuilder()->paginate(T_USERS, $page);
+    $link .= '&query='.Secure($filter_keyword);
+    $sql   = " {$filter_type} (username LIKE '%$filter_keyword%' OR email LIKE '%$filter_keyword%' OR id = '$filter_keyword' OR name LIKE '%$filter_keyword%') ";
+	$db->where($sql);
 } 
+if (!empty($_GET['range']) && in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
+    if ($_GET['range'] == 'Today' || $_GET['range'] == 'Yesterday') {
+        $this_start = strtotime(date('M')." ".date('d').", ".date('Y')." 12:00am");
+        $this_end = strtotime(date('M')." ".date('d').", ".date('Y')." 11:59pm");
+        if ($_GET['range'] == 'Yesterday') {
+            $this_start = strtotime(date('M')." ".date('d',strtotime("-1 days")).", ".date('Y')." 12:00am");
+            $this_end = strtotime(date('M')." ".date('d',strtotime("-1 days")).", ".date('Y')." 11:59pm");
+        }
+        $main_range = 'Today';
+        $title = "Daily";
+    }
+    elseif ($_GET['range'] == 'This Week') {
+        $time = strtotime(date('l').", ".date('M')." ".date('d').", ".date('Y'));
 
-else {
+        if (date('l') == 'Saturday') {
+            $this_start = strtotime(date('M')." ".date('d').", ".date('Y')." 12:00am");
+        }
+        else{
+            $this_start = strtotime('last saturday, 12:00am', $time);
+        }
 
-    $users = $db->objectbuilder()->orderBy('id', 'DESC')->paginate(T_USERS, $page);
+        if (date('l') == 'Friday') {
+            $this_end = strtotime(date('M')." ".date('d').", ".date('Y')." 11:59pm");
+        }
+        else{
+            $this_end = strtotime('next Friday, 11:59pm', $time);
+        }
+        
+        $main_range = 'This Week';
+        $title = "Weekly";
+    }
+    elseif ($_GET['range'] == 'This Month' ||$_GET['range'] == 'Last Month') {
+        $this_start = strtotime("1 ".date('M')." ".date('Y')." 12:00am");
+        $this_end = strtotime(cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'))." ".date('M')." ".date('Y')." 11:59pm");
+        if ($_GET['range'] == 'Last Month') {
+            $this_start = strtotime("1 ".date('M',strtotime("-1 month"))." ".date('Y')." 12:00am");
+            $this_end = strtotime(cal_days_in_month(CAL_GREGORIAN, date('m',strtotime("-1 month")), date('Y'))." ".date('M',strtotime("-1 month"))." ".date('Y')." 11:59pm");
+        }
+        $main_range = 'This Month';
+        $title = "Monthly";
+    }
+    elseif ($_GET['range'] == 'This Year') {
+        $this_start = strtotime("1 January ".date('Y')." 12:00am");
+        $this_end = strtotime("31 December ".date('Y')." 11:59pm");
+        $main_range = 'This Year';
+        $title = "Yearly";
+    }
 }
+$start = '';
+$end = '';
+$first_code = '';
+$second_code = '';
+if (!empty($_GET['range']) && !in_array($_GET['range'], array('Today','Yesterday','This Week','This Month','Last Month','This Year'))) {
+    $_GET['range'] = str_replace('_', '/', $_GET['range']);
+    $arr = explode('-', $_GET['range']);
+    if (preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[0]) && preg_match('~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~m', $arr[1])) {
+        $start = Secure($arr[0]);
+        $end = Secure($arr[1]);
+        $this_start = strtotime($start);
+        $this_end = strtotime($end);
+        $month_days = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+        $diff = abs(strtotime($end) - strtotime($start));
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        if ($years >= 1) {
+            $array = array();
+            for ($i=date('Y',strtotime($start)); $i <= date('Y',strtotime($end)); $i++) { 
+                $array["'".$i."'"] = 0;
+            }
+            $main_range = 'Custom';
+            $code = 'Y';
+            $title = "Yearly";
+        }
+        elseif ($months >= 1) {
+            $array = array('01' => 0 ,'02' => 0 ,'03' => 0 ,'04' => 0 ,'05' => 0 ,'06' => 0 ,'07' => 0 ,'08' => 0 ,'09' => 0 ,'10' => 0 ,'11' => 0 ,'12' => 0);
+            $code = 'm';
+            $main_range = 'This Year';
+            $title = "Monthly";
+            if (date('Y',strtotime($start)) == date('Y',strtotime($end))) {
+                $array = array();
+                for ($i=date('m',strtotime($start)); $i <= date('m',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'm';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('m',strtotime($start)); $i <= 12; $i++) { 
+                    $array["'".(int)$i.'-'.date('Y',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('m',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('Y',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'm';
+                $second_code = 'Y';
+                $main_range = 'Custom';
+            }
+        }
+        elseif ($days > 7) {
+            if (date('m',strtotime($start)) == date('m',strtotime($end))) {
+                $array = array();
+                for ($i=date('d',strtotime($start)); $i <= date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'd';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('d',strtotime($start)); $i <= $month; $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'd';
+                $second_code = 'm';
+                $main_range = 'Custom';
+            }
+            $title = "Daily";
+        }
+        elseif ($days >= 1 && $days < 8) {
+            $title = "Daily";
+            $code = 'l';
+            $array = array('Saturday' => 0 , 'Sunday' => 0 , 'Monday' => 0 , 'Tuesday' => 0 , 'Wednesday' => 0 , 'Thursday' => 0 , 'Friday' => 0);
+            if (date('m',strtotime($start)) == date('m',strtotime($end))) {
+                $array = array();
+                for ($i=date('d',strtotime($start)); $i <= date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i."'"] = 0;
+                }
+                $code = 'd';
+                $main_range = 'Custom';
+            }
+            else{
+                $month = cal_days_in_month(CAL_GREGORIAN, date('m',strtotime($start)), date('Y',strtotime($start)));
+                $array = array();
+                for ($i=(int)date('d',strtotime($start)); $i <= $month; $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($start))."'"] = 0;
+                }
+                for ($i=1; $i <= (int)date('d',strtotime($end)); $i++) { 
+                    $array["'".(int)$i.'-'.date('m',strtotime($end))."'"] = 0;
+                }
+                $first_code = 'd';
+                $second_code = 'm';
+                $main_range = 'Custom';
+            }
+        }
+    }
+}
+
+
+$rang_link = $link;
+if (!empty($this_start) && !empty($this_end)) {
+    $link .= "&range=".Secure($_GET['range']);
+    $db->where('time',$this_start,'>=')->where('time',$this_end,'<=');
+}
+$sort_link = $link;
+$sort_array = array('DESC_i' => array('id' , 'DESC'),
+                    'ASC_i'  => array('id' , 'ASC'),
+                    'DESC_u' => array('username' , 'DESC'),
+                    'ASC_u'  => array('username' , 'ASC'));
+if (!empty($_GET['sort']) && in_array($_GET['sort'], array_keys($sort_array))) {
+    $db->orderBy($sort_array[$_GET['sort']][0],$sort_array[$_GET['sort']][1]);
+    $link .= "&sort=".Secure($_GET['sort']);
+    $rang_link .= "&sort=".Secure($_GET['sort']);
+}
+else{
+    $_GET['sort'] = 'DESC_i';
+    $db->orderBy('id', 'DESC');
+}
+$users = $db->where('access_level','0', '!=')->where('access_level','4', '!=')->objectbuilder()->paginate(T_USERS, $page);
 
 $get_online_users = $db->where('last_active', time() - 60, '>')->getValue(T_USERS, 'COUNT(*)');
 
 if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
-    header("Location: " . LoadAdminLinkSettings('manage-users'));
-    exit();
+	header("Location: " . LoadAdminLinkSettings('manage-users'));
+	exit();
 }
 ?>
 <div class="page-header d-md-flex justify-content-between">
    <div>
-            <h3>Users</h3>
+            <h3>Manage Staff</h3>
             <nav aria-label="breadcrumb" class="d-flex align-items-start">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -224,11 +396,11 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
 
                     <input type="hidden" id="user_id" name="user_id">
                     <input type="hidden" name="hash_id" value="<?php echo CreateSession();?>">
-                    <button type="submit" id="submit_new_user" class="btn btn-primary m-t-15 waves-effect">Save</button>
+                    <div onclick="addNewUser()" id="submit_new_user" class="btn btn-primary m-t-15 waves-effect">Save</div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeLikesForm" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="closeLikesForm" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
 
@@ -236,46 +408,48 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
 </div>
 
 <script type="text/javascript">
+
       $(function() {
-        let form1 = $('form.add-users');
-    "use strict";
+ 
+         "use strict";
             $('#closeLikesForm').on('click', function(event) {
                 event.preventDefault();
                 $('#delete-modal').attr('data-id', $(this).attr('data-id')).modal('show');
             });
 
-            form1.ajaxForm({
-            url: '{{LINK aj/admin_user_register}}?hash=<?php echo CreateMainSession(); ?>',
-            dataTyep: 'json',
-
-            success: function (data) {
-                if (data.status == 200) {
-
-                    $('.site-settings-alert').html($('<div>',{
-                        class: "alert alert-success",
-                        html: data.message
-                    }));
-                    $('.alert-success').fadeIn(300);
-                    $('#AddNewUsers').modal('hide');
-                    window.location.reload();
-                   
-                }
-                else {
-                    $('.site-settings-alert').html($('<div>',{
-                        class: "alert alert-danger",
-                        html: data.message
-                    }));
-
-                
-
-                }
-            }
-        });
+            
         });
 
         function add_user_modal(){
                 $('#AddNewUsers').modal('show');
         }
+        function addNewUser(){
+                    let form1 = document.querySelector('.add-users');
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
+                            if (data.status == 200) {
+
+                           
+                                toastr.options = {
+                                    timeOut: 2000,
+                                    progressBar: true,
+                                    showMethod: "slideDown",
+                                    hideMethod: "slideUp",
+                                    showDuration: 200,
+                                    hideDuration: 200 
+                                    };
+                                toastr.success('User Added Edited');
+                                window.location.reload();
+                                
+                            }
+                        }
+                    }
+                    request.open("POST", `{{LINK aj/admin_user_register}}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+                }
 
       
 

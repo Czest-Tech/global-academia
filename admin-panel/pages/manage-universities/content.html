@@ -141,13 +141,13 @@
                 <div class="modal-content modal-col-red">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add this Job To Featured Jobs</h4>
+                        <h4 class="modal-title">Delete University</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to continue? this action will add a job to appear in the site featured jobs</p>
+                        <p>Are you sure you want to continue? this action will delete the program nd remove all the programs and applications to this university</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect add_to_featured-button" data-dismiss="modal" data-type="add">Add</button>
+                        <div type="button" class="btn btn-danger waves-effect add_to_featured-button" data-dismiss="modal" data-type="add">Comfirm</div>
                         <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                     </div>
                 </div>
@@ -244,5 +244,27 @@
                 });
               });
             });
+            function DeleteProgram(id){
+                $('#featured-modal').attr('data-user-id', id);
+                $('#featured-modal').attr('data-id', id).modal('show');
+                $('.add_to_featured-button').replaceWith(`<div onClick="ComfirmedRemove(${id})" class="btn btn-danger waves-effect add_to_featured-button" data-dismiss="modal" data-type="add">Comfirm</div>`);
+            }
+            function ComfirmedRemove(id){
+                $.get(`{{LINK aj/manage_universities/delete_university}}?hash=${$('.main_session').val()}`, { id: id}, function (data) {
+                    if (data.status == 200) {
+                        toastr.options = {
+                            timeOut: 2000,
+                            progressBar: true,
+                            showMethod: "slideDown",
+                            hideMethod: "slideUp",
+                            showDuration: 200,
+                            hideDuration: 200 
+                            };
+                        toastr.success('Program removed Edited');
+                        window.location.reload();
+                      
+                    }
+                });
+            }
     </script>
 

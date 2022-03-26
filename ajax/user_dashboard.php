@@ -132,7 +132,7 @@
                 'status' => 200,
                 'data' => $get_data,
                 'user_data' => $kd->user,
-                'url' => UrlLink($redirectlink)
+               
              );
         } else {
             $data = array(

@@ -788,17 +788,17 @@
                             <?php } ?>
                         </select>
                     </div>
-                    <div>
+                    <?php if($kd->user->access_level == 1) {?>  <div>
                         <p>Commision </p>:&nbsp;
                         <input type="number" name="commision" id="" class="commision-inputs" value="<?php echo $apn->commision; ?>">
-                    </div>
+                    </div> <?php } ?>
                     <input type="hidden" name="id" value="<?php echo $ap_n; ?>" />
                     <button type="submit" class="purple-btn">Save</button>
                 </form>
                 <div id="show-commission" style="display: <?php echo ($apn->signed_by &&  $apn->commision)? '' : 'none';  ?>">
                     <div>
                         <p><?php echo GetUserName($apn->signed_by); ?> :</p>
-                        <p>&nbsp; <?php echo $apn->commision; ?></p>
+                      <?php if($kd->user->access_level == 1) {?> <p>&nbsp; <?php echo $apn->commision; ?></p> <?php } ?>
                     </div>
                     <button class="purple-btn" onclick="showEditCommision('SHOW')">Edit</button>
                 </div>

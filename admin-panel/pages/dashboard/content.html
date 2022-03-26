@@ -318,6 +318,18 @@ $u_array = implode(', ', $user_array);
                 <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_agents}}</div>
             </div>
         </div>
+        <div class="dash_card col-md-3">
+            <a href="<?php echo LoadAdminLinkSettings('agent-account-requests'); ?>">
+                 <h5 class="card-title">Active Agent Request</h5>
+                <div>
+                    <div class="icon_container">
+                        <i class="material-icons">people</i>
+                    </div>
+                    <div class="font-weight-bold ml-1 font-size-30 ml-3">{{CONFIG get_total_agent_request}}</div>
+                </div>
+            </a>
+            
+        </div>
 
         <div class="dash_card col-md-3">
             <h5 class="card-title">Total Unactive Users</h5>

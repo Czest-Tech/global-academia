@@ -350,3 +350,51 @@ if ($first == 'edit_program') {
     }
     
 }
+if($first == 'delete_program'){
+    if(isset($_GET['id'])){
+        $id = Secure($_GET['id']);
+        $delete_application = $db->where('id',$id)->delete(T_PROGRAM);
+
+        if($delete_application){
+             
+            $data = array(
+                'status' => 200,
+                'message' => 'deleted'
+            );
+        } else {
+            $data = array(
+                'status' => 400,
+                'message' => 'error deleting'
+            );
+        }
+    } else {
+        $data = array(
+            'status' => 401,
+            'error' => 'ID cannot be empty'
+        );
+    }
+}
+if($first == 'delete_university'){
+    if(isset($_GET['id'])){
+        $id = Secure($_GET['id']);
+        $delete_application = $db->where('id',$id)->delete(T_UNIVERSITY);
+
+        if($delete_application){
+             
+            $data = array(
+                'status' => 200,
+                'message' => 'deleted'
+            );
+        } else {
+            $data = array(
+                'status' => 400,
+                'message' => 'error deleting'
+            );
+        }
+    } else {
+        $data = array(
+            'status' => 401,
+            'error' => 'ID cannot be empty'
+        );
+    }
+}

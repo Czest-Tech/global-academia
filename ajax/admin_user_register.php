@@ -29,6 +29,8 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     $c_password      = Secure($_POST['c_password']);
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
     $email           = Secure($_POST['email']);
+    $first_name      = Secure($_POST['first_name']);
+    $last_name      = Secure($_POST['last_name']);
     if (UsernameExists($username)) {
         $errors[] = __('username_is_taken');
     }
@@ -51,6 +53,7 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors[] = __('password_is_short');
     }
     $active = 1;
+   
     if (empty($errors)) {
         $email_code              = sha1(time() + rand(111, 999));
         $insert_data             = array(
@@ -60,9 +63,10 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             'ip_address' => get_ip_address(),
             'active' => $active,
             'email_code' => $email_code,
-            'first_name' => Secure($_POST['first_name']),
-            'last_name' => Secure($_POST['last_name']),
+            'first_name' => $first_name,
+            'last_name' => $last_name,
             'last_active' => time(),
+            'account_type' => GetAccountType($_POST['access_level']),
             'admin' => ($_POST['access_level'] != 4)? 1 : 0,
             'access_level' => Secure($_POST['access_level']),
             'registered' => date('Y') . '/' . intval(date('m'))
@@ -75,12 +79,30 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         }
         $user_id = $db->insert(T_USERS, $insert_data);
         if (!empty($user_id)) {
-          
+           
+
+
+            $update_data = array(
+                'PASSWORD' =>  $password,
+                'EMAIL' => $email,
+                'URL' => UrlLink('login'),
+                'NAME' =>  $first_name . '  '. $last_name,
+             );
+             $send_email_data = array(
+                 'from_email' => $kd->config->email,
+                 'from_name' => $kd->config->name,
+                 'to_email' => $email,
+                 'to_name' => $first_name . '  '. $last_name,
+                 'subject' => 'New Account Creation',
+                 'charSet' => 'UTF-8',
+                 'message_body' => LoadPage('email/admin_user_creation', $update_data),
+                 'is_html' => true
+             );
+            $send_message = SendMessage($send_email_data);
             $data        = array(
                 'status' => 200,
                 'mode' => 'done',
-                'message' => $success_icon . __('successfully_joined_desc'),
-               
+                 
             );
         }
     } else {
@@ -88,6 +110,8 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         foreach ($errors as $key => $value) {
             $errors_text .= $error_icon . $value . "<br>";
         }
+        $data['status'] = 400;
         $data['message'] = $errors_text;
+        
     }
 }

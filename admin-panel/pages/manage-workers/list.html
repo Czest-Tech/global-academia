@@ -1,0 +1,37 @@
+<tr id="list-{{USER id}}">
+    <td></td>
+    <td>{{USER id}}</td>
+    <td>
+        <a href="{{USER url}}">
+            <figure class="avatar avatar-sm mr-2">
+                <img src="{{USER avatar}}"
+                     class="rounded-circle" alt="avatar">
+            </figure>
+            {{USER name}}
+        </a>
+    </td>
+    <td>{{USER username}}</td>
+    <td>{{USER email}}</td>
+    <td>{{USER country_name}}</td>
+
+    <td>{{ACCESS_LEVEL}}</td>
+    <td>
+       {{STATUS}}
+    </td>
+    <td class="text-right">
+        <div class="dropdown">
+            <a href="#" data-toggle="dropdown"
+               class="btn btn-floating"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="ti-more-alt"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="#" class="dropdown-item">View Profile</a>
+                <a href="#" class="dropdown-item">Edit</a>
+                <button class="dropdown-item text-danger delete-content" data-id="{{USER id}}">Delete</button>
+            </div>
+        </div>
+    </td>
+</tr>
+
+
