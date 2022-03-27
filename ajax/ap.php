@@ -29,6 +29,22 @@ if ($first == 'test_sms_message') {
     echo json_encode($data);
     exit();
 }
+if ($first == 'update_html_emails') {
+    $saveSetting = false;
+    foreach ($_POST as $key => $value) {
+        if ($key != 'hash_id' && in_array($key, array('confirm','notification','reset','unusual_login'))) {
+            $saveSetting = SaveHTMLEmails($key, base64_decode($value));
+        }
+    }
+    if ($saveSetting === true) {
+        $data['status'] = 200;
+    }
+    header("Content-type: application/json");
+    echo json_encode($data);
+    exit();
+
+
+}
 if ($first == 'search_in_pages') {
     $keyword = Secure($_POST['keyword']);
     $html = '';

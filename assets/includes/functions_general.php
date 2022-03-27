@@ -78,6 +78,19 @@ function ToArray($obj) {
     }
     return $new;
 }
+function ReplaceText($html='',$replaces=array())
+{
+    global $kd, $db,$sqlConnect, $lang_array;
+    $lang = $lang_array;
+    $html = preg_replace_callback("/{{LANG (.*?)}}/", function($m) use ($lang) {
+        return (isset($lang[$m[1]])) ? $lang[$m[1]] : '';
+    }, $html);
+    foreach ($replaces as $key => $replace) {
+        $object_to_replace = "{{" . $key . "}}";
+        $html      = str_replace($object_to_replace, $replace, $html);
+    }
+    return $html;
+}
 function UrlLink($string) {
     global $site_url;
     return rtrim($site_url ,'/') . str_replace('//','/','/' . $string);
@@ -800,6 +813,21 @@ function lang($string = '') {
     }
 	$lang_array[$stringFromArray] = $string;
 	return $string;
+}
+function SaveHTMLEmails($update_name, $value) {
+    global $kd, $db,$sqlConnect;
+    if ($kd->loggedin == false) {
+        return false;
+    }
+    $update_name = Secure($update_name);
+    $value       = mysqli_real_escape_string($sqlConnect, $value);
+    $query_one   = " UPDATE " . T_HTML_EMAILS . " SET `value` = '{$value}' WHERE `name` = '{$update_name}'";
+    $query       = mysqli_query($sqlConnect, $query_one);
+    if ($query) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function GetAccountType($type){

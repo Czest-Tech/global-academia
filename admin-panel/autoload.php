@@ -127,16 +127,24 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
 <script src="<?php echo LoadAdminLink('assets/js/admin.js'); ?>"></script>
 <link rel="stylesheet" href="<?php echo(LoadAdminLink('vendors/select2/css/select2.min.css')) ?>" type="text/css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-<?php //if ($page == 'create-article' || $page == 'edit-article' || $page == 'manage-announcements' || $page == 'newsletters') { ?>
 <script src="<?php echo LoadAdminLink('vendors/tinymce/js/tinymce/tinymce.min.js'); ?>"></script>
 
 <script src="<?php echo LoadAdminLink('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.js'); ?>"></script>
 <link href="<?php echo LoadAdminLink('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.css'); ?>" rel="stylesheet" />
-<?php //} ?>
+
 <?php if ($page == 'custom-code') { ?>
 
 <?php } ?>
+<?php if ($page == 'bank-receipts' || $page == 'agent-account-requests' || $page == 'monetization-requests' || $page == 'manage-user-ads' || $page == 'manage-artists') { ?>
+        <!-- Css -->
+        <link rel="stylesheet" href="<?php echo(LoadAdminLink('vendors/lightbox/magnific-popup.css')) ?>" type="text/css">
 
+        <!-- Javascript -->
+        <script src="<?php echo(LoadAdminLink('vendors/lightbox/jquery.magnific-popup.min.js')) ?>"></script>
+        <script src="<?php echo(LoadAdminLink('vendors/charts/justgage/raphael-2.1.4.min.js')) ?>"></script>
+        <script src="<?php echo(LoadAdminLink('vendors/charts/justgage/justgage.js')) ?>"></script>
+    <?php } ?>
+<script src="<?php echo LoadAdminLink('assets/js/jquery.form.min.js'); ?>"></script>
 
 </head>
 <!-- <script type="text/javascript">

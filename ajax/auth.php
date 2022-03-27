@@ -52,9 +52,6 @@ if ($first == 'forgot-password') {
 	        	$errors[] = lang("This e-mail is not found");
 	        }
 
-            if ( $kd->config->maintenance_mode == 'on' ) {
-                $errors[] = lang("Website maintenance mode is active");
-            }
 
 	        if (empty($errors)) {
 	        	$user_id             = $getUser->id;
@@ -66,7 +63,8 @@ if ($first == 'forgot-password') {
 
 	            $update_data['USER_DATA'] = $rest_user;
 	            $update_data['email_code'] = $email_code;
-	            
+	            $kd->email_code = $email_code;
+	            $kd->username = $rest_user->name;
 
 	            $send_email_data = array(
 	           		'from_email' => $kd->config->email,
@@ -75,7 +73,7 @@ if ($first == 'forgot-password') {
 	           		'to_name' => $rest_user->name,
 	           		'subject' => lang("Reset Password"),
 	           		'charSet' => 'UTF-8',
-	           		'message_body' => LoadPage('emails/reset-password', $update_data),
+	           		'message_body' => LoadPage('email/reset-password', $update_data),
 	           		'is_html' => true
 	           	);
 

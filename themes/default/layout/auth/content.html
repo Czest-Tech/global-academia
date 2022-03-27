@@ -25,11 +25,11 @@
           <!-- forgot password -->
             <span class="loginToggle" id="auth_forgot">
                 <p>{{LANG Reset Password}}</p>
-                <form id="" class="loginForm" method="post" role="form">
+                <form id="resetCode" class="loginForm" method="post">
                     <div class="login-alert"></div>    
                     <label>{{LANG Email}}</label>
-                    <input type="text" name="username" id="username" placeholder="{{LANG Enter your Email}}">
-                    <button class="whiteBtn8" type="submit" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</button> 
+                    <input type="text" name="email" id="rest_email" placeholder="{{LANG Enter your Email}}">
+                    <div class="whiteBtn8" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</div> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -38,7 +38,7 @@
             <!-- Enter Reset Code -->
             <span class="loginToggle" id="reset_code">
                 <p>{{LANG Reset Code}}</p>
-                <form id="" class="loginForm" method="post" role="form">
+                <form id="" class="loginForm comfimCode" method="post">
                     <div class="login-alert"></div>    
                     <label>{{LANG Reset Code}}</label>
                     <input type="text" name="username" id="username" placeholder="{{LANG Enter your reset Code}}">
@@ -103,6 +103,7 @@
         document.getElementById("reset_code").style.display = "none"
         document.getElementById("new_passowrd").style.display = "none"
         document.getElementById(id).style.display = "flex"
+        SendResetCode(id);
     }
 
     $(function() {
@@ -167,4 +168,28 @@
             }
         });
     });
+
+    function SendResetCode(value){
+        let post_url = '';
+        if(value === "reset_code"){
+           post_url = 'forgot-password';
+            let form1 = document.querySelector('#resetCode');
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
+                            if (data.status == 200) {
+                                //response move to the next form
+                                 console.log(data)
+                           
+                             
+                            }
+                        }
+                    }
+                    request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+        }
+       
+    }
 </script>

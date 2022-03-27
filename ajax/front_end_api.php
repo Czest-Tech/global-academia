@@ -439,14 +439,16 @@ if($first === "manage_applications"){
               $vb = $logged_user_data;
           }
         }
+        $name_F =  (!empty($vb->first_name))? $vb->first_name : ' ';
+        $name_B =  (!empty($vb->last_name))? $vb->last_name : ' ';
         $vb->id_photo = GetMedia($vb->id_photo);
-        $vb->name = $vb->first_name .' '. $vb->last_name; 
+        $vb->name = $name_F.' '. $name_B;
         $vb->university = ($vb->type === 'multiple')? 'MULTIPLE APPLICATION': GetuniversityByID($vb->university_id);
         $vb->program = ($vb->type === 'multiple')? 'MULTIPLE APPLICATION': GetProgramByID($vb->program_id); 
-        $vb->signed_by_name = GetUserName($vb->signed_by);
-        $vb->sign_id = $vb->signed_by;
-        $vb->status = __($vb->status);
-        $vb->active_applications = GetApplicationsCount($vb->email);
+        $vb->signed_by_name =(!empty($vb->signed_by))? GetUserName($vb->signed_by) : ' ';
+        $vb->sign_id = (!empty($vb->signed_by))? $vb->signed_by : ' ';
+        $vb->status = (!empty($vb->status))?  __($vb->status) : ' ';
+        $vb->active_applications =  (!empty($vb->email))? GetApplicationsCount($vb->email) : ' ';
     }
     if($bew_arrat){
         $data = array(
