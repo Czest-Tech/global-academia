@@ -1,13 +1,20 @@
 <?php 
 
-if ($first == 'reset-password') {
-	if (!empty($_POST)) {
-	    if (empty($_POST['password']) || empty($_POST['c_password']) || empty($_POST['email_code'])) {
+if ($first == 'reset_password') {
+	
+	    if (empty($_POST['password']) || empty($_POST['c_password']) || empty($_POST['code'])) {
 	        $errors[] = lang("Please check your details");
+            $data = array(
+                'status' => 400,
+                'message' => 'No Applications Found',
+                'error' => $errors
+             );
+             echo json_encode($data);
+             exit();
 	    } else {
 	        $password        = secure($_POST['password']);
 	        $c_password  = secure($_POST['c_password']);
-	        $old_email_code = secure($_POST['email_code']);
+	        $old_email_code = secure($_POST['code']);
 
 	        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 	        if ($password != $c_password) {
@@ -24,15 +31,25 @@ if ($first == 'reset-password') {
 	        		$email_code = sha1(time() + rand(1111,9999));
 		        	$update = $db->where('id', $user_id)->update(T_USERS, ['password' => $password_hashed, 'email_code' => '']);
 		        	if ($update) {
-		        		createUserSession($user_id);
-			            $data = ['status' => 200];
+		        		
+			            $data = array(
+                            'status' => 200,
+                            'message' => lang("Password Changed")
+                        );	 
 		        	}
 	        	}
 	        	else{
 	        		$errors[] = lang("Please check your details");
+                    $data = array(
+                        'status' => 400,
+                        'message' => 'Password reset error',
+                        'error' => $errors
+                     );
+                     echo json_encode($data);
+                     exit();
 	        	}
             }
-	    }
+	    
 	}
 }
 if ($first == 'forgot-password') {
@@ -50,7 +67,7 @@ if ($first == 'forgot-password') {
 	        	$errors[] = lang("This e-mail is not found");
                 $data = array(
                     'status' => 400,
-                    'message' => 'No Applications Found',
+                    'message' => 'No Records Found',
                     'error' => $errors
                  );
                  echo json_encode($data);
@@ -126,6 +143,7 @@ if ($first == 'comfirm_code') {
 	        if (empty($errors) && ($getUser->email_code == $code)) {	        	           
                 $data = array(
                     'status' => 200,
+                    'code' =>  $code,
                     'message' => lang("code correct")
                 );	             
             } 
