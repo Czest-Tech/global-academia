@@ -42,8 +42,9 @@
 
 {{CONTAINER_CONTENT}}
    </div>
-{{FOOTER_LAYOUT_ALL}}
-
+   <?php if($kd->page != 'login'){ ?> 
+     {{FOOTER_LAYOUT_ALL}}
+	 <?php } ?>
    
 <?php  if($kd->page == 'dashboard'){ ?>
 	    <script src="{{CONFIG theme_url}}/js/dashboard.js"></script> 
