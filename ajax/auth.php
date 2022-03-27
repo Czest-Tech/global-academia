@@ -29,7 +29,7 @@ if ($first == 'reset_password') {
 	        	$user_id = $db->where('email_code', $old_email_code)->where('time_code_sent', time(),'>')->getValue(T_USERS, "id");
 	        	if (!empty($user_id)) {
 	        		$email_code = sha1(time() + rand(1111,9999));
-		        	$update = $db->where('id', $user_id)->update(T_USERS, ['password' => $password_hashed, 'email_code' => '']);
+		        	$update = $db->where('id', $user_id)->update(T_USERS, ['password' => $password_hashed, 'email_code' => $email_code]);
 		        	if ($update) {
 		        		
 			            $data = array(
