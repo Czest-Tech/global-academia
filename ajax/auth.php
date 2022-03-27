@@ -6,7 +6,7 @@ if ($first == 'reset_password') {
 	        $errors[] = lang("Please check your details");
             $data = array(
                 'status' => 400,
-                'message' => 'No Applications Found',
+                'message' => 'Fields can not be empty',
                 'error' => $errors
              );
              echo json_encode($data);
