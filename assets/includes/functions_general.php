@@ -795,6 +795,22 @@ function QuestionData(&$question, $api = false){
 
     return $question;
 }
+function lang($string = '') {
+	global $lang_array, $kd, $db;
+    $dev = true;
+    $string = trim($string);
+	$stringFromArray = strtolower(preg_replace('/[^a-zA-Z0-9-_\.]/','_', $string));
+	if (in_array($stringFromArray, array_keys($lang_array))) {
+		return $lang_array[$stringFromArray];
+	}
+    if ($dev == true) {
+       //$insert = $db->insert(T_LANGS, ['ref' => '', 'options' => '' , 'lang_key' => $stringFromArray, 'english' => secure($string)]);
+    } else {
+        return '';
+    }
+	$lang_array[$stringFromArray] = $string;
+	return $string;
+}
 
 function GetAccountType($type){
     $account_type = '';

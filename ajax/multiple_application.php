@@ -19,8 +19,6 @@ if($first == "multiple" ){
     if (!empty($student_id)) {
             foreach ($student_id as $sid) {
                 $get_applicant_info = $db->where('id', $sid)->getOne(T_AGENT_STUDENTS);
-
-
                 if (!empty($_FILES['id_photo']['tmp_name'])) {
                     $file_info = array(
                         'file' => $_FILES['id_photo']['tmp_name'],
