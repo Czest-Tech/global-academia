@@ -38,12 +38,12 @@
             <!-- Enter Reset Code -->
             <span class="loginToggle" id="reset_code">
                 <p>{{LANG Reset Code}}</p>
-                <div id="" class="loginForm comfimCode" method="post">
+                <form id="ConfirmResetCode" class="loginForm comfimCode" method="post">
                     <div class="login-alert"></div>    
                     <label>{{LANG Reset Code}}</label>
                     <input type="text" name="username" id="username" placeholder="{{LANG Enter your reset Code}}">
-                    <button class="whiteBtn8 auth_btn" type="submit" id="login_btn" onclick="switchAuth('new_passowrd')">{{LANG Confirm Reset Code}}</button> 
-                </div>
+                    <div class="whiteBtn8 auth_btn" type="submit" id="ConfirmResetCode_btn" onclick="ConfirmResetCode()" >{{LANG Confirm}}</div> 
+                </form>
                 <button class="switch_auth" onclick="switchAuth('auth_forgot')">{{LANG Resend Code}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
             </span>
@@ -187,10 +187,40 @@
                         document.getElementById("send_reset_btn").innerHTML = `{{LANG Send Reset Code}}`
                     }, 5000);
                 }
+
+                console.log(data)
             }
         }
         request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
         request.send(formData);
+    }
+    function ConfirmResetCode(){
+        document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Please wait}}...`
+        let post_url = 'comfirm_code';
+        let form1 = document.querySelector('#ConfirmResetCode');
+        var formData = new FormData(form1);
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (request.readyState === 4) {
+                let data = JSON.parse(request.response);
+                // switchAuth('new_passowrd')
+                if (data.status == 200) {
+                    document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Suucess}}`
+                    setTimeout(() => {
+                        document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Confirm}}`
+                    }, 5000);
+                }
+                if (data.status == 400) {
+                    document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Invalid Reset Code}}`
+                    setTimeout(() => {
+                        document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Confirm}}`
+                    }, 5000);
+                }
 
+                console.log(data)
+            }
+        }
+        request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
+        request.send(formData);
     }
 </script>
