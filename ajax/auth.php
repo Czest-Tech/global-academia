@@ -50,6 +50,7 @@ if ($first == 'forgot-password') {
 
 	        if (empty($getUser)) {
 	        	$errors[] = lang("This e-mail is not found");
+                $data = array('status' => 400,'error'=>$errors);
 	        }
 
 
