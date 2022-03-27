@@ -61,11 +61,11 @@
             $get_pending_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "queued")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
             $get_accepted_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "accepted")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
             $get_rejected_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "rejected")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
-           
-
-            $get_user_applications = '';
-            $get_univiversities = array();
-           
+            foreach($get_applicant_unversities as $allProgram){
+                $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                $allProgram->application_status_slug =  __($allProgram->application_status);
+            }
             foreach($get_user_notificatins as $nf){
                 if($nf->type == "application_status"){
                 $nf->subject = "Application status update";
@@ -77,6 +77,12 @@
                 }
                 $nf->url = UrlLink($nf->url);
             }
+
+       
+            $get_user_applications = '';
+            $get_univiversities = array();
+           
+           
 
         
             if( true) {
