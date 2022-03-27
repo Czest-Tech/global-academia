@@ -7,6 +7,7 @@
         <p>GLOBAL ACADEMIA</p>
       </div>
       <div class="loginRight">
+          <!-- Login form -->
           <span class="loginToggle" id="auth_login">
                 <p>{{LANG Login}}</p>
                 <form id="login-form" class="loginForm" method="post" role="form">
@@ -17,50 +18,91 @@
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
                     <button class="whiteBtn8" type="submit" id="login_btn">{{LANG Login}}</button> 
                 </form>
-                <button class="switch_auth" onclick="switchAuth()">Dont have an Account?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_forgot')">Forgot Password?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
           </span>
-          <span class="registerToggle" id="auth_register">
-            <p>{{LANG Register}}</p>
-            <div class="register-alert"></div> 
-            <form id="register-form" class="loginForm" method="post" role="form">
-                <div class="alert alert-danger alert-empty" id="output-singup-errors"></div>
 
-                <label>{{LANG Account Type}}</label>
-                <select name="account_type" id="">
-                    <option value="applicant">Student</option>
-                    <option value="agent">Agent</option>
-                </select>
-                <label>{{LANG First Name}}</label>
-                <input type="text" name="first_name" id="firstname" placeholder="{{LANG firstname}}">
-                <label>{{LANG Last Name}}</label>
-                <input type="text" name="last_name" id="lastname" placeholder="{{LANG lastname}}">
-                <label>{{LANG Email}}</label>
-                <input type="text" name="email" id="email" placeholder="{{LANG email}}">
-                <label>{{LANG Password}}</label>
-                <input type="password" name="password" id="password" placeholder="{{LANG password}}">
-                <label>{{LANG Comfirm Password}}</label>
-                <input type="password" name="c_password" id="c_password" placeholder="{{LANG comfirm password}}">
-                <button class="whiteBtn8" type="submit">{{LANG Register}}</button> 
-            </form>
-            <button class="switch_auth" onclick="switchAuth()">{{LANG Already have an Account}}?</button>
-      </span>
+          <!-- forgot password -->
+            <span class="loginToggle" id="auth_forgot">
+                <p>{{LANG Reset Password}}</p>
+                <form id="" class="loginForm" method="post" role="form">
+                    <div class="login-alert"></div>    
+                    <label>{{LANG Email}}</label>
+                    <input type="text" name="username" id="username" placeholder="{{LANG Enter your Email}}">
+                    <button class="whiteBtn8" type="submit" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</button> 
+                </form>
+                <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
+            </span>
+
+            <!-- Enter Reset Code -->
+            <span class="loginToggle" id="reset_code">
+                <p>{{LANG Reset Code}}</p>
+                <form id="" class="loginForm" method="post" role="form">
+                    <div class="login-alert"></div>    
+                    <label>{{LANG Reset Code}}</label>
+                    <input type="text" name="username" id="username" placeholder="{{LANG Enter your reset Code}}">
+                    <button class="whiteBtn8" type="submit" id="login_btn" onclick="switchAuth('new_passowrd')">{{LANG Confirm Reset Code}}</button> 
+                </form>
+                <button class="switch_auth" onclick="switchAuth('auth_forgot')">{{LANG Resend Code}}?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
+            </span>
+
+            <!-- Create new Password -->
+            <span class="loginToggle" id="new_passowrd">
+                <p>{{LANG New Passowrd}}</p>
+                <form id="" class="loginForm" method="post" role="form">
+                    <div class="login-alert"></div>    
+                    <label>{{LANG New Passowrd}}</label>
+                    <input type="text" name="username" id="username" placeholder="{{LANG Enter New Passowrd}}">
+                    <label>{{LANG Confirm Password}}</label>
+                    <input type="text" name="username" id="username" placeholder="{{LANG Enter Confirm Password}}">
+                    <button class="whiteBtn8" type="submit" id="login_btn" onclick="switchAuth('auth_login')">{{LANG Save Password}}</button> 
+                </form>
+                <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
+            </span>
+
+            <!-- Create new Account -->
+            <span class="registerToggle" id="auth_register">
+                <p>{{LANG Register}}</p>
+                <div class="register-alert"></div> 
+                <form id="register-form" class="loginForm" method="post" role="form">
+                    <div class="alert alert-danger alert-empty" id="output-singup-errors"></div>
+
+                    <label>{{LANG Account Type}}</label>
+                    <select name="account_type" id="">
+                        <option value="applicant">Student</option>
+                        <option value="agent">Agent</option>
+                    </select>
+                    <label>{{LANG First Name}}</label>
+                    <input type="text" name="first_name" id="firstname" placeholder="{{LANG firstname}}">
+                    <label>{{LANG Last Name}}</label>
+                    <input type="text" name="last_name" id="lastname" placeholder="{{LANG lastname}}">
+                    <label>{{LANG Email}}</label>
+                    <input type="text" name="email" id="email" placeholder="{{LANG email}}">
+                    <label>{{LANG Password}}</label>
+                    <input type="password" name="password" id="password" placeholder="{{LANG password}}">
+                    <label>{{LANG Comfirm Password}}</label>
+                    <input type="password" name="c_password" id="c_password" placeholder="{{LANG comfirm password}}">
+                    <button class="whiteBtn8" type="submit">{{LANG Register}}</button> 
+                </form>
+                <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Already have an Account}}?</button>
+            </span>
          
       </div>
 </div>
 
 <script>
-    let auth_switch = true
-    switchAuth()
-    function switchAuth(){
-        if(auth_switch){
-            document.getElementById("auth_register").style.display = "none"
-            document.getElementById("auth_login").style.display = "flex"
-            auth_switch = false
-        }else{
-            document.getElementById("auth_register").style.display = "flex"
-            document.getElementById("auth_login").style.display = "none"
-            auth_switch = true
-        }
+    switchAuth(localStorage.getItem("GA_AUTH_SWITCH") || 'auth_login')
+    function switchAuth(id){
+        localStorage.setItem("GA_AUTH_SWITCH", id)
+        document.getElementById("auth_register").style.display = "none"
+        document.getElementById("auth_forgot").style.display = "none"
+        document.getElementById("auth_login").style.display = "none"
+        document.getElementById("reset_code").style.display = "none"
+        document.getElementById("new_passowrd").style.display = "none"
+        document.getElementById(id).style.display = "flex"
     }
 
     $(function() {
