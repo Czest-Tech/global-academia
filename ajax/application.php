@@ -229,7 +229,7 @@ if($first == "single_agent" ){
             foreach($student_id as $sid){
                 $get_applicant_info = $db->where('id', $sid)->getOne(T_AGENT_STUDENTS);
 
-                var_dump($get_applicant_info);
+              
             }
         }
     }

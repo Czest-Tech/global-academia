@@ -166,7 +166,7 @@
             <!-- <input type="hidden" name="diploma_file" class="diploma"   id="diploma">
             <input type="hidden" name="transcript_file" class="transcript8" id="transcript8">
             <input type="hidden" name="passport_file" class="passport_file8"   id="passport_file8"> -->
-            <input type="hidden" name="user_id"   value="{{ME id}}">
+            <input type="hidden" name="user_id"   value="<?php echo (IsLogged())? $kd->user->id : '0'; ?>">
             <input type="hidden" name="multiple_applicants"  id="multiple_applicants">
             <input type="hidden" name="applicant_type"  id="applicant_type">          
             <input type="hidden" name="university_id" value="<?php echo $kd->apply_university; ?>">
@@ -226,6 +226,7 @@
             document.querySelector('.agent_applicant_list').style.display = "none";
         }
     } else {
+        document.querySelector('.agent_applicant_list').style.display = "none";
         document.getElementById("applicant_type").value = "guest";
         account_type = "guest";
 
