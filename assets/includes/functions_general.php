@@ -1,15 +1,5 @@
 <?php
-function lang($string = '') {
-    global $lang_array, $db;
-    $string = trim($string);
-    $stringFromArray = strtolower(preg_replace('/[^a-zA-Z0-9-_\.]/','_', $string));
-    if (in_array($stringFromArray, array_keys($lang_array))) {
-        return __($stringFromArray); //$lang_array[$stringFromArray];
-    }
-    $insert = $db->insert(T_LANGS, ['lang_key' => $stringFromArray, 'english' => secure($string)]);
-    $lang_array[$stringFromArray] = $string;
-    return $string;
-}
+
 function LoadPage($page_url = '', $data = array(), $set_lang = true) {
     global $kd, $lang_array, $config, $fl_currpage, $countries_name;
     $page = './themes/' . $config['theme'] . '/layout/' . $page_url . '.html';
