@@ -1448,7 +1448,6 @@ a{
     .slide-num5 {
         display: none !important;
     }
-
 }
 
 .statusLeft8{
@@ -2291,4 +2290,11 @@ span.registerToggle {
 }
 .table_data{
     text-transform: capitalize;
+}
+.register-alert.alert-danger {
+    text-align: center;
+    width: 95%;
+    max-width: 500px;
+    margin: 14px auto;
+    color: white;
 }

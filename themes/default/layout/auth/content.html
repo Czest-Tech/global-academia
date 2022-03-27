@@ -18,7 +18,7 @@
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
                     <button class="whiteBtn8" type="submit" id="login_btn">{{LANG Login}}</button> 
                 </form>
-                <button class="switch_auth" onclick="switchAuth('auth_forgot')">Forgot Password?</button>
+                <button class="switch_auth" onclick="switchAuth('auth_forgot')">{{LANG Forgot Password}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
           </span>
 
@@ -129,7 +129,7 @@
                             html: data.post_register_action
                         }));
                         $('.alert-success').fadeIn(300);
-                        $('.switch_auth').text('{{LANG Login}}');
+                        // $('.switch_auth').text('{{LANG Login}}');
                     }
                   
                 }
