@@ -38,7 +38,7 @@ if ($first == 'reset-password') {
 	}
 }
 if ($first == 'forgot-password') {
-	if (!empty($_POST)) {
+	if (!empty($_POST['email'])) {
 	    if (empty($_POST['email'])) {
 	        $errors[] = lang("Please check your details");
 	    } else {
@@ -50,7 +50,13 @@ if ($first == 'forgot-password') {
 
 	        if (empty($getUser)) {
 	        	$errors[] = lang("This e-mail is not found");
-                $data = array('status' => 400,'error'=>$errors);
+                $data = array(
+                    'status' => 400,
+                    'message' => 'No Applications Found',
+                    'error' => $errors
+                 );
+                 echo json_encode($data);
+                 exit();
 	        }
 
 
@@ -91,11 +97,17 @@ if ($first == 'forgot-password') {
 	    }
 	} else {
         $errors[] = lang("Email cannot be empty");
-        $data = array('status' => 400,'error'=>$errors);
+        $data = array(
+            'status' => 400,
+            'message' => 'No Applications Found',
+            'error' => $errors
+         );
+         echo json_encode($data);
+         exit();
     }
 }
 if ($first == 'comfirm_code') {
-	if (!empty($_POST)) {
+	if (!empty($_POST['code'])) {
 	    if (empty($_POST['code'])) {
 	        $errors[] = lang("Please check your details");
 	    } else {
@@ -105,7 +117,13 @@ if ($first == 'comfirm_code') {
 
 	        if (empty($getUser)) {
 	        	$errors[] = lang("incorrect code");
-                $data = array('status' => 400,'error'=>$errors);
+                $data = array(
+                    'status' => 400,
+                    'message' => 'No Applications Found',
+                    'error' => $errors
+                 );
+                 echo json_encode($data);
+                 exit();
 	        }
 	        if (empty($errors) && ($getUser->email_code == $code)) {	        	           
                 $data = array(
@@ -120,6 +138,12 @@ if ($first == 'comfirm_code') {
 	    }
 	}else {
         $errors[] = lang("code cannot be empty");
-        $data = array('status' => 400,'error'=>$errors);
+        $data = array(
+            'status' => 400,
+            'message' => 'No Applications Found',
+            'error' => $errors
+         );
+         echo json_encode($data);
+         exit();
     }
 }
