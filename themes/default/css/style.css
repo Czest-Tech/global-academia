@@ -1167,7 +1167,7 @@ a{
     width: 100%;
     flex-wrap: wrap;
     padding: 0 !important;
-    width: 500px;
+
 }
 .added_stud{
     color: white !important;
@@ -1190,7 +1190,6 @@ a{
     background-color: #f9f9f9;
     border-radius: 10px;
     width: 100%;
-    margin: 5px;
     margin-top: 10px;
     margin-bottom: 30px !important;
 }
@@ -1445,7 +1444,12 @@ a{
     }
 
 }
+@media (max-width: 400px){
+    .slide-num5 {
+        display: none !important;
+    }
 
+}
 
 .statusLeft8{
     flex:1;
