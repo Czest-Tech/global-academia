@@ -29,7 +29,7 @@
                     <div class="login-alert"></div>    
                     <label>{{LANG Email}}</label>
                     <input type="text" name="email" id="rest_email" placeholder="{{LANG Enter your Email}}">
-                    <div class="whiteBtn8 auth_btn" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</div> 
+                    <div class="whiteBtn8 auth_btn" id="send_reset_btn" onclick="SendResetCode()">{{LANG Send Reset Code}}</div> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -103,7 +103,6 @@
         document.getElementById("reset_code").style.display = "none"
         document.getElementById("new_passowrd").style.display = "none"
         document.getElementById(id).style.display = "flex"
-        SendResetCode(id);
     }
 
     $(function() {
@@ -169,27 +168,29 @@
         });
     });
 
-    function SendResetCode(value){
-        let post_url = '';
-        if(value === "reset_code"){
-           post_url = 'forgot-password';
-            let form1 = document.querySelector('#resetCode');
-                    var formData = new FormData(form1);
-                    var request = new XMLHttpRequest();
-                    request.onreadystatechange = function() {
-                        if (request.readyState === 4) {
-                            let data = JSON.parse(request.response);
-                            if (data.status == 200) {
-                                //response move to the next form
-                                 console.log(data)
-                           
-                             
-                            }
-                        }
-                    }
-                    request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
-                    request.send(formData);
+    function SendResetCode(){
+        document.getElementById("send_reset_btn").innerHTML = `{{LANG Please wait}}...`
+        let post_url = 'forgot-password';
+        let form1 = document.querySelector('#resetCode');
+        var formData = new FormData(form1);
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (request.readyState === 4) {
+                let data = JSON.parse(request.response);
+                if (data.status == 200) {
+                    document.getElementById("send_reset_btn").innerHTML = `{{LANG Send Reset Code}}...`
+                    switchAuth('reset_code')
+                }
+                if (data.status == 400) {
+                    document.getElementById("send_reset_btn").innerHTML = `{{LANG Email not found}}`
+                    setTimeout(() => {
+                        document.getElementById("send_reset_btn").innerHTML = `{{LANG Send Reset Code}}`
+                    }, 5000);
+                }
+            }
         }
-       
+        request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
+        request.send(formData);
+
     }
 </script>
