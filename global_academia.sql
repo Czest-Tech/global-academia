@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 26, 2022 at 06:46 PM
+-- Generation Time: Mar 27, 2022 at 10:26 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.19
 
@@ -163,6 +163,19 @@ CREATE TABLE `applicant_chat` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `applicant_chat`
+--
+
+INSERT INTO `applicant_chat` (`id`, `admin_id`, `applicant_email`, `message`, `file`, `from`, `to`, `action_slug`, `created_at`) VALUES
+(1, NULL, 'fghfhfdgh@gmail.com', 'amkd cocugu', NULL, 'admin', 'dfsdg fsdfgsd', NULL, '2022-03-27 17:27:28'),
+(2, NULL, 'fghfhfdgh@gmail.com', 'ne var lab', NULL, 'dfsdg fsdfgsd', 'admin', NULL, '2022-03-27 17:28:08'),
+(3, NULL, 'fghfhfdgh@gmail.com', '', NULL, 'admin', 'dfsdg  fsdfgsd', 'document_missing', '2022-03-27 17:28:42'),
+(4, NULL, 'fghfhfdgh@gmail.com', '', NULL, 'admin', 'dfsdg  fsdfgsd', 'passport_missing', '2022-03-27 17:28:43'),
+(5, NULL, 'fghfhfdgh@gmail.com', '', NULL, 'admin', 'dfsdg  fsdfgsd', 'transcript_missing', '2022-03-27 17:28:44'),
+(6, NULL, 'fghfhfdgh@gmail.com', '', NULL, 'admin', 'dfsdg  fsdfgsd', 'passport_missing', '2022-03-27 17:28:45'),
+(7, NULL, 'fghfhfdgh@gmail.com', '', NULL, 'admin', 'dfsdg  fsdfgsd', 'stamp_missing_on_transcript', '2022-03-27 17:28:45');
+
 -- --------------------------------------------------------
 
 --
@@ -207,7 +220,8 @@ INSERT INTO `applicant_education_info` (`id`, `date_of_birth`, `phone_number`, `
 (1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 12),
 (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
 (3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14),
-(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15);
+(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'single', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15),
+(5, '2022-03-11', '5138784120', '', 'John', 'Mia', 'zn232432', 'Zambia', 'Poland', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'multiple', '1648325315', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20);
 
 -- --------------------------------------------------------
 
@@ -240,8 +254,26 @@ CREATE TABLE `applican_universities` (
 INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id`, `application_status`, `is_checked`, `acceptance_letter`, `uniqid`, `edit_request`, `priority`, `created_at`, `reference_id`, `applied_by`, `student_id`, `applicant_type`) VALUES
 (1, 7, 'bonihgu@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '4713', 'none', 0, '2022-03-17 02:14:41.946390', NULL, 10, 1, 'agent'),
 (2, 7, 'emlas@yahoo.com', 9, 'awaiting_approval', 'queued', NULL, '4969', 'none', 0, '2022-03-17 02:14:41.951753', NULL, 10, 2, 'agent'),
-(3, 7, 'bonihgu@gmail.com', 8, 'awaiting_approval', 'queued', NULL, '4968', 'none', 0, '2022-03-17 02:16:46.899504', NULL, 10, 1, 'agent'),
-(4, 7, 'emlas@yahoo.com', 8, 'awaiting_approval', 'queued', NULL, '2664', 'none', 0, '2022-03-17 02:16:46.904096', NULL, 10, 2, 'agent');
+(3, 7, 'bonihgu@gmail.com', 17, 'awaiting_approval', 'queued', NULL, '4968', 'none', 0, '2022-03-17 02:16:46.899504', NULL, 10, 1, 'agent'),
+(4, 7, 'emlas@yahoo.com', 8, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/A2WT3eG1I78AFvMAVPhp_27_8f9d1a63afce95d0021f55524aa5476a_image.png', '2664', 'none', 0, '2022-03-17 02:16:46.904096', NULL, 10, 2, 'agent'),
+(5, 7, 'brycordmuchindu@gmail.com', 16, 'awaiting_approval', 'queued', NULL, '9583', 'none', 0, '2022-03-26 20:09:48.167021', NULL, 20, NULL, 'applicant'),
+(6, 5, 'brycordmuchindu@gmail.com', 5, 'awaiting_approval', 'queued', NULL, '6946', 'none', 0, '2022-03-26 20:14:15.975433', NULL, 20, 20, 'applicant'),
+(7, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '7819', 'none', 0, '2022-03-27 01:58:22.364370', '-7819', 20, 20, 'applicant'),
+(8, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '7819', 'none', 1, '2022-03-27 01:58:22.370159', '-7819', 20, 20, 'applicant'),
+(9, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '7819', 'none', 2, '2022-03-27 01:58:22.377148', '-7819', 20, 20, 'applicant'),
+(10, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '5415', 'none', 0, '2022-03-27 02:04:20.643861', '-5415', 20, 20, 'applicant'),
+(11, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '5415', 'none', 1, '2022-03-27 02:04:20.647643', '-5415', 20, 20, 'applicant'),
+(12, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '5415', 'none', 2, '2022-03-27 02:04:20.650332', '-5415', 20, 20, 'applicant'),
+(13, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '6239', 'none', 0, '2022-03-27 02:35:00.221949', NULL, 0, NULL, 'guest'),
+(14, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '1104', 'none', 0, '2022-03-27 02:36:10.103120', NULL, 0, NULL, 'guest'),
+(15, 7, 'poijkm@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '9551', 'none', 1, '2022-03-27 02:57:59.893757', '6-9551', 0, 0, 'guest'),
+(16, 7, 'poijkm@gmail.com', 13, 'awaiting_approval', 'queued', NULL, '9551', 'none', 2, '2022-03-27 02:57:59.897364', '6-9551', 0, 0, 'guest'),
+(17, 5, 'bonihgu@gmail.com', 4, 'awaiting_approval', 'queued', NULL, '4784', 'none', 0, '2022-03-27 03:02:11.816985', NULL, 10, 1, 'agent'),
+(18, 5, 'emlas@yahoo.com', 4, 'awaiting_approval', 'queued', NULL, '7381', 'none', 0, '2022-03-27 03:02:11.822674', NULL, 10, 2, 'agent'),
+(19, 5, 'fghfhfdgh@gmail.com', 6, 'awaiting_approval', 'rejected', NULL, '8364', 'none', 1, '2022-03-27 17:06:51.076924', '193-8364', 0, 0, 'guest'),
+(20, 5, 'fghfhfdgh@gmail.com', 70, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/VSrSX1QycSSn7l6yfyP6_27_dbd6e383ff303a8e4324b9c8552028f0_image.png', '8364', 'none', 2, '2022-03-27 17:06:51.080600', '193-8364', 0, 0, 'guest'),
+(21, 5, 'fghfhfdgh@gmail.com', 72, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/h7EoH1g3BHkBE2DDQsoX_27_aae077a37477f80981b1ef50de814eca_image.png', '8364', 'none', 3, '2022-03-27 17:06:51.084341', '193-8364', 0, 0, 'guest'),
+(22, 5, 'fghfhfdgh@gmail.com', 75, 'awaiting_approval', 'queued', NULL, '8364', 'none', 4, '2022-03-27 17:06:51.088144', '193-8364', 0, 0, 'guest');
 
 -- --------------------------------------------------------
 
@@ -302,8 +334,200 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `university_id`, `program_id`, `first_name`, `last_name`, `date_of_birth`, `phone_number`, `phone_number_2`, `email`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `application_no`, `status`, `note`, `signed_by`, `is_notified`, `isClosed`, `mark_university`, `ischecked`, `acceptance_letter`, `type`, `request_update`, `created_at`, `commision`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`, `applicant_type`, `time`, `applied_by`) VALUES
-(1, '7', '9', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '3304', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483211', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10),
-(2, '7', '9', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '4465', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483281', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10);
+(1, '7', '9', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', '', '', 'upload/photos/2022/03/zvqfIkFLRITaGkGcBv3V_27_d6b1f9f2260f6539d103cdea8f2ff673_image.png', 'upload/photos/2022/03/j5JZOYmMuulRAyZRZKc5_27_d6b1f9f2260f6539d103cdea8f2ff673_image.png', 'upload/photos/2022/03/1KaLWvX7Ib4I6BGKwtK7_27_d6b1f9f2260f6539d103cdea8f2ff673_image.png', 'upload/photos/2022/03/1J7dZJm61LoeQZVyOqIQ_27_d6b1f9f2260f6539d103cdea8f2ff673_image.png', NULL, '', '3304', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483211', NULL, NULL, NULL, NULL, '004_b.png', '004_b.png', '004_a.png', NULL, '004_b.png', 10, 'agent', 0, 10),
+(2, '7', '9', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '4465', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1647483281', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, 'agent', 0, 10),
+(3, '7', '16', '', '', '', '', '', 'brycordmuchindu@gmail.com', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', '5723', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1648325388', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20, 'applicant', 1648325388, 20),
+(4, '5', '6', 'IMMACULATE', 'OMOSA', '2022-03-10', '+905523257568', '', 'fgjgjfu@gmail.com', 'Christano', 'ssdfgs', 'cn3232', 'Australia', 'United Kingdom', NULL, NULL, NULL, NULL, NULL, '', '6239', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'single', 0, '1648348500', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0, 0),
+(5, '5', '1', 'IMMACULATE', 'OMOSA', '2022-03-24', '+905523257568', '', 'stellatmb@yahoo.com', 'easdfa', 'asfdasda', 'cn3232', 'Aland Islands', 'United States', NULL, NULL, NULL, NULL, NULL, '', '0509', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'multiple', 0, '1648349041', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0, 0),
+(6, '5', '1', 'IMMACULATE', 'OMOSA', '2022-03-25', '51387840', '', 'poijkm@gmail.com', 'HAGGAI', 'ELIZABERTH', 'cn3232', 'Aruba', 'United States', NULL, NULL, NULL, NULL, NULL, '', '2530', 'awaiting_approval', NULL, NULL, 1, 0, 'no', 'applied', NULL, 'multiple', 0, '1648349879', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0, 0),
+(7, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8900', 'awaiting_approval', NULL, '16', 1, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(8, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8900', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(9, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8900', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(10, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8900', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(11, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8900', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(12, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7104', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(13, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7104', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(14, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7104', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(15, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7104', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(16, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7104', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350197', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(17, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6866', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(18, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6866', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(19, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6866', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(20, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6866', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(21, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6866', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(22, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1595', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(23, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1595', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(24, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1595', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(25, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1595', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(26, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1595', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350206', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(27, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8004', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(28, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8004', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(29, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8004', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(30, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8004', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(31, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8004', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(32, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1440', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(33, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1440', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(34, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1440', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(35, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1440', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(36, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1440', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350208', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(37, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5783', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(38, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5783', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(39, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5783', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(40, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5783', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(41, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5783', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(42, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9079', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(43, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9079', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(44, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9079', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(45, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9079', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(46, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9079', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350210', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(47, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0005', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(48, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0005', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(49, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0005', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(50, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0005', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(51, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0005', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(52, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1869', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(53, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1869', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(54, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1869', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(55, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1869', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(56, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1869', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350212', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(57, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1663', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(58, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1663', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(59, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1663', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(60, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1663', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(61, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1663', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(62, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3727', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(63, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3727', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(64, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3727', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(65, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3727', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(66, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3727', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350217', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(67, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(68, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(69, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(70, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(71, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '1000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(72, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4707', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(73, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4707', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(74, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4707', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(75, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4707', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(76, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4707', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350219', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(77, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7763', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(78, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7763', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(79, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7763', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(80, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7763', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(81, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7763', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(82, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0307', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(83, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0307', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(84, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0307', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(85, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0307', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(86, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0307', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350221', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(87, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350228', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(88, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350228', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(89, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350228', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(90, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350228', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(91, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350228', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(92, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7633', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350229', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(93, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7633', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350229', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(94, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7633', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350229', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(95, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7633', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350229', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(96, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '7633', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350229', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(97, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0458', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(98, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0458', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(99, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0458', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(100, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0458', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(101, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0458', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(102, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5696', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(103, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5696', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(104, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5696', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(105, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5696', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(106, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '5696', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350230', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(107, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2490', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(108, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2490', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(109, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2490', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(110, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2490', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(111, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2490', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(112, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6758', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(113, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6758', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(114, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6758', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(115, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6758', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(116, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6758', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350233', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(117, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0892', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(118, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0892', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(119, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0892', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(120, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0892', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(121, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0892', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(122, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(123, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(124, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(125, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(126, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0052', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(127, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8606', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(128, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8606', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(129, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8606', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(130, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8606', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(131, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '8606', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(132, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0600', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(133, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0600', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(134, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0600', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(135, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0600', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(136, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0600', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350237', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(137, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6760', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(138, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6760', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(139, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6760', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(140, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6760', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(141, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '6760', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(142, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(143, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(144, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(145, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(146, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350240', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(147, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3320', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(148, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3320', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(149, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3320', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(150, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3320', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(151, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '3320', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(152, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4960', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(153, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4960', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(154, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4960', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(155, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4960', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(156, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '4960', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350242', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10);
+INSERT INTO `applications` (`id`, `university_id`, `program_id`, `first_name`, `last_name`, `date_of_birth`, `phone_number`, `phone_number_2`, `email`, `fathers_name`, `mothers_name`, `passport_number`, `nationality`, `country_of_residence`, `id_photo`, `passport_file`, `transcript_file`, `diploma_file`, `other_files`, `middle_name`, `application_no`, `status`, `note`, `signed_by`, `is_notified`, `isClosed`, `mark_university`, `ischecked`, `acceptance_letter`, `type`, `request_update`, `created_at`, `commision`, `language_certificate`, `reference_id`, `applicant_note`, `transcript_name`, `diploma_name`, `passport_name`, `language_certificate_name`, `id_photo_name`, `user_id`, `applicant_type`, `time`, `applied_by`) VALUES
+(157, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2930', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(158, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2930', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(159, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2930', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(160, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2930', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(161, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2930', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(162, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2267', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(163, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2267', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(164, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2267', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(165, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2267', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(166, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2267', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350244', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(167, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(168, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(169, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(170, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(171, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0000', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(172, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2228', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(173, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2228', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(174, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2228', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(175, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2228', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(176, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2228', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350400', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(177, '7', '17', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0939', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(178, '7', '19', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0939', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(179, '34', '22', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0939', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(180, '34', '26', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0939', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(181, '34', '31', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '0939', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(182, '7', '17', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2908', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(183, '7', '19', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2908', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(184, '34', '22', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2908', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(185, '34', '26', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2908', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(186, '34', '31', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2908', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350508', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(187, '34', '37', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2563', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(188, '34', '36', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2563', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(189, '34', '35', '', '', '', '', '', 'bonihgu@gmail.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '2563', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(190, '34', '37', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9100', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(191, '34', '36', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9100', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(192, '34', '35', '', '', '', '', '', 'emlas@yahoo.com', '', '', '', 'Select Country', 'Select Country', NULL, NULL, NULL, NULL, NULL, '', '9100', 'awaiting_approval', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648350624', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'agent', 0, 10),
+(193, '5', '5', 'dfsdg', 'fsdfgsd', '2022-03-16', '+905523257568', '', 'fghfhfdgh@gmail.com', 'sdfgsdg', 'dfgsdfg', 'cn3232', 'Angola', 'Turkey', NULL, NULL, NULL, NULL, NULL, '', '7009', 'stamp_missing_on_transcript', NULL, NULL, 0, 0, 'no', 'applied', NULL, 'multiple', 0, '1648400811', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'guest', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -403,7 +627,7 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (25, 'smtp_encryption', 'tls'),
 (26, 'smtp_port', '587'),
 (27, 'delete_account', 'on'),
-(36, 'last_admin_collection', '1648157376'),
+(36, 'last_admin_collection', '1648400868'),
 (45, 'user_registration', 'on'),
 (54, 'job_listing_statics', '[{&quot;month&quot;:&quot;January&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;February&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;March&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;April&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;May&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;June&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;July&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;August&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;September&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;October&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;November&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;December&quot;,&quot;new_job&quot;:16}]'),
 (58, 'google', ''),
@@ -439,7 +663,7 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (154, 'ads_currency', 'USD'),
 (156, 'google_map_api', 'AIzaSyBOfpaMO_tMMsuvS2T4zx4llbtsFqMuT9Y'),
 (157, 'last_update', '1538060393'),
-(165, 'total_unactive_users', '0'),
+(165, 'total_unactive_users', '3'),
 (166, 'auto_friend_users', 'qbizns'),
 (168, 'fb_login', 'on'),
 (169, 'plus_login', 'on'),
@@ -507,10 +731,10 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (234, 'twitter_app_key', ''),
 (235, 'twitter_app_ID', ''),
 (236, 'bank_description', '<div class=\"bank_info\"><div class=\"dt_settings_header bg_gradient\"><div class=\"dt_settings_circle-1\"></div><div class=\"dt_settings_circle-2\"></div><div class=\"bank_info_innr\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z\"></path></svg><h4 class=\"bank_name\">Garanti Bank</h4><div class=\"row\"><div class=\"col col-md-12\"><div class=\"bank_account\"><p>4796824372433055</p><span class=\"help-block\">Account number / IBAN</span></div></div><div class=\"col col-md-12\"><div class=\"bank_account_holder\"><p>Antoian Kordiyal</p><span class=\"help-block\">Account name</span></div></div><div class=\"col col-md-6\"><div class=\"bank_account_code\"><p>TGBATRISXXX</p><span class=\"help-block\">Routing code</span></div></div><div class=\"col col-md-6\"><div class=\"bank_account_country\"><p>United States</p><span class=\"help-block\">Country</span></div></div></div></div></div></div>'),
-(237, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":2},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
-(239, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":2},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
+(237, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":11},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
+(239, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":11},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
 (240, 'job_listing_statics', '[{&quot;month&quot;:&quot;January&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;February&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;March&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;April&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;May&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;June&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;July&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;August&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;September&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;October&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;November&quot;,&quot;new_job&quot;:0},{&quot;month&quot;:&quot;December&quot;,&quot;new_job&quot;:16}]'),
-(241, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":2},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
+(241, 'user_statics', '[{\"month\":\"January\",\"new_users\":0},{\"month\":\"February\",\"new_users\":1},{\"month\":\"March\",\"new_users\":11},{\"month\":\"April\",\"new_users\":0},{\"month\":\"May\",\"new_users\":0},{\"month\":\"June\",\"new_users\":0},{\"month\":\"July\",\"new_users\":0},{\"month\":\"August\",\"new_users\":0},{\"month\":\"September\",\"new_users\":0},{\"month\":\"October\",\"new_users\":0},{\"month\":\"November\",\"new_users\":0},{\"month\":\"December\",\"new_users\":0}]'),
 (242, 'total_active_users', '9'),
 (243, 'total_pages', '0'),
 (244, 'total_applications', '11'),
@@ -518,13 +742,14 @@ INSERT INTO `config` (`id`, `name`, `value`) VALUES
 (246, 'total_job_share', '0'),
 (247, 'total_reports', '1'),
 (248, 'weekly_user_vist', '0'),
-(249, 'get_number_of_applicants', '2'),
+(249, 'get_number_of_applicants', '193'),
 (250, 'reports_count', '0'),
-(251, 'get_total_universities', '58'),
-(252, 'get_active_users', '9'),
-(253, 'get_total_application_to_universities', '4'),
+(251, 'get_total_universities', '59'),
+(252, 'get_active_users', '15'),
+(253, 'get_total_application_to_universities', '22'),
 (254, 'get_students_with_missing_documents', '0'),
-(255, 'get_total_agents', '1');
+(255, 'get_total_agents', '4'),
+(256, 'get_total_agent_request', '3');
 
 -- --------------------------------------------------------
 
@@ -899,7 +1124,6 @@ INSERT INTO `course` (`id`, `main_image`, `university`, `department`, `language`
 (337, NULL, 'Istanbul Galata University', 'NURSING (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (338, NULL, 'Istanbul Galata University', 'PHYSIOTHERAPY AND REHABILITATION (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (339, NULL, 'Istanbul Galata University', 'NUTRITION AND DIETETICS (TURKISH)', 'Turkish', 'Undergraduate', 4, NULL, 4500, '1950', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(340, NULL, 'Istanbul Memz University', 'JOURNALISM', 'Turkish', 'Undergraduate', 4, NULL, 4000, '2000', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (341, 'upload/photos/2022/03/VAvOKZkSmoNNwgsHdH8a_24_8667043422ca6c3db35a35a2aeaedb32_image.png', 'Chawama university', 'Whichraft', 'en', 'degree', 4, '4000', 2000, NULL, NULL, 'Lusaka', NULL, NULL, NULL, NULL, 111);
 
 -- --------------------------------------------------------
@@ -965,10 +1189,10 @@ CREATE TABLE `html_emails` (
 --
 
 INSERT INTO `html_emails` (`id`, `name`, `value`) VALUES
-(1, 'notification', 'Hello {{uname}},\r\n<br><br>\r\nNew notification from <a href=\"{{notify_link}}\">{{username}}{{c}}</a>:\r\n<br>\r\n{{full_name}} {{contents}}\r\n<a href=\"{{user_link}}\">{{username}}{{c}}</a>\r\n<br><br>\r\n{{site_name}} Team.'),
-(2, 'confirm', 'Hello {{USERNAME}},\r\n<br><br>\r\nPlease confirm your email address by clicking the link below:\r\n<br>\r\n<a href=\"{{CODE_URL}}\">Confirm email address</a>\r\n<br><br>\r\n{{SITE_NAME}} Team.'),
-(3, 'reset', 'Hello {{username}},\r\n<br><br>\r\nTo reset your password, please click the link below:\r\n<br>\r\n<a href=\"{{code_url}}\">Reset my password</a>\r\n<br><br>\r\n{{site_name}} Team.'),
-(4, 'unusual_login', 'Hi {{username}},<br><br>\r\n\r\nPlease verify that it\'s you<br><br>\r\n\r\nYour sign in attempt seems a little different than usual. This could be because you are signing in from a different device or a different location.<br><br>\r\n\r\nIf you are attempting to sign-in, please use the following code to confirm your identity:<br><br>\r\n\r\n{{code}}<br><br>\r\n\r\nHere are the details of the sign-in attempt:<br>\r\nDate: {{date}}<br>\r\nAccount: {{email}}<br>\r\nLocation: {{countryCode}}<br>\r\nIP Address: {{ip_address}}<br>\r\nCity: {{city}}<br><br>\r\n\r\nIf this wasn\'t you, please reset your password.<br><br>\r\n\r\nYours securely,<br>\r\nTeam {{site_name}}');
+(1, 'notification', '<p>Hello {{uname}}, <br /><br /> New notification from <a href=\"{{notify_link}}\">{{username}}{{c}}</a>: <br /> {{full_name}} {{contents}} <a href=\"{{user_link}}\">{{username}}{{c}}</a> <br /><br /> {{site_name}} Team.</p>'),
+(2, 'confirm', '<p>Hello {{USERNAME}}, <br /><br /> Please confirm your email address by clicking the link below: <br /> <a href=\"{{CODE_URL}}\">Confirm email address</a> <br /><br /> {{SITE_NAME}} Team.</p>'),
+(3, 'reset', '<p>Hello {{username}}, <br /><br /> Here is your reset code: <br /> <a>{{code_url}}</a> <br /><br /> {{site_name}} Team.</p>'),
+(4, 'unusual_login', '<p>Hi {{username}},<br /><br /> Please verify that it\'s you<br /><br /> Your sign in attempt seems a little different than usual. This could be because you are signing in from a different device or a different location.<br /><br /> If you are attempting to sign-in, please use the following code to confirm your identity:<br /><br /> {{code}}<br /><br /> Here are the details of the sign-in attempt:<br /> Date: {{date}}<br /> Account: {{email}}<br /> Location: {{countryCode}}<br /> IP Address: {{ip_address}}<br /> City: {{city}}<br /><br /> If this wasn\'t you, please reset your password.<br /><br /> Yours securely,<br /> Team {{site_name}}</p>');
 
 -- --------------------------------------------------------
 
@@ -1674,7 +1898,12 @@ INSERT INTO `langs` (`id`, `lang_key`, `english`, `arabic`, `dutch`, `french`, `
 (687, 'total', 'Total', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (688, 'programs', 'Programs', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (689, 'program_details_page', 'Program details page', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(690, 'your_account_await_approval', 'Registration successful, Your Account is Awaiting Approval. This process might take a few hours or days, Kindly keep track of your email inbox for the approval email', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(690, 'your_account_await_approval', 'Registration successful, Your Account is Awaiting Approval. This process might take a few hours or days, Kindly keep track of your email inbox for the approval email', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(691, 'your_account_account_has_be_successfully_created_by', 'Your account Account has be successfully created by', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(692, 'team', 'Team', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(693, 'you_now_have_access_to_the_system', 'You now have access to the system', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(694, 'here_are_your_login_credentials', 'Here are your login credentials', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(695, 'university_details', 'University Details', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1725,7 +1954,35 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`id`, `notifier_id`, `recipient_id`, `application_id`, `replay_id`, `type`, `text`, `url`, `seen`, `time`, `sent_push`, `target`, `admin`) VALUES
 (1, 10, 0, 0, 0, 'new_application', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=8445', '0', '1647481012', 0, 'all', 0),
 (2, 10, 0, 0, 0, 'new_application', ' Applied at <b>Altinbas University</b> inCIVIL ENGINEERING (ENGLISH)</b>', '/admin-cp/view-application?id=3603', '0', '1647483283', 0, 'all', 0),
-(3, 10, 0, 0, 0, 'new_application', ' Applied at <b>Altinbas University</b> inCHILD DEVELOPMENT</b>', '/admin-cp/view-application?id=8534', '0', '1647483408', 0, 'all', 0);
+(3, 10, 0, 0, 0, 'new_application', ' Applied at <b>Altinbas University</b> inCHILD DEVELOPMENT</b>', '/admin-cp/view-application?id=8534', '0', '1647483408', 0, 'all', 0),
+(4, 20, 0, 0, 0, 'new_application', ' Applied at <b>Altinbas University</b> inENGLISH TEACHING (ENGLISH)</b>', '/admin-cp/view-application?id=0071', '0', '1648325390', 0, 'all', 0),
+(5, 20, 0, 0, 0, 'new_application', ' Applied at <b>Acibadem University</b> inBANKING AND INSURANCE</b>', '/admin-cp/view-application?id=7947', '0', '1648325657', 0, 'all', 0),
+(6, 20, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=', '0', '1648325717', 0, 'all', 0),
+(7, 20, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=', '0', '1648330474', 0, 'all', 0),
+(8, 20, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=', '0', '1648330476', 0, 'all', 0),
+(9, 20, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inINTERNATIONAL TRADE AND FINANCE (ENGLISH)</b>', '/admin-cp/view-application?id=7819', '0', '1648346302', 0, 'all', 0),
+(10, 20, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inINTERNATIONAL TRADE AND FINANCE (ENGLISH)</b>', '/admin-cp/view-application?id=5415', '0', '1648346662', 0, 'all', 0),
+(11, 10, 0, 0, 0, 'new_application', ' Applied at <b>Acibadem University</b> inAUDIOLOGY</b>', '/admin-cp/view-application?id=4621', '0', '1648350133', 0, 'all', 0),
+(12, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=0520', '0', '1648350199', 0, 'all', 0),
+(13, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=0860', '0', '1648350208', 0, 'all', 0),
+(14, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=4918', '0', '1648350210', 0, 'all', 0),
+(15, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=0145', '0', '1648350212', 0, 'all', 0),
+(16, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=9304', '0', '1648350214', 0, 'all', 0),
+(17, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=6850', '0', '1648350219', 0, 'all', 0),
+(18, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=0290', '0', '1648350221', 0, 'all', 0),
+(19, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=8341', '0', '1648350223', 0, 'all', 0),
+(20, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=6609', '0', '1648350230', 0, 'all', 0),
+(21, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=2064', '0', '1648350232', 0, 'all', 0),
+(22, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=5192', '0', '1648350234', 0, 'all', 0),
+(23, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=0059', '0', '1648350236', 0, 'all', 0),
+(24, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=7400', '0', '1648350238', 0, 'all', 0),
+(25, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=5009', '0', '1648350242', 0, 'all', 0),
+(26, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=9100', '0', '1648350244', 0, 'all', 0),
+(27, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=2248', '0', '1648350246', 0, 'all', 0),
+(28, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=6087', '0', '1648350402', 0, 'all', 0),
+(29, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inJOURNALISM</b>', '/admin-cp/view-application?id=8796', '0', '1648350510', 0, 'all', 0),
+(30, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inuniversity not found</b>', '/admin-cp/view-application?id=', '0', '1648350594', 0, 'all', 0),
+(31, 10, 0, 0, 0, 'new_application', ' Applied at <b>university not found</b> inMEDIA AND VISUAL ARTS</b>', '/admin-cp/view-application?id=1776', '0', '1648350626', 0, 'all', 0);
 
 -- --------------------------------------------------------
 
@@ -1941,7 +2198,8 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (229, 'fa02386487d26d2a462e6c025728e59c43bb0ea31647456224eafc1c0f37d804fe55bf428f0e56731a', 10, 'web', 1647456224),
 (231, '5ce38e2db247b6e9c78da699a68591eb6961c29916483140412ddd07a2959bc43954ace30fcab64103', 12, 'web', 1648314041),
 (232, 'd8a80bfcf761d2c73fc77e4ef7bf79ac5e3993fc16483141464b6419079e6d54b7ffc0e3010993703d', 13, 'web', 1648314146),
-(233, '6a9136b19d3c0969ec32f4d476264b88fac10c8116483150454b52ef2fecc897f32580d2bb0b61b572', 14, 'web', 1648315045);
+(233, '6a9136b19d3c0969ec32f4d476264b88fac10c8116483150454b52ef2fecc897f32580d2bb0b61b572', 14, 'web', 1648315045),
+(244, 'c75aac45b6a2b63a2fd11b2ca99a144a079b7c611648402663c51a9151301d448dfc2651cd52f8f42e', 16, 'web', 1648402663);
 
 -- --------------------------------------------------------
 
@@ -2107,8 +2365,7 @@ INSERT INTO `university` (`id`, `main_image`, `university_logo`, `description`, 
 (99, NULL, NULL, NULL, NULL, 'Izmir Tinaztepe University', '?zmir', 'Private', 2018, '1', '0', '0', '0', '13', '8', '10', '9', NULL, '0', '0', '0', 'Full-Time', NULL, NULL, NULL, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, 1, 1, 5, 1, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, 1, NULL, 1, 1, NULL, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
 (108, NULL, NULL, NULL, NULL, 'Near East University', 'N. Cyprus', 'Private', NULL, '1', '0', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', NULL, 'N/A', 'N/A', 'N/A', 'Full-Time', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NULL, NULL, 1, 1, 1, 1, 1, NULL, 1, NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, 1, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
 (109, NULL, NULL, NULL, NULL, 'Nisantasi University', 'Istanbul', 'Private', 2009, '1', '0', '6', '17', '58', '186', '182', '118', NULL, '1', '1443', '20011', 'Full-Time', NULL, NULL, NULL, 1, 1, NULL, 1, 1, NULL, 1, 1, 1, 1, NULL, 1, NULL, NULL, 1, 1, 1, NULL, 1, 12, 1, NULL, 1, 1, NULL, 1, 1, NULL, 1, NULL, 1, 1, 1, NULL, NULL, 1, NULL, NULL, 1, 1, 1, NULL, NULL, '2021-06-21 11:56:03', '2021-06-21 11:56:03', NULL),
-(110, 'upload/photos/2022/03/9cmSlTOgkYdfc6SdZWMs_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', 'upload/photos/2022/03/ccIHbsmYvNJKzmKXQDzG_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', '', 'Chibolya university', 'Chibolya university', 'Lusaka', 'State', 1997, 'english', 'turkish', '15', '54', '15', '9', '48', '8', NULL, '6', '56', '10', '56', 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 68, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 'chibolya_university'),
-(111, 'upload/photos/2022/03/xDM9JmJoDdevr3d9vz1E_24_76955ef11166bbd84355243350fe6fb9_image.jpg', 'upload/photos/2022/03/wMpWMHyhPKwA7Sxm25eI_24_76955ef11166bbd84355243350fe6fb9_image.jpg', '', 'Chawama university', 'Chawama university', 'Lusaka', 'State', 1997, 'english', 'turkish', '15', '54', '15', '9', '48', '8', NULL, '6', '56', '10', '56', 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 68, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, NULL, NULL, NULL, 'chawama_university');
+(110, 'upload/photos/2022/03/9cmSlTOgkYdfc6SdZWMs_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', 'upload/photos/2022/03/ccIHbsmYvNJKzmKXQDzG_24_bebb9a40edb950fc0aa6f6b1254fbf80_image.jpg', '', 'Chibolya university', 'Chibolya university', 'Lusaka', 'State', 1997, 'english', 'turkish', '15', '54', '15', '9', '48', '8', NULL, '6', '56', '10', '56', 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 68, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 'chibolya_university');
 
 -- --------------------------------------------------------
 
@@ -2164,27 +2421,33 @@ CREATE TABLE `users` (
   `account_type` varchar(150) NOT NULL DEFAULT 'applicant',
   `is_pro` int(11) NOT NULL DEFAULT '0',
   `pro_time` varchar(100) DEFAULT NULL,
-  `time` int(20) NOT NULL DEFAULT '0'
+  `time` int(20) NOT NULL DEFAULT '0',
+  `time_code_sent` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first_name`, `last_name`, `gender`, `email_code`, `language`, `avatar`, `cover`, `country_id`, `about`, `location`, `website`, `google`, `facebook`, `twitter`, `instagram`, `active`, `admin`, `access_level`, `verified`, `last_active`, `last_follow_id`, `registered`, `startup`, `birth_date`, `notification_on_application`, `notification_on_visit_profile`, `turn_on_email_notifications`, `share_my_profile`, `wallet`, `src`, `last_location_update`, `lat`, `lng`, `two_factor`, `new_email`, `two_factor_verified`, `new_phone`, `phone_number`, `user_upload_limit`, `account_type`, `is_pro`, `pro_time`, `time`) VALUES
-(2, 'root', 'cbmkboniface@gmail.com', '::1', '$2y$10$Cts1nSrcfuQ6pz/KbCGIu.EXYDRLTkNz0AtYDINfVXyXwgnElR3T.', 'BONIFACE', 'MWANZA', 'female', '6a94a0cfcbc31971e95206224ef13d04f9068fe7', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/2020/10/MbujiUzuXVstjtVzNvXi_02_13fa8e67f213a2dc6422251197109062_image.jpg', 0, '', '', '', '', '', '', '', 1, 1, 1, 0, 1625487735, 0, '2020/8', 2, '', 1, 1, 1, 1, '113', 'site', '1626092538', '39.77667', '30.52056', 0, NULL, 0, NULL, NULL, '0', 'admin', 0, NULL, 0),
-(4, 'paul_jere939', 'pauljere@gmail.com', '::1', '$2y$10$ub8ZuKsxmESpe1tkS92yV.vZ6ImKLuI7TYUjOfJM3O38mfaT1pMOC', 'Paul', 'Jere', 'male', '6a03329353fb590efbca7b760d0f44cbf00fb3cc', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636174007, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(5, 'musa_mwanza426', 'asdaf@yahoo.com', '::1', '$2y$10$BI0sFJDqothtRSWBjmy/SuqLoSbKP/Aqd/rWDWODrn2vko9WMDrwe', 'Musa', 'Mwanza', 'male', '6d616ca916b6d759ae1c7697862a9262eb22b34b', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1636174137, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(6, 'mehmet_durmaz752', 'mehmed@gmail.com', '::1', '$2y$10$5TD.cjAZyDM9CHPAxemXPO5WmaeZtXasSbhaF.oH0ym/NPlshbM46', 'Mehmet', 'Durmaz', 'male', '39c7d17ba3bbe8f549340a432c20ee4cb69bbb3d', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1636284445, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(7, 'debagge_test966', 'debtest@gmail.com', '::1', '$2y$10$0eKjaNmt2qIZPMxrdWagX.efg4N7adCyZAuXmzcmemM4YVmH/EMMi', 'Debagge', 'TEst', 'male', '2645361158a9f04673456bdc2f7c055079be04df', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636446549, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0),
-(12, 'Cos_1cDo_Age', 'comsicagency@gmail.com', '::1', '$2y$10$cjR/dfGvaWGNwpJanBl/Ju8KZcHlOt3mhhpeOt7fRMs.fmXLNRNw2', 'Cosmic', 'Agency', 'male', '98add4a26365b475797845ecbfb8427eb7bdf081', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314041, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(13, 'Cos_QqbM_Age', 'comsicagenc@gmail.com', '::1', '$2y$10$mxedI4ZJ0V.9lg.DEeontehKbVAJlozf34L55oMcfdw32mJYYQULy', 'Cosmi', 'Agenc', 'male', '31deed68434d434b62ca969e2cfe44bac3d89538', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314146, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(14, 'Luc_EXp7_Stu', 'lucrativestudy@gmail.com', '::1', '$2y$10$Jnv6CndbWvzfVDd08UPch.IAz79OgT1rC0HEjnyn1IxoW5ki7ptxa', 'Lucrative', 'Study', 'male', 'e4a00ded0de8ee2b5b31e396898e18ef428b4d0c', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648315045, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0),
-(15, 'Jon_9rIu_Dee', 'jonnydeep@gmail.com', '::1', '$2y$10$FaS7VaW3U2QpWtDHIo1VL.n4LgGbbwST46ZI2rtZnQBgVEao.qZXa', 'Jonny', 'Deep', 'male', 'fd429c4759f3d23fe6215d55390c5eeabda39d52', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1648315437, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0);
+INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first_name`, `last_name`, `gender`, `email_code`, `language`, `avatar`, `cover`, `country_id`, `about`, `location`, `website`, `google`, `facebook`, `twitter`, `instagram`, `active`, `admin`, `access_level`, `verified`, `last_active`, `last_follow_id`, `registered`, `startup`, `birth_date`, `notification_on_application`, `notification_on_visit_profile`, `turn_on_email_notifications`, `share_my_profile`, `wallet`, `src`, `last_location_update`, `lat`, `lng`, `two_factor`, `new_email`, `two_factor_verified`, `new_phone`, `phone_number`, `user_upload_limit`, `account_type`, `is_pro`, `pro_time`, `time`, `time_code_sent`) VALUES
+(2, 'root', 'cbmkboniface@gmail.com', '::1', '$2y$10$Cts1nSrcfuQ6pz/KbCGIu.EXYDRLTkNz0AtYDINfVXyXwgnElR3T.', 'BONIFACE', 'MWANZA', 'female', '0041', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/2020/10/MbujiUzuXVstjtVzNvXi_02_13fa8e67f213a2dc6422251197109062_image.jpg', 0, '', '', '', '', '', '', '', 1, 1, 1, 0, 1625487735, 0, '2020/8', 2, '', 1, 1, 1, 1, '113', 'site', '1626092538', '39.77667', '30.52056', 0, NULL, 0, NULL, NULL, '0', 'admin', 0, NULL, 0, '1648502756'),
+(4, 'paul_jere939', 'pauljere@gmail.com', '::1', '$2y$10$ub8ZuKsxmESpe1tkS92yV.vZ6ImKLuI7TYUjOfJM3O38mfaT1pMOC', 'Paul', 'Jere', 'male', '6a03329353fb590efbca7b760d0f44cbf00fb3cc', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636174007, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(5, 'musa_mwanza426', 'asdaf@yahoo.com', '::1', '$2y$10$BI0sFJDqothtRSWBjmy/SuqLoSbKP/Aqd/rWDWODrn2vko9WMDrwe', 'Musa', 'Mwanza', 'male', '6d616ca916b6d759ae1c7697862a9262eb22b34b', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1636174137, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(6, 'mehmet_durmaz752', 'mehmed@gmail.com', '::1', '$2y$10$5TD.cjAZyDM9CHPAxemXPO5WmaeZtXasSbhaF.oH0ym/NPlshbM46', 'Mehmet', 'Durmaz', 'male', '39c7d17ba3bbe8f549340a432c20ee4cb69bbb3d', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1636284445, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(7, 'debagge_test966', 'debtest@gmail.com', '::1', '$2y$10$0eKjaNmt2qIZPMxrdWagX.efg4N7adCyZAuXmzcmemM4YVmH/EMMi', 'Debagge', 'TEst', 'male', '2645361158a9f04673456bdc2f7c055079be04df', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 1, 0, 1636446549, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(8, 'damla_nur826', 'damla@globalacademia.com', '159.146.40.232', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', 'Damla', 'Nur', 'male', '453546e313559872d5c1e8392fc85298e6549a55', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1637659901, 0, '2021/11', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(9, 'asd_xU6n_asd', 'root@asdf.com', '::1', '$2y$10$wd4zd6Yq9km/1fO03QcYueh4FbrNGo/5Quwd.gpjENDMN8XMEnrqC', '', '', 'male', '69f5f980790a5eb2272d77db3b5c9accda115687', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646008243, 0, '2022/2', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(10, 'Kom_c3gb_Meh', 'komisyoncu@km.com', '::1', '$2y$10$QwA5nWg/.pUOiibdiRpcU..0Hfj/qj2COypxq2q7k28YTXWO/Zf76', 'Komisyoncu', 'Mulahi', 'male', '904b793fa32b154249e9f901225612e59d65e12d', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646294386, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
+(11, 'Tel_9So1_Mwa', 'telo@masda.com', '::1', '$2y$10$sAQQLo3gwaQZDMkLQy7yhOx0xV2QxzHeXikEE6k.Jaz0OE5wLKjh2', 'Teloas', 'Mwanza', 'male', '8c2eef7dcb284088994d00225bc7417d2dc37673', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 4, 0, 1646578312, 0, '2022/3', 0, '', 1, 1, 1, 0, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(12, 'Cos_1cDo_Age', 'comsicagency@gmail.com', '::1', '$2y$10$cjR/dfGvaWGNwpJanBl/Ju8KZcHlOt3mhhpeOt7fRMs.fmXLNRNw2', 'Cosmic', 'Agency', 'male', '98add4a26365b475797845ecbfb8427eb7bdf081', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314041, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
+(13, 'Cos_QqbM_Age', 'comsicagenc@gmail.com', '::1', '$2y$10$mxedI4ZJ0V.9lg.DEeontehKbVAJlozf34L55oMcfdw32mJYYQULy', 'Cosmi', 'Agenc', 'male', '31deed68434d434b62ca969e2cfe44bac3d89538', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314146, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
+(14, 'Luc_EXp7_Stu', 'lucrativestudy@gmail.com', '::1', '$2y$10$Jnv6CndbWvzfVDd08UPch.IAz79OgT1rC0HEjnyn1IxoW5ki7ptxa', 'Lucrative', 'Study', 'male', 'e4a00ded0de8ee2b5b31e396898e18ef428b4d0c', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648315045, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
+(15, 'Jon_9rIu_Dee', 'jonnydeep@gmail.com', '::1', '$2y$10$FaS7VaW3U2QpWtDHIo1VL.n4LgGbbwST46ZI2rtZnQBgVEao.qZXa', 'Jonny', 'Deep', 'male', 'fd429c4759f3d23fe6215d55390c5eeabda39d52', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1648315437, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
+(16, 'ayse_gul365', 'ayse.gur@global.com', '::1', '$2y$10$hZhpc3RuwHb2F9fKNm6VveUmlfTj/7nEDG/WNKltACR5OBvl43/Rq', 'Ayse', 'Gul', 'male', '0448', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322225, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, '1648486468'),
+(17, 'canan_gamze998', 'canangamze@gmail.com', '::1', '$2y$10$u0YwQkiQk.q/o9MCvmB2oejg4w7Ze1ixsNADJI3TIGNucwVholtHi', 'Canan', 'Gamze', 'male', '24a2e0687e0015aa84d1cc445e738e45e3bef64c', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322444, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
+(18, 'husnu_coban065', 'hunsucoban@globalacademia.com', '::1', '$2y$10$zrTj7aNJA41/PQw1O.otRuoleXpBv2Sz2R2zf1xd0EZW1oxdu5iIi', 'Husnu', 'Coban', 'male', '68f6267ac9bed349a66600f7f4e77a9f844dd4a3', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322603, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
+(19, 'atlar_patlar344', 'atlarptlar@globaacademia.com', '::1', '$2y$10$e.lX5pDlVT6gU4U3EnuuVe7uK3XetHQ93AFEvHkGHMZ54rcT74LNq', 'Atlar', 'Patlar', 'male', 'e86730d8004ae2e538c11215e892082dee135950', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322663, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
+(20, 'Bry_N8cJ_Muc', 'brycordmuchindu@gmail.com', '::1', '$2y$10$IK6PhA6cWdqaPJemlGa9G.sylljkChwRjFvZ.qxd1CsuB3ARajB.q', 'Brycord', 'Muchindu', 'male', '991acb687461c780646e834f3db18e003a79c2ee', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1648325218, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -2206,6 +2469,13 @@ CREATE TABLE `user_notifications` (
   `sent_push` int(11) NOT NULL DEFAULT '0',
   `target` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_notifications`
+--
+
+INSERT INTO `user_notifications` (`id`, `notifier_id`, `recipient_id`, `application_no`, `replay_id`, `type`, `text`, `url`, `seen`, `time`, `sent_push`, `target`) VALUES
+(1, 0, 10, '2664', 0, 'application_status', 'Your application atAltinbas University in CHILD DEVELOPMENT status changed to Accepted', '/admin-cp/view-application?id=', '0', '1648402577', 0, 'all');
 
 --
 -- Indexes for dumped tables
@@ -2477,25 +2747,25 @@ ALTER TABLE `announcement_views`
 -- AUTO_INCREMENT for table `applicant_chat`
 --
 ALTER TABLE `applicant_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `applicant_education_info`
 --
 ALTER TABLE `applicant_education_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `applican_universities`
 --
 ALTER TABLE `applican_universities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT for table `apps_sessions`
@@ -2519,7 +2789,7 @@ ALTER TABLE `banned`
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT for table `course`
@@ -2555,7 +2825,7 @@ ALTER TABLE `invitation_links`
 -- AUTO_INCREMENT for table `langs`
 --
 ALTER TABLE `langs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=691;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=696;
 
 --
 -- AUTO_INCREMENT for table `likes`
@@ -2567,7 +2837,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -2585,7 +2855,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `terms`
@@ -2603,13 +2873,13 @@ ALTER TABLE `university`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user_notifications`
 --
 ALTER TABLE `user_notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
