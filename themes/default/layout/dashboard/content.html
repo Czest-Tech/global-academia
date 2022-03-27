@@ -1,13 +1,13 @@
 <main class="user_panel">
 	<nav class="dashoard_sidebar">
-		<div class="dashboard_top font7" id="nav_top_agent">
+		<a href="{{LINK dashboard/profile/}}{{USER username}}" class="dashboard_top font7" id="nav_top_agent">
 			<i class="fas fa-user-alt"></i>
 			<p class="font2" id="user_name2">Agent</p>
-		</div>
-		<div class="dashboard_top font7" id="nav_top_student">
+		</a>
+		<a href="{{LINK dashboard/profile/}}{{USER username}}" class="dashboard_top font7" id="nav_top_student">
 			<i class="fas fa-user-graduate "></i>
 			<p class="font2" id="user_name">Student</p>
-		</div>
+		</a>
 		<div class="sidebar_navlinks">
 			<a href="{{LINK dashboard/dashboard/}}{{USER username}}" data-load="?link1=dashboard&page=dashboard&user={{USER username}}">
 				<div class="nav_link">

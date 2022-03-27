@@ -66,9 +66,11 @@
         <thead>
             <tr>
                 <th>Date</th>
+                <th>Names</th>
                 <th>University</th>
                 <th>Programme</th>
                 <th>Status</th>
+                <th>Payment</th>
 
                <?php if($kd->user->account_type === "agent"){?>  <th>Commission</th> <?php } ?>
                 <th>Action</th>
@@ -111,7 +113,7 @@
     let tableRows = ""
     let status_drop = []
     data.forEach((element, index) => {
-
+      console.log(element)
      
       var date = new Date(element.created_at)
       let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
@@ -123,9 +125,11 @@
       let rows = `
             <tr>
                 <td>${date.toDateString().substr(4)}</td>
-                <td class="table_data">${element.university_id.toLowerCase()}</td>
-                <td class="table_data">${element.program_id.toLowerCase()}</td>
+                <td class="table_data">${trim_lng_text('Paul Jere')}</td>
+                <td class="table_data">${trim_lng_text(element.university_id.toLowerCase())}</td>
+                <td class="table_data">${trim_lng_text(element.program_id.toLowerCase())}</td>
                 <td class="table_data">${element.is_checked.toLowerCase()}</td>
+                <td class="table_data">Paid</td>
                ${isAgent == 'agent' ? '<td class="table_data">$120</td>' : ''} 
                 <td>
                     <div class="table_actions">
@@ -181,8 +185,7 @@
     }
    
 
-  function open_action(id, app_id){
-    let action = document.getElementById("app_change"+id).value
+  function open_action(action, app_id){
     if(action === "VIEW"){
        window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?application_number=${app_id}`;
     }
@@ -222,5 +225,9 @@
        });
    }
 
+   function trim_lng_text(text){
+      if(text.length > 15) text = text.substr(0, 15) + "..."
+      return text
+   }
 
 </script>
