@@ -40,7 +40,7 @@
                 <p>{{LANG Reset Code}}</p>
                 <form id="ConfirmResetCode" class="loginForm comfimCode" method="post">
                     <div class="login-alert"></div>    
-                    <label>{{LANG Reset Code}}</label>
+                    <label>{{LANG Check you email for reset Code}}</label>
                     <input type="text" name="code" id="code_value" placeholder="{{LANG Enter your reset Code}}">
                     <div class="whiteBtn8 auth_btn" type="submit" id="ConfirmResetCode_btn" onclick="ConfirmResetCode()" >{{LANG Confirm}}</div> 
                 </form>
@@ -51,13 +51,14 @@
             <!-- Create new Password -->
             <span class="loginToggle" id="new_passowrd">
                 <p>{{LANG New Passowrd}}</p>
-                <form id="" class="loginForm" method="post" role="form">
+                <form id="new_pass_form" class="loginForm" method="post" role="form">
                     <div class="login-alert"></div>    
-                    <label>{{LANG New Passowrd}}</label>
-                    <input type="text" name="username" id="username" placeholder="{{LANG Enter New Password}}">
+                    <label>{{LANG New Password}}</label>
+                    <input type="text" name="code" id="reset_code_v" hidden>
+                    <input type="password" name="password" id="psword" placeholder="{{LANG Enter Password}}">
                     <label>{{LANG Confirm Password}}</label>
-                    <input type="text" name="username" id="username" placeholder="{{LANG Enter Confirm Password}}">
-                    <button class="whiteBtn8 auth_btn" type="submit" id="login_btn" onclick="switchAuth('auth_login')">{{LANG Save Password}}</button> 
+                    <input type="password" name="c_password" id="c_psword" placeholder="{{LANG Enter Password}}">
+                    <div class="whiteBtn8 auth_btn" id="new_pass_btn"  onclick="newPasswordCode()">{{LANG Save Password}}</div> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -205,10 +206,9 @@
                 let data = JSON.parse(request.response);
                 // switchAuth('new_passowrd')
                 if (data.status == 200) {
-                    document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Suucess}}`
-                    setTimeout(() => {
-                        document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Confirm}}`
-                    }, 5000);
+                    document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Confirm}}`
+                    switchAuth('new_passowrd')
+                    document.getElementById("reset_code_v").value = data.code
                 }
                 if (data.status == 400) {
                     document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Invalid Reset Code}}`
@@ -216,11 +216,46 @@
                         document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Confirm}}`
                     }, 5000);
                 }
-
-                console.log(data)
             }
         }
         request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
         request.send(formData);
+    }
+    function newPasswordCode(){
+        let pass1 = document.getElementById("psword").value
+        let pass2 = document.getElementById("c_psword").value
+        if(pass1 !== pass2){
+            document.getElementById("new_pass_btn").innerHTML = `{{LANG Passwords do not Match}}...`
+            setTimeout(() => {
+                document.getElementById("new_pass_btn").innerHTML = `{{LANG Save password}}`
+            }, 5000);
+        }else{
+            document.getElementById("new_pass_btn").innerHTML = `{{LANG Please wait}}...`
+            let post_url = 'reset_password';
+            let form1 = document.querySelector('#new_pass_form');
+            var formData = new FormData(form1);
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+                    let data = JSON.parse(request.response);
+                    switchAuth('new_passowrd')
+                    if (data.status == 200) {
+                        document.getElementById("ConfirmResetCode_btn").innerHTML = `{{LANG Save Password}}`
+                        switchAuth('auth_login')
+                    }
+                    if (data.status == 400) {
+                        document.getElementById("new_pass_btn").innerHTML = `{{LANG Failed, Try again}}`
+                        setTimeout(() => {
+                            document.getElementById("new_pass_btn").innerHTML = `{{LANG Save Password}}`
+                        }, 5000);
+                    }
+
+                    console.log(data)
+                }
+            }
+            request.open("POST", `{{LINK aj/auth}}/${post_url}?hash=${$('.main_session').val()}`);
+            request.send(formData);
+        }
+       
     }
 </script>
