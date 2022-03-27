@@ -16,9 +16,7 @@ if ($first == 'reset-password') {
 	            $errors[] = lang("Password is too short");
 	        }
 
-            if ( $music->config->maintenance_mode == 'on' ) {
-                $errors[] = lang("Website maintenance mode is active");
-            }
+           
 	        if (empty($errors)) {
 
 	        	$user_id = $db->where('email_code', $old_email_code)->where('time_code_sent', time(),'>')->getValue(T_USERS, "id");
@@ -99,7 +97,7 @@ if ($first == 'forgot-password') {
         $errors[] = lang("Email cannot be empty");
         $data = array(
             'status' => 400,
-            'message' => 'No Applications Found',
+            'message' => 'Field can not be empty',
             'error' => $errors
          );
          echo json_encode($data);
@@ -119,7 +117,7 @@ if ($first == 'comfirm_code') {
 	        	$errors[] = lang("incorrect code");
                 $data = array(
                     'status' => 400,
-                    'message' => 'No Applications Found',
+                    'message' => 'Code not found',
                     'error' => $errors
                  );
                  echo json_encode($data);
@@ -140,7 +138,7 @@ if ($first == 'comfirm_code') {
         $errors[] = lang("code cannot be empty");
         $data = array(
             'status' => 400,
-            'message' => 'No Applications Found',
+            'message' => 'Filed can not be empty',
             'error' => $errors
          );
          echo json_encode($data);
