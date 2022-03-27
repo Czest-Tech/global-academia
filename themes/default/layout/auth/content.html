@@ -16,7 +16,7 @@
                     <input type="text" name="username" id="username" placeholder="{{LANG username}}">
                     <label>{{LANG Password}}</label>
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
-                    <button class="whiteBtn8" type="submit" id="login_btn">{{LANG Login}}</button> 
+                    <button class="whiteBtn8 auth_btn" type="submit" id="login_btn">{{LANG Login}}</button> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_forgot')">{{LANG Forgot Password}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -29,7 +29,7 @@
                     <div class="login-alert"></div>    
                     <label>{{LANG Email}}</label>
                     <input type="text" name="email" id="rest_email" placeholder="{{LANG Enter your Email}}">
-                    <div class="whiteBtn8" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</div> 
+                    <div class="whiteBtn8 auth_btn" onclick="switchAuth('reset_code')">{{LANG Send Reset Code}}</div> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -38,12 +38,12 @@
             <!-- Enter Reset Code -->
             <span class="loginToggle" id="reset_code">
                 <p>{{LANG Reset Code}}</p>
-                <form id="" class="loginForm comfimCode" method="post">
+                <div id="" class="loginForm comfimCode" method="post">
                     <div class="login-alert"></div>    
                     <label>{{LANG Reset Code}}</label>
                     <input type="text" name="username" id="username" placeholder="{{LANG Enter your reset Code}}">
-                    <button class="whiteBtn8" type="submit" id="login_btn" onclick="switchAuth('new_passowrd')">{{LANG Confirm Reset Code}}</button> 
-                </form>
+                    <button class="whiteBtn8 auth_btn" type="submit" id="login_btn" onclick="switchAuth('new_passowrd')">{{LANG Confirm Reset Code}}</button> 
+                </div>
                 <button class="switch_auth" onclick="switchAuth('auth_forgot')">{{LANG Resend Code}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
             </span>
@@ -54,10 +54,10 @@
                 <form id="" class="loginForm" method="post" role="form">
                     <div class="login-alert"></div>    
                     <label>{{LANG New Passowrd}}</label>
-                    <input type="text" name="username" id="username" placeholder="{{LANG Enter New Passowrd}}">
+                    <input type="text" name="username" id="username" placeholder="{{LANG Enter New Password}}">
                     <label>{{LANG Confirm Password}}</label>
                     <input type="text" name="username" id="username" placeholder="{{LANG Enter Confirm Password}}">
-                    <button class="whiteBtn8" type="submit" id="login_btn" onclick="switchAuth('auth_login')">{{LANG Save Password}}</button> 
+                    <button class="whiteBtn8 auth_btn" type="submit" id="login_btn" onclick="switchAuth('auth_login')">{{LANG Save Password}}</button> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Login Instead}}?</button>
                 <button class="switch_auth" onclick="switchAuth('auth_register')">{{LANG Dont have an Account}}?</button>
@@ -85,7 +85,7 @@
                     <input type="password" name="password" id="password" placeholder="{{LANG password}}">
                     <label>{{LANG Comfirm Password}}</label>
                     <input type="password" name="c_password" id="c_password" placeholder="{{LANG comfirm password}}">
-                    <button class="whiteBtn8" type="submit">{{LANG Register}}</button> 
+                    <button class="whiteBtn8 auth_btn" type="submit">{{LANG Register}}</button> 
                 </form>
                 <button class="switch_auth" onclick="switchAuth('auth_login')">{{LANG Already have an Account}}?</button>
             </span>
