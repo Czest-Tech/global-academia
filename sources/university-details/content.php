@@ -6,8 +6,8 @@ if (isset($_GET['page'])) {
 }
 
 
-$kd->page_url_   = $kd->config->site_url.'program-details/'.$program_details_page;
-$kd->title       = __('program_details') . '  | Apply in Turkey | Scholarships'.  $kd->config->title;
+$kd->page_url_   = $kd->config->site_url.'university-details/'.$university_details_page;
+$kd->title       = __('university_details') . '  | Apply in Turkey | Scholarships'.  $kd->config->title;
 $kd->page        = "university_details";
 $kd->description = $kd->config->description;
 $kd->keyword     = @$kd->config->keyword;
@@ -21,6 +21,8 @@ $university = new class{};
 if(!empty($university_details_page)){
  
     $gp = $db->where('id', Secure($university_details_page))->getOne(T_UNIVERSITY);
+
+
     $kd->university = $gp;
     $kd->title       = $gp->university. '  | Apply in Turkey | Scholarships'.  $kd->config->title;
     
