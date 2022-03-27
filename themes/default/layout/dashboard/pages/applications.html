@@ -55,7 +55,9 @@
         <p>Status</p>
         <select name="" id="status_drop" onchange="filter_status()">
             <option value='ANY'>Any</option>
-            <option value='AwaitingApproval'>Awaiting Approval</option>
+            <option value='accepted'>Accepted</option>
+            <option value='rejected'>Rejected</option>
+            <option value='queued'>Queued</option>
         </select>
     </div>
 </div>
@@ -109,19 +111,21 @@
     let tableRows = ""
     let status_drop = []
     data.forEach((element, index) => {
+
+     
       var date = new Date(element.created_at)
       let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
-      let data_string = (`${date.toDateString()} ${element.university_id} ${element.program_id} ${element.application_status_slug}`).toLowerCase()
+      let data_string = (`${date.toDateString()} ${element.university_id} ${element.program_id} ${element.is_checked}`).toLowerCase()
       let search_found = data_string.includes(search_string.toLowerCase())
-      status_drop.push(element.application_status_slug)
-      let status_found = status_string === "ANY" ? true : element.application_status_slug.replaceAll(" ",'').includes(status_string)
-
+      status_drop.push(element.is_checked)
+      let status_found = status_string === "ANY" ? true : element.is_checked.replaceAll(" ",'').includes(status_string)
+      
       let rows = `
             <tr>
                 <td>${date.toDateString().substr(4)}</td>
                 <td class="table_data">${element.university_id.toLowerCase()}</td>
                 <td class="table_data">${element.program_id.toLowerCase()}</td>
-                <td class="table_data">${element.application_status_slug.toLowerCase()}</td>
+                <td class="table_data">${element.is_checked.toLowerCase()}</td>
                ${isAgent == 'agent' ? '<td class="table_data">$120</td>' : ''} 
                 <td>
                     <div class="table_actions">

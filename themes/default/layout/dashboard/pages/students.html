@@ -1,10 +1,80 @@
+<style>
+  .filter_inputs p{
+    margin-bottom: 0;
+  }
+  .filter_inputs{
+    display: flex;
+    margin-bottom: 15px;
+  }
+  .filter_inputs .column{
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgb(240, 240, 240);
+    padding: 0 15px;
+  }
+  .filter_inputs .column:nth-child(1){
+    border-left: none;
+    padding-left: 0;
+  }
+  .date_column{
+    display: flex;
+    align-items: center;
+  }
+  .date_column input{
+    width: 140px;
+    font-size: 13px !important;
+  }
+  .column p{
+    font-weight: 600;
+    color: #054EA1;
+    font-size: 15px;
+  }
+  .column input,select{
+    border: 1px solid #777;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 13px !important;
+    height: 30px;
+  }
+  .add_stud{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  </style>
 <div class="applications">
-  <button class="agent_add_student" onclick="add_student()">Add Student</button>
+  <div class="filter_inputs">
+    <div class="column">
+        <p>Search</p>
+        <input type="text" placeholder="Search anything..." id="filter_search" oninput="filter_search()">
+    </div>
+    <div class="column">
+        <p>Date of Birth</p>
+        <div class="date_column">
+            <input type="date" id="date_start" onchange="filter_date()">
+            &nbsp;<p>-</p>&nbsp;
+            <input type="date" id="date_end" onchange="filter_date()">
+        </div>
+    </div>
+    <!-- <div class="column">
+        <p>Status</p>
+        <select name="" id="status_drop" onchange="filter_status()">
+            <option value='ANY'>Any</option>
+            <option value='accepted'>Accepted</option>
+            <option value='rejected'>Rejected</option>
+            <option value='queued'>Queued</option>
+        </select>
+    </div> -->
+    <div class="add_stud">
+      <button class="agent_add_student" onclick="add_student()">Add Student</button>
+    </div>
+</div>
   <div class="table_area_app">
     <table class="ga_table">
       <thead>
         <tr>
-          <th>Date</th>
+          <th>Date of Birth</th>
           <th>Names</th>
           <th>Email</th>
           <th>Status</th>
@@ -85,17 +155,25 @@
       request.open("POST", `{{LINK aj/user_dashboard/delete_agent_student}}?hash=${$('.main_session').val()}`);
       request.send(formData);
     }
- 
+  let search_string = ""
+  let date_start = "2000-01-01"
+  let date_end = "4000-12-12"
+
   function render_application(data) {
-    let rows = ""
+    let tablerows = ""
     data.forEach((element, index) => {
-      let date = new Date(+element.created_at)
-      rows += `
+      let date = new Date(element.date_of_birth)
+      let date_found = ( Date.parse(date_start) <= Date.parse(element.date_of_birth) && Date.parse(date_end) >= Date.parse(element.date_of_birth) )
+
+      let data_string = `${date.toString().substr(4, 11)} ${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()} ${element.email} ${element.ischecked}`
+      let search_found = data_string.includes(search_string.toLowerCase())
+
+      let rows = `
               <tr>
                   <td>${date.toString().substr(4, 11)}</td>
-                  <td class="table_data">${element.first_name} ${element.last_name}</td>
+                  <td class="table_data">${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()}</td>
                   <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
-                  <td class="table_data">On-going</td>
+                  <td class="table_data">${element.ischecked}</td>
                   <td>
                       <div class="table_actions">
                         <i class="fas fa-eye table_eye" onclick="open_action('VIEW', '${element.id}')"></i>
@@ -105,11 +183,23 @@
                   </td>
               </tr>
           `
+          if(search_found && date_found)
+          tablerows += rows
     })
-    document.getElementById("ga_table-body").innerHTML = rows
+    document.getElementById("ga_table-body").innerHTML = tablerows
     if (data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
     else document.getElementById("no_apps").innerHTML = ""
   }
+
+  function filter_search(){
+    search_string = document.getElementById("filter_search").value
+    render_application(MY_STUDENTS)
+  }
+  function filter_date(){
+        date_start = document.getElementById("date_start").value || "2000-01-01"
+        date_end = document.getElementById("date_end").value || "4000-12-12"
+        render_application(MY_STUDENTS)
+    }
 
   function open_action(action, app_id) {
     if (action === "VIEW") {
