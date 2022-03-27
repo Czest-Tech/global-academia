@@ -89,5 +89,37 @@ if ($first == 'forgot-password') {
 		        }
             }
 	    }
-	}
+	} else {
+        $errors[] = lang("Email cannot be empty");
+        $data = array('status' => 400,'error'=>$errors);
+    }
+}
+if ($first == 'comfirm_code') {
+	if (!empty($_POST)) {
+	    if (empty($_POST['code'])) {
+	        $errors[] = lang("Please check your details");
+	    } else {
+	        $code        = secure($_POST['code']);
+
+	        $getUser = $db->where("email_code", $code)->getOne(T_USERS);
+
+	        if (empty($getUser)) {
+	        	$errors[] = lang("incorrect code");
+                $data = array('status' => 400,'error'=>$errors);
+	        }
+	        if (empty($errors) && ($getUser->email_code == $code)) {	        	           
+                $data = array(
+                    'status' => 200,
+                    'message' => lang("code correct")
+                );	             
+            } 
+            else {
+                $errors[] = lang("code not comfirmed");
+                $data = array('status' => 400,'error'=>$errors);
+		    }
+	    }
+	}else {
+        $errors[] = lang("code cannot be empty");
+        $data = array('status' => 400,'error'=>$errors);
+    }
 }
