@@ -159,9 +159,10 @@
   }
   function upload_reciept(id){
     let form = `
-      <form>
+      <form class="upload_receipt_${id}">
         <label for="reciept_${id}" class="reciept_upload_btn">Upload</label>
-        <input type="file" id="reciept_${id}" hidden/>
+        <input type="file" name="payment_receipt_file" onchange="open_action('UPLOAD',${id})" id="reciept_${id}" hidden/>
+        <input  name="id" value="${id}" hidden/>
       </form>
     `
     return form
@@ -219,7 +220,7 @@
         
     }
     if(action === "UPLOAD"){
-      
+      UploadReceiptFunc(app_id);
     }
     console.log(action)
   }
@@ -239,5 +240,22 @@
       if(text.length > 15) text = text.substr(0, 15) + "..."
       return text
    }
+   function UploadReceiptFunc(id){
+                    let form1 = document.querySelector(`.upload_receipt_${id}`);
+                    var formData = new FormData(form1);
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            let data = JSON.parse(request.response);
+                            if (data.status == 200) {
+
+                                //receipt_upload_responce
+                                console.log(data)
+                            }
+                        }
+                    }
+                    request.open("POST", `{{LINK aj/user_dashboard/upload_receipt}}?hash=${$('.main_session').val()}`);
+                    request.send(formData);
+                }
 
 </script>

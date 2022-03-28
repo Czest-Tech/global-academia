@@ -66,6 +66,7 @@
                 $allProgram->program_id = GetProgramByID($allProgram->program_id);
                 $allProgram->application_status_slug =  __($allProgram->application_status);
                 $allProgram->name = GetstudentName($allProgram->student_id);
+                $allProgram->payment_receipt_file = GetMedia($allProgram->payment_receipt_file);
 
             }
             foreach($get_user_notificatins as $nf){
@@ -747,7 +748,7 @@ if($first  === 'upload_receipt'){
                 'crop' => array('width' => 400, 'height' => 400),
                 'mode' => 'id_photo'
             );
-            $update_education->payment_receipt_file_name = $_FILES['id_photo']['name'];
+            $update_education->payment_receipt_file_name = $_FILES['payment_receipt_file']['name'];
             $file_upload = ShareFile($file_info);
             if (!empty($file_upload['filename'])) {
                 $update_education->payment_receipt_file = $file_upload['filename'];
