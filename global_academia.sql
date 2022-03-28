@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 28, 2022 at 12:51 AM
+-- Generation Time: Mar 28, 2022 at 11:36 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.19
 
@@ -256,7 +256,7 @@ CREATE TABLE `applican_universities` (
 
 INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id`, `application_status`, `is_checked`, `acceptance_letter`, `uniqid`, `edit_request`, `priority`, `created_at`, `reference_id`, `applied_by`, `student_id`, `applicant_type`, `payment_receipt_required`, `payment_receipt_file`, `payment_receipt_file_name`) VALUES
 (1, 7, 'bonihgu@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '4713', 'none', 0, '2022-03-17 02:14:41.946390', NULL, 10, 1, 'agent', 0, NULL, NULL),
-(2, 7, 'emlas@yahoo.com', 9, 'awaiting_approval', 'queued', NULL, '4969', 'none', 0, '2022-03-17 02:14:41.951753', NULL, 10, 2, 'agent', 0, NULL, NULL),
+(2, 7, 'emlas@yahoo.com', 9, 'awaiting_approval', 'queued', NULL, '4969', 'none', 0, '2022-03-17 02:14:41.951753', NULL, 10, 2, 'agent', 0, 'upload/photos/2022/03/CNwyPqy3po3BUZUnwqAU_28_6d2cb7f9d3c5886448a072ffa88ebac6_image.png', NULL),
 (3, 7, 'bonihgu@gmail.com', 17, 'awaiting_approval', 'queued', NULL, '4968', 'none', 0, '2022-03-17 02:16:46.899504', NULL, 10, 1, 'agent', 0, NULL, NULL),
 (4, 7, 'emlas@yahoo.com', 8, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/A2WT3eG1I78AFvMAVPhp_27_8f9d1a63afce95d0021f55524aa5476a_image.png', '2664', 'none', 0, '2022-03-17 02:16:46.904096', NULL, 10, 2, 'agent', 0, NULL, NULL),
 (5, 7, 'brycordmuchindu@gmail.com', 16, 'awaiting_approval', 'queued', NULL, '9583', 'none', 0, '2022-03-26 20:09:48.167021', NULL, 20, NULL, 'applicant', 0, NULL, NULL),
