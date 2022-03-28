@@ -89,7 +89,7 @@
 
     let link_id = "<?php echo isset($_GET['application_number'])? $_GET['application_number'] : '' ; ?>";
     let user__id = "{{ME id}}"
-    let applicant_info_req = "<?php echo $_GET['student_number']; ?>"
+    let applicant_info_req = "<?php echo isset( $_GET['student_number'])?  $_GET['student_number'] : ' '; ?>"
 
     if(link_id){
         $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {id:link_id, user_id:user__id, api_type: "single"}, (data => {
