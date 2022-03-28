@@ -77,6 +77,7 @@
           <th>Date of Birth</th>
           <th>Names</th>
           <th>Email</th>
+          <th>Nationality</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -162,10 +163,11 @@
   function render_application(data) {
     let tablerows = ""
     data.forEach((element, index) => {
+      console.log(element)
       let date = new Date(element.date_of_birth)
       let date_found = ( Date.parse(date_start) <= Date.parse(element.date_of_birth) && Date.parse(date_end) >= Date.parse(element.date_of_birth) )
 
-      let data_string = `${date.toString().substr(4, 11)} ${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()} ${element.email} ${element.ischecked}`
+      let data_string = `${date.toString().substr(4, 11)} ${element.first_name.toLowerCase()} ${element.nationality.toLowerCase()} ${element.last_name.toLowerCase()} ${element.email} ${element.ischecked}`
       let search_found = data_string.includes(search_string.toLowerCase())
 
       let rows = `
@@ -173,6 +175,7 @@
                   <td>${date.toString().substr(4, 11)}</td>
                   <td class="table_data">${element.first_name.toLowerCase()} ${element.last_name.toLowerCase()}</td>
                   <td class="table_data" style="text-transform: lowercase;">${element.email}</td>
+                  <td class="table_data" >${element.nationality}</td>
                   <td class="table_data">${element.ischecked}</td>
                   <td>
                       <div class="table_actions">

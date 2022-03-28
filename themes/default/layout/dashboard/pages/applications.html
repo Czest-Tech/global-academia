@@ -70,8 +70,7 @@
                 <th>University</th>
                 <th>Programme</th>
                 <th>Status</th>
-                <th>Payment</th>
-
+                <th>App. Fee</th>
                <?php if($kd->user->account_type === "agent"){?>  <th>Commission</th> <?php } ?>
                 <th>Action</th>
             </tr>
@@ -113,11 +112,13 @@
     let tableRows = ""
     let status_drop = []
     data.forEach((element, index) => {
+      let payment = "N/A"
+      if(!element.payment_receipt_required) payment = upload_reciept(element.id)
       console.log(element)
      
       var date = new Date(element.created_at)
       let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
-      let data_string = (`${date.toDateString()} ${element.university_id} ${element.program_id} ${element.is_checked}`).toLowerCase()
+      let data_string = (`${date.toDateString()} ${element.name} ${element.university_id} ${element.program_id} ${element.is_checked}`).toLowerCase()
       let search_found = data_string.includes(search_string.toLowerCase())
       status_drop.push(element.is_checked)
       let status_found = status_string === "ANY" ? true : element.is_checked.replaceAll(" ",'').includes(status_string)
@@ -125,17 +126,17 @@
       let rows = `
             <tr>
                 <td>${date.toDateString().substr(4)}</td>
-                <td class="table_data">${trim_lng_text('Paul Jere')}</td>
+                <td class="table_data">${trim_lng_text(element.name)}</td>
                 <td class="table_data">${trim_lng_text(element.university_id.toLowerCase())}</td>
                 <td class="table_data">${trim_lng_text(element.program_id.toLowerCase())}</td>
                 <td class="table_data">${element.is_checked.toLowerCase()}</td>
-                <td class="table_data">Paid</td>
-               ${isAgent == 'agent' ? '<td class="table_data">$120</td>' : ''} 
+                <td class="table_data">${payment}</td>
+               ${isAgent == 'agent' ? '<td class="table_data">-</td>' : ''} 
                 <td>
                     <div class="table_actions">
                       <i class="fas fa-eye table_eye" onclick="open_action('VIEW', '${element.id}')"></i>
                       <i class="fas fa-edit table_edit" onclick="open_action('EDIT', '${element.id}')"></i>
-                      <i class="fas fa-trash table_trash"></i>
+                      <i class="fas fa-trash table_trash" onclick="open_action('DELETE', '${element.id}')"></i>
                     </div>
                 </td>
             </tr>
@@ -155,6 +156,15 @@
     document.getElementById("ga_table-body").innerHTML = tableRows
     if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
     else document.getElementById("no_apps").innerHTML = ""
+  }
+  function upload_reciept(id){
+    let form = `
+      <form>
+        <label for="reciept_${id}" class="reciept_upload_btn">Upload</label>
+        <input type="file" id="reciept_${id}" hidden/>
+      </form>
+    `
+    return form
   }
 
   function get_unique(data){
