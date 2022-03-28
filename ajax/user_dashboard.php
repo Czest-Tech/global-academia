@@ -65,6 +65,8 @@
                 $allProgram->university_id = GetuniversityByID($allProgram->university_id);
                 $allProgram->program_id = GetProgramByID($allProgram->program_id);
                 $allProgram->application_status_slug =  __($allProgram->application_status);
+                $allProgram->name = GetstudentName($allProgram->student_id);
+
             }
             foreach($get_user_notificatins as $nf){
                 if($nf->type == "application_status"){
@@ -730,5 +732,50 @@ if($first == "upload_missing"){
             
         );
     }   
+
+}
+if($first  === 'upload_receipt'){
+    if(!empty($_POST['id'])) {
+        $update_education = new stdClass();
+        $isSent = '';
+        if (!empty($_FILES['payment_receipt_file']['tmp_name'])) {
+            $file_info = array(
+                'file' => $_FILES['payment_receipt_file']['tmp_name'],
+                'size' => $_FILES['payment_receipt_file']['size'],
+                'name' => $_FILES['payment_receipt_file']['name'],
+                'type' => $_FILES['payment_receipt_file']['type'],
+                'crop' => array('width' => 400, 'height' => 400),
+                'mode' => 'id_photo'
+            );
+            $update_education->payment_receipt_file_name = $_FILES['id_photo']['name'];
+            $file_upload = ShareFile($file_info);
+            if (!empty($file_upload['filename'])) {
+                $update_education->payment_receipt_file = $file_upload['filename'];
+                
+            }
+            $uplouad_receipt = $db->where('id',Secure($_POST['id']))->update(T_APPLICANT_UNIVERSITIES, ToArray($update_education));
+            if($uplouad_receipt){
+                $data = array(
+                    'status' => 200,
+                    'message' => lang('receipt uploaded'),
+                    
+                );
+            }
+        } else{
+            $data = array(
+                'status' => 400,
+                'error' => lang('file name can not be empty'),
+                
+            );
+        }
+    } else {
+        $data = array(
+            'status' => 400,
+            'error' => lang('id can not be empty'),
+            
+        );
+    }   
+  
+
 
 }

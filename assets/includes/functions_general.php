@@ -1193,3 +1193,15 @@ function GetAdminInvitation() {
     }
     return $data;
 }
+function GetstudentName($user__id){
+    global $db, $kd;
+    if(!empty($user__id)){
+        $get_name = $db->where('id', $user__id)->getOne(T_AGENT_STUDENTS);
+
+        if($get_name){
+            return $get_name->first_name . ' ' . $get_name->last_name;
+        }
+    }
+
+    return ' ';
+}

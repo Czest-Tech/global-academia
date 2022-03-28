@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 27, 2022 at 10:26 PM
+-- Generation Time: Mar 28, 2022 at 12:51 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.19
 
@@ -244,36 +244,39 @@ CREATE TABLE `applican_universities` (
   `reference_id` varchar(11) DEFAULT NULL,
   `applied_by` int(11) NOT NULL DEFAULT '0',
   `student_id` int(11) DEFAULT NULL,
-  `applicant_type` varchar(150) NOT NULL DEFAULT 'guest'
+  `applicant_type` varchar(150) NOT NULL DEFAULT 'guest',
+  `payment_receipt_required` int(3) NOT NULL DEFAULT '0',
+  `payment_receipt_file` varchar(250) DEFAULT NULL,
+  `payment_receipt_file_name` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `applican_universities`
 --
 
-INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id`, `application_status`, `is_checked`, `acceptance_letter`, `uniqid`, `edit_request`, `priority`, `created_at`, `reference_id`, `applied_by`, `student_id`, `applicant_type`) VALUES
-(1, 7, 'bonihgu@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '4713', 'none', 0, '2022-03-17 02:14:41.946390', NULL, 10, 1, 'agent'),
-(2, 7, 'emlas@yahoo.com', 9, 'awaiting_approval', 'queued', NULL, '4969', 'none', 0, '2022-03-17 02:14:41.951753', NULL, 10, 2, 'agent'),
-(3, 7, 'bonihgu@gmail.com', 17, 'awaiting_approval', 'queued', NULL, '4968', 'none', 0, '2022-03-17 02:16:46.899504', NULL, 10, 1, 'agent'),
-(4, 7, 'emlas@yahoo.com', 8, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/A2WT3eG1I78AFvMAVPhp_27_8f9d1a63afce95d0021f55524aa5476a_image.png', '2664', 'none', 0, '2022-03-17 02:16:46.904096', NULL, 10, 2, 'agent'),
-(5, 7, 'brycordmuchindu@gmail.com', 16, 'awaiting_approval', 'queued', NULL, '9583', 'none', 0, '2022-03-26 20:09:48.167021', NULL, 20, NULL, 'applicant'),
-(6, 5, 'brycordmuchindu@gmail.com', 5, 'awaiting_approval', 'queued', NULL, '6946', 'none', 0, '2022-03-26 20:14:15.975433', NULL, 20, 20, 'applicant'),
-(7, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '7819', 'none', 0, '2022-03-27 01:58:22.364370', '-7819', 20, 20, 'applicant'),
-(8, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '7819', 'none', 1, '2022-03-27 01:58:22.370159', '-7819', 20, 20, 'applicant'),
-(9, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '7819', 'none', 2, '2022-03-27 01:58:22.377148', '-7819', 20, 20, 'applicant'),
-(10, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '5415', 'none', 0, '2022-03-27 02:04:20.643861', '-5415', 20, 20, 'applicant'),
-(11, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '5415', 'none', 1, '2022-03-27 02:04:20.647643', '-5415', 20, 20, 'applicant'),
-(12, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '5415', 'none', 2, '2022-03-27 02:04:20.650332', '-5415', 20, 20, 'applicant'),
-(13, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '6239', 'none', 0, '2022-03-27 02:35:00.221949', NULL, 0, NULL, 'guest'),
-(14, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '1104', 'none', 0, '2022-03-27 02:36:10.103120', NULL, 0, NULL, 'guest'),
-(15, 7, 'poijkm@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '9551', 'none', 1, '2022-03-27 02:57:59.893757', '6-9551', 0, 0, 'guest'),
-(16, 7, 'poijkm@gmail.com', 13, 'awaiting_approval', 'queued', NULL, '9551', 'none', 2, '2022-03-27 02:57:59.897364', '6-9551', 0, 0, 'guest'),
-(17, 5, 'bonihgu@gmail.com', 4, 'awaiting_approval', 'queued', NULL, '4784', 'none', 0, '2022-03-27 03:02:11.816985', NULL, 10, 1, 'agent'),
-(18, 5, 'emlas@yahoo.com', 4, 'awaiting_approval', 'queued', NULL, '7381', 'none', 0, '2022-03-27 03:02:11.822674', NULL, 10, 2, 'agent'),
-(19, 5, 'fghfhfdgh@gmail.com', 6, 'awaiting_approval', 'rejected', NULL, '8364', 'none', 1, '2022-03-27 17:06:51.076924', '193-8364', 0, 0, 'guest'),
-(20, 5, 'fghfhfdgh@gmail.com', 70, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/VSrSX1QycSSn7l6yfyP6_27_dbd6e383ff303a8e4324b9c8552028f0_image.png', '8364', 'none', 2, '2022-03-27 17:06:51.080600', '193-8364', 0, 0, 'guest'),
-(21, 5, 'fghfhfdgh@gmail.com', 72, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/h7EoH1g3BHkBE2DDQsoX_27_aae077a37477f80981b1ef50de814eca_image.png', '8364', 'none', 3, '2022-03-27 17:06:51.084341', '193-8364', 0, 0, 'guest'),
-(22, 5, 'fghfhfdgh@gmail.com', 75, 'awaiting_approval', 'queued', NULL, '8364', 'none', 4, '2022-03-27 17:06:51.088144', '193-8364', 0, 0, 'guest');
+INSERT INTO `applican_universities` (`id`, `university_id`, `email`, `program_id`, `application_status`, `is_checked`, `acceptance_letter`, `uniqid`, `edit_request`, `priority`, `created_at`, `reference_id`, `applied_by`, `student_id`, `applicant_type`, `payment_receipt_required`, `payment_receipt_file`, `payment_receipt_file_name`) VALUES
+(1, 7, 'bonihgu@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '4713', 'none', 0, '2022-03-17 02:14:41.946390', NULL, 10, 1, 'agent', 0, NULL, NULL),
+(2, 7, 'emlas@yahoo.com', 9, 'awaiting_approval', 'queued', NULL, '4969', 'none', 0, '2022-03-17 02:14:41.951753', NULL, 10, 2, 'agent', 0, NULL, NULL),
+(3, 7, 'bonihgu@gmail.com', 17, 'awaiting_approval', 'queued', NULL, '4968', 'none', 0, '2022-03-17 02:16:46.899504', NULL, 10, 1, 'agent', 0, NULL, NULL),
+(4, 7, 'emlas@yahoo.com', 8, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/A2WT3eG1I78AFvMAVPhp_27_8f9d1a63afce95d0021f55524aa5476a_image.png', '2664', 'none', 0, '2022-03-17 02:16:46.904096', NULL, 10, 2, 'agent', 0, NULL, NULL),
+(5, 7, 'brycordmuchindu@gmail.com', 16, 'awaiting_approval', 'queued', NULL, '9583', 'none', 0, '2022-03-26 20:09:48.167021', NULL, 20, NULL, 'applicant', 0, NULL, NULL),
+(6, 5, 'brycordmuchindu@gmail.com', 5, 'awaiting_approval', 'queued', NULL, '6946', 'none', 0, '2022-03-26 20:14:15.975433', NULL, 20, 20, 'applicant', 0, NULL, NULL),
+(7, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '7819', 'none', 0, '2022-03-27 01:58:22.364370', '-7819', 20, 20, 'applicant', 0, NULL, NULL),
+(8, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '7819', 'none', 1, '2022-03-27 01:58:22.370159', '-7819', 20, 20, 'applicant', 0, NULL, NULL),
+(9, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '7819', 'none', 2, '2022-03-27 01:58:22.377148', '-7819', 20, 20, 'applicant', 0, NULL, NULL),
+(10, 34, 'brycordmuchindu@gmail.com', 22, 'awaiting_approval', 'queued', NULL, '5415', 'none', 0, '2022-03-27 02:04:20.643861', '-5415', 20, 20, 'applicant', 0, NULL, NULL),
+(11, 34, 'brycordmuchindu@gmail.com', 27, 'awaiting_approval', 'queued', NULL, '5415', 'none', 1, '2022-03-27 02:04:20.647643', '-5415', 20, 20, 'applicant', 0, NULL, NULL),
+(12, 34, 'brycordmuchindu@gmail.com', 30, 'awaiting_approval', 'queued', NULL, '5415', 'none', 2, '2022-03-27 02:04:20.650332', '-5415', 20, 20, 'applicant', 0, NULL, NULL),
+(13, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '6239', 'none', 0, '2022-03-27 02:35:00.221949', NULL, 0, NULL, 'guest', 0, NULL, NULL),
+(14, 5, 'fgjgjfu@gmail.com', 6, 'awaiting_approval', 'queued', NULL, '1104', 'none', 0, '2022-03-27 02:36:10.103120', NULL, 0, NULL, 'guest', 0, NULL, NULL),
+(15, 7, 'poijkm@gmail.com', 9, 'awaiting_approval', 'queued', NULL, '9551', 'none', 1, '2022-03-27 02:57:59.893757', '6-9551', 0, 0, 'guest', 0, NULL, NULL),
+(16, 7, 'poijkm@gmail.com', 13, 'awaiting_approval', 'queued', NULL, '9551', 'none', 2, '2022-03-27 02:57:59.897364', '6-9551', 0, 0, 'guest', 0, NULL, NULL),
+(17, 5, 'bonihgu@gmail.com', 4, 'awaiting_approval', 'queued', NULL, '4784', 'none', 0, '2022-03-27 03:02:11.816985', NULL, 10, 1, 'agent', 0, NULL, NULL),
+(18, 5, 'emlas@yahoo.com', 4, 'awaiting_approval', 'queued', NULL, '7381', 'none', 0, '2022-03-27 03:02:11.822674', NULL, 10, 2, 'agent', 0, NULL, NULL),
+(19, 5, 'fghfhfdgh@gmail.com', 6, 'awaiting_approval', 'rejected', NULL, '8364', 'none', 1, '2022-03-27 17:06:51.076924', '193-8364', 0, 0, 'guest', 0, NULL, NULL),
+(20, 5, 'fghfhfdgh@gmail.com', 70, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/VSrSX1QycSSn7l6yfyP6_27_dbd6e383ff303a8e4324b9c8552028f0_image.png', '8364', 'none', 2, '2022-03-27 17:06:51.080600', '193-8364', 0, 0, 'guest', 0, NULL, NULL),
+(21, 5, 'fghfhfdgh@gmail.com', 72, 'awaiting_approval', 'accepted', 'upload/photos/2022/03/h7EoH1g3BHkBE2DDQsoX_27_aae077a37477f80981b1ef50de814eca_image.png', '8364', 'none', 3, '2022-03-27 17:06:51.084341', '193-8364', 0, 0, 'guest', 0, NULL, NULL),
+(22, 5, 'fghfhfdgh@gmail.com', 75, 'awaiting_approval', 'queued', NULL, '8364', 'none', 4, '2022-03-27 17:06:51.088144', '193-8364', 0, 0, 'guest', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2199,7 +2202,8 @@ INSERT INTO `sessions` (`id`, `session_id`, `user_id`, `platform`, `time`) VALUE
 (231, '5ce38e2db247b6e9c78da699a68591eb6961c29916483140412ddd07a2959bc43954ace30fcab64103', 12, 'web', 1648314041),
 (232, 'd8a80bfcf761d2c73fc77e4ef7bf79ac5e3993fc16483141464b6419079e6d54b7ffc0e3010993703d', 13, 'web', 1648314146),
 (233, '6a9136b19d3c0969ec32f4d476264b88fac10c8116483150454b52ef2fecc897f32580d2bb0b61b572', 14, 'web', 1648315045),
-(244, 'c75aac45b6a2b63a2fd11b2ca99a144a079b7c611648402663c51a9151301d448dfc2651cd52f8f42e', 16, 'web', 1648402663);
+(244, 'c75aac45b6a2b63a2fd11b2ca99a144a079b7c611648402663c51a9151301d448dfc2651cd52f8f42e', 16, 'web', 1648402663),
+(245, 'ff33a04063569262068e2d04ed5bd6ae295b413d1648422736ce179b121640fe1dc80665d0f85de9fe', 10, 'web', 1648422736);
 
 -- --------------------------------------------------------
 
@@ -2443,7 +2447,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `ip_address`, `password`, `first
 (13, 'Cos_QqbM_Age', 'comsicagenc@gmail.com', '::1', '$2y$10$mxedI4ZJ0V.9lg.DEeontehKbVAJlozf34L55oMcfdw32mJYYQULy', 'Cosmi', 'Agenc', 'male', '31deed68434d434b62ca969e2cfe44bac3d89538', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648314146, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
 (14, 'Luc_EXp7_Stu', 'lucrativestudy@gmail.com', '::1', '$2y$10$Jnv6CndbWvzfVDd08UPch.IAz79OgT1rC0HEjnyn1IxoW5ki7ptxa', 'Lucrative', 'Study', 'male', 'e4a00ded0de8ee2b5b31e396898e18ef428b4d0c', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 0, 0, 0, 0, 1648315045, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'agent', 0, NULL, 0, NULL),
 (15, 'Jon_9rIu_Dee', 'jonnydeep@gmail.com', '::1', '$2y$10$FaS7VaW3U2QpWtDHIo1VL.n4LgGbbwST46ZI2rtZnQBgVEao.qZXa', 'Jonny', 'Deep', 'male', 'fd429c4759f3d23fe6215d55390c5eeabda39d52', 'english', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 0, 0, 0, 1648315437, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'applicant', 0, NULL, 0, NULL),
-(16, 'ayse_gul365', 'ayse.gur@global.com', '::1', '$2y$10$hZhpc3RuwHb2F9fKNm6VveUmlfTj/7nEDG/WNKltACR5OBvl43/Rq', 'Ayse', 'Gul', 'male', '0448', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322225, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, '1648486468'),
+(16, 'ayse_gul365', 'ayse.gur@global.com', '::1', '$2y$10$hZhpc3RuwHb2F9fKNm6VveUmlfTj/7nEDG/WNKltACR5OBvl43/Rq', 'Ayse', 'Gul', 'male', '4283', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322225, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, '1648506262'),
 (17, 'canan_gamze998', 'canangamze@gmail.com', '::1', '$2y$10$u0YwQkiQk.q/o9MCvmB2oejg4w7Ze1ixsNADJI3TIGNucwVholtHi', 'Canan', 'Gamze', 'male', '24a2e0687e0015aa84d1cc445e738e45e3bef64c', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322444, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
 (18, 'husnu_coban065', 'hunsucoban@globalacademia.com', '::1', '$2y$10$zrTj7aNJA41/PQw1O.otRuoleXpBv2Sz2R2zf1xd0EZW1oxdu5iIi', 'Husnu', 'Coban', 'male', '68f6267ac9bed349a66600f7f4e77a9f844dd4a3', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322603, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
 (19, 'atlar_patlar344', 'atlarptlar@globaacademia.com', '::1', '$2y$10$e.lX5pDlVT6gU4U3EnuuVe7uK3XetHQ93AFEvHkGHMZ54rcT74LNq', 'Atlar', 'Patlar', 'male', 'e86730d8004ae2e538c11215e892082dee135950', 'turkish', 'upload/photos/d-avatar.jpg', 'upload/photos/d-cover.jpg', 0, NULL, '', '', '', '', '', '', 1, 1, 3, 0, 1648322663, 0, '2022/3', 0, '', 1, 1, 1, 1, '0.00', 'site', '0', '0', '0', 0, NULL, 0, NULL, NULL, NULL, 'worker', 0, NULL, 0, NULL),
@@ -2855,7 +2859,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT for table `terms`
