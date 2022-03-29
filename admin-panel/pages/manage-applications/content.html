@@ -424,8 +424,8 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
                         <td>${element.nationality}</td>
                         <td>
                             <i class="fas fa-eye table_eye" onclick="handleAction('view', '${element.id}')"></i>
-                            <i class="fas fa-edit table_edit"  onclick="handleAction('edit', '${element.id}'"></i>
-                            <i class="fas fa-trash table_trash" onclick="handleAction('delete', '${element.id}'""></i>
+                            <i class="fas fa-edit table_edit"  onclick="handleAction('edit', '${element.id}')"></i>
+                            <i class="fas fa-trash table_trash" onclick="handleAction('delete', '${element.id}')"></i>
                         </td>
                     </tr>
                 `
@@ -492,15 +492,13 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
     function handleAction(action, id) {
 
         // let action = document.getElementById(`table-actions${id}`).value
-        console.log(id, action)
+
         if (action === "view")
             window.open(`${application_view_url}?id=${id}`)
         if (action === "edit")
             window.open(`${application_edit_url}?id=${id}`)
         if (action === "delete")
-            delete_application(id,"application") 
-
-        document.getElementById(`table-actions${id}`).value = "Select"
+            delete_application(id,"application")
     }
     function delete_application(id,type) {
         let obj = {
@@ -509,6 +507,7 @@ if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
         }
         localStorage.setItem("DEL_APP", JSON.stringify(obj))
         document.getElementById("delete-applicaiton-modal").style.display = "flex"
+
    }
    function deleteApplicant(action){
         if(action === "YES"){
