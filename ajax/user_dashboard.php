@@ -419,11 +419,11 @@ if($first === "get_agent_students"){
 if($first  === "add_agent_student"){
     $update_education = new stdClass();
     $isSent = '';
-    $randon_divider = random_str(4);
+    $randon_divider = random_str(3);
 
     $firstname       = Secure($_POST['first_name']);
     $lastname       = Secure($_POST['last_name']);
-    $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
+    $username = $firstname.'_'.$lastname.'_'.$randon_divider;   
 
     $update_education->type = "multiple";
     $update_education->username = $username;
@@ -517,10 +517,11 @@ if($first  === "update_agent_student"){
 if($first  === "delete_agent_student"){
     if(isset($_POST['id']) && !empty($_POST['id'])){
         
-        $delet_educationa_data = $db->where('id', Secure($_POST['id']))->delete(T_AGENT_STUDENTS);
-        
+        $delet_educationa_data = $db->where('id', Secure($_POST['id']))->getOne(T_AGENT_STUDENTS);
         if($delet_educationa_data){
-    
+             $db->where("email", $delet_educationa_data->email)->delete(T_APPLICANT_UNIVERSITIES);
+             $db->where('id', Secure($_POST['id']))->delete(T_AGENT_STUDENTS);
+
             $get_data = $db->where('agent_id', $kd->user->id)->get(T_AGENT_STUDENTS);
     
             $data = array(

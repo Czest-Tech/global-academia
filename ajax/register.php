@@ -34,7 +34,7 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     $lastname       = Secure($_POST['last_name']);
     $account_type = Secure($_POST["account_type"]);
     $randon_divider = random_str(4);
-    $username = substr($firstname,0, 3).'_'.$randon_divider.'_'.substr($lastname,0, 3);   
+    $username = $firstname.'_'.$lastname.'_'.$randon_divider;   
 
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
     $email           = Secure($_POST['email']);

@@ -3,6 +3,9 @@
 if (IS_LOGGED == false) {
     header("Location: " . UrlLink('login'));
     exit();
+} else if ( IsAdmin() == true) {
+	header("Location: " . UrlLink('admin-cp'));
+    exit();
 }
 $user_id                = $kd->user->id;
 $kd->is_admin          = IsAdmin();
