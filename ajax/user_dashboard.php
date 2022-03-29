@@ -781,3 +781,138 @@ if($first  === 'upload_receipt'){
 
 
 }
+if($first  === "delete_agent_application"){
+    if(isset($_GET['id']) && !empty($_GET['id'])){
+        
+        $delet_educationa_data = $db->where('id', Secure($_GET['id']))->delete(T_APPLICANT_UNIVERSITIES);
+        if($delet_educationa_data){
+            if($kd->user->account_type == "applicant"){
+                $get_user_applications = $db->where("user_id", $kd->user->id)->getOne(T_APPLICATIONS);
+                $get_univiversities = $db->where("email", $get_user_applications->email)->get(T_APPLICANT_UNIVERSITIES);
+                $get_pending_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "queued")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                $get_accepted_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "accepted")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                $get_rejected_application_count =  $db->where("email", $get_user_applications->email)->where("is_checked", "rejected")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                $get_user_notificatins = $db->where('recipient_id', $kd->user->id)->get(T_USER_NOTIFACATIONS);
+                $get_user_notificatins_count = $db->where('recipient_id', $kd->user->id)->where("seen", 0)->getValue(T_USER_NOTIFACATIONS, "count(*)");
+    
+                foreach($get_univiversities as $allProgram){
+                    $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                    $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                    $allProgram->application_status_slug =  __($allProgram->application_status);
+                }
+                foreach($get_user_notificatins as $nf){
+                    if($nf->type == "application_status"){
+                    $nf->subject = "Application status update";
+    
+    
+                    } else {
+                        $nf->subject = "New message from Global Academia";
+    
+                    }
+                    $nf->url = UrlLink($nf->url);
+                }
+    
+            
+                if( $get_user_applications) {
+                    
+                    $data = array(
+                        'status' => 200,
+                        'user_data' => $kd->user,
+                        'application_data' => $get_user_applications,
+                        'applied_to_universities' => $get_univiversities,
+                        'number_of_applications' => count($get_univiversities),
+                        'number_of_pending_applications' => $get_pending_application_count,
+                        'number_of_accepted_applications' => $get_accepted_application_count,
+                        'number_of_rejected_applications' => $get_rejected_application_count,
+                        'user_notifications' => $get_user_notificatins,
+                        'user_new_notification_count' => $get_user_notificatins_count,
+                        // 'user_number_of_applicaions' => GetUserAppliedToUniversities($email, 'applicant')
+    
+    
+                    );
+                } else {
+                    
+                    $send_errors_data = array(
+                        'status' => 400,
+                        'message' => "ERROR",
+                    
+                    );
+                }
+            } 
+            elseif($kd->user->account_type == "agent"){
+                $get_user_notificatins = $db->where('recipient_id', $kd->user->id)->get(T_USER_NOTIFACATIONS);
+                $get_user_notificatins_count = $db->where('recipient_id', $kd->user->id)->where("seen", 0)->getValue(T_USER_NOTIFACATIONS, "count(*)");
+                $get_applicant_unversities = $db->where('applied_by', $kd->user->id)->get(T_APPLICANT_UNIVERSITIES);
+                $get_pending_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "queued")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                $get_accepted_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "accepted")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                $get_rejected_application_count =  $db->where('applied_by', $kd->user->id)->where("is_checked", "rejected")->getValue(T_APPLICANT_UNIVERSITIES, "count(*)");
+                foreach($get_applicant_unversities as $allProgram){
+                    $allProgram->university_id = GetuniversityByID($allProgram->university_id);
+                    $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                    $allProgram->application_status_slug =  __($allProgram->application_status);
+                    $allProgram->name = GetstudentName($allProgram->student_id);
+                    $allProgram->payment_receipt_file = GetMedia($allProgram->payment_receipt_file);
+    
+                }
+                foreach($get_user_notificatins as $nf){
+                    if($nf->type == "application_status"){
+                    $nf->subject = "Application status update";
+    
+    
+                    } else {
+                        $nf->subject = "New message from Global Academia";
+    
+                    }
+                    $nf->url = UrlLink($nf->url);
+                }
+    
+           
+                $get_user_applications = '';
+                $get_univiversities = array();
+               
+               
+    
+            
+                if( true) {
+                    
+                    $data = array(
+                        'status' => 200,
+                        'user_data' => $kd->user,
+                        'application_data' => $get_user_applications,
+                        'applied_to_universities' => $get_applicant_unversities,
+                        'number_of_applications' => count($get_applicant_unversities),
+                        'number_of_pending_applications' => $get_pending_application_count,
+                        'number_of_accepted_applications' => $get_accepted_application_count,
+                        'number_of_rejected_applications' => $get_rejected_application_count,
+                        'user_notifications' => $get_user_notificatins,
+                        'user_new_notification_count' => $get_user_notificatins_count,
+                        // 'user_number_of_applicaions' => GetUserAppliedToUniversities($email, 'applicant')
+    
+    
+                    );
+                } else {
+                    
+                    $send_errors_data = array(
+                        'status' => 400,
+                        'message' => "ERROR",
+                    
+                    );
+                }
+            }
+        } else {
+            $data = array(
+                'status' => 401,
+                'message' => __('error'),
+                'url' => UrlLink($redirectlink)
+             );
+        }
+        
+    }else {
+        $data = array(
+            'status' => 400,
+            'message' => __('error'),
+            'url' => UrlLink($redirectlink)
+         );
+    }
+   
+}
