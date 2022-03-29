@@ -522,6 +522,7 @@ a{
     box-shadow: var(--SHADOW);
     margin: 0 10px;
     min-width: 280px;
+    width: 280px;
     padding: 10px !important;
     border-radius: 7px;
 }

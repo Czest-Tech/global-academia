@@ -192,7 +192,7 @@
                     </div>
                 </div>
             </div>
-            <div class="app_bottom_btns">
+            <div class="app_bottom_btns" id="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
                 <div onclick="SendApplication()">{{LANG Confirm}}</div>
               
@@ -324,7 +324,7 @@ let form1 = $('form.final_Send');
         url: `{{LINK aj/${application_url}}}?hash=${$('.main_session').val()}`,
         dataTyep:'json',
         beforeSend: function() {
-            form1.find('button').text("{{LANG please_wait}}");
+            document.getElementById('app_bottom_btns').innerHTML = `<p style="color:white; font-size:15px; padding:10px 25px">Applying...</p>`
         },
             success: function(data) {
                 if (data.status == 200) { 

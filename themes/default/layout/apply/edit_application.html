@@ -30,13 +30,12 @@
         <form class="final_Send" method="post"> 
             <p class="submission_message">{{LANG Are you sure you want to submit}} ?</p>
             <p class="submit-alert"></p>
+            <input type="hidden" name="id" value="{{ID}}" />
+            <input type="hidden" class="new_prog" name="change_program_id" id="chan_program_id" value="" />
   
-            <div class="app_bottom_btns">
+            <div class="app_bottom_btns" id="app_bottom_btns">
                 <div onclick="appModal()">{{LANG Cancel}}</div>
-              <button type="submit">{{LANG Confirm}}</button>
-              <input type="hidden" name="id" value="{{ID}}" />
-              <input type="hidden" class="new_prog" name="change_program_id" id="chan_program_id" value="" />
-
+                <button type="submit">{{LANG Confirm}}</button>
            </div>
         </form> 
     </div>
@@ -117,7 +116,7 @@
         url: '{{LINK aj/application/single_missing}}?hash=' + $('.main_session').val(),
         dataTyep:'json',
         beforeSend: function() {
-            form1.find('button').text("{{LANG please_wait}}");
+            document.getElementById('app_bottom_btns').innerHTML = `<p style="color:white; font-size:15px; padding:10px 25px">Applying...</p>`
         },
             success: function(data) {
                 if (data.status == 200) { 
