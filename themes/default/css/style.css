@@ -521,7 +521,7 @@ a{
     margin: 0 5px;
     box-shadow: var(--SHADOW);
     margin: 0 10px;
-    width: 310px;
+    min-width: 280px;
     padding: 10px !important;
     border-radius: 7px;
 }

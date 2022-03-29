@@ -44,6 +44,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th id="apps_table_col">Names</th>
                         <th>University</th>
                         <th>Program</th>
                     </tr>
@@ -62,11 +63,15 @@
     </div>
 </div>
 <script>
+    let isAgent = '{{ME account_type}}';
+    document.getElementById("apps_table_col").style.display = isAgent === "agent" ? "":"none"
+
     $.get('{{LINK aj}}' + "/user_dashboard/get_user_applications?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
             render_dashboard_cards(data)
             render_dashboard_app_table(data.applied_to_universities)
             render_dashboard_notification(data.user_notifications)
+            console.log(data)
         }
     }));
 
@@ -82,16 +87,19 @@
     }
 
     function render_dashboard_app_table(data){
-        data.forEach((element,index) => {
+        let num = data.length > 10 ? 10 : data.length
+        for (let index = 0; index < num; index++) {
             document.getElementById("app_table_rows").innerHTML += `
                 <tr>
                     <td>${index + 1}</td>
-                    <td class="table_data">${element.university_id.toLowerCase()}</td>
-                    <td class="table_data">${element.program_id.toLowerCase()}</td>
+                    ${isAgent === "agent" ? '<td class="table_data">'+ data[index].name.toLowerCase()+'</td>' : ''}
+                    <td class="table_data">${data[index].university_id.toLowerCase()}</td>
+                    <td class="table_data">${data[index].program_id.toLowerCase()}</td>
                 </tr>
             `
-        });
+        }
         if(data.length < 1) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Applications</p>'
+        if(data.length > 0) document.getElementById("no_apps").innerHTML = '<a href="{{LINK dashboard/applications/}}{{ME username}}" class="font2 bold600 pointer "><p class="m-10 to_apps">View All Applications</p></a>'
         else document.getElementById("no_apps").innerHTML = ""
     }
     function render_dashboard_notification(data){

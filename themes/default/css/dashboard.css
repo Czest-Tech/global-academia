@@ -386,6 +386,10 @@ a{
     padding: 5px 10px;
     cursor: pointer;
 }
+.to_apps{
+    color: var(--DARK_BLUE) !important;
+    padding: 0 5px;
+}
 
 @media only screen and (max-width: 1120px) {
     .dash_card { max-width: 400px; width: 30%; }

@@ -138,6 +138,17 @@
       toggleStatusOut = true
     }
   }
+
+  var langOut = false
+function toggleLang(){
+    if(langOut){
+        document.querySelector(".langDropTop").style.display = "none"
+        langOut = false
+    }else{
+        document.querySelector(".langDropTop").style.display = "flex"
+        langOut = true
+    }
+}
   
 
 </script>
