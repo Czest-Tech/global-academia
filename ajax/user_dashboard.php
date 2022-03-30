@@ -13,6 +13,7 @@
             foreach($get_univiversities as $allProgram){
                 $allProgram->university_id = GetuniversityByID($allProgram->university_id);
                 $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                $allProgram->payment_receipt_file = GetMedia( $allProgram->payment_receipt_file);
                 $allProgram->application_status_slug =  __($allProgram->application_status);
             }
             foreach($get_user_notificatins as $nf){
@@ -798,6 +799,8 @@ if($first  === "delete_agent_application"){
                 foreach($get_univiversities as $allProgram){
                     $allProgram->university_id = GetuniversityByID($allProgram->university_id);
                     $allProgram->program_id = GetProgramByID($allProgram->program_id);
+                    $allProgram->payment_receipt_file = GetMedia( $allProgram->payment_receipt_file);
+
                     $allProgram->application_status_slug =  __($allProgram->application_status);
                 }
                 foreach($get_user_notificatins as $nf){
