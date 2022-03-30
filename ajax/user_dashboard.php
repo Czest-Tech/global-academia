@@ -15,6 +15,7 @@
                 $allProgram->program_id = GetProgramByID($allProgram->program_id);
                 $allProgram->payment_receipt_file = GetMedia( $allProgram->payment_receipt_file);
                 $allProgram->application_status_slug =  __($allProgram->application_status);
+                $allProgram->name = $kd->user->first_name . ' ' . $kd->user->last_name;
             }
             foreach($get_user_notificatins as $nf){
                 if($nf->type == "application_status"){
@@ -800,6 +801,7 @@ if($first  === "delete_agent_application"){
                     $allProgram->university_id = GetuniversityByID($allProgram->university_id);
                     $allProgram->program_id = GetProgramByID($allProgram->program_id);
                     $allProgram->payment_receipt_file = GetMedia( $allProgram->payment_receipt_file);
+                    $allProgram->name = $kd->user->first_name . ' ' . $kd->user->last_name;
 
                     $allProgram->application_status_slug =  __($allProgram->application_status);
                 }
