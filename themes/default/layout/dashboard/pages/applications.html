@@ -114,7 +114,8 @@
     data.forEach((element, index) => {
       console.log(element)
       let payment = "N/A"
-      if(!element.payment_receipt_required) payment = upload_reciept(element.id)
+      if(!element.payment_receipt_file) payment = upload_reciept(element.id)
+      if(element.payment_receipt_file) payment = view_reciept(element.payment_receipt_file)
       var date = new Date(element.created_at)
       let date_found = ( Date.parse(date_start) <= Date.parse(date) && Date.parse(date_end) >= Date.parse(date) )
       let data_string = (`${date.toDateString()} ${element.name} ${element.university_id} ${element.program_id} ${element.is_checked}`).toLowerCase()
@@ -165,6 +166,10 @@
       </form>
     `
     return form
+  }
+  function view_reciept(link){
+
+    return `<a href="${link}" target="_blank"class="reciept_upload_btn" style="border:none; color:white">Open</a>`
   }
 
   function get_unique(data){
