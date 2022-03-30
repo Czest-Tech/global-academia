@@ -178,10 +178,13 @@ $university  = $db->where('id',$id)->getOne(T_UNIVERSITY);
                     <input class="form-control" type="text" name="location"
                         value="<?php echo $university->location; ?>" />
                 </div>
+                
                 <div class="input_fields_rows">
                     <label>University Type</label>
-                    <input type="text" class="form-control" name="university_type"
-                        value="<?php echo $university->location; ?>" />
+                    <select class="form-control" name="university_type" aria-label="Default select example" value="<?php echo $university->university_type; ?>">
+                        <option value="Private">Private</option>
+                        <option value="State">State</option>
+                    </select>
                 </div>
                 <div class="input_fields_rows">
                     <label>Foundation</label>
@@ -193,21 +196,6 @@ $university  = $db->where('id',$id)->getOne(T_UNIVERSITY);
                 <label for="description">University description</label>
                 <textarea type="text" name="description" class="form-control"
                     id="title"><?php echo $university->description; ?></textarea>
-            </div>
-
-            <hr class="w-100" />
-            <p class="section_title">Languages</p>
-            <div class="input_fields">
-                <div class="input_fields_rows">
-                    <label>Language Education English</label>
-                    <input type="text" class="form-control" name="lang_edu_en"
-                        value="<?php echo $university->lang_edu_en; ?>" />
-                </div>
-                <div class="input_fields_rows">
-                    <label class="col-8">Language Education Turkey</label>
-                    <input type="text" class="form-control" name="lang_edu_tr"
-                        value="<?php echo $university->lang_edu_tk; ?>" />
-                </div>
             </div>
 
             <hr class="w-100" />
