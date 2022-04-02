@@ -3,13 +3,13 @@
         <div class="profile_card_top">
             <form id="user-change-avatar-form"  method="post">
                 <label for="profile_pic" class="profile_pic_label">
-                    <img class="avatar" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
+                    <img class="avatar" id="profile_ph" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
                     <i class="fas fa-camera"></i>
                 </label>
                 <input type="file" name="avatar" id="profile_pic" class="user-avatar" accept="image/x-png, image/jpeg" hidden>
                 <div class="dark_color">
                     <p class="font3 bold500">{{ME name}}</p>
-                    <p class="font2 bold400">Student Account</p>
+                    <p class="font2 bold400" id="acc_type">Account Type</p>
                 </div>
             </form>
         </div>
@@ -28,13 +28,11 @@
                 <p class="font2">{{LANG Last Name}}</p>
                 <input type="text" name="last_name" value="{{USER last_name}}">
             </div>
-            
-         
             <button class="profile_save_btn">{{LANG Save Changes}}</button>
         </div>
         <div class="profile_card_body" id="details">
             <form class="save_info" method="post">
-                <div class="save_info_alert"></div>
+                <!-- <div class="save_info_alert"></div> -->
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Fathers Name}}</p>
                     <input type="text" name="fathers_name" value="<?php echo $kd->user->education_info->fathers_name; ?>">
@@ -77,7 +75,7 @@
         </div>
         <div class="profile_card_body" id="documents">
             <form class="save_documents" method="post"> 
-                <div class="save_documents_info_alert"></div>
+                <!-- <div class="save_documents_info_alert"></div> -->
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Diploma}}</p>
                     <input type="file" name="diploma" value="<?php echo $kd->user->education_info->diploma; ?>">
@@ -103,7 +101,7 @@
         </div>
         <div class="profile_card_body" id="security">
             <form class="save_change_password" method="post">
-                <div class="save_pass_alert"></div>
+                <!-- <div class="save_pass_alert"></div> -->
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Old Password}}</p>
                     <input type="password" name="current_password">
@@ -118,7 +116,7 @@
                 </div>
                 
                 <input type="hidden" name="user_id" value="{{ME id}}">
-                <button class="profile_save_btn">{{LANG Save Changes}}</button>
+                <button class="profile_save_btn" style="width: 100%;">{{LANG Save Changes}}</button>
             </form>
                 
         </div>
@@ -126,18 +124,23 @@
 </div>
 
 <script>
+    let isAgent = '{{ME account_type}}'
+    document.getElementById('acc_type').innerHTML = isAgent === 'agent' ? 'Agent Account' : 'Student Account'
+
+
+
    $(document).on('change', '.user-avatar', (event) => {
 	$("#user-change-avatar-form").submit();
 });
   
         $(document).ready(() =>{
-     
                  $('#user-change-avatar-form').change().ajaxForm({
                     url: "{{CONFIG aj/user/update-profile-picture}}?hash=" + $('.main_session').val(),
                     beforeSubmit:  function () {
-                    
+                        console.log("Saviung")
                     },
                     success: function (data) {
+                        console.log(data)
                         if (data.status == 200) {
                             $('#avatar').attr('src', data.img);
                         }
@@ -155,7 +158,10 @@
 
     $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
-          console.log(data)
+            if(data.data.avatar) document.getElementById('profile_ph').src = data.data.avatar
+
+            console.log(data.data)
+  
         }
     }));
 
@@ -263,7 +269,3 @@
     
 
 </script>
-
-
-1/yac0s/0v
-1/yac0s/0v
