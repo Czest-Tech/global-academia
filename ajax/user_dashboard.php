@@ -136,10 +136,18 @@
         $update_education->fathers_name = Secure($_POST['fathers_name']);
         $update_education->mothers_name = Secure($_POST['mothers_name']);
         $update_education->passport_number = Secure($_POST['passport']);
+        $update_education->first_name  = $kd->user->first_name;
+        $update_education->last_name  = $kd->user->last_name;
+
         $update_education->nationality = Secure($_POST['nationality']);
         $update_education->country_of_residence = Secure($_POST['country_of_residence']);
-        $update_educationa_data = $db->where('user_id', $kd->user->id)->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
-        
+        if($db->where('user_id', $kd->user->id)->getOne(T_APPLICANT_EDUCATION_INFO)){
+          $update_educationa_data = $db->where('user_id', $kd->user->id)->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
+        } else {
+            $update_education->user_id =  $kd->user->id;
+            $update_educationa_data = $db->insert(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
+
+        }
         if($update_educationa_data){
             $get_data = $db->where('user_id', $kd->user->id)->get(T_APPLICANT_EDUCATION_INFO);
 
