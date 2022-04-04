@@ -27,24 +27,26 @@ if($first == "multiple" ){
                 $uniqid =  random_str(4, '120340567890');
                 $get_applicant_info->type = "multiple";
                 $get_applicant_info->created_at = time();
-
+                $get_applicant_info->user_id = $get_applicant_info->id;
                 $get_applicant_info->applicant_type = Secure($_POST['applicant_type']);
-                $get_applicant_info->applied_by = $kd->user->id;        
-               
+                $get_applicant_info->applied_by = $kd->user->id; 
+                unset($get_applicant_info->id);       
+                unset($get_applicant_info->agent_id);
+                unset($get_applicant_info->username);
                 $application_sent = false;
                 $push_application_data;          
                 foreach( $universities_re  as $kp){  
                     $get_applicant_info->university_id = Secure($kp->university_id);
                     $get_applicant_info->program_id = Secure($kp->id);  
-                    $check_email_exists = $db->where('email', $email)->getOne(T_APPLICATIONS);
+                    $check_email_exists = $db->where('email', $get_applicant_info->email)->getOne(T_APPLICATIONS);
                     if($check_email_exists){
                         $applican_exists = true;
                         $referencetrack = $check_email_exists->application_no;
                         $grouped_applications->uniqid = $uniqid;
-                        $grouped_applications->email = $email;
+                        $grouped_applications->email = $get_applicant_info->email;
                         $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
                         $grouped_applications->applied_by = $kd->user->id;
-                        $grouped_applications->student_id = Secure($_POST['user_id']);  
+                        $grouped_applications->student_id = $sid;  
                         $grouped_applications->university_id = Secure($kp->university_id);
                         $grouped_applications->program_id = Secure($kp->id);
                         $grouped_applications->priority = $counts;
@@ -58,10 +60,10 @@ if($first == "multiple" ){
                     } else {
                     $isSent = $db->insert(T_APPLICATIONS, ToArray($get_applicant_info));
                     $referencetrack = $uniqid;
-                    $grouped_applications->email = $email;
+                    $grouped_applications->email = $get_applicant_info->email;
                     $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
                     $grouped_applications->applied_by = $kd->user->id;
-                    $grouped_applications->student_id = Secure($_POST['user_id']);  
+                    $grouped_applications->student_id = $sid;  
                     $grouped_applications->university_id =  Secure($kp->university_id);
                     $grouped_applications->program_id =  Secure($kp->id);
                     $grouped_applications->priority = $counts;
@@ -80,6 +82,9 @@ if($first == "multiple" ){
     if($application_data->applicant_type == 'applicant'){
         $applicant_type = Secure($_POST['applicant_type']);
         $get_applicantEducational_info = $db->where('user_id', $kd->user->id)->getOne(T_APPLICANT_EDUCATION_INFO);
+        if(empty($get_applicantEducational_info)){
+            $get_applicantEducational_info = $db->where('id', $kd->user->id)->getOne(T_USERS);
+        }
         $email = $kd->user->email;
         $isSent = '';
         
@@ -102,11 +107,10 @@ if($first == "multiple" ){
                 $grouped_applications->email = $email;
                 $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
                 $grouped_applications->applied_by = $kd->user->id;
-                $grouped_applications->student_id = Secure($_POST['user_id']);  
+                $grouped_applications->student_id = $kd->user->id;  
                 $grouped_applications->university_id = Secure($kp->university_id);
                 $grouped_applications->program_id = Secure($kp->id);
                 $grouped_applications->priority = $counts;
-                var_dump($grouped_applications);
                 $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
                 if($push_application_data){
                     $ref_code['reference_id'] = $uniqid;
@@ -114,25 +118,27 @@ if($first == "multiple" ){
                     $count += 1;
                 }
 
-            } else {
-            $isSent = $db->insert(T_APPLICATIONS, ToArray($application_data));
-            $referencetrack = $uniqid;
-            $grouped_applications->email = $email;
-            $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
-            $grouped_applications->applied_by = $kd->user->id;
-            $grouped_applications->student_id = Secure($_POST['user_id']);  
-            $grouped_applications->university_id = Secure($_POST['university_id']);
-            $grouped_applications->program_id = Secure($_POST['program_id']);
-            $grouped_applications->priority = $counts;
-            $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
-            if($push_application_data){
-                $ref_code['reference_id'] = $isSent.'-'.$uniqid;
-                $db->where('id', $push_application_data)->update(T_APPLICANT_UNIVERSITIES,$ref_code);
-                $count += 1;
             }
+            else 
+            {
+                $isSent = $db->insert(T_APPLICATIONS, ToArray($get_applicantEducational_info));
+                $referencetrack = $uniqid;
+                $grouped_applications->email = $email;
+                $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
+                $grouped_applications->applied_by = $kd->user->id;
+                $grouped_applications->student_id = $kd->user->id;
+                $grouped_applications->university_id = Secure($_POST['university_id']);
+                $grouped_applications->program_id = Secure($_POST['program_id']);
+                $grouped_applications->priority = $counts;
+                $push_application_data = $db->insert(T_APPLICANT_UNIVERSITIES, ToArray($grouped_applications));
+                if($push_application_data){
+                    $ref_code['reference_id'] = $isSent.'-'.$uniqid;
+                    $db->where('id', $push_application_data)->update(T_APPLICANT_UNIVERSITIES,$ref_code);
+                    $count += 1;
+                }
 
             }
-            $counts += 1;
+           
         
         }
 

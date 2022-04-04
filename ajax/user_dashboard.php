@@ -340,9 +340,10 @@ if($first === "get_agent_students"){
     if($kd->user->account_type === "agent"){
        
         if(isset($_GET['api_type']) && Secure($_GET['api_type']) === 'single'  && !empty(Secure($_GET['id']))) {
+  
+            $get_applicant_data = $db->where('applied_by', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_APPLICANT_UNIVERSITIES);
 
-
-            $agent_students = $db->where('agent_id', $kd->user->id)->where('id',Secure($_GET['id']))->getOne(T_AGENT_STUDENTS);
+            $agent_students = $db->where('agent_id', $kd->user->id)->where('id',$get_applicant_data->student_id)->getOne(T_AGENT_STUDENTS);
             $get_univiversities = $db->where("email", $agent_students->email)->get(T_APPLICANT_UNIVERSITIES);
             $agent_students->transcript_file = GetMedia($agent_students->transcript_file);
             $agent_students->id_photo = GetMedia($agent_students->id_photo);

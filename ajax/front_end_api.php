@@ -147,8 +147,20 @@ if($first == "view_application"){
        $get_init_data->transcript_name = $get_init_data2->transcript_name;
        $get_init_data->diploma_name = $get_init_data2->diploma_name;
        
- 
+       $get_init_data->first_name = $get_init_data2->first_name;
+       $get_init_data->last_name = $get_init_data2->last_name;
+       $get_init_data->date_of_birth = $get_init_data2->date_of_birth;
+       $get_init_data->phone_number = $get_init_data2->phone_number;
+       $get_init_data->phone_number_2 = $get_init_data2->phone_number_2;
+       $get_init_data->fathers_name = $get_init_data2->fathers_name;
+       $get_init_data->mothers_name = $get_init_data2->mothers_name;
 
+       $get_init_data->passport_number = $get_init_data2->passport_number;
+       $get_init_data->nationality = $get_init_data2->nationality;
+       $get_init_data->country_of_residence = $get_init_data2->country_of_residence;
+   
+
+   
 
        $get_init_data->transcript = $get_init_data2->transcript_file;     
        $get_init_data->diploma = $get_init_data2->diploma_file;
@@ -432,17 +444,29 @@ if($first === "manage_applications"){
     }
   
     foreach($bew_arrat as $vb){
-        if(!empty($vb->user_id)){
-          $logged_user_data =  $db->where('user_id', $vb->user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
-
-          if(!empty($logged_user_data)){
-              $vb = $logged_user_data;
-          }
-        }
         $name_F =  (!empty($vb->first_name))? $vb->first_name : ' ';
         $name_B =  (!empty($vb->last_name))? $vb->last_name : ' ';
         $vb->id_photo = GetMedia($vb->id_photo);
         $vb->name = $name_F.' '. $name_B;
+
+        if(!empty($vb->user_id)){
+          $logged_user_data =  $db->where('user_id', $vb->user_id)->getOne(T_APPLICANT_EDUCATION_INFO);
+         
+          if(!empty($logged_user_data)){
+                $name_F =  $logged_user_data->first_name;
+                $name_B = $logged_user_data->last_name;
+                $vb->first_name =  $logged_user_data->first_name;
+                $vb->last_name = $logged_user_data->last_name;
+                $vb->nationality = $logged_user_data->nationality;
+                $vb->date_of_birth = $logged_user_data->date_of_birth;
+                $vb->phone_number = $logged_user_data->phone_number;
+                $vb->id_photo = GetMedia($logged_user_data->id_photo);
+                $vb->name = $name_F.' '. $name_B;
+              unset($logged_user_data->id);
+          }
+        }
+     
+     
         $vb->university = ($vb->type === 'multiple')? 'MULTIPLE APPLICATION': GetuniversityByID($vb->university_id);
         $vb->program = ($vb->type === 'multiple')? 'MULTIPLE APPLICATION': GetProgramByID($vb->program_id); 
         $vb->signed_by_name =(!empty($vb->signed_by))? GetUserName($vb->signed_by) : ' ';

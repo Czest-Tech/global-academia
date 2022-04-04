@@ -3,7 +3,7 @@
         <div class="profile_card_top">
             <form id="user-change-avatar-form"  method="post">
                 <label for="profile_pic" class="profile_pic_label">
-                    <img class="avatar" src="http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" alt="">
+                    <img class="avatar" src="" alt="">
                     <i class="fas fa-camera"></i>
                 </label>
                 <input type="file" name="avatar" id="profile_pic" class="user-avatar" accept="image/x-png, image/jpeg" hidden>
@@ -125,21 +125,30 @@
     </div>
 </div>
 
+
+
 <script>
+    let profile_pic = '{{ME avatar}}';
+    if(profile_pic !== undefined){
+        $('.avatar').attr('src', profile_pic);
+    }else {
+        $('.avatar').attr('src', 'http://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg');
+    }
+
    $(document).on('change', '.user-avatar', (event) => {
-	$("#user-change-avatar-form").submit();
-});
-  
+        $("#user-change-avatar-form").submit();
+    });
+    
         $(document).ready(() =>{
      
                  $('#user-change-avatar-form').change().ajaxForm({
-                    url: "{{CONFIG aj/user/update-profile-picture}}?hash=" + $('.main_session').val(),
+                    url: "{{LINK aj/user/update-profile-picture}}?hash=" + $('.main_session').val(),
                     beforeSubmit:  function () {
                     
                     },
                     success: function (data) {
                         if (data.status == 200) {
-                            $('#avatar').attr('src', data.img);
+                            $('.avatar').attr('src', data.img);
                         }
                     
                     }
