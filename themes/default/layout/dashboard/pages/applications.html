@@ -271,7 +271,7 @@
           if (request.readyState === 4) {
               let data = JSON.parse(request.response);
               if (data.status == 200) {
-
+                  window.location.reload()
                   //receipt_upload_responce
                   console.log(data)
               }

@@ -154,11 +154,11 @@ a{
 .modal_body{ display: flex; flex-direction: column; align-items: center; }
 .modal_body_btn{ width: 100%; align-items: center; justify-content: center; margin-top: 10px; }
 .modal_body_btn > *{ margin: 5px 10px; padding: 6px; border: none; background:none; color: white; border-radius: 5px; min-width: 100px; }
-.modal_body_btn > *:nth-child(1){ background:var(--GREEN); }
-.modal_body_btn > *:nth-child(2){ background:tomato; }
+.modal_body_btn > *:nth-child(2){ background:var(--GREEN); }
+.modal_body_btn > *:nth-child(1){ background:tomato; }
 .app_modal{ max-width: 450px; text-align: center; padding: 20px 15px 10px 15px; }
 .table_area_app{ width: 100%; }
-.profile_card_body form { width: 100%; }
+.profile_card_body form { width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between;}
 .left_bubble { width: 100%; }
 .message_file_house{
     position: absolute;
