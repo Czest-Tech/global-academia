@@ -3,11 +3,11 @@
         <div class="profile_card_top">
             <form id="user-change-avatar-form"  method="post">
                 <label for="profile_pic" class="profile_pic_label">
-                    <img class="avatar"  src="" alt="">
+                    <img class="avatar" id="profile_pic" src="" alt="">
                     <i class="fas fa-camera"></i>
                 </label>
                 <input type="hidden" name="user_id" value="{{ME id}}" />
-                <input type="file" name="avatar"  class="user-avatar" accept="image/x-png, image/jpeg" hidden>
+                <input type="file" name="avatar" id="profile_pic" class="user-avatar" accept="image/x-png, image/jpeg" hidden>
                 <div class="dark_color">
                     <p class="font3 bold500">{{ME name}}</p>
                     <p class="font2 bold400" id="acc_type">Account Type</p>
