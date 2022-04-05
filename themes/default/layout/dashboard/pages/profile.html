@@ -84,23 +84,28 @@
                 <!-- <div class="save_documents_info_alert"></div> -->
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Diploma}}</p>
-                    <input type="file" name="diploma_file" value="<?php echo $kd->user->education_info->diploma; ?>">
+                    <span><?php echo $kd->user->education_info->diploma_name; ?></span>
+                    <input type="file" name="diploma_file" value="">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Transcript}}</p>
-                    <input type="file" name="transcript_file" value="<?php echo $kd->user->education_info->transcript_file; ?>">
+                    <span><?php echo $kd->user->education_info->transcript_name; ?></span>
+                    <input type="file" name="transcript_file" value="">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Certificate}}</p>
-                    <input type="file" name="language_certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
+                    <span><?php echo $kd->user->education_info->language_certificate_name; ?></span>
+                    <input type="file" name="language_certificate" value="">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Passport}}</p>
-                    <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport_file">
+                    <span><?php echo $kd->user->education_info->passport_name; ?></span>
+                    <input type="file" value="" name="passport_file">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG ID Photo}}</p>
-                    <input type="file" value="<?php echo $kd->user->education_info->id_photo; ?>" name="id_photo">
+                    <span><?php echo $kd->user->education_info->id_photo; ?></span>
+                    <input type="file" value="" name="id_photo">
                 </div>
                 <input type="hidden" name="user_id" value="{{ME id}}">
 
