@@ -73,6 +73,8 @@
                     <p class="font2">{{LANG Date of Birth}}</p>
                     <input type="date" name="date_of_birth" value="<?php echo $kd->user->education_info->date_of_birth; ?>">
                 </div>
+                <input type="hidden" name="user_id" value="{{ME id}}">
+
                 <button class="profile_save_btn">{{LANG Save Changes}}</button>
             </form>
 
@@ -82,7 +84,7 @@
                 <!-- <div class="save_documents_info_alert"></div> -->
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Diploma}}</p>
-                    <input type="file" name="diploma" value="<?php echo $kd->user->education_info->diploma; ?>">
+                    <input type="file" name="diploma_file" value="<?php echo $kd->user->education_info->diploma; ?>">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Transcript}}</p>
@@ -90,16 +92,18 @@
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Certificate}}</p>
-                    <input type="file" name="certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
+                    <input type="file" name="language_certificate" value="<?php echo $kd->user->education_info->certificate; ?>">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG Passport}}</p>
-                    <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport">
+                    <input type="file" value="<?php echo $kd->user->education_info->passport; ?>" name="passport_file">
                 </div>
                 <div class="profile_card_inputs">
                     <p class="font2">{{LANG ID Photo}}</p>
                     <input type="file" value="<?php echo $kd->user->education_info->id_photo; ?>" name="id_photo">
                 </div>
+                <input type="hidden" name="user_id" value="{{ME id}}">
+
                 <button class="profile_save_btn">{{LANG Save Changes}}</button>
             </form>
         </div>

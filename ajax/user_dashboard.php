@@ -260,8 +260,13 @@
             }
         }
  
-        $update_educationa_data = $db->where('user_id', $kd->user->id)->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
-        
+        if($db->where('user_id',Secure($_POST['user_id']))->getOne(T_APPLICANT_EDUCATION_INFO)){
+            $update_educationa_data = $db->where('user_id',Secure($_POST['user_id']))->update(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
+          } else {
+              $update_education->user_id = Secure($_POST['user_id']);
+              $update_educationa_data = $db->insert(T_APPLICANT_EDUCATION_INFO, ToArray($update_education));
+  
+          }
         if($update_educationa_data){
             $get_data = $db->where('user_id', $kd->user->id)->get(T_APPLICANT_EDUCATION_INFO);
 
@@ -269,13 +274,11 @@
                 'status' => 200,
                 'data' => $get_data,
                 'user_data' => $kd->user,
-                'url' => UrlLink($redirectlink)
              );
         } else {
             $data = array(
                 'status' => 401,
                 'message' => __('your_application_was_submited'),
-                'url' => UrlLink($redirectlink)
              );
         }
     }
