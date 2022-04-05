@@ -930,3 +930,29 @@ if($first  === "delete_agent_application"){
     }
    
 }
+if($first == "update_user_info"){
+    $user_id = Secure($_POST['user_id']);
+    $first_name = Secure($_POST['first_name']);
+    $last_name = Secure($_POST['last_name']);
+
+    $data_save = new StdClass();
+    $data_save->last_name = $last_name;
+    $data_save->first_name = $first_name;
+
+    $update =  $db->where('id', $user_id)->update(T_USERS,ToArray($data_save));
+    $data =  $db->where('user_id', $user_id)->update(T_APPLICANT_EDUCATION_INFO,ToArray($data_save));
+    if($update){
+        $data = array(
+            'status' => 200           
+        );
+
+    } else {
+        $data = array(
+            'status' => 400,
+            'message' => __('error')
+            
+         );
+    }
+
+
+}

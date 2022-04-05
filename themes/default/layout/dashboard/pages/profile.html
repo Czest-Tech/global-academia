@@ -21,15 +21,18 @@
             <button id="btn_security" onclick="profile_tab('security')">Security</button>
         </div>
         <div class="profile_card_body profile_info" id="information">
-            <div class="profile_card_inputs">
-                <p class="font2">{{LANG First Name}}</p>
-                <input type="text" name="first_name" value="{{USER first_name}}">
-            </div>
-            <div class="profile_card_inputs">
-                <p class="font2">{{LANG Last Name}}</p>
-                <input type="text" name="last_name" value="{{USER last_name}}">
-            </div>
-            <button class="profile_save_btn">{{LANG Save Changes}}</button>
+            <form class="profile_info_save" method="post">
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG First Name}}</p>
+                    <input type="text" name="first_name" value="{{USER first_name}}">
+                </div>
+                <div class="profile_card_inputs">
+                    <p class="font2">{{LANG Last Name}}</p>
+                    <input type="text" name="last_name" value="{{USER last_name}}">
+                </div>
+                <input type="hidden" name="user_id" value="{{ME id}}" />
+                <button class="profile_save_btn">{{LANG Save Changes}}</button>
+            </form>
         </div>
         <div class="profile_card_body" id="details">
             <form class="save_info" method="post">
@@ -164,6 +167,7 @@
     let save_documents = $(".save_documents");
     let save_info = $(".save_info");
     let change_password = $('.save_change_password');
+    let profile_save_btn = $('.profile_info_save');
 
     $.get('{{LINK aj}}' + "/user_dashboard/user_data?hash=" + $('.main_session').val(), {}, (data => {
         if(data.status === 200){
@@ -217,6 +221,33 @@
                             html: data.message
                         }));
                         save_documents.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
+                    }
+                }
+        });
+        profile_save_btn.ajaxForm({
+            url: '{{LINK aj/user_dashboard/update_user_info}}?hash=' + $('.main_session').val(),
+            dataTyep:'json',
+            beforeSend: function() {
+                profile_save_btn.find('button').text("{{LANG please_wait}}");
+            },
+                success: function(data) {
+                    if (data.status == 200) { 
+                        $('.submission_message').hide(); 
+
+                        $('.save_documents_info_alert').html($('<div>',{
+                            class: "alert alert-success",
+                            html: data.message
+                        }));
+                        $('.alert-success').fadeIn(5000);
+                       
+                        window.location = data.url
+                    }
+                    else {
+                        $('.save_documents_info_alert').html($('<div>',{
+                            class: "alert alert-danger",
+                            html: data.message
+                        }));
+                        profile_save_btn.find('button').replaceWith('<button type="submit" class="btn btn-block btn-primary u-btn-primary transition-3d-hover">'+"{{LANG Submit}}"+'</button>');
                     }
                 }
         });
