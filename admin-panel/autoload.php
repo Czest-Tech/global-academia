@@ -328,9 +328,9 @@ if (!empty($_COOKIE['mode']) && $_COOKIE['mode'] == 'night') {
                                                     foreach ($old_notifications as $key => $notify) {
                                                         $page_ = '';
                                                         $text = '';
-                                                        if ($notify->type == 'bank') {
-                                                            $page_ = 'bank-receipts';
-                                                            $text = 'You have a new bank payment awaiting your approval';
+                                                        if ($notify->type == 'new_application') {
+                                                            $page_ = 'manage-applications';
+                                                            $text = 'Hello you have new applications';
                                                         }
                                                         elseif ($notify->type == 'verify') {
                                                             $page_ = 'verification-requests';
