@@ -101,66 +101,20 @@
 
 <script>
   let MY_STUDENTS = []
+
   $.get('{{LINK aj}}' + "/user_dashboard/get_agent_students?hash=" + $('.main_session').val(), {}, (data => {
     if (data.status === 200) {
       MY_STUDENTS = data.applicant_info
       render_application(data.applicant_info)
     }
   }));
-  function submitStudent(){
-
-      let form1 = document.querySelector('.add_student_xd');
-      var formData = new FormData(form1);
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          let new_data = JSON.parse(request.response);
-          MY_STUDENTS = new_data.data
-          render_application(new_data.data)
-          closeModal();
-        }
-      }
-      request.open("POST", `{{LINK aj/user_dashboard/add_agent_student}}?hash=${$('.main_session').val()}`);
-      request.send(formData);
-
-    
-    }
-
-    function update_student(){
-      let form1 = document.querySelector('.edit_student_xd');
-      var formData = new FormData(form1);
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          let new_data = JSON.parse(request.response);
-          MY_STUDENTS = new_data.data
-          render_application(new_data.data)
-          closeModal();
-        }
-      }
-      request.open("POST", `{{LINK aj/user_dashboard/update_agent_student}}?hash=${$('.main_session').val()}`);
-      request.send(formData);
-    }
-    function erase_student(){
-      let form1 = document.querySelector('.delete_stud');
-      var formData = new FormData(form1);
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if (request.readyState === 4) {
-          let new_data = JSON.parse(request.response);
-          MY_STUDENTS = new_data.data
-          render_application(new_data.data)
-          closeModal();
-        }
-      }
-      request.open("POST", `{{LINK aj/user_dashboard/delete_agent_student}}?hash=${$('.main_session').val()}`);
-      request.send(formData);
-    }
+  
   let search_string = ""
-  let date_start = "2000-01-01"
+  let date_start = "1000-01-01"
   let date_end = "4000-12-12"
 
   function render_application(data) {
+    console.log(MY_STUDENTS)
     let tablerows = ""
     data.forEach((element, index) => {
       console.log(element)
@@ -190,8 +144,10 @@
           tablerows += rows
     })
     document.getElementById("ga_table-body").innerHTML = tablerows
-    if (data.length = 0) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
+    if (data.length === 0) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
     else document.getElementById("no_apps").innerHTML = ""
+
+    console.log("END", MY_STUDENTS)
   }
 
   function filter_search(){
@@ -199,30 +155,32 @@
     render_application(MY_STUDENTS)
   }
   function filter_date(){
-        date_start = document.getElementById("date_start").value || "2000-01-01"
+        date_start = document.getElementById("date_start").value || "1000-01-01"
         date_end = document.getElementById("date_end").value || "4000-12-12"
         render_application(MY_STUDENTS)
     }
 
   function open_action(action, app_id) {
+
     if (action === "VIEW") {
       window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?student_number=${app_id}`;
     }
     if (action === "EDIT") {
+      console.log(app_id, MY_STUDENTS)
       MY_STUDENTS.forEach(element => {
         if (element.id == app_id) {
+          document.getElementById("modal_container").style.display = "block"
           edit_student(element, app_id)
         }
       });
-      document.getElementById("modal_container").style.display = "block"
     }
     if (action === "DELETE") {
       MY_STUDENTS.forEach(element => {
         if (element.id == app_id) {
+          document.getElementById("modal_container").style.display = "block"
           student_eraser(app_id)
         }
       });
-      document.getElementById("modal_container").style.display = "block"
     }
 
   }
@@ -252,6 +210,53 @@
       console.log("SEND REQ RESPONSE", data)
       closeModal()
     });
+  }
+
+  function submitStudent(){
+    let form1 = document.querySelector('.add_student_xd');
+    var formData = new FormData(form1);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        let new_data = JSON.parse(request.response);
+        MY_STUDENTS = new_data.data
+        render_application(new_data.data)
+        closeModal();
+      }
+    }
+    request.open("POST", `{{LINK aj/user_dashboard/add_agent_student}}?hash=${$('.main_session').val()}`);
+    request.send(formData);
+  }
+
+  function update_student(){
+    let form1 = document.querySelector('.edit_student_xd');
+    var formData = new FormData(form1);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        let new_data = JSON.parse(request.response);
+        MY_STUDENTS = new_data.data
+        render_application(new_data.data)
+        closeModal();
+      }
+    }
+    request.open("POST", `{{LINK aj/user_dashboard/update_agent_student}}?hash=${$('.main_session').val()}`);
+    request.send(formData);
+  }
+  function erase_student(){
+    let form1 = document.querySelector('.delete_stud');
+    var formData = new FormData(form1);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        let new_data = JSON.parse(request.response);
+        MY_STUDENTS = new_data.data
+        render_application(new_data.data)
+        closeModal();
+      }
+    }
+    request.open("POST", `{{LINK aj/user_dashboard/delete_agent_student}}?hash=${$('.main_session').val()}`);
+    request.send(formData);
   }
 
   function add_student() {
