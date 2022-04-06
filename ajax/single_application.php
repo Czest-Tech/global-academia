@@ -248,7 +248,8 @@ if ($first == "single_applicant") {
             $get_applicant_info->program_id = Secure($_POST['program_id']);
 
             $get_applicant_info->applicant_type = Secure($_POST['applicant_type']);
-
+            unset($get_applicant_info->username);
+            unset($get_applicant_info->password);
           
             $get_applicant_info->time = time();
 
