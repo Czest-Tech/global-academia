@@ -192,20 +192,18 @@ if ($first == 'profile') {
 if ($first == 'change-pass') {
     $user_data = UserData($_POST['user_id']);
     if (!empty($user_data->id)) {
-        if ( !IsAdmin() && empty($_POST['current_password']) ) {
-            $errors[] = $error_icon . __('please_check_details');
-        }
-        else if ( empty($_POST['new_password']) || empty($_POST['confirm_new_password'])) {
+       
+       if ( empty($_POST['new_password']) || empty($_POST['confirm_new_password'])) {
             $errors[] = $error_icon . __('please_check_details');
         } else {
-            if ( !IsAdmin() ) {
-                if ( !password_verify($user_data->password,$_POST['current_password'])) {
+           
+                if ( !password_verify($_POST['current_password'], $user_data->password)) {
 
                   
                     $errors[] = $error_icon . __('current_password_dont_match');
 
                 }
-            }
+            
             if (strlen($_POST['new_password']) < 4) {
                 $errors[] = $error_icon . __('password_is_short');
             }
@@ -216,15 +214,16 @@ if ($first == 'change-pass') {
                 $update_data = array(
                     'password' => password_hash($_POST['new_password'], PASSWORD_DEFAULT)
                 );
-                if ($is_owner == true || IsAdmin()) {
+              
                     $update = $db->where('id', Secure($_POST['user_id']))->update(T_USERS, $update_data);
                     if ($update) {
                         $data = array(
                             'status' => 200,
-                            'message' => $success_icon . __('setting_updated')
+                            'message' => $success_icon . __('setting_updated'),
+                            'url' => UrlLink('logout')
                         );
                     }
-                }
+                
             }
         }
     }
