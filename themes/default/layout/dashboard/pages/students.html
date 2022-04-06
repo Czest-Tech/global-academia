@@ -114,10 +114,8 @@
   let date_end = "4000-12-12"
 
   function render_application(data) {
-    console.log(MY_STUDENTS)
     let tablerows = ""
     data.forEach((element, index) => {
-      console.log(element)
       let date = new Date(element.date_of_birth)
       let date_found = ( Date.parse(date_start) <= Date.parse(element.date_of_birth) && Date.parse(date_end) >= Date.parse(element.date_of_birth) )
 
@@ -147,7 +145,6 @@
     if (data.length === 0) document.getElementById("no_apps").innerHTML = '<p class="m-10 font2 bold600">No Students</p>'
     else document.getElementById("no_apps").innerHTML = ""
 
-    console.log("END", MY_STUDENTS)
   }
 
   function filter_search(){
@@ -166,7 +163,6 @@
       window.location.href = `{{LINK dashboard/view_application}}/{{ME username}}?student_number=${app_id}`;
     }
     if (action === "EDIT") {
-      console.log(app_id, MY_STUDENTS)
       MY_STUDENTS.forEach(element => {
         if (element.id == app_id) {
           document.getElementById("modal_container").style.display = "block"
@@ -207,7 +203,7 @@
   
   function send_edit_request(id) {
     $.get('{{LINK aj/front_end_api/send_edit_request}}?' + "hash=<?php echo CreateMainSession() ?>", { id: id }, function (data) {
-      console.log("SEND REQ RESPONSE", data)
+
       closeModal()
     });
   }
