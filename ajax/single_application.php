@@ -249,7 +249,7 @@ if ($first == "single_applicant") {
 
             $get_applicant_info->applicant_type = Secure($_POST['applicant_type']);
        
-            $get_applicant_info->email = $kd->usere->email;
+            $get_applicant_info->email = $kd->user->email;
             $get_applicant_info->time = time();
 
             $get_applicant_info->applied_by = $kd->user->id;
