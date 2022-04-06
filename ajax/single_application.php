@@ -243,13 +243,12 @@ if ($first == "single_applicant") {
 
         if (!empty($student_id)) {
 
-            $get_applicant_info = $db->where('id', $student_id)->getOne(T_USERS);
+            $get_applicant_info = $db->where('user_id', $student_id)->getOne(T_APPLICANT_EDUCATION_INFO);
             $get_applicant_info->university_id = Secure($_POST['university_id']);
             $get_applicant_info->program_id = Secure($_POST['program_id']);
 
             $get_applicant_info->applicant_type = Secure($_POST['applicant_type']);
-            unset($get_applicant_info->username);
-            unset($get_applicant_info->password);
+       
           
             $get_applicant_info->time = time();
 
