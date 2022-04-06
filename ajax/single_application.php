@@ -249,7 +249,7 @@ if ($first == "single_applicant") {
 
             $get_applicant_info->applicant_type = Secure($_POST['applicant_type']);
        
-          
+            $get_applicant_info->email = $kd->usere->email;
             $get_applicant_info->time = time();
 
             $get_applicant_info->applied_by = $kd->user->id;
@@ -258,7 +258,7 @@ if ($first == "single_applicant") {
 
 
             $application_sent = false;
-            $check_email_exists = $db->where('email', $get_applicant_info->email)->getOne(T_APPLICATIONS);
+            $check_email_exists = $db->where('email', $kd->user->email)->getOne(T_APPLICATIONS);
 
             if ($check_email_exists) {
                 $grouped_applications->uniqid =  random_str(4, '12345634608974');
@@ -279,7 +279,7 @@ if ($first == "single_applicant") {
                 if ($isSent) {
                     $referencetrack = $uniqid;
                     $grouped_applications->uniqid =  random_str(4, '12345634608974');
-                    $grouped_applications->email = $get_applicant_info->email;
+                    $grouped_applications->email =  $kd->user->email;
                     $grouped_applications->applicant_type = Secure($_POST['applicant_type']);
                     $grouped_applications->applied_by = $kd->user->id;
                     $grouped_applications->student_id = $sid;
